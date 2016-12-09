@@ -1,8 +1,6 @@
-
-#/app/config.php
 composer.lock
 
 /vendor/
-#app/config.php
+app/config.php
 /phpDocumentor.phar
 *.log
