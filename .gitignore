@@ -1,0 +1,9 @@
+
+/app/config.php
+/public/assets/
+composer.lock
+
+/vendor/
+app/config.php
+/phpDocumentor.phar
+*.log
