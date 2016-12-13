@@ -9,7 +9,8 @@
 namespace Model;
 
 
-class ActivityModel
+
+class ActivityModel extends ModelTemplate
 {
     /*----------------Properties------------------*/
     /**
