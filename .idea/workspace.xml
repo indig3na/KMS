@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4bbc93a-3e32-4d15-be1d-589970a3e7cd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Model/SchoolYear.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/SchoolYear.php" afterPath="$PROJECT_DIR$/app/Model/SchoolYear.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -35,11 +35,9 @@
         <entry file="file://$PROJECT_DIR$/app/Model/SchoolYear.php">
 >>>>>>> 9486ffcb60cbf3114e6d64faa595e6ed97dfa191
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2094065" vertical-offset="0" max-vertical-offset="893">
-              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-              <folding>
-                <element signature="e#6#88#0#PHP" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.90481526" vertical-offset="348" max-vertical-offset="1258">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -397,7 +395,7 @@
     <option name="totallyTimeSpent" value="4896000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
 <<<<<<< HEAD
@@ -522,12 +520,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/SchoolYear.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.2094065" vertical-offset="0" max-vertical-offset="893">
           <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
 >>>>>>> 9486ffcb60cbf3114e6d64faa595e6ed97dfa191
           </folding>
+=======
+        <state vertical-scroll-proportion="0.90481526" vertical-offset="348" max-vertical-offset="1258">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+>>>>>>> 6294a56536ea6d0acffe01f1663a107a2b5db5bd
         </state>
       </provider>
     </entry>
