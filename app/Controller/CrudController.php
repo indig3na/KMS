@@ -2,15 +2,24 @@
 
 namespace Controller;
 
+use Model\CountryModel;
+
 class CrudController extends ControllerTemplate
 {
 
 	/**
 	 * Page de gestion CRUD pour table country en GET
 	 */
-	public function country_get()
-	{
-		$this->show('crud/country');
+	public function country_get(){
+            $model = new CountryModel();
+            $tabledata = $model -> findAll();
+            $vars = [
+                'title' => 'Country',
+                'header' => ['Pays','Insertion','Modification'],
+                'primaryKey' => 'cou_id',
+                'data' => $tabledata
+            ];
+            $this->show('crud/country',$vars);
 	}
         
 	/**
@@ -18,7 +27,7 @@ class CrudController extends ControllerTemplate
 	 */
 	public function country_post()
 	{
-		$this->show('crud/country');
+            $this->show('crud/country');
 	}
 
 	/**
@@ -26,7 +35,7 @@ class CrudController extends ControllerTemplate
 	 */
 	public function schoolyear_get()
 	{
-		$this->show('crud/schoolyear');
+            $this->show('crud/schoolyear');
 	}
         
 	/**
@@ -34,7 +43,7 @@ class CrudController extends ControllerTemplate
 	 */
 	public function schoolyear_post()
 	{
-		$this->show('crud/schoolyear');
+            $this->show('crud/schoolyear');
 	}
 
 }
