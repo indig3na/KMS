@@ -27,10 +27,10 @@ class SchoolYearModel extends ModelTemplate
 
     public function __construct($scy_id=0,$scy_year=0,$scy_inserted=NULL,$scy_updated=NULL) {
         parent::__construct();
-        $this -> scy_id = $scy_id;
-        $this -> scy_year = $scy_year;
-        $this -> scy_inserted = $scy_inserted;
-        $this -> scy_updated = $scy_updated;
+        $this ->scy_id = $scy_id;
+        $this ->scy_year = $scy_year;
+        $this ->scy_inserted = $scy_inserted;
+        $this ->scy_updated = $scy_updated;
     }
 
 
