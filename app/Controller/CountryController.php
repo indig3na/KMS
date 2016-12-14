@@ -14,7 +14,7 @@ class CountryController extends ControllerTemplate
         $tabledata = $model -> findAllColumns(['cou_id','cou_name']);
         $vars = [
             'title' => 'Country',
-            'header' => ['Pays'],
+            'header' => ['Pays *'],
             'primaryKey' => 'cou_id',
             'data' => $tabledata
         ];
@@ -24,12 +24,13 @@ class CountryController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public function country_post()
-    {$model = new CountryModel;
+    public function country_post(){
+        $model = new CountryModel;
+        $success = false;
+        $errors = array();
         if (in_array($method = $_POST['method'],['insert','update'])){
             //validation données
-            $success = false;
-            $errors = array();
+            
             $data = array_intersect_key($_POST, array_flip(['cou_name']));
             if (empty($data['cou_name'])){
                 $errors[] = 'Nom du pays doit être renseigné';
