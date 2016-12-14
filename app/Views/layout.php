@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title>TamTam School </title>
+    <title>KMS</title>
     <meta name="description" content="Ahrach App">
 
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/style.css')?>">
