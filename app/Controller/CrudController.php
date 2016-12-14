@@ -46,4 +46,20 @@ class CrudController extends ControllerTemplate
             $this->show('crud/schoolyear');
 	}
 
+    /**
+     * CRUD Activity table in GET method
+     */
+	public function activity_get()
+    {
+        $this->show('crud/activity');
+    }
+
+    /**
+     * CRUD Activity table in POST method
+     */
+    public function activity_post()
+    {
+        $this->show('crud/activity');
+    }
+
 }
