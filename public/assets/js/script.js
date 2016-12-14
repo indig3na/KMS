@@ -95,20 +95,29 @@ $(function() {
     
     //--------------------------CRUD add/update/delete -----------------------
     
-    //add
-    
-    $('#kms-crud-add-btn').click(function(e) {
-        e.preventDefault();
-        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
-        data.push({name:'method',value:'insert'});
+    function ajaxCall(data){
         $.ajax({
             url:'',
             type:'post',
             dataType:'json',
             data:data
         }).done(function(response){
-            //reload on success, else show errors
+            //reload on success, else show errors           
+            if (response.code == 0){
+                alert(response.message);
+            } else if (response.code == 1){
+                location.reload();
+            }
         });
+    }
+    
+    //add
+    
+    $('#kms-crud-add-btn').click(function(e) {
+        e.preventDefault();
+        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        data.push({name:'method',value:'insert'});
+        ajaxCall(data);
     });
     
     $('.kms-crud-update-btn').click(function(e) {
@@ -140,14 +149,7 @@ $(function() {
     function crudUpdate(){
         var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
         data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'});
-        $.ajax({
-            url:'',
-            type:'post',
-            dataType:'json',
-            data:data
-        }).done(function(response){
-            //reload on success, else show errors
-        });
+        ajaxCall(data);
     }
     
     //delete
@@ -155,15 +157,7 @@ $(function() {
     $('.kms-crud-delete-btn').click(function(e) {
         e.preventDefault();
         data=[{name:'id',value:$(this).attr('value')},{name:'method',value:'delete'}];
-
-        $.ajax({
-            url:'',
-            type:'post',
-            dataType:'json',
-            data:data,
-        }).done(function(response){
-            //reload on success, else show errors
-        });
+        ajaxCall(data);
     });
 
 });
