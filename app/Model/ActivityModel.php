@@ -35,7 +35,7 @@ class ActivityModel extends ModelTemplate
     private $act_material;
 
 
-    /*---------------------constructor--------------*/
+    /*-----------------constructor---------*/
 
     /**
      * ActivityModel constructor.
@@ -45,17 +45,21 @@ class ActivityModel extends ModelTemplate
      * @param string $act_updated
      * @param string $act_material
      */
-    public function __construct($act_id, $act_name, $act_inserted, $act_updated, $act_material)
+    public function __construct($act_id=0, $act_name='', $act_inserted=null, $act_updated=null, $act_material='')
     {
+
         $this->act_id = $act_id;
         $this->act_name = $act_name;
         $this->act_inserted = $act_inserted;
         $this->act_updated = $act_updated;
         $this->act_material = $act_material;
+        parent::__construct();
     }
 
 
+
     /*---------------------Setter--------------*/
+
     /**
      * @param int $act_id
      */
@@ -88,7 +92,32 @@ class ActivityModel extends ModelTemplate
         $this->act_updated = $act_updated;
     }
 
+    /**
+     * @param string $table
+     */
+    public function setTable($table)
+    {
+        $this->table = $table;
+    }
+
+    /**
+     * @param int $primaryKey
+     */
+    public function setPrimaryKey($primaryKey)
+    {
+        $this->primaryKey = $primaryKey;
+    }
+
+    /**
+     * @param \PDO $dbh
+     */
+    public function setDbh($dbh)
+    {
+        $this->dbh = $dbh;
+    }
+
     /*--------------------Getter--------------*/
+
 
     /**
      * @param string $act_material
@@ -136,6 +165,30 @@ class ActivityModel extends ModelTemplate
     public function getActMaterial()
     {
         return $this->act_material;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
+
+    /**
+     * @return \PDO
+     */
+    public function getDbh()
+    {
+        return $this->dbh;
     }
 
 
