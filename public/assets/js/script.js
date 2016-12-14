@@ -3,7 +3,7 @@
  */
 $(function() {
     
-    // Homepage - Google Maps
+    //------------ Homepage - Google Maps-----------
     
     if(window.location.pathname.endsWith('/public/')){
         // scrolling offset handler
@@ -30,7 +30,7 @@ $(function() {
         // To add the marker to the map, call setMap();
         marker.setMap(map);
 
-        //contact form
+        //-------------------------contact form-------------------------
         //alert('jquery');
         //console.log('ok');
         // hide messages
@@ -93,29 +93,79 @@ $(function() {
         });
     }
     
-    //CRUD update/delete
+    //--------------------------CRUD add/update/delete -----------------------
     
-    if(window.location.pathname.endsWith('/app/manage/country')){
-            $('.kms-update').click(function(e) {
-                    e.preventDefault();
-                    id = $(this).attr('value');
-                    tr = $(this).parent().parent();
-                    var val=[];
-                    tr.children('.kms-datacolumn').each(function(){
-                        val.push($(this).html());
-                    });
-                    tr.html($('#add').html());
-                    tr.children('.kms-headercolumn').addClass('kms-datacolumn');
-                    tr.children('.kms-datacolumn').removeClass('kms-headercolumn');
-                    tr.children('.kms-datacolumn').each(function(){
-                        $(this).children().attr('value',(val.shift()));
-                    });
-                   tr.find('.kms-add').addClass('kms-update').removeClass('kms-add').attr('value','Enrégistrer');
-                   tr.find('input.kms-method').attr('method','update');
-                   tr.children('.kms-action').append('<input type="hidden" name="id" value="'+id+'"/>')
-                    
-            });
+    //add
+    
+    $('#kms-crud-add-btn').click(function(e) {
+        e.preventDefault();
+        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        data.push({name:'method',value:'insert'});
+        $.ajax({
+            url:'',
+            type:'post',
+            dataType:'json',
+            data:data
+        }).done(function(response){
+            //reload on success, else show errors
+        });
+    });
+    
+    $('.kms-crud-update-btn').click(function(e) {
+        e.preventDefault();
+        crudUpdatePrepare.call(this);
+    });
+    
+    //update
+    
+    function crudUpdatePrepare (){
+        var tr = $(this).parent().parent();
+        var val=[];
+        tr.children('.kms-datacolumn').each(function(){
+            val.push($(this).html());
+            $(this).remove();
+        });
+        tr.prepend($('.kms-add-inp').clone());
+        tr.find('.kms-add-inp').wrap('<td></td>');
+        tr.find('.kms-add-inp').addClass('kms-update-inp');
+        tr.find('.kms-update-inp').removeClass('kms-add-inp');
+        tr.find('.kms-update-inp').each(function(){
+            $(this).attr('value',(val.shift()));
+        });
+        $(this).html('Enrégistrer').off('click').click(function(e) {
+            e.preventDefault();
+            crudUpdate.call(this);
+        });
     }    
+    function crudUpdate(){
+        var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
+        data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'});
+        $.ajax({
+            url:'',
+            type:'post',
+            dataType:'json',
+            data:data
+        }).done(function(response){
+            //reload on success, else show errors
+        });
+    }
+    
+    //delete
+    
+    $('.kms-crud-delete-btn').click(function(e) {
+        e.preventDefault();
+        data=[{name:'id',value:$(this).attr('value')},{name:'method',value:'delete'}];
+
+        $.ajax({
+            url:'',
+            type:'post',
+            dataType:'json',
+            data:data,
+        }).done(function(response){
+            //reload on success, else show errors
+        });
+    });
+
 });
 
 

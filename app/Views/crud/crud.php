@@ -5,15 +5,15 @@
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
     <!-- Table -->
-    <?php if (!empty($data)): ?>
+    <?php if (!empty($data)):?>
         <table class="table">
             <thead>
-            <tr>
-                <?php foreach ($header as $value): ?>
-                    <th><?= $value ?></th>
-                <?php endforeach ?>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <?php foreach ($header as $value):?>
+                        <th><?= $value ?></th>
+                    <?php endforeach ?>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
                 <tr id="add">
@@ -34,16 +34,15 @@
                         <?php endforeach ?>
                         <td class="kms-action">
                             <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>
-                            <a class="btn btn-danger kms-delete" href="?action=delete&id=<?= $row[$primaryKey] ?>">X</a>
+                            <a class="btn btn-danger kms-crud-delete-btn" href="#" value="<?= $row[$primaryKey] ?>">X</a>
                         </td>
                     </tr> 
                 <?php endforeach ?>
             </tbody>
         </table>
-    <?php
-    else:
-        echo '<span>Vide!</span>';
-    endif
+    <?php else:
+        echo'<span>Vide!</span>';
+        endif
     ?>
 </div>
 <?php $this->stop('main_content') ?>

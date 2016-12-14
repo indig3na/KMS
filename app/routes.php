@@ -1,5 +1,4 @@
 <?php
-	
 	$w_routes = array(
             ['GET', '/', 'Default#home', 'default_home'],
             
@@ -17,3 +16,4 @@
             ['GET', '/app/manage/classroom', 'Classroom#classroom_get', 'classroom_classroom_get'],
             ['POST', '/app/manage/classroom', 'Classroom#classroom_post', 'classroom_classroom_post'],
 	);
+

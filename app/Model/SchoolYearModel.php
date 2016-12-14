@@ -27,10 +27,10 @@ class SchoolYearModel extends ModelTemplate
 
     public function __construct($scy_id=0,$scy_year=0,$scy_inserted=NULL,$scy_updated=NULL) {
         parent::__construct();
-        $this ->scy_id = $scy_id;
-        $this ->scy_year = $scy_year;
-        $this ->scy_inserted = $scy_inserted;
-        $this ->scy_updated = $scy_updated;
+        $this -> scy_id = $this -> setScyId($scy_id);
+        $this -> scy_year = $this -> setScyYear($scy_year);
+        $this -> scy_inserted = $this -> setScyInserted($scy_inserted);
+        $this -> scy_updated = $this -> setScyUpdated($scy_updated);
     }
 
 
@@ -43,11 +43,11 @@ class SchoolYearModel extends ModelTemplate
         $this->scy_id = $scy_id;
         return $this;
     }
-    public function getScyName() {
+    public function getScyYear() {
         return $this->scy_year;
     }
-    public function setScyName($scy_name) {
-        $this->scy_name = $scy_name;
+    public function setScyYear($scy_year) {
+        $this->scy_year = $scy_year;
         return $this;
     }
     public function getScyInserted() {
