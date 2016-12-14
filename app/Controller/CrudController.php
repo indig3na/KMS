@@ -64,7 +64,7 @@ class CrudController extends ControllerTemplate
 	public function activity_get()
     {
         $activitymodel = new ActivityModel();
-        $tabledata = $activitymodel -> findAll();
+        $tabledata = $activitymodel -> findAllColumns(['act_id','act_name','act_material','act_description']);
         $actVars = [
             'title' => 'Activity',
             'header' => ['Activity','Insertion','Modification','Material','Description'],
@@ -111,12 +111,14 @@ class CrudController extends ControllerTemplate
         $this->show('crud/activity', array(
             'errorList' => $errorList,
             'act_name' => $activity,
-            'act_material' => $material
+            'act_material' => $material,
+            'act_description' => $description
             )
         );
     }
     public function deletItems()
     {
+
 
     }
 
