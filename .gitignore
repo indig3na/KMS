@@ -1,7 +1,8 @@
 composer.lock
 
 /vendor/
-app/config.php
-/phpDocumentor.phar
+.idea
 *.log
-/nbproject/private/
+/phpDocumentor.phar
+/nproject/
+*.log

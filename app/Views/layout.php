@@ -1,23 +1,35 @@
-<!DOCTYPE html>
-<html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title><?= $this->e($title) ?></title>
+    <meta charset="utf-8">
+    <title>KMS</title>
+    <meta name="description" content="Ahrach App">
 
-	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/style.css')?>">
+    <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
-<body>
-	<div class="container">
-		<header>
-			<h1>W :: <?= $this->e($title) ?></h1>
-		</header>
 
-		<section>
-			<?= $this->section('main_content') ?>
-		</section>
+    <body data-spy="scroll" data-target="#my-navbar" >
+        <div class="container">
 
-		<footer>
-		</footer>
-	</div>
-</body>
+            <section>
+                <?= $this->section('main_content') ?>
+            </section>
+
+            <footer>
+            </footer>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="<?= $this->assetUrl('js/script.js')?>"></script>
+    </body>
 </html>

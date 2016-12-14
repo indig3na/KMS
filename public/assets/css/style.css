@@ -1,26 +1,25 @@
-html, body {
-	font-family: Consolas, monaco, monospace;
-	background-color: #272822;
-	color: #F8F8F2;
+body{
+	padding-top: 40px;
 }
 
-.container {
-	margin: 50px;
+
+#cform .btn:hover {
+	background: rgba(9,8,77,0.7);
 }
 
-a {
-	text-decoration: none;
-	color: #A6E22E;
+#address {
+	width: 100%;
+	height: 150px;
+	padding: 15px 15px;
+	margin-bottom: 10px;
+	border: 1px solid #D6D2D2;
+	border-radius: 5px;
 }
 
-a:hover {
-	color: #F92672;
-}
-
-h1 {
-	color: #F92672;
-}
-
-h2 {
-	color: #66D9EF;
+#myMap {
+	width: 100%;
+	height: 350px;
+	margin-bottom: 15px;
+	border: 1px solid #D6D2D2;
+	border-radius: 5px;
 }
