@@ -21,7 +21,7 @@ class NurseryController extends ControllerTemplate
             'primaryKey' => 'nur_id',
             'data' => $tabledata
         ];
-        $this->show('crud/country', $vars);
+        $this->show('crud/crud', $vars);
     }
 
     /**
@@ -29,7 +29,7 @@ class NurseryController extends ControllerTemplate
      */
     public function nursery_post()
     {
-        $this->show('crud/country');
+        $this->show('crud/crud');
     }
 
 }
