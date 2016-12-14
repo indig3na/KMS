@@ -43,7 +43,7 @@ class CrudController extends ControllerTemplate
         $tabledata = $model->findAll();
         $vars = [
             'title' => 'Année Scolaire',
-            'header' => ['Insertion', 'Modification'],
+            'header' => ['Année Scolaire'],
             'primaryKey' => 'scy_id',
             'data' => $tabledata
         ];
@@ -55,7 +55,8 @@ class CrudController extends ControllerTemplate
      */
     public function schoolyear_post()
     {
-        $this->show('crud/country');
+        //validation & insertion données
+        $this->showJson(['Succès / Erreur']);
     }
 
     /**
