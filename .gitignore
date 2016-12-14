@@ -4,3 +4,4 @@ composer.lock
 app/config.php
 /phpDocumentor.phar
 *.log
+/nbproject/private/
