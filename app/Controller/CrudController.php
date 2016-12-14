@@ -26,7 +26,7 @@ class CrudController extends ControllerTemplate
      */
 	public function activity_get()
     {
-
+        $this->show('crud/activity');
     }
 
     /**
@@ -34,7 +34,7 @@ class CrudController extends ControllerTemplate
      */
     public function activity_post()
     {
-
+        $this->show('crud/activity');
     }
 
 }
