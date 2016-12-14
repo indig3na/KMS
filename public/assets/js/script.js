@@ -3,7 +3,7 @@
  */
 $(function() {
     
-    // Homepage - Google Maps
+    //------------ Homepage - Google Maps-----------
     
     if(window.location.pathname.endsWith('/public/')){
         // scrolling offset handler
@@ -30,7 +30,7 @@ $(function() {
         // To add the marker to the map, call setMap();
         marker.setMap(map);
 
-        //contact form
+        //-------------------------contact form-------------------------
         //alert('jquery');
         //console.log('ok');
         // hide messages
@@ -139,6 +139,19 @@ $(function() {
     }    
     function crudUpdate(){
         var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
+        data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'})
+        $.ajax({
+            url:'',
+            type:'post',
+            dataType:'json',
+            data:data,
+        }).done(function(response){
+            //reload on success, else show errors
+        });
+    }
+
+    function crudDelete(){
+        var data = $(this).parent().parent().find('.kms-delete-').serializeArray();
         data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'})
         $.ajax({
             url:'',
