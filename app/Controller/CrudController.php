@@ -59,7 +59,15 @@ class CrudController extends ControllerTemplate
      */
 	public function activity_get()
     {
-        $this->show('crud/activity');
+        $activitymodel = new CountryModel();
+        $tabledata = $activitymodel -> findAll();
+        $vars = [
+            'title' => 'Activity',
+            'header' => ['Activity','Material','Insertion','Modification'],
+            'primaryKey' => 'cou_id',
+            'data' => $tabledata
+        ];
+        $this->show('crud/activity', $vars);
     }
 
     /**
