@@ -19,7 +19,7 @@ abstract class ModelTemplate extends Model
     public function findAllColumns($cols = ['*'], $orderBy = '', $orderDir = 'ASC', $limit = null, $offset = null)
     {
 
-            $sql = 'SELECT '.implode($cols).' FROM ' . $this->table;
+            $sql = 'SELECT '.implode(', ',$cols).' FROM ' . $this->table;
             if (!empty($orderBy)){
 
                     //sécurisation des paramètres, pour éviter les injections SQL
