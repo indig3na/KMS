@@ -9,30 +9,30 @@ use Model\NurseryModel;
 class CrudController extends ControllerTemplate
 {
 
-    /**
-     * Page de gestion CRUD pour table country en GET
-     */
-    public function country_get()
-    {
-        $model = new CountryModel();
-        $tabledata = $model->findAll();
-        $vars = [
-            'title' => 'Country',
-            'header' => ['Pays', 'Insertion', 'Modification'],
-            'primaryKey' => 'cou_id',
-            'data' => $tabledata
-        ];
-        $this->show('crud/crud', $vars);
-    }
 
-    /**
-     * Page de gestion CRUD pour table country en POST
-     */
-    public function country_post()
-    {
-        //validation & insertion données
-        $this->showJson(['Succès / Erreur']);
-    }
+	/**
+	 * Page de gestion CRUD pour table country en GET
+	 */
+	public function country_get(){
+            $model = new CountryModel();
+            $tabledata = $model -> findAllColumns(['cou_name']);
+            $vars = [
+                'title' => 'Country',
+                'header' => ['Pays'],
+                'primaryKey' => 'cou_id',
+                'data' => $tabledata
+            ];
+            $this->show('crud/crud',$vars);
+	}
+        
+	/**
+	 * Page de gestion CRUD pour table country en POST
+	 */
+	public function country_post()
+	{
+            //validation & insertion données
+            $this->showJson(['Succès / Erreur']);
+	}
 
     /**
      * Page de gestion CRUD pour table schoolyear en GET

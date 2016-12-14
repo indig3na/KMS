@@ -34,7 +34,7 @@
                         <?php endforeach ?>
                         <td class="kms-action">
                             <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>
-                            <a class="btn btn-danger kms-delete" href="?action=delete&id=<?= $row[$primaryKey] ?>">X</a>
+                            <a class="btn btn-danger kms-crud-delete-btn" href="#" value="<?= $row[$primaryKey] ?>">X</a>
                         </td>
                     </tr> 
                 <?php endforeach ?>
