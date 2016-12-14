@@ -103,11 +103,13 @@ $(function() {
                     var val=[];
                     tr.children('.kms-datacolumn').each(function(){
                         val.push($(this).html());
+                        $(this).remove;
                     });
-                    tr.html($('#add').html());
-                    tr.children('.kms-headercolumn').addClass('kms-datacolumn');
-                    tr.children('.kms-datacolumn').removeClass('kms-headercolumn');
-                    tr.children('.kms-datacolumn').each(function(){
+                    console.log(val);
+                    tr.prepend($('.kms-add-inp'));
+                    tr.find('.kms-add-inp').addClass('kms-update-inp');
+                    tr.find('.kms-update-inp').removeClass('kms-add-inp');
+                    tr.find('.kms-update-inp').each(function(){
                         $(this).children().attr('value',(val.shift()));
                     });
                    tr.find('.kms-add').addClass('kms-update').removeClass('kms-add').attr('value','Enrégistrer');
