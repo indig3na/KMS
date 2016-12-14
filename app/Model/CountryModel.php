@@ -27,6 +27,7 @@ class CountryModel extends ModelTemplate
 
 	public function __construct($cou_id=0,$cou_name='',$cou_inserted=NULL,$cou_updated=NULL) {
 		parent::__construct();
+                $this -> primaryKey = 'cou_id';
 		$this -> cou_id = $this -> setCouId($cou_id);
 		$this -> cou_name = $this -> setCouName($cou_name);
 		$this -> cou_inserted = $this -> setCouInserted($cou_inserted);
