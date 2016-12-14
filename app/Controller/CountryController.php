@@ -25,7 +25,7 @@ class CountryController extends ControllerTemplate
      * Page de gestion CRUD pour table country en POST
      */
     public function country_post()
-    {
+    {$model = new CountryModel;
         if (in_array($method = $_POST['method'],['insert','update'])){
             //validation données
             $success = false;
@@ -35,22 +35,34 @@ class CountryController extends ControllerTemplate
                 $errors[] = 'Nom du pays doit être renseigné';
             }
             if(empty($errors)){
-                $model = new CountryModel;
+                //insertion données
                 if ($method === 'insert'){
-                    //insertion données
-                    //if($model ->insert($data) === false) {
+                    if($model ->insert($data) === false) {
                         $errors[] = 'Insertion en base de données échouée';
-                    //} else {
+                    } else {
                         $message = 'Inseré en base de données';
                         $success = true;
-                    //}
+                    }
+                //modification données
                 } else {
-                    //modification données
+                    $id = intval($_POST['id']);
+                    if($model ->update($data,$id) === false) {
+                        $errors[] = 'Modification de la base de données échouée';
+                    } else {
+                        $message = 'Modifié dans la base de données';
+                        $success = true;
+                    }
                 }
             }
         } elseif ($method === 'delete'){
         // suppression données
-            
+        $id = intval($_POST['id']);
+        if($model -> delete($id) === false) {
+            $errors[] = 'Suppression de la base de données échouée';
+        } else {
+            $message = 'Supprimé de la base de données';
+            $success = true;
+        }    
         } else {
             //error
         }
