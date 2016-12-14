@@ -111,51 +111,80 @@ $(function() {
         });
     }
     
-    //add
+    //----------add----------
     
+    
+    //si bouton ajout cliqué
     $('#kms-crud-add-btn').click(function(e) {
         e.preventDefault();
+        
+        // récupérer les données des input de la ligne ajout
         var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        
+        //ajouter le paramètre 'method'
         data.push({name:'method',value:'insert'});
         ajaxCall(data);
     });
+        
+        
+    //----------update------------  
     
+    //si bouton 'modifier' cliqué
     $('.kms-crud-update-btn').click(function(e) {
         e.preventDefault();
         crudUpdatePrepare.call(this);
     });
-    
-    //update
-    
+
+    //si bouton 'modifier' cliqué - fonction principale
     function crudUpdatePrepare (){
+        
+        //sélectionner la ligne de table courante
         var tr = $(this).parent().parent();
+        
+        //stocker la valeur des td de la ligne courante dans val et supprimer les td
         var val=[];
         tr.children('.kms-datacolumn').each(function(){
             val.push($(this).html());
             $(this).remove();
         });
+        
+        //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('.kms-add-inp').clone());
         tr.find('.kms-add-inp').wrap('<td></td>');
+        
+        //changer ensuite les classes de add en update
         tr.find('.kms-add-inp').addClass('kms-update-inp');
         tr.find('.kms-update-inp').removeClass('kms-add-inp');
+        
+        //insérer les valeurs depuis le tableau val
         tr.find('.kms-update-inp').each(function(){
             $(this).attr('value',(val.shift()));
         });
+        
+        //changer le texte du bouton 'Modifier' en 'Enrégistrer'
+        //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
         $(this).html('Enrégistrer').off('click').click(function(e) {
             e.preventDefault();
             crudUpdate.call(this);
         });
-    }    
+    }   
+    
+    //si bouton 'modifier' cliqué - fonction principale
     function crudUpdate(){
+        
+        // récupérer les données des input de la ligne courante
         var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
+        
+        // ajouter le paramètre 'method' et l'id de la ligne courante
         data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'});
         ajaxCall(data);
     }
     
-    //delete
+    //----------delete----------
     
     $('.kms-crud-delete-btn').click(function(e) {
         e.preventDefault();
+        // ajouter l'id de la ligne courante
         data=[{name:'id',value:$(this).attr('value')},{name:'method',value:'delete'}];
         ajaxCall(data);
     });

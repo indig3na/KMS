@@ -16,6 +16,7 @@
                 </tr>
             </thead>
             <tbody>
+                <?php //ligne d'ajout ?>
                 <tr id="add">
                         <?php foreach ($data[0] as $key => $value):?>
                             <?php if ($key !== $primaryKey): ?>
@@ -25,6 +26,7 @@
                         <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
                     </form>
                 </tr>
+                <?php //lignes de données ?>
                 <?php foreach ($data as $row):?>
                     <tr>
                         <?php foreach ($row as $key => $value):?>
