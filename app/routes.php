@@ -8,12 +8,12 @@ $w_routes = array(
     ['GET', '/app/manage/country', 'Crud#country_get', 'crud_country_get'],
     ['POST', '/app/manage/country', 'Crud#country_post', 'crud_country_post'],
     //SchoolYear
-    ['GET', '/app/manage/schoolyear/', 'Crud#schoolyear_get', 'crud_schoolyear_get'],
-    ['POST', '/app/manage/schoolyear/', 'Crud#schoolyear_post', 'crud_schoolyear_post'],
+    ['GET', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_get', 'schoolYear_schoolyear_get'],
+    ['POST', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_post', 'schoolYear_schoolyear_post'],
     //Activity
     ['GET', '/app/manage/activity', 'Crud#activity_get', 'crud_activity_get'],
     ['POST', '/app/manage/activity', 'Crud#activity_post', 'crud_activity_post'],
     //SchoolYear
-    ['GET', '/app/manage/nursery/', 'Crud#nursery_get', 'crud_nursery_get'],
-    ['POST', '/app/manage/nursery/', 'Crud#nursery_post', 'crud_nursery_post'],
+    ['GET', '/app/manage/nursery/', 'Nursery#nursery_get', 'nursery_nursery_get'],
+    ['POST', '/app/manage/nursery/', 'Nursery#nursery_post', 'nursery_nursery_post'],
 );
