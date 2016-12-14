@@ -39,6 +39,7 @@ class CountryModel extends ModelTemplate
 	public function getCouId() {
 		return $this->cou_id;
 	}
+
 	public function setCouId($cou_id) {
 		$this->cou_id = $cou_id;
 		return $this;
