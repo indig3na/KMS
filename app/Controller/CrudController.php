@@ -4,8 +4,7 @@ namespace Controller;
 
 use Model\CountryModel;
 use Model\ActivityModel;
-use Model\SchoolYearModel;
-use Model\NurseryModel;
+
 
 
 class CrudController extends ControllerTemplate
@@ -35,31 +34,6 @@ class CrudController extends ControllerTemplate
             //validation & insertion données
             $this->showJson(['Succès / Erreur']);
 	}
-
-    /**
-     * Page de gestion CRUD pour table schoolyear en GET
-     */
-    public function schoolyear_get()
-    {
-        $model = new SchoolYearModel();
-        $tabledata = $model -> findAllColumns(['scy_id','scy_year']);
-        $vars = [
-            'title' => 'Année Scolaire',
-            'header' => ['Année Scolaire'],
-            'primaryKey' => 'scy_id',
-            'data' => $tabledata
-        ];
-        $this->show('crud/country', $vars);
-    }
-
-    /**
-     * Page de gestion CRUD pour table schoolyear en POST
-     */
-    public function schoolyear_post()
-    {
-        //validation & insertion données
-        $this->showJson(['Succès / Erreur']);
-    }
 
     /**
      * CRUD Activity table in GET method
@@ -125,32 +99,6 @@ class CrudController extends ControllerTemplate
     {
 
 
-    }
-
-
-
-    /**
-     * Page de gestion CRUD pour table nursery en GET
-     */
-    public function nursery_get()
-    {
-        $model = new NurseryModel();
-        $tabledata = $model -> findAllColumns(['nur_id','nur_name','nur_address','nur_email','nur_telephone','nur_website']);
-        $vars = [
-            'title' => 'Nursery',
-            'header' => ['Nursery','Address', 'Email', 'Telephone', 'Website'],
-            'primaryKey' => 'nur_id',
-            'data' => $tabledata
-        ];
-        $this->show('crud/country', $vars);
-    }
-
-    /**
-     * Page de gestion CRUD pour table nursery en POST
-     */
-    public function nursery_post()
-    {
-        $this->show('crud/country');
     }
 
 }
