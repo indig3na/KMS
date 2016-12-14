@@ -40,7 +40,7 @@ class CrudController extends ControllerTemplate
     public function schoolyear_get()
     {
         $model = new SchoolYearModel();
-        $tabledata = $model->findAll();
+        $tabledata = $model -> findAllColumns(['scy_id','scy_year']);
         $vars = [
             'title' => 'Année Scolaire',
             'header' => ['Année Scolaire'],
@@ -89,10 +89,10 @@ class CrudController extends ControllerTemplate
     public function nursery_get()
     {
         $model = new NurseryModel();
-        $tabledata = $model->findAll();
+        $tabledata = $model -> findAllColumns(['nur_id','nur_name','nur_address','nur_email','nur_telephone','nur_website']);
         $vars = [
             'title' => 'Nursery',
-            'header' => ['Insertion', 'Modification','Nursery','Address', 'Email', 'Telephone', 'Website','CityID'],
+            'header' => ['Nursery','Address', 'Email', 'Telephone', 'Website'],
             'primaryKey' => 'nur_id',
             'data' => $tabledata
         ];
