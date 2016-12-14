@@ -22,7 +22,7 @@
                                 <td><input class="form-control kms-add-inp" type="text" name="<?= $key ?>"/></td>
                             <?php endif ?>
                         <?php endforeach ?>
-                        <td class="kms-action"><a class="btn btn-success" href="#" id="kms-add-btn">Ajouter</a></td>
+                        <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
                     </form>
                 </tr>
                 <?php foreach ($data as $row):?>
@@ -33,7 +33,7 @@
                             <?php endif ?>
                         <?php endforeach ?>
                         <td class="kms-action">
-                            <a class="btn btn-success kms-update" value="<?= $row[$primaryKey] ?>">Modifier</a>
+                            <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>
                             <a class="btn btn-danger kms-delete" href="?action=delete&id=<?= $row[$primaryKey] ?>">X</a>
                         </td>
                     </tr> 
