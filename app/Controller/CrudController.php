@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\CountryModel;
+use Model\SchoolYearModel;
 
 class CrudController extends ControllerTemplate
 {
@@ -33,10 +34,17 @@ class CrudController extends ControllerTemplate
 	/**
 	 * Page de gestion CRUD pour table schoolyear en GET
 	 */
-	public function schoolyear_get()
-	{
-            $this->show('crud/schoolyear');
-	}
+	public function schoolyear_get(){
+        $model = new SchoolYearModel();
+        $tabledata = $model -> findAll();
+        $vars = [
+            'title' => 'Année Scolaire',
+            'header' => ['Année Scolaire','Insertion','Modification'],
+            'primaryKey' => 'scy_id',
+            'data' => $tabledata
+        ];
+        $this->show('crud/schoolyear',$vars);
+    }
         
 	/**
 	 * Page de gestion CRUD pour table schoolyear en POST
