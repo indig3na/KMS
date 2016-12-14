@@ -38,12 +38,12 @@ class CountryController extends ControllerTemplate
                 $model = new CountryModel;
                 if ($method === 'insert'){
                     //insertion données
-                    if($model ->insert($data) === false) {
+                    //if($model ->insert($data) === false) {
                         $errors[] = 'Insertion en base de données échouée';
-                    } else {
+                    //} else {
                         $message = 'Inseré en base de données';
                         $success = true;
-                    }
+                    //}
                 } else {
                     //modification données
                 }
@@ -55,9 +55,9 @@ class CountryController extends ControllerTemplate
             //error
         }
         if ($success){
-            $this->showJson([1, $message]);
+            $this->showJson(['code' => 1, 'message' => $message]);
         } else {
-            $this->showJson([0, $errors]);
+            $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
         }
     }
 
