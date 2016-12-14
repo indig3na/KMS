@@ -19,7 +19,7 @@
             <tr id="add">
                 <form action="" method="post">
                     <?php foreach ($data[0] as $key => $value):?>
-                        <?php if ($key !== $primaryKey): ?>
+                        <?php if ($key == $primaryKey): ?>
                             <td class="kms-headercolumn"><input class="form-control" type="text" name="<?= $key ?>"/></td>
                         <?php endif ?>
                     <?php endforeach ?>

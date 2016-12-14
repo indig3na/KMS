@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\CountryModel;
 use Model\SchoolYearModel;
+use Model\NurseryModel;
 
 class CrudController extends ControllerTemplate
 {
@@ -76,6 +77,29 @@ class CrudController extends ControllerTemplate
     public function activity_post()
     {
         $this->show('crud/activity');
+    }
+
+    /**
+     * Page de gestion CRUD pour table nursery en GET
+     */
+    public function nursery_get(){
+        $model = new NurseryModel();
+        $tabledata = $model -> findAll();
+        $vars = [
+            'title' => 'Nursery',
+            'header' => ['Insertion','Modification', ],
+            'primaryKey' => 'nur_id',
+            'data' => $tabledata
+        ];
+        $this->show('crud/country',$vars);
+    }
+
+    /**
+     * Page de gestion CRUD pour table nursery en POST
+     */
+    public function nursery_post()
+    {
+        $this->show('crud/nursery');
     }
 
 }
