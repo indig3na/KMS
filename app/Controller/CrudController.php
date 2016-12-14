@@ -15,7 +15,7 @@ class CrudController extends ControllerTemplate
 	 */
 	public function country_get(){
             $model = new CountryModel();
-            $tabledata = $model -> findAllColumns(['cou_name']);
+            $tabledata = $model -> findAllColumns(['cou_id','cou_name']);
             $vars = [
                 'title' => 'Country',
                 'header' => ['Pays'],
