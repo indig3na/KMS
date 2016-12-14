@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\CountryModel;
+use Model\ActivityModel;
 
 class CrudController extends ControllerTemplate
 {
@@ -51,15 +52,15 @@ class CrudController extends ControllerTemplate
      */
 	public function activity_get()
     {
-        $activitymodel = new CountryModel();
+        $activitymodel = new ActivityModel();
         $tabledata = $activitymodel -> findAll();
-        $vars = [
+        $actVars = [
             'title' => 'Activity',
-            'header' => ['Activity','Material','Insertion','Modification'],
-            'primaryKey' => 'cou_id',
+            'header' => ['Activity','Insertion','Modification','Material'],
+            'primaryKey' => 'act_id',
             'data' => $tabledata
         ];
-        $this->show('crud/activity', $vars);
+        $this->show('crud/activity', $actVars);
     }
 
     /**
@@ -67,7 +68,40 @@ class CrudController extends ControllerTemplate
      */
     public function activity_post()
     {
-        $this->show('crud/activity');
+        $activity = isset($_POST['activity']) ? trim(strip_tags($_POST['activity'])) : '';
+        $material = isset($_POST['material']) ? trim($_POST['material']) : '';
+
+        // activity input validation
+        $activityOk = true;
+        if (empty($activity))
+        {
+            echo 'Activity required<br>';
+            $activityOk = false;
+        }
+        // if input ok
+        if ($activityOk)
+        {
+
+            $activityModel = new ActivityModel();
+            //Insert data
+            $activityData = $activityModel->insert(array(
+                'act_name' => $activity,
+                'act_material' => $material
+            ));
+            // Si l'insertion a fonctionné
+            if ($activityData === false)
+            {
+                $errorList[] = 'Insert Error<br>';
+            }
+        }
+        $this->show('crud/activity', array(
+            'errorList' => $errorList,
+            'act_name' => $activity,
+            'act_material' => $material
+            )
+        );
     }
+
+
 
 }
