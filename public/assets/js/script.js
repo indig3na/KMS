@@ -100,12 +100,12 @@ $(function() {
     $('#kms-crud-add-btn').click(function(e) {
         e.preventDefault();
         var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
-        data.push({name:'method',value:'insert'})
+        data.push({name:'method',value:'insert'});
         $.ajax({
             url:'',
             type:'post',
             dataType:'json',
-            data:data,
+            data:data
         }).done(function(response){
             //reload on success, else show errors
         });
@@ -139,17 +139,31 @@ $(function() {
     }    
     function crudUpdate(){
         var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
-        data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'})
+        data.push({name:'id',value:$(this).attr('value')},{name:'method',value:'update'});
         $.ajax({
             url:'',
             type:'post',
             dataType:'json',
-            data:data,
+            data:data
         }).done(function(response){
             //reload on success, else show errors
         });
     }
- 
+    
+    //delete
+    
+    $('#kms-crud-delete-btn').click(function(e) {
+        e.preventDefault();
+        data=[{name:'id',value:$(this).attr('value')},{name:'method',value:'delete'}];
+        $.ajax({
+            url:'',
+            type:'post',
+            dataType:'json',
+            data:data
+        }).done(function(response){
+            //reload on success, else show errors
+        });
+    });
 });
 
 
