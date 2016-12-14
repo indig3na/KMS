@@ -22,7 +22,7 @@ class ActivityController extends ControllerTemplate
         $tabledata = $activitymodel -> findAllColumns(['act_id','act_name','act_material','act_description']);
         $actVars = [
             'title' => 'Activity',
-            'header' => ['Activity','Insertion','Modification','Material','Description'],
+            'header' => ['Activity','Material','Description'],
             'primaryKey' => 'act_id',
             'data' => $tabledata
         ];
