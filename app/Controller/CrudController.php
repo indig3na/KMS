@@ -12,10 +12,10 @@ class CrudController extends ControllerTemplate
 	 */
 	public function country_get(){
             $model = new CountryModel();
-            $tabledata = $model -> findAll();
+            $tabledata = $model -> findAllColumns(['cou_name']);
             $vars = [
                 'title' => 'Country',
-                'header' => ['Pays','Insertion','Modification'],
+                'header' => ['Pays'],
                 'primaryKey' => 'cou_id',
                 'data' => $tabledata
             ];

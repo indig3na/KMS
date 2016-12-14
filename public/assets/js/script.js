@@ -152,7 +152,7 @@ $(function() {
     
     //delete
     
-    $('#kms-crud-delete-btn').click(function(e) {
+    $('.kms-crud-delete-btn').click(function(e) {
         e.preventDefault();
         data=[{name:'id',value:$(this).attr('value')},{name:'method',value:'delete'}];
         $.ajax({
