@@ -13,4 +13,7 @@
             //Activity
             ['GET', '/app/manage/activity', 'Crud#activity_get', 'crud_activity_get'],
             ['POST', '/app/manage/activity', 'Crud#activity_post', 'crud_activity_post'],
+            //Classroom
+            ['GET', '/app/manage/classroom', 'Classroom#classroom_get', 'classroom_classroom_get'],
+            ['POST', '/app/manage/classroom', 'Classroom#classroom_post', 'classroom_classroom_post'],
 	);

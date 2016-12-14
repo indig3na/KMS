@@ -61,5 +61,5 @@ class CrudController extends ControllerTemplate
     {
         $this->show('crud/activity');
     }
-
+    
 }
