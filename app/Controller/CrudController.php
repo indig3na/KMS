@@ -21,7 +21,7 @@ class CrudController extends ControllerTemplate
                 'primaryKey' => 'cou_id',
                 'data' => $tabledata
             ];
-            $this->show('crud/country',$vars);
+            $this->show('crud/crud',$vars);
 	}
         
 	/**
@@ -29,7 +29,8 @@ class CrudController extends ControllerTemplate
 	 */
 	public function country_post()
 	{
-            $this->show('crud/country');
+            //validation & insertion données
+            $this->showJson(['Succès / Erreur']);
 	}
 
 	/**
