@@ -111,7 +111,7 @@ $(function () {
             }
         });
     }
-
+    $('.chosen-select').chosen({diable_search:false});
     //----------add----------
 
 
@@ -120,7 +120,12 @@ $(function () {
         e.preventDefault();
 
         // récupérer les données des input de la ligne ajout
-        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        var data = $(this).parent().parent().find('.kms-add-inp').not('.chosen-select').serializeArray();
+        var mult = $(this).parent().parent().find('.kms-add-inp.chosen-select');
+        mult.val().map(function(opt,index){
+            data.push({name: mult.attr('name')+'['+index+']', value: opt});
+        });
+        console.log(data);
 
         //ajouter le paramètre 'method'
         data.push({name: 'method', value: 'insert'});

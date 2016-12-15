@@ -22,7 +22,7 @@
                     <?php if ($key == $primaryKey): ?>
                     <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                         <td>
-                            <select class="form-control kms-add-inp" name="<?= $key ?>">
+                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control kms-add-inp chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
                                 <?php foreach ($fkData[$key] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>
@@ -34,27 +34,28 @@
                     <?php endif ?>
                 <?php endforeach ?>
                 <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
-                </form>
             </tr>
             <?php //lignes de données ?>
             <?php foreach ($data as $row): ?>
                 <tr>
                     <?php foreach ($row as $key => $value): ?>
-                        <td class="kms-datacolumn">
                         <?php if ($key == $primaryKey): ?>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <?php if(empty($value)): ?>
-                            <?php elseif (is_array($value)): ?>
+                            <td class="kms-datacolumn">
+                                <?php if(empty($value)): ?>
+                                <?php elseif (is_array($value)): ?>
                                     <?php foreach ($value as $val): ?>
                                         <span class="well well-sm"><?= $fkData[$key][$val] ?></span>
                                     <?php endforeach ?>
-                            <?php else: ?>
-                                <?= $fkData[$key][$value] ?>
-                            <?php endif ?>
+                                <?php else: ?>
+                                    <?= $fkData[$key][$value] ?>
+                                <?php endif ?>
+                            </td>
                         <?php else: ?>
-                            <?= $value ?>
+                            <td class="kms-datacolumn">
+                                <?= $value ?>
+                            </td>
                         <?php endif ?>
-                        </td>
                     <?php endforeach ?>
                     <td class="kms-action">
                         <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>

@@ -10,17 +10,11 @@ class ProgramController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en GET
      */
-    public function program_gsedfet(){
+    public function program_guiiuet(){
         $model = new ProgramModel();
         debug($model -> getActivities());
-        $acts = $model -> getActivities();
-        debug($model -> findAllColumns(['prg_id','prg_name']));
-        $test=$model -> findAllColumns(['prg_id','prg_name']);
-        foreach ($test as &$row){
-           $row['activities']= $acts[$row['prg_id']];
-        };
-        unset($row);
-        debug($test);
+        debug($model -> getActivities2());
+        
         
     }
     public function program_get(){
@@ -30,12 +24,12 @@ class ProgramController extends ControllerTemplate
         $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
         
         //récupérer les données de la table de correspondance
-        $activities = $model -> getActivities();
+        $activities = $model -> getActivities2();
         
         //inclure les données de la table de correspondance dans la table données
         foreach ($tabledata as &$row){
-           $row['activities']= $activities[$row['prg_id']];
-        };
+           $row['activities']= isset ($activities[$row['prg_id']]) ? $activities[$row['prg_id']] : Null;
+        }
         unset($row);
         
         //stocker les données des autres tables de DB dans $fkdata
@@ -50,7 +44,7 @@ class ProgramController extends ControllerTemplate
             //titre de page
             'title' => 'Program',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Programme *'],
+            'header' => ['Programme *','Activités'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'prg_id',
             //données
@@ -66,6 +60,8 @@ class ProgramController extends ControllerTemplate
      */
     public function program_post(){
         //initialiser
+        debug ($_POST);
+        die();
         $model = new ProgramModel;
         $success = false;
         $errors = array();

@@ -55,6 +55,20 @@ class ProgramModel extends ModelTemplate
             }
             return $result;
         }
+        public function getActivities2(){
+            $sql = '
+                SELECT *
+                FROM saliab_sql2.program_has_activity
+            ';
+            $sth = $this->dbh->prepare($sql);
+            $sth->execute();
+            $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            $result = array();
+            foreach ($query as $row){
+                $result[$row['program_prg_id']][] = $row['activity_act_id'];
+            }
+            return $result;
+        }
         
         
         //-----------------GETTERS & SETTERS--------------
