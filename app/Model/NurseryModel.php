@@ -48,6 +48,7 @@ class NurseryModel extends ModelTemplate
 
     public function __construct($nur_id=0,$nur_name=null,$nur_inserted=NULL,$nur_updated=NULL, $nur_address=NULL,$nur_email=NULL,$nur_telephone=NULL,$nur_website=NULL) {
         parent::__construct();
+        $this->setPrimaryKey('nur_id');
         $this ->nur_id = $nur_id;
         $this ->nur_name = $nur_name;
         $this ->nur_inserted = $nur_inserted;
