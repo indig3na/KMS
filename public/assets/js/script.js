@@ -106,6 +106,7 @@ $(function() {
             if (response.code == 0){
                 alert(response.message);
             } else if (response.code == 1){
+                alert(response.message);
                 location.reload();
             }
         });

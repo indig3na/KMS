@@ -33,7 +33,7 @@ class SchoolYearController extends ControllerTemplate
         $id = '';
 
         //validation
-        $succesList = array();
+        $successList = array();
         $success = false;
         $errorList = array();
         $data = array();
@@ -55,7 +55,7 @@ class SchoolYearController extends ControllerTemplate
                 if ($tableData === false) {
                     $errorList[] = 'Insert Error';
                 } else {
-                    $succesList[] = 'SchoolYear inserted';
+                    $successList[] = 'SchoolYear inserted';
                     $success = true;
                 }
             } //update
@@ -66,7 +66,7 @@ class SchoolYearController extends ControllerTemplate
                 if ($updateData === false) {
                     $errorList[] = 'Update Error';
                 } else {
-                    $succesList[] = 'SchoolYear Updated';
+                    $successList[] = 'SchoolYear Updated';
                     $success = true;
                 }
             }
@@ -79,13 +79,13 @@ class SchoolYearController extends ControllerTemplate
             if ($deletedData === false) {
                 $errorList[] = 'Deletion Error';
             } else {
-                $succesList[] = 'SchoolYear Deleted';
+                $successList[] = 'SchoolYear Deleted';
                 $success = true;
             }
         }
         // show json errorList and/or successList message
         if ($success) {
-            $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+            $this->showJson(['code' => 1, 'message' => implode('<br>', $successList)]);
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
         }

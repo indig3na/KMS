@@ -53,27 +53,7 @@ class NurseryController extends ControllerTemplate
         $errorList = array();
         $data = array();
 
-        if (empty($name)) {
-            $errorList[] = 'All champs are required';
-            $success = false;
-        }
-        if (empty($address)) {
-            $errorList[] = 'All champs are required';
-            $success = false;
-        }
-        if (empty($email)) {
-            $errorList[] = 'All champs are required';
-            $success = false;
-        }
-        if (empty($telephone)) {
-            $errorList[] = 'All champs are required';
-            $success = false;
-        }
-        if (empty($website)) {
-            $errorList[] = 'All champs are required';
-            $success = false;
-        }
-        if (empty($city)) {
+        if (empty($name) || empty($address) || empty($email) || empty($telephone) || empty($website) || empty($city)) {
             $errorList[] = 'All champs are required';
             $success = false;
         }
@@ -126,9 +106,11 @@ class NurseryController extends ControllerTemplate
         }
         // show json errorList and/or successList message
         if ($success) {
-            $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+            $this->showJson(['code' => 1, 'message' => implode('
+            ', $succesList)]);
         } else {
-            $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
+            $this->showJson(['code' => 0, 'message' => implode('
+            ', $errorList)]);
         }
     }
 }
