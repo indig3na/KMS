@@ -8,6 +8,7 @@ namespace Model;
  */
 class CityModel extends ModelTemplate
 {
+
     /**
      * @var int
      */
@@ -93,5 +94,6 @@ class CityModel extends ModelTemplate
     {
         $this->cit_updated = $cit_updated;
     }
+
 
 }

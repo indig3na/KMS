@@ -25,6 +25,13 @@ $w_routes = array(
     //Class
     ['GET', '/app/manage/class/', 'Class#class_get', 'class_class_get'],
     ['POST', '/app/manage/class/', 'Class#class_post', 'class_class_post'],
+    //Child
+    ['GET', '/app/manage/child/', 'Child#child_get', 'crud_child_get'],
+    ['POST', '/app/manage/child/', 'Child#child_post', 'crud_child_post'],
+    //Parent
+    ['GET', '/app/manage/user/', 'User#user_get', 'crud_user_get'],
+    ['POST', '/app/manage/user/', 'User#user_post', 'crud_user_post'],
+
 );
 
 

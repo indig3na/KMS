@@ -50,6 +50,7 @@ class NurseryModel extends ModelTemplate
     {
         parent::__construct();
         $this->setPrimaryKey('nur_id');
+
         $this->nur_id = $nur_id;
         $this->nur_name = $nur_name;
         $this->nur_inserted = $nur_inserted;
@@ -58,6 +59,7 @@ class NurseryModel extends ModelTemplate
         $this->nur_email = $nur_email;
         $this->nur_telephone = $nur_telephone;
         $this->nur_website = $nur_website;
+
     }
 
 
