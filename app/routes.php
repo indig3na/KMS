@@ -28,6 +28,9 @@ $w_routes = array(
     //Parent
     ['GET', '/app/manage/user/', 'User#user_get', 'crud_user_get'],
     ['POST', '/app/manage/user/', 'User#user_post', 'crud_user_post'],
+    //Program
+    ['GET', '/app/manage/program/', 'Program#program_get', 'crud_program_get'],
+    ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
 );
 
 
