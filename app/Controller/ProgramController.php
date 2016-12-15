@@ -8,15 +8,8 @@ use Model\ActivityModel;
 class ProgramController extends ControllerTemplate
 {
     /**
-     * Page de gestion CRUD pour table country en GET
+     * Page de gestion CRUD pour table program en GET
      */
-    public function program_guiiuet(){
-        $model = new ProgramModel();
-        debug($model -> getActivities());
-        debug($model -> getActivities2());
-        
-        
-    }
     public function program_get(){
         //model nécessaire pour acces BD
         $model = new ProgramModel();
@@ -24,7 +17,7 @@ class ProgramController extends ControllerTemplate
         $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
         
         //récupérer les données de la table de correspondance
-        $activities = $model -> getActivities2();
+        $activities = $model -> getActivities();
         
         //inclure les données de la table de correspondance dans la table données
         foreach ($tabledata as &$row){
@@ -60,14 +53,13 @@ class ProgramController extends ControllerTemplate
      */
     public function program_post(){
         //initialiser
-        debug ($_POST);
-        die();
         $model = new ProgramModel;
         $success = false;
         $errors = array();
         if (in_array($method = $_POST['method'],['insert','update'])){
             //récupérer les champs nécessaires de $-POST
             $data = array_intersect_key($_POST, array_flip(['prg_name']));
+            $corrTableData = array_intersect_key($_POST, array_flip(['activities']));
             //validation données
             if (empty($data['prg_name'])){
                 $errors[] = 'Nom de la ville doit être renseigné';
@@ -81,6 +73,8 @@ class ProgramController extends ControllerTemplate
                     } else {
                         $message = 'Inseré en base de données';
                         $success = true;
+                        
+                        //todo insertion $corrTableData
                     }
                 //modification données
                 } else {
@@ -90,6 +84,8 @@ class ProgramController extends ControllerTemplate
                     } else {
                         $message = 'Modifié dans la base de données';
                         $success = true;
+                        
+                        //todo update $corrTableData
                     }
                 }
             }

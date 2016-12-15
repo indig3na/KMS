@@ -36,27 +36,6 @@ class ProgramModel extends ModelTemplate
         }
         public function getActivities(){
             $sql = '
-                SELECT group_concat(activity_act_id separator \',\') as id_list, prg_id
-                FROM saliab_sql2.program 
-                LEFT OUTER JOIN saliab_sql2.program_has_activity 
-                ON program_prg_id = prg_id
-                group by prg_id
-            ';
-            $sth = $this->dbh->prepare($sql);
-            $sth->execute();
-            $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
-            $result = array();
-            foreach ($query as $row){
-                if (!empty($row['id_list'])){
-                    $result[$row['prg_id']] = explode(',',$row['id_list']);                   
-                } else {
-                    $result[$row['prg_id']] = null;
-                }
-            }
-            return $result;
-        }
-        public function getActivities2(){
-            $sql = '
                 SELECT *
                 FROM saliab_sql2.program_has_activity
             ';

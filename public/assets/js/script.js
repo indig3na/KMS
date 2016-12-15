@@ -111,7 +111,8 @@ $(function () {
             }
         });
     }
-    $('.chosen-select').chosen({diable_search:false});
+    //initialiser la librairie chosen sur les select
+    $('.chosen-select').chosen({disable_search_threshold:8});
     //----------add----------
 
 
@@ -193,9 +194,11 @@ $(function () {
 
     $('.kms-crud-delete-btn').click(function (e) {
         e.preventDefault();
-        // ajouter l'id de la ligne courante
-        data = [{name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'delete'}];
-        ajaxCall(data);
+        if (confirm('Voulez-vous vraiment supprimer cette ligne ?')){
+            // ajouter l'id de la ligne courante
+            data = [{name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'delete'}];
+            ajaxCall(data);
+        }
     });
 
 });
