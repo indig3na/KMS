@@ -1,6 +1,6 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
-<?php $this->start('main_content') ?>
+<?php $this->start('main_content')?>
 
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
@@ -40,13 +40,21 @@
             <?php foreach ($data as $row): ?>
                 <tr>
                     <?php foreach ($row as $key => $value): ?>
+                        <td class="kms-datacolumn">
                         <?php if ($key == $primaryKey): ?>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <td class="kms-datacolumn"><?= $fkData[$key][$value] ?></td>
-                        <?php
-                        else: ?>
-                            <td class="kms-datacolumn"><?= $value ?></td>
+                            <?php if(empty($value)): ?>
+                            <?php elseif (is_array($value)): ?>
+                                    <?php foreach ($value as $val): ?>
+                                        <span class="well well-sm"><?= $fkData[$key][$val] ?></span>
+                                    <?php endforeach ?>
+                            <?php else: ?>
+                                <?= $fkData[$key][$value] ?>
+                            <?php endif ?>
+                        <?php else: ?>
+                            <?= $value ?>
                         <?php endif ?>
+                        </td>
                     <?php endforeach ?>
                     <td class="kms-action">
                         <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>

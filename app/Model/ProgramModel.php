@@ -47,7 +47,11 @@ class ProgramModel extends ModelTemplate
             $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
             $result = array();
             foreach ($query as $row){
-                $result[$row['prg_id']] = explode(',',$row['id_list']);
+                if (!empty($row['id_list'])){
+                    $result[$row['prg_id']] = explode(',',$row['id_list']);                   
+                } else {
+                    $result[$row['prg_id']] = null;
+                }
             }
             return $result;
         }

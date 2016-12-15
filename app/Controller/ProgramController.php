@@ -44,6 +44,7 @@ class ProgramController extends ControllerTemplate
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $activityModel = new ActivityModel();
         $fkData['activities'] = $activityModel ->findIndexedColumn('act_name');
+        $mult =['activities'];
         
         $vars = [
             //titre de page
@@ -54,7 +55,8 @@ class ProgramController extends ControllerTemplate
             'primaryKey' => 'prg_id',
             //données
             'data' => $tabledata,
-            'fkData' => $fkData      
+            'fkData' => $fkData,
+            'mult' => $mult
         ];
         $this->show('crud/crud',$vars);
     }
