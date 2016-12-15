@@ -3,32 +3,55 @@
 namespace Controller;
 
 use Model\ProgramModel;
+use Model\ActivityModel;
 
 class ProgramController extends ControllerTemplate
 {
     /**
      * Page de gestion CRUD pour table country en GET
      */
+    public function program_gsedfet(){
+        $model = new ProgramModel();
+        debug($model -> getActivities());
+        $acts = $model -> getActivities();
+        debug($model -> findAllColumns(['prg_id','prg_name']));
+        $test=$model -> findAllColumns(['prg_id','prg_name']);
+        foreach ($test as &$row){
+           $row['activities']= $acts[$row['prg_id']];
+        };
+        unset($row);
+        debug($test);
+        
+    }
     public function program_get(){
         //model nécessaire pour acces BD
         $model = new ProgramModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['prg_id','prg_name','country_cou_id']);
+        $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
+        
+        //récupérer les données de la table de correspondance
+        $activities = $model -> getActivities();
+        
+        //inclure les données de la table de correspondance dans la table données
+        foreach ($tabledata as &$row){
+           $row['activities']= $activities[$row['prg_id']];
+        };
+        unset($row);
         
         //stocker les données des autres tables de DB dans $fkdata
         $fkData = array();
         
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
-        $countryModel = new CountryModel();
-        $fkData['country_cou_id'] = $countryModel ->findIndexedColumn('cou_name');
+        $activityModel = new ActivityModel();
+        $fkData['activities'] = $activityModel ->findIndexedColumn('act_name');
         
         $vars = [
             //titre de page
-            'title' => 'City',
+            'title' => 'Program',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Ville *', 'Pays *'],
+            'header' => ['Programme *'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
-            'primaryKey' => 'cit_id',
+            'primaryKey' => 'prg_id',
             //données
             'data' => $tabledata,
             'fkData' => $fkData      
@@ -46,13 +69,10 @@ class ProgramController extends ControllerTemplate
         $errors = array();
         if (in_array($method = $_POST['method'],['insert','update'])){
             //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip(['cit_name','country_cou_id']));
+            $data = array_intersect_key($_POST, array_flip(['prg_name']));
             //validation données
-            if (empty($data['cit_name'])){
+            if (empty($data['prg_name'])){
                 $errors[] = 'Nom de la ville doit être renseigné';
-            }
-            if (empty($data['country_cou_id'])){
-                $errors[] = 'Pays doit être renseigné';
             }
             //modifier la BD
             if(empty($errors)){
