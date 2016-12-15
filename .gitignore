@@ -4,5 +4,5 @@ composer.lock
 .idea
 app/config.php
 /phpDocumentor.phar
-/nbroject/
+/nbproject/
 *.log
