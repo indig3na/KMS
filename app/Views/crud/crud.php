@@ -19,7 +19,16 @@
                 <?php //ligne d'ajout ?>
                 <tr id="add">
                         <?php foreach ($data[0] as $key => $value):?>
-                            <?php if ($key !== $primaryKey): ?>
+                            <?php if ($key == $primaryKey): ?>
+                            <?php elseif (isset($fkData) && in_array($key,array_keys($fkData))): ?>
+                                <td>
+                                    <select class="form-control kms-add-inp" name="<?= $key ?>">
+                                        <?php foreach ($fkData[$key] as $id => $value):?>
+                                            <option value="<?= $id ?>"><?= $value ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </td>
+                            <?php else: ?>
                                 <td><input class="form-control kms-add-inp" type="text" name="<?= $key ?>"/></td>
                             <?php endif ?>
                         <?php endforeach ?>
@@ -30,7 +39,10 @@
                 <?php foreach ($data as $row):?>
                     <tr>
                         <?php foreach ($row as $key => $value):?>
-                            <?php if ($key !== $primaryKey): ?>
+                            <?php if ($key == $primaryKey): ?>
+                            <?php elseif (isset($fkData) && in_array($key,array_keys($fkData))): ?>
+                                <td class="kms-datacolumn"><?= $fkData[$key][$value] ?></td>
+                            <?php else: ?>
                                 <td class="kms-datacolumn"><?= $value ?></td>
                             <?php endif ?>
                         <?php endforeach ?>
