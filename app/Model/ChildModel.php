@@ -24,10 +24,11 @@ class ChildModel extends ModelTemplate
      * @var string
      */
     private $chd_lastname;
+
     /**
      * @var string
      */
-    private $chd_date;
+    private $chd_birthday;
     /**
      * @var string
      */
@@ -61,7 +62,7 @@ class ChildModel extends ModelTemplate
     /**
      * @var int
      */
-    private $parent_par_id;
+    private $user_usr_id;
 
 
     /*----------------------------constructor---------------------*/
@@ -71,7 +72,7 @@ class ChildModel extends ModelTemplate
      * @param int $chd_id
      * @param string $chd_firstname
      * @param string $chd_lastname
-     * @param string $chd_date
+     * @param string $chd_birthday
      * @param string $chd_gender
      * @param string $chd_hobbies
      * @param string $chd_comments
@@ -79,16 +80,16 @@ class ChildModel extends ModelTemplate
      * @param int $chd_insert
      * @param int $chd_updated
      * @param int $class_cls_id
-     * @param int $parent_par_id
+     * @param int $user_usr_id
      */
-    public function __construct($chd_id, $chd_firstname, $chd_lastname, $chd_date, $chd_gender, $chd_hobbies, $chd_comments, $chd_img_path, $chd_insert, $chd_updated, $class_cls_id, $parent_par_id)
+    public function __construct($chd_id = 0, $chd_firstname = '', $chd_lastname = '', $chd_birthday= NULL, $chd_gender= NULL, $chd_hobbies= NULL, $chd_comments= NULL, $chd_img_path= NULL, $chd_insert= NULL, $chd_updated= NULL, $class_cls_id= NULL, $user_usr_id= NULL)
     {
         parent::__construct();
         $this->setPrimaryKey('chd_id');
         $this->chd_id = $chd_id;
         $this->chd_firstname = $chd_firstname;
         $this->chd_lastname = $chd_lastname;
-        $this->chd_date = $chd_date;
+        $this->chd_date = $chd_birthday;
         $this->chd_gender = $chd_gender;
         $this->chd_hobbies = $chd_hobbies;
         $this->chd_comments = $chd_comments;
@@ -96,7 +97,7 @@ class ChildModel extends ModelTemplate
         $this->chd_insert = $chd_insert;
         $this->chd_updated = $chd_updated;
         $this->class_cls_id = $class_cls_id;
-        $this->parent_par_id = $parent_par_id;
+        $this->user_usr_id = $user_usr_id;
     }
 
     /*----------------------------Setters---------------------*/
@@ -124,13 +125,15 @@ class ChildModel extends ModelTemplate
         $this->chd_lastname = $chd_lastname;
     }
 
+
     /**
-     * @param string $chd_date
+     * @param string $chd_birthday
      */
-    public function setChdDate($chd_date)
+    public function setChdBirthday($chd_birthday)
     {
-        $this->chd_date = $chd_date;
+        $this->chd_birthday = $chd_birthday;
     }
+
 
     /**
      * @param string $chd_gender
@@ -183,17 +186,41 @@ class ChildModel extends ModelTemplate
     /**
      * @param int $class_cls_id
      */
-    public function setClassClsId($class_cls_id)
+    public function setClassclsId($class_cls_id)
     {
         $this->class_cls_id = $class_cls_id;
     }
 
     /**
-     * @param int $parent_par_id
+     * @param int $user_usr_id
      */
-    public function setParentParId($parent_par_id)
+    public function setUserUsrId($user_usr_id)
     {
-        $this->parent_par_id = $parent_par_id;
+        $this->user_usr_id = $user_usr_id;
+    }
+
+    /**
+     * @param string $table
+     */
+    public function setTable($table)
+    {
+        $this->table = $table;
+    }
+
+    /**
+     * @param int $primaryKey
+     */
+    public function setPrimaryKey($primaryKey)
+    {
+        $this->primaryKey = $primaryKey;
+    }
+
+    /**
+     * @param \PDO $dbh
+     */
+    public function setDbh($dbh)
+    {
+        $this->dbh = $dbh;
     }
 
     /*----------------------------Getters---------------------*/
@@ -225,9 +252,9 @@ class ChildModel extends ModelTemplate
     /**
      * @return string
      */
-    public function getChdDate()
+    public function getChdbirthday()
     {
-        return $this->chd_date;
+        return $this->chd_birthday;
     }
 
     /**
@@ -281,7 +308,7 @@ class ChildModel extends ModelTemplate
     /**
      * @return int
      */
-    public function getClassClsId()
+    public function getClassclsId()
     {
         return $this->class_cls_id;
     }
@@ -289,11 +316,34 @@ class ChildModel extends ModelTemplate
     /**
      * @return int
      */
-    public function getParentParId()
+    public function getUserUsrId()
     {
-        return $this->parent_par_id;
+        return $this->user_usr_id;
     }
 
+    /**
+     * @return string
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
+
+    /**
+     * @return \PDO
+     */
+    public function getDbh()
+    {
+        return $this->dbh;
+    }
 
 
 

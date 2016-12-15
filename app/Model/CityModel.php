@@ -31,11 +31,11 @@ class CityModel extends ModelTemplate
 
 	public function __construct($cit_id=0, $cit_name='', $country=NULL, $cit_inserted=NULL, $cit_updated=NULL) {
 		parent::__construct();
-                $this -> primaryKey = 'cit_id';
+        $this -> primaryKey = 'cit_id';
 		$this -> cit_id = $cit_id;
 		$this -> cit_name = $cit_name;
-                $this -> country = $country;
-                $this -> cit_inserted = $cit_inserted;
+        $this -> country = $country;
+        $this -> cit_inserted = $cit_inserted;
 		$this -> cit_updated = $cit_updated;
 	}
         
