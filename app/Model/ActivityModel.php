@@ -9,7 +9,6 @@
 namespace Model;
 
 
-
 class ActivityModel extends ModelTemplate
 {
     /*----------------Properties------------------*/
@@ -45,7 +44,7 @@ class ActivityModel extends ModelTemplate
      * @param string $act_updated
      * @param string $act_material
      */
-    public function __construct($act_id=0, $act_name='', $act_inserted=null, $act_updated=null, $act_material='')
+    public function __construct($act_id = 0, $act_name = '', $act_inserted = null, $act_updated = null, $act_material = '')
     {
         parent::__construct();
         $this->setPrimaryKey('act_id');
@@ -62,35 +61,11 @@ class ActivityModel extends ModelTemplate
     /*---------------------Setter--------------*/
 
     /**
-     * @param int $act_id
+     * @param int $primaryKey
      */
-    public function setActId($act_id)
+    public function setPrimaryKey($primaryKey)
     {
-        $this->act_id = $act_id;
-    }
-
-    /**
-     * @param string $act_name
-     */
-    public function setActName($act_name)
-    {
-        $this->act_name = $act_name;
-    }
-
-    /**
-     * @param string $act_inserted
-     */
-    public function setActInserted($act_inserted)
-    {
-        $this->act_inserted = $act_inserted;
-    }
-
-    /**
-     * @param string $act_updated
-     */
-    public function setActUpdated($act_updated)
-    {
-        $this->act_updated = $act_updated;
+        $this->primaryKey = $primaryKey;
     }
 
     /**
@@ -102,30 +77,11 @@ class ActivityModel extends ModelTemplate
     }
 
     /**
-     * @param int $primaryKey
-     */
-    public function setPrimaryKey($primaryKey)
-    {
-        $this->primaryKey = $primaryKey;
-    }
-
-    /**
      * @param \PDO $dbh
      */
     public function setDbh($dbh)
     {
         $this->dbh = $dbh;
-    }
-
-    /*--------------------Getter--------------*/
-
-
-    /**
-     * @param string $act_material
-     */
-    public function setActMaterial($act_material)
-    {
-        $this->act_material = $act_material;
     }
 
     /**
@@ -137,6 +93,14 @@ class ActivityModel extends ModelTemplate
     }
 
     /**
+     * @param int $act_id
+     */
+    public function setActId($act_id)
+    {
+        $this->act_id = $act_id;
+    }
+
+    /**
      * @return string
      */
     public function getActName()
@@ -145,11 +109,29 @@ class ActivityModel extends ModelTemplate
     }
 
     /**
+     * @param string $act_name
+     */
+    public function setActName($act_name)
+    {
+        $this->act_name = $act_name;
+    }
+
+    /*--------------------Getter--------------*/
+
+    /**
      * @return string
      */
     public function getActInserted()
     {
         return $this->act_inserted;
+    }
+
+    /**
+     * @param string $act_inserted
+     */
+    public function setActInserted($act_inserted)
+    {
+        $this->act_inserted = $act_inserted;
     }
 
     /**
@@ -161,11 +143,27 @@ class ActivityModel extends ModelTemplate
     }
 
     /**
+     * @param string $act_updated
+     */
+    public function setActUpdated($act_updated)
+    {
+        $this->act_updated = $act_updated;
+    }
+
+    /**
      * @return string
      */
     public function getActMaterial()
     {
         return $this->act_material;
+    }
+
+    /**
+     * @param string $act_material
+     */
+    public function setActMaterial($act_material)
+    {
+        $this->act_material = $act_material;
     }
 
     /**
@@ -191,8 +189,6 @@ class ActivityModel extends ModelTemplate
     {
         return $this->dbh;
     }
-
-
 
 
 }

@@ -9,12 +9,13 @@ class CountryController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en GET
      */
-    public function country_get(){
+    public function country_get()
+    {
         //model nécessaire pour acces BD
         $model = new CountryModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['cou_id','cou_name']);
-        
+        $tabledata = $model->findAllColumns(['cou_id', 'cou_name']);
+
         $vars = [
             //titre de page
             'title' => 'Country',
@@ -25,38 +26,39 @@ class CountryController extends ControllerTemplate
             //données
             'data' => $tabledata
         ];
-        $this->show('crud/crud',$vars);
+        $this->show('crud/crud', $vars);
     }
 
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public function country_post(){
+    public function country_post()
+    {
         //initialiser
         $model = new CountryModel;
         $success = false;
         $errors = array();
-        if (in_array($method = $_POST['method'],['insert','update'])){
+        if (in_array($method = $_POST['method'], ['insert', 'update'])) {
             //récupérer les champs nécessaires de $-POST
             $data = array_intersect_key($_POST, array_flip(['cou_name']));
             //validation données
-            if (empty($data['cou_name'])){
+            if (empty($data['cou_name'])) {
                 $errors[] = 'Nom du pays doit être renseigné';
             }
             //modifier la BD
-            if(empty($errors)){
+            if (empty($errors)) {
                 //insertion données
-                if ($method === 'insert'){
-                    if($model ->insert($data) === false) {
+                if ($method === 'insert') {
+                    if ($model->insert($data) === false) {
                         $errors[] = 'Insertion en base de données échouée';
                     } else {
                         $message = 'Inseré en base de données';
                         $success = true;
                     }
-                //modification données
+                    //modification données
                 } else {
                     $id = intval($_POST['id']);
-                    if($model ->update($data,$id) === false) {
+                    if ($model->update($data, $id) === false) {
                         $errors[] = 'Modification de la base de données échouée';
                     } else {
                         $message = 'Modifié dans la base de données';
@@ -64,19 +66,19 @@ class CountryController extends ControllerTemplate
                     }
                 }
             }
-        } elseif ($method === 'delete'){
+        } elseif ($method === 'delete') {
             // suppression données
             $id = intval($_POST['id']);
-            if($model -> delete($id) === false) {
+            if ($model->delete($id) === false) {
                 $errors[] = 'Suppression de la base de données échouée';
             } else {
                 $message = 'Supprimé de la base de données';
                 $success = true;
-            }    
+            }
         } else {
             $errors[] = 'méthode inconnue';
         }
-        if ($success){
+        if ($success) {
             $this->showJson(['code' => 1, 'message' => $message]);
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);

@@ -10,19 +10,20 @@ class CityController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en GET
      */
-    public function city_get(){
+    public function city_get()
+    {
         //model nécessaire pour acces BD
         $model = new CityModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['cit_id','cit_name','country_cou_id']);
-        
+        $tabledata = $model->findAllColumns(['cit_id', 'cit_name', 'country_cou_id']);
+
         //stocker les données des autres tables de DB dans $fkdata
         $fkData = array();
-        
+
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $countryModel = new CountryModel();
-        $fkData['country_cou_id'] = $countryModel ->findIndexedColumn('cou_name');
-        
+        $fkData['country_cou_id'] = $countryModel->findIndexedColumn('cou_name');
+
         $vars = [
             //titre de page
             'title' => 'City',
@@ -32,43 +33,44 @@ class CityController extends ControllerTemplate
             'primaryKey' => 'cit_id',
             //données
             'data' => $tabledata,
-            'fkData' => $fkData      
+            'fkData' => $fkData
         ];
-        $this->show('crud/crud',$vars);
+        $this->show('crud/crud', $vars);
     }
 
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public function city_post(){
+    public function city_post()
+    {
         //initialiser
         $model = new CityModel;
         $success = false;
         $errors = array();
-        if (in_array($method = $_POST['method'],['insert','update'])){
+        if (in_array($method = $_POST['method'], ['insert', 'update'])) {
             //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip(['cit_name','country_cou_id']));
+            $data = array_intersect_key($_POST, array_flip(['cit_name', 'country_cou_id']));
             //validation données
-            if (empty($data['cit_name'])){
+            if (empty($data['cit_name'])) {
                 $errors[] = 'Nom de la ville doit être renseigné';
             }
-            if (empty($data['country_cou_id'])){
+            if (empty($data['country_cou_id'])) {
                 $errors[] = 'Pays doit être renseigné';
             }
             //modifier la BD
-            if(empty($errors)){
+            if (empty($errors)) {
                 //insertion données
-                if ($method === 'insert'){
-                    if($model ->insert($data) === false) {
+                if ($method === 'insert') {
+                    if ($model->insert($data) === false) {
                         $errors[] = 'Insertion en base de données échouée';
                     } else {
                         $message = 'Inseré en base de données';
                         $success = true;
                     }
-                //modification données
+                    //modification données
                 } else {
                     $id = intval($_POST['id']);
-                    if($model ->update($data,$id) === false) {
+                    if ($model->update($data, $id) === false) {
                         $errors[] = 'Modification de la base de données échouée';
                     } else {
                         $message = 'Modifié dans la base de données';
@@ -76,19 +78,19 @@ class CityController extends ControllerTemplate
                     }
                 }
             }
-        } elseif ($method === 'delete'){
+        } elseif ($method === 'delete') {
             // suppression données
             $id = intval($_POST['id']);
-            if($model -> delete($id) === false) {
+            if ($model->delete($id) === false) {
                 $errors[] = 'Suppression de la base de données échouée';
             } else {
                 $message = 'Supprimé de la base de données';
                 $success = true;
-            }    
+            }
         } else {
             $errors[] = 'méthode inconnue';
         }
-        if ($success){
+        if ($success) {
             $this->showJson(['code' => 1, 'message' => $message]);
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
