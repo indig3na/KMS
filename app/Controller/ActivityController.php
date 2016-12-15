@@ -38,84 +38,92 @@ class ActivityController extends ControllerTemplate
         $material = isset($_POST['act_material']) ? trim($_POST['act_material']) : '';
         $description = isset($_POST['act_description']) ? trim($_POST['act_description']) : '';
 
-        $insert = isset($_POST['insert']) ? trim(strip_tags($_POST['insert'])) : '';
-        $delete = isset($_POST['delete']) ? trim(strip_tags($_POST['delete'])) : '';
-        $update = isset($_POST['update']) ? trim(strip_tags($_POST['update'])) : '';
-        $id = isset($_POST['id']) ? trim($_POST['id']) : 0;
+        $method = $_POST['method'];
+        $id = '';
 
-
-        if ('method' === $insert)
+        // activity input validation
+        $succesList = array();
+        $success = false;
+        $errorList = array();
+        $data = array();
+        if (empty($name))
         {
-
-            // activity input validation
-            $errorList = array();
-            $activityOk = true;
-            if (empty($name)) {
-                echo 'Activity required<br>';
-                $activityOk = false;
-            }
-            // if input ok
-            if ($activityOk) {
-
-                $activityModel = new ActivityModel();
-                //Insert data
-                $activityData = $activityModel->insert(array(
-                    'act_name' => $name,
-                    'act_material' => $material,
-                    'act_description' => $description
-                ));
-                // if not inserted error
-                if ($activityData === false) {
-                    $errorList[] = 'Insert Error<br>';
-                }
-            }
-            $this->show('crud/activity', array(
-                    'errorList' => $errorList,
-                    'act_name' => $activity,
-                    'act_material' => $material,
-                    'act_description' => $description
-                )
-            );
+            $errorList[]= 'Activity required<br>';
+            $success = false;
         }
-        if('method'=== 'update')
+        $data= [
+            'act_name' => $name,
+            'act_material' => $material,
+            'act_description' => $description
+        ];
+        // if input ok
+        if (empty($errorList))
         {
-            // activity input validation
-            $errorList = array();
-            $activityOk = true;
-            if (empty($name)) {
-                echo 'Activity required<br>';
-                $activityOk = false;
-            }
-            // if input ok
-            if ($activityOk) {
 
-                $activityModel = new ActivityModel();
-                //Insert data
-                $activityData = $activityModel->update(array(
-                    'act_name' => $name,
-                    'act_material' => $material,
-                    'act_description' => $description
-                ), $id ,$stripTags = true);
-                // if not inserted error
-                if ($activityData === false) {
-                    $errorList[] = 'Insert Error<br>';
-                }
-            }
-            $this->show('crud/activity', array(
-                    'errorList' => $errorList,
-                    'act_name' => $activity,
-                    'act_material' => $material,
-                    'act_description' => $description
-                )
-            );
-        }
-        if('method'=== $delete)
-        {
             $activityModel = new ActivityModel();
-            //delete data
-            $deletDataId = $activityModel->delete($id);
-            $this->show('crud/crud');
+            //Insert data
+            if ($method === 'insert')
+            {
+                $activityData = $activityModel->insert($data);
+                // if not inserted error
+                if ($activityData === false)
+                {
+                    $errorList[] = 'Insert Error<br>';
+                }
+                else
+                {
+                    $succesList[]= 'Activity inserted';
+                    $success = true;
+                }
+            }
+            //update data for given Id
+            elseif ($method === 'update')
+            {
+                $id = $_POST['id'];
+                $updateData = $activityModel->update($data, $id,$stripTags = true );
+                // if not updated error
+                if ($updateData === false)
+                {
+                    $errorList[] = 'Update Error<br>';
+                }
+                else
+                {
+                    $succesList[]= 'Activity Updated';
+                    $success = true;
+                }
+            }
+
+
         }
+        //delete data for a given Id
+        if ($method === 'delete')
+        {
+            $id = $_POST['id'];
+            $activityModel = new ActivityModel();
+            $deletedData = $activityModel->delete($id);
+            // if not deleted error
+            // if not updated error
+            if ($deletedData === false)
+            {
+                $errorList[] = 'Delete Error<br>';
+            }
+            else
+            {
+                $succesList[]= 'Activity Deleted';
+                $success = true;
+            }
+
+        }
+        // show json errorList and/or successList message
+        if ($success)
+        {
+           $this->showJson(['code'=> 1, 'message' => implode('<br>', $succesList)]);
+        }
+        else
+        {
+            $this->showJson(['code'=> 0, 'message' => implode('<br>', $errorList)]);
+        }
+
 
     }
 
