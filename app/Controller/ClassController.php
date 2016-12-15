@@ -9,7 +9,7 @@
 namespace Controller;
 
 use Model\ClassModel;
-//use Model\ProgramModel;
+use Model\ProgramModel;
 use Model\SchoolYearModel;
 
 
@@ -20,18 +20,18 @@ class ClassController extends ControllerTemplate{
     public function class_get()
     {
         $model = new ClassModel();
-        $tabledata = $model->findAllColumns(['cls_id', 'cls_name', /*'program_prg_id',*/ 'school_year_scy_id' ]);
+        $tabledata = $model->findAllColumns(['cls_id', 'cls_name', 'program_prg_id', 'school_year_scy_id' ]);
 
         //initialisation of $fkdata
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
-        //$programModel = new ProgramModel();
+        $programModel = new ProgramModel();
         $schoolYearModel = new SchoolYearModel();
-        //$fkData['program_prg_id'] = $programModel->findIndexedColumn('prg_name');
+        $fkData['program_prg_id'] = $programModel->findIndexedColumn('prg_name');
         $fkData['school_year_scy_id'] =  $schoolYearModel->findIndexedColumn('scy_year');
         $vars = [
             'title' => 'Class',
-            'header' => ['Class', /*'Program',*/ 'SchoolYear'],
+            'header' => ['Class', 'Program', 'SchoolYear'],
             'primaryKey' => 'cls_id',
             'data' => $tabledata,
             'fkData' => $fkData
@@ -44,7 +44,7 @@ class ClassController extends ControllerTemplate{
     public function class_post()
     {
         $name = isset($_POST['cls_name']) ? trim(strip_tags($_POST['cls_name'])) : '';
-       // $program = isset($_POST['program_prg_id']) ? trim(strip_tags($_POST['program_prg_id'])) : '';
+        $program = isset($_POST['program_prg_id']) ? trim(strip_tags($_POST['program_prg_id'])) : '';
         $schoolyear = isset($_POST['school_year_scy_id']) ? trim(strip_tags($_POST['school_year_scy_id'])) : '';
         $method = $_POST['method'];
         $id = '';
@@ -55,13 +55,13 @@ class ClassController extends ControllerTemplate{
         $errorList = array();
         $data = array();
 
-        if (empty($name) || /*empty($program) ||*/ empty($schoolyear)) {
+        if (empty($name) || empty($program) || empty($schoolyear)) {
             $errorList[] = 'All champs are required';
             $success = false;
         }
         $data = [
             'cls_name' => $name,
-            //'program_prg_id' => $program,
+            'program_prg_id' => $program,
             'school_year_scy_id' => $schoolyear
         ];
         // if input ok
