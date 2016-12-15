@@ -10,6 +10,9 @@ $w_routes = array(
     //SchoolYear
     ['GET', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_get', 'schoolYear_schoolyear_get'],
     ['POST', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_post', 'schoolYear_schoolyear_post'],
+     //Classroom
+    ['GET', '/app/manage/classroom/', 'Classroom#classroom_get', 'classroom_classroom_get'],
+    ['POST', '/app/manage/classroom/', 'Classroom#classroom_post', 'classroom_classroom_post'],
     //Activity
     ['GET', '/app/manage/activity/', 'Activity#activity_get', 'crud_activity_get'],
     ['POST', '/app/manage/activity/', 'Activity#activity_post', 'crud_activity_post'],

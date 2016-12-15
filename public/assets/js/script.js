@@ -164,7 +164,10 @@ $(function () {
 
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
-        $(this).html('Enrégistrer').off('click').click(function (e) {
+
+        $(this).html('Enrégistrer').off('click').click(function(e) {
+
+
             e.preventDefault();
             crudUpdate.call(this);
         });

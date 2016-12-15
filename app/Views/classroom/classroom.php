@@ -1,19 +1,11 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
-<pre>
-    <?php print_r($tabledata); ?>
-    </pre>
-<pre>
-    <?php print_r($vars); ?>
-    </pre>
+
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
     <!-- Table -->
-    <?php if (!empty($data)): ?>
-        <pre>
-    <?php print_r($vars); ?>
-    </pre>
+    <?php if (!empty($data)):?>
 
         <table class="table">
             <thead>
@@ -25,6 +17,7 @@
             </tr>
             </thead>
             <tbody>
+
             <tr id="add">
                 <form action="" method="post">
                     <?php foreach ($data[0] as $key => $value): ?>
@@ -50,6 +43,30 @@
                     </td>
                 </tr>
             <?php endforeach ?>
+
+                <tr id="add">
+                        <?php foreach ($data[0] as $key => $value):?>
+                            <?php if ($key !== $primaryKey): ?>
+                                <td><input class="form-control kms-add-inp" type="text" name="<?= $key ?>"/></td>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                        <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
+                    </form>
+                </tr>
+                <?php foreach ($data as $row):?>
+                    <tr>
+                        <?php foreach ($row as $key => $value):?>
+                            <?php if ($key !== $primaryKey): ?>
+                                <td class="kms-datacolumn"><?= $value ?></td>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                        <td class="kms-action">
+                            <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>
+                            <a class="btn btn-danger kms-crud-delete-btn" href="#" value="<?= $row[$primaryKey] ?>">X</a>
+                        </td>
+                    </tr> 
+                <?php endforeach ?>
+
             </tbody>
         </table>
     <?php
@@ -59,6 +76,4 @@
     ?>
 </div>
 <?php $this->stop('main_content') ?>
-
-
 
