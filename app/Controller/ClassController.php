@@ -13,14 +13,14 @@ use Model\ProgramModel;
 use Model\SchoolYearModel;
 
 
-class ClassControler extends ControllerTemplate{
+class ClassController extends ControllerTemplate{
     /**
      * Page de gestion CRUD pour table Class en GET
      */
     public function class_get()
     {
         $model = new ClassModel();
-        $tabledata = $model->findAllColumns(['cls_id', 'cls_name', 'program_prg_id', 'schoolyear_scy_id' ]);
+        $tabledata = $model->findAllColumns(['cls_id', 'cls_name', 'program_prg_id', 'school_year_scy_id' ]);
 
         //initialisation of $fkdata
         $fkData = array();
