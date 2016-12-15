@@ -1,7 +1,6 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
-
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
     <!-- Table -->

@@ -46,7 +46,7 @@ class ClassroomModel extends ModelTemplate
         
         public function __construct() {
             parent::__construct();
-            $this->setPrimaryKey('div_id');
+            $this->setPrimaryKey('clr_id');
         }
         
         //-----------------GETTERS & SETTERS--------------
