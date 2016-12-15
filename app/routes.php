@@ -10,6 +10,9 @@ $w_routes = array(
     //SchoolYear
     ['GET', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_get', 'schoolYear_schoolyear_get'],
     ['POST', '/app/manage/schoolyear/', 'SchoolYear#schoolyear_post', 'schoolYear_schoolyear_post'],
+     //Classroom
+    ['GET', '/app/manage/classroom/', 'Classroom#classroom_get', 'classroom_classroom_get'],
+    ['POST', '/app/manage/classroom/', 'Classroom#classroom_post', 'classroom_classroom_post'],
     //Activity
     ['GET', '/app/manage/activity/', 'Activity#activity_get', 'crud_activity_get'],
     ['POST', '/app/manage/activity/', 'Activity#activity_post', 'crud_activity_post'],
@@ -19,6 +22,12 @@ $w_routes = array(
     //City
     ['GET', '/app/manage/city/', 'City#city_get', 'crud_city_get'],
     ['POST', '/app/manage/city/', 'City#city_post', 'crud_city_post'],
+    //Child
+    ['GET', '/app/manage/child/', 'Child#child_get', 'crud_child_get'],
+    ['POST', '/app/manage/child/', 'Child#child_post', 'crud_child_post'],
+    //Parent
+    ['GET', '/app/manage/user/', 'User#user_get', 'crud_user_get'],
+    ['POST', '/app/manage/user/', 'User#user_post', 'crud_user_post'],
 );
 
 

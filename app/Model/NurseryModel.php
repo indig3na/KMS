@@ -46,16 +46,20 @@ class NurseryModel extends ModelTemplate
      */
     protected $nur_website;
 
-    public function __construct($nur_id=0,$nur_name=null,$nur_inserted=NULL,$nur_updated=NULL, $nur_address=NULL,$nur_email=NULL,$nur_telephone=NULL,$nur_website=NULL) {
+    public function __construct($nur_id = 0, $nur_name = null, $nur_inserted = NULL, $nur_updated = NULL, $nur_address = NULL, $nur_email = NULL, $nur_telephone = NULL, $nur_website = NULL)
+    {
         parent::__construct();
-        $this ->nur_id = $nur_id;
-        $this ->nur_name = $nur_name;
-        $this ->nur_inserted = $nur_inserted;
-        $this ->nur_updated = $nur_updated;
-        $this ->nur_address = $nur_address;
-        $this ->nur_email = $nur_email;
-        $this ->nur_telephone = $nur_telephone;
-        $this ->nur_website = $nur_website;
+        $this->setPrimaryKey('nur_id');
+
+        $this->nur_id = $nur_id;
+        $this->nur_name = $nur_name;
+        $this->nur_inserted = $nur_inserted;
+        $this->nur_updated = $nur_updated;
+        $this->nur_address = $nur_address;
+        $this->nur_email = $nur_email;
+        $this->nur_telephone = $nur_telephone;
+        $this->nur_website = $nur_website;
+
     }
 
 
@@ -205,7 +209,4 @@ class NurseryModel extends ModelTemplate
     {
         $this->nur_website = $nur_website;
     }
-
-
-
 }

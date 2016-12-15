@@ -28,57 +28,66 @@ class SchoolYearController extends ControllerTemplate
      */
     public function schoolyear_post()
     {
-
-        $insert = isset($_POST['insert']) ? trim(strip_tags($_POST['insert'])) : '';
-        $update = isset($_POST['update']) ? trim(strip_tags($_POST['update'])) : '';
         $year = isset($_POST['scy_year']) ? trim(strip_tags($_POST['scy_year'])) : '';
-        $id = isset($_POST['id']) ? trim($_POST['id']) : 0;
+        $method = $_POST['method'];
+        $id = '';
 
-        if ('method' === $insert) {
-            //validation & insertion données
-            $errorList = array();
-            $yearOk = true;
-
-            if (empty($year)) {
-                echo 'champ year est vide<br>';
-                $yearOk = false;
-            }
-            if ($yearOk) {
-                $schoolYearModel = new schoolYearModel();
-                //Insert data
-                $tableData = $schoolYearModel->insert(array(
-                    'scy_year' => $year
-                ));
-                // if not inserted error
-                if ($tableData === false) {
-                    $errorList[] = 'Insertion Error<br>';
-                }
-            }
-            $this->showJson(['Succès / Erreur']);
+        //validation
+        $successList = array();
+        $success = false;
+        $errorList = array();
+        $data = array();
+        if (empty($year)) {
+            $errorList[] = 'Schoolyear required';
+            $success = false;
         }
+        $data = [
+            'scy_year' => $year
+        ];
+        // if input ok
+        if (empty($errorList)) {
 
-        if ('method' === $update) {
-            $errorList = array();
-            $yearOk = true;
-            if (empty($year)) {
-                echo 'error<br>';
-                $yeraOk = false;
-            }
-            // if input ok
-            if ($yearOk) {
-
-                $schoolYearModel = new SchoolYearModel();
-                //Insert data
-                $tableData = $schoolYearModel->update(array(
-                    'scy_year' => $year
-                ), $id ,$stripTags = true);
+            $schoolYearModel = new SchoolYearModel();
+            //Insert
+            if ($method === 'insert') {
+                $tableData = $schoolYearModel->insert($data);
                 // if not inserted error
                 if ($tableData === false) {
-                    $errorList[] = 'Error<br>';
+                    $errorList[] = 'Insert Error';
+                } else {
+                    $successList[] = 'SchoolYear inserted';
+                    $success = true;
+                }
+            } //update
+            elseif ($method === 'update') {
+                $id = $_POST['id'];
+                $updateData = $schoolYearModel->update($data, $id, $stripTags = true);
+                // if not updated error
+                if ($updateData === false) {
+                    $errorList[] = 'Update Error';
+                } else {
+                    $successList[] = 'SchoolYear Updated';
+                    $success = true;
                 }
             }
-            $this->showJson(['Succès / Erreur']);
-
+        }
+        //delete
+        if ($method === 'delete') {
+            $id = $_POST['id'];
+            $schoolYearModel = new SchoolYearModel();
+            $deletedData = $schoolYearModel->delete($id);
+            if ($deletedData === false) {
+                $errorList[] = 'Deletion Error';
+            } else {
+                $successList[] = 'SchoolYear Deleted';
+                $success = true;
+            }
+        }
+        // show json errorList and/or successList message
+        if ($success) {
+            $this->showJson(['code' => 1, 'message' => implode('<br>', $successList)]);
+        } else {
+            $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
         }
     }
 }
