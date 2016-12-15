@@ -47,13 +47,14 @@ class ActivityModel extends ModelTemplate
      */
     public function __construct($act_id=0, $act_name='', $act_inserted=null, $act_updated=null, $act_material='')
     {
-
+        parent::__construct();
+        $this->setPrimaryKey('act_id');
         $this->act_id = $act_id;
         $this->act_name = $act_name;
         $this->act_inserted = $act_inserted;
         $this->act_updated = $act_updated;
         $this->act_material = $act_material;
-        parent::__construct();
+
     }
 
 
