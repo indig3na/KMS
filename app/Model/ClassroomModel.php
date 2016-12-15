@@ -8,6 +8,7 @@ namespace Model;
  */
 class ClassroomModel extends ModelTemplate
 {
+
 	/**
 	 * @var int
 	 */
@@ -33,7 +34,7 @@ class ClassroomModel extends ModelTemplate
 	 */
 	protected $clr_updated;
 
-	public function __construct($clr_id=0,$clr_name='',$clr_caracteristics='',$clr_description='', $clr_inserted=NULL,$clr_inserted=NULL) {
+/*	public function __construct($clr_id=0,$clr_name='',$clr_caracteristics='',$clr_description='', $clr_inserted=NULL,$clr_inserted=NULL) {
 		parent::__construct();
         $this->setPrimaryKey('clr_id');
 		$this -> clr_id = $clr_id;
@@ -43,7 +44,12 @@ class ClassroomModel extends ModelTemplate
 		$this -> clr_inserted = $clr_inserted;
 		$this -> clr_updated = $clr_inserted;
 	}
-     
+ */
+        
+        public function __construct() {
+            parent::__construct();
+            $this->setPrimaryKey('clr_id');
+        }
         
         //-----------------GETTERS & SETTERS--------------
         
