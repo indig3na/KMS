@@ -160,21 +160,18 @@ $(function() {
         tr.find('.kms-update-inp').each(function(){
             $(this).attr('value',(val.shift()));
         });
-<<<<<<< HEAD
-        $(this).html('Enregistrer').off('click').click(function(e) {
-=======
-        
+
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
         $(this).html('Enrégistrer').off('click').click(function(e) {
->>>>>>> 5d7de7e58bae496092a5f7c64865160ccc58e583
+
             e.preventDefault();
             crudUpdate.call(this);
         });
     }   
     
     //si bouton 'modifier' cliqué - fonction principale
-    function crudUpdate(){
+    function crudUpdate() {
         
         // récupérer les données des input de la ligne courante
         var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
