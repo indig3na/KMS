@@ -13,9 +13,12 @@ $w_routes = array(
     //Activity
     ['GET', '/app/manage/activity', 'Activity#activity_get', 'crud_activity_get'],
     ['POST', '/app/manage/activity', 'Activity#activity_post', 'crud_activity_post'],
-    //SchoolYear
+    //Nursery
     ['GET', '/app/manage/nursery/', 'Nursery#nursery_get', 'nursery_nursery_get'],
     ['POST', '/app/manage/nursery/', 'Nursery#nursery_post', 'nursery_nursery_post'],
+     //Classroom
+    ['GET', '/app/manage/classroom/', 'Classroom#classroom_get', 'classroom_classroom_get'],
+    ['POST', '/app/manage/classroom/', 'Classroom#classroom_post', 'classroom_classroom_post'],
 );
 
 

@@ -141,7 +141,7 @@ $(function() {
         tr.find('.kms-update-inp').each(function(){
             $(this).attr('value',(val.shift()));
         });
-        $(this).html('Enrégistrer').off('click').click(function(e) {
+        $(this).html('Enregistrer').off('click').click(function(e) {
             e.preventDefault();
             crudUpdate.call(this);
         });
