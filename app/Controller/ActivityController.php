@@ -19,10 +19,10 @@ class ActivityController extends ControllerTemplate
     public function activity_get()
     {
         $activitymodel = new ActivityModel();
-        $tabledata = $activitymodel -> findAllColumns(['act_id','act_name','act_material','act_description']);
+        $tabledata = $activitymodel->findAllColumns(['act_id', 'act_name', 'act_material', 'act_description']);
         $actVars = [
             'title' => 'Activity',
-            'header' => ['Activity','Material','Description'],
+            'header' => ['Activity', 'Material', 'Description'],
             'primaryKey' => 'act_id',
             'data' => $tabledata
         ];
@@ -46,49 +46,38 @@ class ActivityController extends ControllerTemplate
         $success = false;
         $errorList = array();
         $data = array();
-        if (empty($name))
-        {
-            $errorList[]= 'Activity required<br>';
+        if (empty($name)) {
+            $errorList[] = 'Activity required<br>';
             $success = false;
         }
-        $data= [
+        $data = [
             'act_name' => $name,
             'act_material' => $material,
             'act_description' => $description
         ];
         // if input ok
-        if (empty($errorList))
-        {
+        if (empty($errorList)) {
 
             $activityModel = new ActivityModel();
             //Insert data
-            if ($method === 'insert')
-            {
+            if ($method === 'insert') {
                 $activityData = $activityModel->insert($data);
                 // if not inserted error
-                if ($activityData === false)
-                {
+                if ($activityData === false) {
                     $errorList[] = 'Insert Error<br>';
-                }
-                else
-                {
-                    $succesList[]= 'Activity inserted';
+                } else {
+                    $succesList[] = 'Activity inserted';
                     $success = true;
                 }
-            }
-            //update data for given Id
-            elseif ($method === 'update')
-            {
+            } //update data for given Id
+            elseif ($method === 'update') {
                 $id = $_POST['id'];
-                $updateData = $activityModel->update($data, $id,$stripTags = true );
+                $updateData = $activityModel->update($data, $id, $stripTags = true);
                 // if not updated error
-                if ($updateData === false)
-                {
+                if ($updateData === false) {
                     $errorList[] = 'Update Error<br>';
-                }
-                else
-                {
-                    $succesList[]= 'Activity Updated';
+                } else {
+                    $succesList[] = 'Activity Updated';
                     $success = true;
                 }
             }
@@ -96,32 +85,25 @@ class ActivityController extends ControllerTemplate
 
         }
         //delete data for a given Id
-        if ($method === 'delete')
-        {
+        if ($method === 'delete') {
             $id = $_POST['id'];
             $activityModel = new ActivityModel();
             $deletedData = $activityModel->delete($id);
             // if not deleted error
             // if not updated error
-            if ($deletedData === false)
-            {
+            if ($deletedData === false) {
                 $errorList[] = 'Delete Error<br>';
-            }
-            else
-            {
-                $succesList[]= 'Activity Deleted';
+            } else {
+                $succesList[] = 'Activity Deleted';
                 $success = true;
             }
 
         }
         // show json errorList and/or successList message
-        if ($success)
-        {
-           $this->showJson(['code'=> 1, 'message' => implode('<br>', $succesList)]);
-        }
-        else
-        {
-            $this->showJson(['code'=> 0, 'message' => implode('<br>', $errorList)]);
+        if ($success) {
+            $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+        } else {
+            $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
         }
 
 

@@ -21,7 +21,7 @@ class NurseryController extends ControllerTemplate
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $cityModel = new CityModel();
-        $fkData['city_cit_id'] = $cityModel ->findIndexedColumn('cit_name');
+        $fkData['city_cit_id'] = $cityModel->findIndexedColumn('cit_name');
 
         $vars = [
             'title' => 'Nursery',

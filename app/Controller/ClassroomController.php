@@ -6,7 +6,6 @@ use \Model\ClassroomModel;
 
 class ClassroomController extends ControllerTemplate
 {
-    
 	/**
 	 * Page de gestion CRUD pour table classroom en GET
 	 */
@@ -70,5 +69,6 @@ class ClassroomController extends ControllerTemplate
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
         }
+
     }
 }

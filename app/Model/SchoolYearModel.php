@@ -25,43 +25,59 @@ class SchoolYearModel extends ModelTemplate
      */
     protected $scy_updated;
 
-    public function __construct($scy_id=0,$scy_year=0,$scy_inserted=NULL,$scy_updated=NULL) {
+    public function __construct($scy_id = 0, $scy_year = 0, $scy_inserted = NULL, $scy_updated = NULL)
+    {
         parent::__construct();
         $this->setPrimaryKey('scy_id');
-        $this -> scy_id = $this -> setScyId($scy_id);
-        $this -> scy_year = $this -> setScyYear($scy_year);
-        $this -> scy_inserted = $this -> setScyInserted($scy_inserted);
-        $this -> scy_updated = $this -> setScyUpdated($scy_updated);
+        $this->scy_id = $this->setScyId($scy_id);
+        $this->scy_year = $this->setScyYear($scy_year);
+        $this->scy_inserted = $this->setScyInserted($scy_inserted);
+        $this->scy_updated = $this->setScyUpdated($scy_updated);
     }
 
 
     //-----------------GETTERS & SETTERS--------------
 
-    public function getScyId() {
+    public function getScyId()
+    {
         return $this->scy_id;
     }
-    public function setScyId($scy_id) {
+
+    public function setScyId($scy_id)
+    {
         $this->scy_id = $scy_id;
         return $this;
     }
-    public function getScyYear() {
+
+    public function getScyYear()
+    {
         return $this->scy_year;
     }
-    public function setScyYear($scy_year) {
+
+    public function setScyYear($scy_year)
+    {
         $this->scy_year = $scy_year;
         return $this;
     }
-    public function getScyInserted() {
+
+    public function getScyInserted()
+    {
         return $this->scy_inserted;
     }
-    public function setScyInserted($scy_inserted) {
+
+    public function setScyInserted($scy_inserted)
+    {
         $this->scy_inserted = $scy_inserted;
         return $this;
     }
-    public function getScyUpdated() {
+
+    public function getScyUpdated()
+    {
         return $this->scy_updated;
     }
-    public function setScyUpdated($scy_updated) {
+
+    public function setScyUpdated($scy_updated)
+    {
         $this->scy_updated = $scy_updated;
         return $this;
     }

@@ -8,6 +8,7 @@ namespace Model;
  */
 class ClassroomModel extends ModelTemplate
 {
+
 	/**
 	 * @var int
 	 */
@@ -35,6 +36,7 @@ class ClassroomModel extends ModelTemplate
 
 /*	public function __construct($clr_id=0,$clr_name='',$clr_caracteristics='',$clr_description='', $clr_inserted=NULL,$clr_inserted=NULL) {
 		parent::__construct();
+        $this->setPrimaryKey('clr_id');
 		$this -> clr_id = $clr_id;
 		$this -> clr_name = $clr_name;
                 $this -> clr_caracteristics = $clr_caracteristics;
