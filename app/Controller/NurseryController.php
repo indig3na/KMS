@@ -4,6 +4,7 @@ namespace Controller;
 
 
 use Model\NurseryModel;
+use Model\CityModel;
 
 
 class NurseryController extends ControllerTemplate
@@ -14,12 +15,20 @@ class NurseryController extends ControllerTemplate
     public function nursery_get()
     {
         $model = new NurseryModel();
-        $tabledata = $model->findAllColumns(['nur_id', 'nur_name', 'nur_address', 'nur_email', 'nur_telephone', 'nur_website']);
+        $tabledata = $model->findAllColumns(['nur_id', 'nur_name', 'nur_address', 'nur_email', 'nur_telephone', 'nur_website', 'city_cit_id']);
+
+        //initialisation of $fkdata
+        $fkData = array();
+        //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
+        $cityModel = new CityModel();
+        $fkData['city_cit_id'] = $cityModel ->findIndexedColumn('cit_name');
+
         $vars = [
             'title' => 'Nursery',
-            'header' => ['Nursery', 'Address', 'Email', 'Telephone', 'Website'],
+            'header' => ['Nursery', 'Address', 'Email', 'Telephone', 'Website', 'City'],
             'primaryKey' => 'nur_id',
-            'data' => $tabledata
+            'data' => $tabledata,
+            'fkData' => $fkData
         ];
         $this->show('crud/crud', $vars);
     }
@@ -34,6 +43,7 @@ class NurseryController extends ControllerTemplate
         $email = isset($_POST['nur_email']) ? trim(strip_tags($_POST['nur_email'])) : '';
         $telephone = isset($_POST['nur_telephone']) ? trim(strip_tags($_POST['nur_telephone'])) : '';
         $website = isset($_POST['nur_website']) ? trim(strip_tags($_POST['nur_website'])) : '';
+        $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
         $method = $_POST['method'];
         $id = '';
 
@@ -42,8 +52,29 @@ class NurseryController extends ControllerTemplate
         $success = false;
         $errorList = array();
         $data = array();
-        if (empty($name) || empty($address) || empty($email) || empty($telephone) || empty($website)) {
-            $errorList[] = 'All champs are required, fill in the blanks please!!<br>';
+
+        if (empty($name)) {
+            $errorList[] = 'All champs are required';
+            $success = false;
+        }
+        if (empty($address)) {
+            $errorList[] = 'All champs are required';
+            $success = false;
+        }
+        if (empty($email)) {
+            $errorList[] = 'All champs are required';
+            $success = false;
+        }
+        if (empty($telephone)) {
+            $errorList[] = 'All champs are required';
+            $success = false;
+        }
+        if (empty($website)) {
+            $errorList[] = 'All champs are required';
+            $success = false;
+        }
+        if (empty($city)) {
+            $errorList[] = 'All champs are required';
             $success = false;
         }
         $data = [
@@ -51,7 +82,8 @@ class NurseryController extends ControllerTemplate
             'nur_address' => $address,
             'nur_email' => $email,
             'nur_telephone' => $telephone,
-            'nur_website' => $website
+            'nur_website' => $website,
+            'city_cit_id' => $city
         ];
         // if input ok
         if (empty($errorList)) {
@@ -62,7 +94,7 @@ class NurseryController extends ControllerTemplate
                 $tableData = $nurseryModel->insert($data);
                 // if not inserted error
                 if ($tableData === false) {
-                    $errorList[] = 'Insert Error<br>';
+                    $errorList[] = 'Insert Error';
                 } else {
                     $succesList[] = 'Nursery inserted';
                     $success = true;
@@ -73,7 +105,7 @@ class NurseryController extends ControllerTemplate
                 $updateData = $nurseryModel->update($data, $id, $stripTags = true);
                 // if not updated error
                 if ($updateData === false) {
-                    $errorList[] = 'Update Error<br>';
+                    $errorList[] = 'Update Error';
                 } else {
                     $succesList[] = 'Nursery Updated';
                     $success = true;
@@ -86,7 +118,7 @@ class NurseryController extends ControllerTemplate
             $nurseryModel = new NurseryModel();
             $deletedData = $nurseryModel->delete($id);
             if ($deletedData === false) {
-                $errorList[] = 'Deletion Error<br>';
+                $errorList[] = 'Deletion Error';
             } else {
                 $succesList[] = 'Nursery Deleted';
                 $success = true;

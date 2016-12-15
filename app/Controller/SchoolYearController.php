@@ -38,7 +38,7 @@ class SchoolYearController extends ControllerTemplate
         $errorList = array();
         $data = array();
         if (empty($year)) {
-            $errorList[] = 'Schoolyear required<br>';
+            $errorList[] = 'Schoolyear required';
             $success = false;
         }
         $data = [
@@ -53,7 +53,7 @@ class SchoolYearController extends ControllerTemplate
                 $tableData = $schoolYearModel->insert($data);
                 // if not inserted error
                 if ($tableData === false) {
-                    $errorList[] = 'Insert Error<br>';
+                    $errorList[] = 'Insert Error';
                 } else {
                     $succesList[] = 'SchoolYear inserted';
                     $success = true;
@@ -64,7 +64,7 @@ class SchoolYearController extends ControllerTemplate
                 $updateData = $schoolYearModel->update($data, $id, $stripTags = true);
                 // if not updated error
                 if ($updateData === false) {
-                    $errorList[] = 'Update Error<br>';
+                    $errorList[] = 'Update Error';
                 } else {
                     $succesList[] = 'SchoolYear Updated';
                     $success = true;
@@ -77,7 +77,7 @@ class SchoolYearController extends ControllerTemplate
             $schoolYearModel = new SchoolYearModel();
             $deletedData = $schoolYearModel->delete($id);
             if ($deletedData === false) {
-                $errorList[] = 'Deletion Error<br>';
+                $errorList[] = 'Deletion Error';
             } else {
                 $succesList[] = 'SchoolYear Deleted';
                 $success = true;
