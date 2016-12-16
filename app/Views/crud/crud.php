@@ -1,6 +1,6 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
-<?php $this->start('main_content') ?>
+<?php $this->start('main_content')?>
 
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
@@ -22,7 +22,7 @@
                     <?php if ($key == $primaryKey): ?>
                     <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                         <td>
-                            <select class="form-control kms-add-inp" name="<?= $key ?>">
+                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control kms-add-inp chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
                                 <?php foreach ($fkData[$key] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>
@@ -34,7 +34,6 @@
                     <?php endif ?>
                 <?php endforeach ?>
                 <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
-                </form>
             </tr>
             <?php //lignes de données ?>
             <?php foreach ($data as $row): ?>
@@ -42,9 +41,17 @@
                     <?php foreach ($row as $key => $value): ?>
                         <?php if ($key == $primaryKey): ?>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <td class="kms-datacolumn"><?= $fkData[$key][$value] ?></td>
-                        <?php
-                        else: ?>
+                            <td class="kms-datacolumn kms-datacolumn-select">
+                                <?php if(empty($value)): ?>
+                                <?php elseif (is_array($value)): ?>
+                                    <?php foreach ($value as $val): ?>
+                                        <span class="well well-sm" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                    <?php endforeach ?>
+                                <?php else: ?>
+                                    <span value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                <?php endif ?>
+                            </td>
+                        <?php else: ?>
                             <td class="kms-datacolumn"><?= $value ?></td>
                         <?php endif ?>
                     <?php endforeach ?>

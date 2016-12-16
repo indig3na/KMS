@@ -111,7 +111,9 @@ $(function () {
             }
         });
     }
-
+    //initialiser la librairie chosen sur les select
+    $('.chosen-select').chosen({disable_search_threshold:8});
+    $('.chosen-select').next().css({width:'100%'});
     //----------add----------
 
 
@@ -120,7 +122,11 @@ $(function () {
         e.preventDefault();
 
         // récupérer les données des input de la ligne ajout
-        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        var data = $(this).parent().parent().find('.kms-add-inp').not('.chosen-select').serializeArray();
+        var mult = $(this).parent().parent().find('.kms-add-inp.chosen-select');
+        mult.val().map(function(opt,index){
+            data.push({name: mult.attr('name')+'['+index+']', value: opt});
+        });
 
         //ajouter le paramètre 'method'
         data.push({name: 'method', value: 'insert'});
@@ -145,23 +151,40 @@ $(function () {
         //stocker la valeur des td de la ligne courante dans val et supprimer les td
         var val = [];
         tr.children('.kms-datacolumn').each(function () {
-            val.push($(this).html());
+            if($(this).hasClass('kms-datacolumn-select')){
+                var sel = [];
+                $(this).children('span').each(function () {
+                    sel.push($(this).attr('value'));
+                }); 
+                val.push(sel);
+            } else {
+                val.push($(this).html());
+            }
             $(this).remove();
         });
 
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('.kms-add-inp').clone());
         tr.find('.kms-add-inp').wrap('<td></td>');
+        /*tr.find('.chosen-container').each(function(){
+            $(this).prev().append($(this));
+        });*/
 
         //changer ensuite les classes de add en update
         tr.find('.kms-add-inp').addClass('kms-update-inp');
         tr.find('.kms-update-inp').removeClass('kms-add-inp');
-
+        console.log(val);
         //insérer les valeurs depuis le tableau val
-        tr.find('.kms-update-inp').each(function () {
-            $(this).attr('value', (val.shift()));
+        tr.find('input.kms-update-inp').each(function () {
+            $(this).attr('value', (val.shift().trim()));
         });
-
+        
+        tr.find('select.kms-update-inp').each(function () {
+            $(this).children('[value="'+val.shift().join('"], [value="')+'"]').attr('selected','true');
+            $(this).css({display:'initial'});
+            $(this).chosen();
+            $(this).next().css({width:'100%'});
+        });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
 
@@ -177,8 +200,11 @@ $(function () {
     function crudUpdate() {
 
         // récupérer les données des input de la ligne courante
-        var data = $(this).parent().parent().find('.kms-update-inp').serializeArray();
-
+        var data = $(this).parent().parent().find('.kms-update-inp').not('.chosen-select').serializeArray();
+        var mult = $(this).parent().parent().find('.kms-update-inp.chosen-select');
+        mult.val().map(function(opt,index){
+            data.push({name: mult.attr('name')+'['+index+']', value: opt});
+        });
         // ajouter le paramètre 'method' et l'id de la ligne courante
         data.push({name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'update'});
         ajaxCall(data);
@@ -188,9 +214,11 @@ $(function () {
 
     $('.kms-crud-delete-btn').click(function (e) {
         e.preventDefault();
-        // ajouter l'id de la ligne courante
-        data = [{name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'delete'}];
-        ajaxCall(data);
+        if (confirm('Voulez-vous vraiment supprimer cette ligne ?')){
+            // ajouter l'id de la ligne courante
+            data = [{name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'delete'}];
+            ajaxCall(data);
+        }
     });
 
     //----------------Select child-------------------
