@@ -34,25 +34,14 @@ class ProgramModel extends ModelTemplate
             $this->prg_inserted = $prg_inserted;
             $this->prg_updated = $prg_updated;
         }
-        public function getActivities(){
-            $sql = '
-                SELECT group_concat(activity_act_id separator \',\') as id_list, prg_id
-                FROM saliab_sql2.program 
-                LEFT OUTER JOIN saliab_sql2.program_has_activity 
-                ON program_prg_id = prg_id
-                group by prg_id
-            ';
-            $sth = $this->dbh->prepare($sql);
-            $sth->execute();
-            $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
-            $result = array();
-            foreach ($query as $row){
-                $result[$row['prg_id']] = explode(',',$row['id_list']);
+        
+        public function validate($data){
+            $messages = array();
+            if (empty($data['prg_name'])){
+                $messages[] = 'Nom de la ville doit être renseigné';
             }
-            return $result;
+            return $messages;
         }
-        
-        
         //-----------------GETTERS & SETTERS--------------
         
 	public function getPrg_id() {
