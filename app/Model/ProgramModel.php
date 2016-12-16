@@ -34,12 +34,18 @@ class ProgramModel extends ModelTemplate
             $this->prg_inserted = $prg_inserted;
             $this->prg_updated = $prg_updated;
         }
-        public function getActivities(){
+        public function getActivities($col=null, $id=0){
             $sql = '
                 SELECT *
                 FROM saliab_sql2.program_has_activity
             ';
+            if (isset($col)){
+                $sql+= 'WHERE '.$col.' = :id';
+            }
             $sth = $this->dbh->prepare($sql);
+            if (isset($col)){
+                $sth ->bindValue(':id', $id);
+            }
             $sth->execute();
             $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
             $result = array();
@@ -47,6 +53,17 @@ class ProgramModel extends ModelTemplate
                 $result[$row['program_prg_id']][] = $row['activity_act_id'];
             }
             return $result;
+        }
+        
+        public function deleteActivities($id){
+            $sql = '
+                DELETE
+                FROM saliab_sql2.program_has_activity
+                WHERE program_prg_id = :id
+            ';
+            $sth = $this->dbh->prepare($sql);
+            $sth ->bindValue(':id', $id);
+            return $sth->execute();
         }
         
         

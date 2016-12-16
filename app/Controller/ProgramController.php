@@ -56,6 +56,7 @@ class ProgramController extends ControllerTemplate
         $model = new ProgramModel;
         $success = false;
         $errors = array();
+        $messages = array();
         if (in_array($method = $_POST['method'],['insert','update'])){
             //récupérer les champs nécessaires de $-POST
             $data = array_intersect_key($_POST, array_flip(['prg_name']));
@@ -71,7 +72,7 @@ class ProgramController extends ControllerTemplate
                     if(!$result = $model ->insert($data)) {
                         $errors[] = 'Insertion en base de données échouée';
                     } else {
-                        $message = 'Inseré en base de données';
+                        $messages[] = 'Inseré en base de données';
                         $success = true;
                         $id = $result[$model->getPrimaryKey()];
                         $insert=array();
@@ -83,11 +84,12 @@ class ProgramController extends ControllerTemplate
                             $insert = ['program_prg_id' => $id, 'activity_act_id' => $corrData];
                             if(!$model->insert($insert)){
                                 $errors[] = 'Insertion d\'une activité en base de données échouée';
+                            } else {
+                                $messages[] = 'Inseré les activités en base de données';
                             }
                         }
                         $model->setTable($table);
                         $model->setPrimaryKey($pk);
-                        //todo insertion $corrTableData
                     }
                 //modification données
                 } else {
@@ -95,9 +97,25 @@ class ProgramController extends ControllerTemplate
                     if($model ->update($data,$id) === false) {
                         $errors[] = 'Modification de la base de données échouée';
                     } else {
-                        $message = 'Modifié dans la base de données';
+                        $messages[] = 'Modifié dans la base de données';
                         $success = true;
+                        $insert=array();
+                        $model -> deleteActivities($id);
+                        $table = $model ->getTable();
+                        $pk = $model->getPrimaryKey();
+                        $model->setPrimaryKey('program_prg_id');
+                        $model->setTable('program_has_activity');
                         
+                        foreach ($corrTableData['activities'] as $corrData){
+                            $insert = ['program_prg_id' => $id, 'activity_act_id' => $corrData];
+                            if(!$model->insert($insert)){
+                                $errors[] = 'Insertion d\'une activité en base de données échouée';
+                            } else {
+                                $messages[] = 'Inseré les activités en base de données';
+                            }
+                        }
+                        $model->setTable($table);
+                        $model->setPrimaryKey($pk);
                         //todo update $corrTableData
                     }
                 }
@@ -108,14 +126,16 @@ class ProgramController extends ControllerTemplate
             if($model -> delete($id) === false) {
                 $errors[] = 'Suppression de la base de données échouée';
             } else {
-                $message = 'Supprimé de la base de données';
+                $messages[] = 'Supprimé de la base de données';
                 $success = true;
+                $model -> deleteActivities($id);
             }    
         } else {
             $errors[] = 'méthode inconnue';
         }
         if ($success){
-            $this->showJson(['code' => 1, 'message' => $message]);
+            $this->showJson(['code' => 1, 'message' => implode('
+', $messages)]);
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
         }

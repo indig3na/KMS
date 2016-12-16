@@ -41,11 +41,11 @@
                     <?php foreach ($row as $key => $value): ?>
                         <?php if ($key == $primaryKey): ?>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <td class="kms-datacolumn">
+                            <td class="kms-datacolumn kms-datacolumn-select">
                                 <?php if(empty($value)): ?>
                                 <?php elseif (is_array($value)): ?>
                                     <?php foreach ($value as $val): ?>
-                                        <span class="well well-sm" value="<?= val ?>"><?= $fkData[$key][$val] ?></span>
+                                        <span class="well well-sm" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
                                     <?php endforeach ?>
                                 <?php else: ?>
                                     <span value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
