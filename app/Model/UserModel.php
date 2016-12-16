@@ -7,9 +7,9 @@
  */
 
 namespace Model;
-use Model\ModelTemplate;
+use W\Model\UsersModel;
 
-class UserModel extends ModelTemplate
+class UserModel extends UsersModel
 {
     /*----------------Properties------------------*/
     /**
@@ -474,10 +474,36 @@ class UserModel extends ModelTemplate
         return $this->class_cls_id;
     }
 
-
-
-
-
-
+    public function addToken($email, $token){
+        $sql = '
+            UPDATE '.$this->table.'
+            SET usr_token = :usrToken
+            WHERE usr_email = :usrEmail
+        ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':usrToken', $token);
+        $stmt->bindValue(':usrEmail', $email);
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    public function findByToken($token){
+        $sql = '
+            SELECT * FROM  '.$this->table.'
+            WHERE usr_token = :usrToken
+        ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':usrToken', $token);
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+             return $stmt->fetch();
+        }
+    }
 
 }
