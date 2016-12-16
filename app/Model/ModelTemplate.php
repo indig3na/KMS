@@ -77,4 +77,26 @@ abstract class ModelTemplate extends Model
         }
         return $result;
     }
+
+    public function getChildInfos($id)
+    {
+        if (!is_numeric($id)){
+            return false;
+        }
+
+        $sql = 'SELECT `chd_id` , `chd_firstname` , `chd_lastname` , `chd_birthday` , `chd_gender` , `chd_hobbies` , `chd_comments` , `chd_img_path` , `chd_inserted` , `chd_updated` , `child`.`class_cls_id` , `user_usr_id` , `parent`.`usr_lastname` AS par_lastname, `parent`.`usr_firstname` AS par_firstname, `parent`.`usr_address` AS par_address, `parent`.`usr_tel_mobile_1` AS par_mobile, `educator`.`usr_lastname` , `educator`.`usr_firstname` , `prg_name` , `nur_name` , `cls_name` , `cit_name` , `scy_year`
+                FROM `child`
+                INNER JOIN user AS parent ON child.user_usr_id = parent.usr_id
+                INNER JOIN class ON child.class_cls_id = class.cls_id
+                INNER JOIN user AS educator ON class.cls_id = educator.class_cls_id
+                INNER JOIN city ON parent.city_cit_id = city.cit_id
+                INNER JOIN nursery ON parent.nursery_nur_id = nursery.nur_id
+                INNER JOIN school_year ON class.school_year_scy_id = school_year.scy_id
+                INNER JOIN program ON class.program_prg_id = program.prg_id WHERE ' . $this->primaryKey .'  = :id LIMIT 1';
+        $sth = $this->dbh->prepare($sql);
+        $sth->bindValue(':id', $id);
+        $sth->execute();
+
+        return $sth->fetch();
+    }
 }

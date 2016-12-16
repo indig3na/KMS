@@ -23,8 +23,8 @@ $w_routes = array(
     ['GET', '/app/manage/city/', 'City#city_get', 'crud_city_get'],
     ['POST', '/app/manage/city/', 'City#city_post', 'crud_city_post'],
     //Child
-    ['GET', '/app/manage/child/', 'Child#child_get', 'crud_child_get'],
-    ['POST', '/app/manage/child/', 'Child#child_post', 'crud_child_post'],
+    ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
+    ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
     //Parent
     ['GET', '/app/manage/user/', 'User#user_get', 'crud_user_get'],
     ['POST', '/app/manage/user/', 'User#user_post', 'crud_user_post'],
