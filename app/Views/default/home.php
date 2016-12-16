@@ -143,7 +143,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-xs-0"></div>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <a href="<?= $this->url('users_lostpassword')?>"><span class="glyphicon glyphicon-refresh"></span> Password oublié </a>
+                    <a href="<?= $this->url('user_lostpassword')?>"><span class="glyphicon glyphicon-refresh"></span> Password oublié </a>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-0"></div>
             </div>

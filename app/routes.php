@@ -31,7 +31,6 @@ $w_routes = array(
     //Parent
     ['GET', '/app/manage/user/', 'User#user_get', 'crud_user_get'],
     ['POST', '/app/manage/user/', 'User#user_post', 'crud_user_post'],
-<<<<<<< HEAD
     //Users login
     ['GET','/', 'User#login', 'user_login'],
     ['POST','/', 'User#loginPost', 'user_login_post'],
@@ -41,12 +40,10 @@ $w_routes = array(
     //MDP réinitialisé
     ['GET','/app/manage/user/passwordreinit/[:token]/', 'User#passwordreinit', 'user_passwordreinit'],
     ['POST','/app/manage/user/passwordreinit/[:token]/', 'User#passwordreinitPost', 'user_passwordreinit_post'],
-=======
     //Program
     ['GET', '/app/manage/program/', 'Program#program_get', 'crud_program_get'],
     ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
 
->>>>>>> 14c65537775a8ab36bd4eb47ffd10deb51b0dea6
 );
 
 
