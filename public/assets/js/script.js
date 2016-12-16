@@ -221,6 +221,18 @@ $(function () {
         }
     });
 
+    //----------------Select child-------------------
+    $('#child').hide();
+    $('.kms-crud-select-btn').click(function (e) {
+        e.preventDefault();
+        // ajouter l'id de la ligne courante
+        //data = {name: 'id', value: $(this).attr('value')};
+        location.search = '?id='+$(this).attr('value');
+        //ajaxCall(data);
+        $('#child').show();
+
+    });
+
 });
 
 

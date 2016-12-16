@@ -30,6 +30,8 @@ class NurseryController extends ControllerTemplate
             'data' => $tabledata,
             'fkData' => $fkData
         ];
+        // pour debug
+        // $this->showForbidden();
         $this->show('crud/crud', $vars);
     }
 
@@ -114,4 +116,3 @@ class NurseryController extends ControllerTemplate
         }
     }
 }
-
