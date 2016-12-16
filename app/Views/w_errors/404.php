@@ -1,5 +1,5 @@
 <?php $this->layout('layout', ['title' => 'Perdu ?']) ?>
 
 <?php $this->start('main_content'); ?>
-<h1>404. Perdu ?</h1>
+<img src=\assets\img">
 <?php $this->stop('main_content'); ?>
