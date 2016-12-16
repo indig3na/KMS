@@ -13,25 +13,31 @@ class ProgramController extends ControllerTemplate
     public function program_get(){
         //model nécessaire pour acces BD
         $model = new ProgramModel();
+        $pk = $model ->getPrimaryKey();
         //récupérer données
         $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
         
+        //tables de correspondance
+        //Indiquer les name du select correspondant suivi des données de la table de correspondance
+        $mult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
+        
         //récupérer les données de la table de correspondance
-        $activities = $model -> getActivities();
-        
-        //inclure les données de la table de correspondance dans la table données
-        foreach ($tabledata as &$row){
-           $row['activities']= isset ($activities[$row['prg_id']]) ? $activities[$row['prg_id']] : Null;
+        $multdata = array();
+        foreach ($mult as $multKey => $ctd){
+            $multdata[$multKey] = $model -> getCorrTableData($ctd);
+            //inclure les données de la table de correspondance dans la table données
+            foreach ($tabledata as &$row){
+               $row[$multKey]= isset ($multdata[$multKey][$row[$pk]]) ? $multdata[$multKey][$row[$pk]] : Null;
+            }
+            unset($row);
         }
-        unset($row);
-        
         //stocker les données des autres tables de DB dans $fkdata
         $fkData = array();
         
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
-        $activityModel = new ActivityModel();
+        $activityModel = new ActivityModel(); //automatically call right model???
         $fkData['activities'] = $activityModel ->findIndexedColumn('act_name');
-        $mult =['activities'];
+        //spécifier les indexes des données des tables de correspondance
         
         $vars = [
             //titre de page
@@ -43,7 +49,7 @@ class ProgramController extends ControllerTemplate
             //données
             'data' => $tabledata,
             'fkData' => $fkData,
-            'mult' => $mult
+            'mult' => array_keys($mult)
         ];
         $this->show('crud/crud',$vars);
     }
@@ -54,90 +60,18 @@ class ProgramController extends ControllerTemplate
     public function program_post(){
         //initialiser
         $model = new ProgramModel;
-        $success = false;
-        $errors = array();
-        $messages = array();
-        if (in_array($method = $_POST['method'],['insert','update'])){
-            //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip(['prg_name']));
-            $corrTableData = array_intersect_key($_POST, array_flip(['activities']));
-            //validation données
-            if (empty($data['prg_name'])){
-                $errors[] = 'Nom de la ville doit être renseigné';
-            }
-            //modifier la BD
-            if(empty($errors)){
-                //insertion données
-                if ($method === 'insert'){
-                    if(!$result = $model ->insert($data)) {
-                        $errors[] = 'Insertion en base de données échouée';
-                    } else {
-                        $messages[] = 'Inseré en base de données';
-                        $success = true;
-                        $id = $result[$model->getPrimaryKey()];
-                        $insert=array();
-                        $table = $model ->getTable();
-                        $pk = $model->getPrimaryKey();
-                        $model->setPrimaryKey('program_prg_id');
-                        $model->setTable('program_has_activity');
-                        foreach ($corrTableData['activities'] as $corrData){
-                            $insert = ['program_prg_id' => $id, 'activity_act_id' => $corrData];
-                            if(!$model->insert($insert)){
-                                $errors[] = 'Insertion d\'une activité en base de données échouée';
-                            } else {
-                                $messages[] = 'Inseré les activités en base de données';
-                            }
-                        }
-                        $model->setTable($table);
-                        $model->setPrimaryKey($pk);
-                    }
-                //modification données
-                } else {
-                    $id = intval($_POST['id']);
-                    if($model ->update($data,$id) === false) {
-                        $errors[] = 'Modification de la base de données échouée';
-                    } else {
-                        $messages[] = 'Modifié dans la base de données';
-                        $success = true;
-                        $insert=array();
-                        $model -> deleteActivities($id);
-                        $table = $model ->getTable();
-                        $pk = $model->getPrimaryKey();
-                        $model->setPrimaryKey('program_prg_id');
-                        $model->setTable('program_has_activity');
-                        
-                        foreach ($corrTableData['activities'] as $corrData){
-                            $insert = ['program_prg_id' => $id, 'activity_act_id' => $corrData];
-                            if(!$model->insert($insert)){
-                                $errors[] = 'Insertion d\'une activité en base de données échouée';
-                            } else {
-                                $messages[] = 'Inseré les activités en base de données';
-                            }
-                        }
-                        $model->setTable($table);
-                        $model->setPrimaryKey($pk);
-                        //todo update $corrTableData
-                    }
-                }
-            }
-        } elseif ($method === 'delete'){
-            // suppression données
-            $id = intval($_POST['id']);
-            if($model -> delete($id) === false) {
-                $errors[] = 'Suppression de la base de données échouée';
-            } else {
-                $messages[] = 'Supprimé de la base de données';
-                $success = true;
-                $model -> deleteActivities($id);
-            }    
-        } else {
-            $errors[] = 'méthode inconnue';
-        }
+        $postfieldsMult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
+        $postfields = ['prg_name'];
+        
+        $result = $model ->db_post($postfields,$postfieldsMult);
+        
+        $success = $result[0];
+        $messages = $result[1];
         if ($success){
             $this->showJson(['code' => 1, 'message' => implode('
 ', $messages)]);
         } else {
-            $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
+            $this->showJson(['code' => 0, 'message' => implode('<br/>', $messages)]);
         }
     }
 
