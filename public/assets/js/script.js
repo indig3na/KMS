@@ -151,6 +151,9 @@ $(function () {
         //stocker la valeur des td de la ligne courante dans val et supprimer les td
         var val = [];
         tr.children('.kms-datacolumn').each(function () {
+            $(this).children('span').each(function () {
+                $(this).replaceWith($(this).attr('value'));
+            });
             val.push($(this).html());
             $(this).remove();
         });
@@ -158,16 +161,22 @@ $(function () {
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('.kms-add-inp').clone());
         tr.find('.kms-add-inp').wrap('<td></td>');
+        /*tr.find('.chosen-container').each(function(){
+            $(this).prev().append($(this));
+        });*/
 
         //changer ensuite les classes de add en update
         tr.find('.kms-add-inp').addClass('kms-update-inp');
         tr.find('.kms-update-inp').removeClass('kms-add-inp');
 
         //insérer les valeurs depuis le tableau val
-        tr.find('.kms-update-inp').each(function () {
-            $(this).attr('value', (val.shift()));
+        tr.find('input.kms-update-inp').each(function () {
+            $(this).attr('value', (val.shift().trim()));
         });
-
+        tr.find('select.kms-update-inp').each(function () {
+            $(this).children('[value="'+val.shift().trim()+'"]').attr('selected','true');
+            $(this).chosen();
+        });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
 

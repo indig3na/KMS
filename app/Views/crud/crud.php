@@ -45,16 +45,14 @@
                                 <?php if(empty($value)): ?>
                                 <?php elseif (is_array($value)): ?>
                                     <?php foreach ($value as $val): ?>
-                                        <span class="well well-sm"><?= $fkData[$key][$val] ?></span>
+                                        <span class="well well-sm" value="<?= val ?>"><?= $fkData[$key][$val] ?></span>
                                     <?php endforeach ?>
                                 <?php else: ?>
-                                    <?= $fkData[$key][$value] ?>
+                                    <span value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
                                 <?php endif ?>
                             </td>
                         <?php else: ?>
-                            <td class="kms-datacolumn">
-                                <?= $value ?>
-                            </td>
+                            <td class="kms-datacolumn"><?= $value ?></td>
                         <?php endif ?>
                     <?php endforeach ?>
                     <td class="kms-action">

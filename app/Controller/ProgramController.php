@@ -68,12 +68,25 @@ class ProgramController extends ControllerTemplate
             if(empty($errors)){
                 //insertion données
                 if ($method === 'insert'){
-                    if($model ->insert($data) === false) {
+                    if(!$result = $model ->insert($data)) {
                         $errors[] = 'Insertion en base de données échouée';
                     } else {
                         $message = 'Inseré en base de données';
                         $success = true;
-                        
+                        $id = $result[$model->getPrimaryKey()];
+                        $insert=array();
+                        $table = $model ->getTable();
+                        $pk = $model->getPrimaryKey();
+                        $model->setPrimaryKey('program_prg_id');
+                        $model->setTable('program_has_activity');
+                        foreach ($corrTableData['activities'] as $corrData){
+                            $insert = ['program_prg_id' => $id, 'activity_act_id' => $corrData];
+                            if(!$model->insert($insert)){
+                                $errors[] = 'Insertion d\'une activité en base de données échouée';
+                            }
+                        }
+                        $model->setTable($table);
+                        $model->setPrimaryKey($pk);
                         //todo insertion $corrTableData
                     }
                 //modification données
