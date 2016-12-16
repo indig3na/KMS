@@ -175,6 +175,7 @@ $(function () {
         });
         tr.find('select.kms-update-inp').each(function () {
             $(this).children('[value="'+val.shift().trim()+'"]').attr('selected','true');
+            $(this).css
             $(this).chosen();
         });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
