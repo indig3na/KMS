@@ -16,12 +16,16 @@ class ProgramController extends ControllerTemplate
         $pk = $model ->getPrimaryKey();
         //récupérer données
         $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
+        //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
+        $fkData = array();
+        //-vide-
         
         //tables de correspondance
         //Indiquer les name du select correspondant suivi des données de la table de correspondance
         $mult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
-        
+        $multColumn = 'act_name';
         //récupérer les données de la table de correspondance
+        
         $multdata = array();
         foreach ($mult as $multKey => $ctd){
             $multdata[$multKey] = $model -> getCorrTableData($ctd);
@@ -30,15 +34,12 @@ class ProgramController extends ControllerTemplate
                $row[$multKey]= isset ($multdata[$multKey][$row[$pk]]) ? $multdata[$multKey][$row[$pk]] : Null;
             }
             unset($row);
+            $activityModel = new ActivityModel(); //automatically call right model???
+            $fkData[$multKey] = $activityModel ->findIndexedColumn($multColumn);
         }
-        //stocker les données des autres tables de DB dans $fkdata
-        $fkData = array();
         
-        //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
-        $activityModel = new ActivityModel(); //automatically call right model???
-        $fkData['activities'] = $activityModel ->findIndexedColumn('act_name');
-        //spécifier les indexes des données des tables de correspondance
         
+         
         $vars = [
             //titre de page
             'title' => 'Program',
@@ -57,22 +58,31 @@ class ProgramController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public function program_post(){
+    public static function program_post(){
+        return self::program_post_db();
+    }
+    
+    
+    /**
+     * fonction CRUD program
+     */
+    public static function program_post_db(){
         //initialiser
         $model = new ProgramModel;
+        $controller = new ProgramController();
         $postfieldsMult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
         $postfields = ['prg_name'];
         
-        $result = $model ->db_post($postfields,$postfieldsMult);
-        
-        $success = $result[0];
-        $messages = $result[1];
-        if ($success){
-            $this->showJson(['code' => 1, 'message' => implode('
-', $messages)]);
-        } else {
-            $this->showJson(['code' => 0, 'message' => implode('<br/>', $messages)]);
-        }
+        $result = $controller->db_post($model,$postfields,$postfieldsMult);
     }
-
+    /**
+     * fonction dfe validation de données pour programm
+     */
+    public function validate($data){
+        $messages = array();
+        if (empty($data['prg_name'])){
+            $messages[] = 'Nom du programme doit être renseigné';
+        }
+        return $messages;
+    }
 }
