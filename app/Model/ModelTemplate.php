@@ -86,7 +86,7 @@ abstract class ModelTemplate extends Model
      * @param $mult array Optionnel: Liste des indexes attendus pour les  tables de correspondances
      * 
      */
-    
+    //todo virer dans le controllerTemplate
     
     public function db_post($postfields,$mult=[]){
         $success = false;
