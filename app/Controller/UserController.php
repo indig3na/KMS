@@ -7,7 +7,7 @@
  */
 
 namespace Controller;
-use Controller\ControllerTemplate;
+use \W\Controller\Controller;
 use Model\UserModel;
 use Model\CityModel;
 use Model\NurseryModel;
@@ -15,7 +15,7 @@ use Model\ClassModel;
 use \W\Security\AuthentificationModel;
 use Controller\MailerController;
 
-class UserController extends ControllerTemplate
+class UserController extends Controller
 {
     /**
      *  CRUD Child table in GET method
@@ -94,8 +94,10 @@ class UserController extends ControllerTemplate
             //  debug($userData);
             // On met le user en session    
                 $auth->logUserIn($userData);
-            // puis on le redirige sur le vue default/home
-                $this->redirectToRoute('crud_child_get');
+                $user_logged = $this->getUser();
+                debug($user_logged);
+            // puis on ge redirige sur le vue default/home
+               // $this->redirectToRoute('default_home');
             }
         }
         $this->show('default/home', array('errorList' =>$errorList));
@@ -161,7 +163,8 @@ class UserController extends ControllerTemplate
                     // On met à jour le password
                     $authentificationModel = new AuthentificationModel();
                     $userData = $userModel->update(array(
-                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1)
+                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1),
+                        'usr_token' => ''
                     ), $userReinit['usr_id'] );
                     // Si l'insertion a fonctionné
                     if($userData !== false){
@@ -197,5 +200,7 @@ class UserController extends ControllerTemplate
             'errorList' => array(),
             'email' => ''));
     }
+    
+   
 
 }

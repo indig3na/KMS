@@ -505,5 +505,23 @@ class UserModel extends UsersModel
              return $stmt->fetch();
         }
     }
+        public function findIndexedColumn($column)
+    {
+        //Sélectionner l'id et a colonne $column
+        $sql = 'SELECT ' . $this->primaryKey . ', ' . $column . ' FROM ' . $this->table;
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute();
+        $data = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        //si erreur, renvoyer false
+        if ($data === false) {
+            return false;
+        }
+        //si réussite, créer un array associatif id => valeur de la colonne spécifiée
+        $result = array();
+        foreach ($data as $row) {
+            $result[$row[$this->primaryKey]] = $row[$column];
+        }
+        return $result;
+    }
 
 }
