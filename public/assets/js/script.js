@@ -111,9 +111,13 @@ $(function () {
             }
         });
     }
+    //fonction pour appliquer la librairie chosen à un objet et l'afficher comme un formulaire bootstrap
+    function styleSelect(jqobj){
+        jqobj.chosen({disable_search_threshold:8});
+        jqobj.next().css({width:'100%'}).children('ul').addClass('form-control');
+    }
     //initialiser la librairie chosen sur les select
-    $('.chosen-select').chosen({disable_search_threshold:8});
-    $('.chosen-select').next().css({width:'100%'});
+    styleSelect($('.chosen-select'));
     //----------add----------
 
 
@@ -122,10 +126,12 @@ $(function () {
         e.preventDefault();
 
         // récupérer les données des input de la ligne ajout
-        var data = $(this).parent().parent().find('.kms-add-inp').not('.chosen-select').serializeArray();
-        var mult = $(this).parent().parent().find('.kms-add-inp.chosen-select');
-        mult.val().map(function(opt,index){
-            data.push({name: mult.attr('name')+'['+index+']', value: opt});
+        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
+        var mult = $(this).parent().parent().find('.kms-add-inp.chosen-select[multiple]');
+        mult.each(function(){
+            $(this).val().map(function(opt,index){
+                data.push({name: mult.attr('name')+'['+index+']', value: opt});
+            });
         });
 
         //ajouter le paramètre 'method'
@@ -151,46 +157,45 @@ $(function () {
         //stocker la valeur des td de la ligne courante dans val et supprimer les td
         var val = [];
         tr.children('.kms-datacolumn').each(function () {
+            //stocker la/les valeurs de select dans un sous-array
             if($(this).hasClass('kms-datacolumn-select')){
                 var sel = [];
                 $(this).children('span').each(function () {
                     sel.push($(this).attr('value'));
                 }); 
                 val.push(sel);
+            //stocker les valeurs d'input en string
             } else {
-                val.push($(this).html());
+                val.push($(this).html().trim());
             }
+            //supprimer
             $(this).remove();
         });
-
+        console.log(val);
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('.kms-add-inp').clone());
         tr.find('.kms-add-inp').wrap('<td></td>');
-        /*tr.find('.chosen-container').each(function(){
-            $(this).prev().append($(this));
-        });*/
 
         //changer ensuite les classes de add en update
         tr.find('.kms-add-inp').addClass('kms-update-inp');
         tr.find('.kms-update-inp').removeClass('kms-add-inp');
-        console.log(val);
         //insérer les valeurs depuis le tableau val
-        tr.find('input.kms-update-inp').each(function () {
-            $(this).attr('value', (val.shift().trim()));
-        });
-        
-        tr.find('select.kms-update-inp').each(function () {
-            $(this).children('[value="'+val.shift().join('"], [value="')+'"]').attr('selected','true');
-            $(this).css({display:'initial'});
-            $(this).chosen();
-            $(this).next().css({width:'100%'});
+        tr.find('.kms-update-inp').each(function () {
+            //sélectionner la/les bonnes valeurs du select
+            if($(this).hasClass('chosen-select')){
+                $(this).children('[value="'+val.shift().join('"], [value="')+'"]').attr('selected','true');
+                //appliquer la librairie chosen au select nouvellement crée
+                $(this).css({display:'initial'});
+                styleSelect($(this));
+            //afficher le texte dans l'input
+            } else {
+                $(this).val(val.shift().trim());
+            }
         });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
 
         $(this).html('Enrégistrer').off('click').click(function(e) {
-
-
             e.preventDefault();
             crudUpdate.call(this);
         });
@@ -200,10 +205,12 @@ $(function () {
     function crudUpdate() {
 
         // récupérer les données des input de la ligne courante
-        var data = $(this).parent().parent().find('.kms-update-inp').not('.chosen-select').serializeArray();
-        var mult = $(this).parent().parent().find('.kms-update-inp.chosen-select');
-        mult.val().map(function(opt,index){
-            data.push({name: mult.attr('name')+'['+index+']', value: opt});
+        var data = $(this).parent().parent().find('.kms-update-inp').not('.chosen-select[multiple]').serializeArray();
+        var mult = $(this).parent().parent().find('.kms-update-inp.chosen-select[multiple]');
+        mult.each(function(){
+            $(this).val().map(function(opt,index){
+                data.push({name: mult.attr('name')+'['+index+']', value: opt});
+            });
         });
         // ajouter le paramètre 'method' et l'id de la ligne courante
         data.push({name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'update'});

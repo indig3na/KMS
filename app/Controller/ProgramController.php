@@ -58,11 +58,12 @@ class ProgramController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public static function program_post(){
-        return self::program_post_db();
+    public function program_post(){
+        list($success,$messages) = self::program_post_db();
+        $code = $success ? 1 : 0;
+        $this->showJson(['code' => $code, 'message' => implode('
+', $messages)]);
     }
-    
-    
     /**
      * fonction CRUD program
      */
@@ -73,7 +74,7 @@ class ProgramController extends ControllerTemplate
         $postfieldsMult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
         $postfields = ['prg_name'];
         
-        $result = $controller->db_post($model,$postfields,$postfieldsMult);
+        return $controller->db_post($model,$postfields,$postfieldsMult);
     }
     /**
      * fonction dfe validation de données pour programm

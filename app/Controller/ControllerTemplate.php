@@ -76,11 +76,6 @@ class ControllerTemplate extends Controller
         } else {
             $messages[] = 'méthode inconnue';
         }
-        if ($success){
-            $controller->showJson(['code' => 1, 'message' => implode('
-', $messages)]);
-        } else {
-            $controller->showJson(['code' => 0, 'message' => implode('<br/>', $messages)]);
-        }
+        return [$success, $messages];
     }
 }
