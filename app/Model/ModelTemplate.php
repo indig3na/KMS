@@ -77,78 +77,30 @@ abstract class ModelTemplate extends Model
         }
         return $result;
     }
-    
-    
-    /**
-     * S'occupe de la base de données
-     * 
-     * @param $postfields array Liste des indexes attendus dans $_POST
-     * @param $mult array Optionnel: Liste des indexes attendus pour les  tables de correspondances
-     * 
-     */
-    //todo virer dans le controllerTemplate
-    
-    public function db_post($postfields,$mult=[]){
-        $success = false;
-        if (in_array($method = $_POST['method'],['insert','update'])){
-            //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip($postfields));
-            $corrTableData = array_intersect_key($_POST, array_flip(array_keys($mult)));
-            //validation données
-            $messages = $this -> validate($data);
-            //modifier la BD
-            if(empty($messages)){
-                //insertion données
-                if ($method === 'insert'){
-                    $prettyMethod='Insertion';
-                    $result = $this ->insert($data);
-                } else if ($method === 'update'){
-                    $prettyMethod='Modification';
-                    $id = intval($_POST['id']);
-                    $result = $this ->update($data,$id);
-                }
-                if($result === false){
-                    $messages[] = $prettyMethod.' générale en BD échouée';
-                } else {
-                    $messages[] = $prettyMethod.' générale en BD réussie';
-                    $success = true;
-                    $id = $result[$this->getPrimaryKey()];
-                    foreach ($mult as $multKey => $ctd){
-                        if ($method === 'update'){
-                            $this -> deleteFromCorrTable($ctd,$id);
-                        }
-                        $corrSuccess = true;
-                        foreach ($corrTableData[$multKey] as $corrData){
-                            $insert = [$ctd[1] => $id, $ctd[2] => $corrData];
-                            if($this->insertIntoCorrTable($insert,$ctd) === false){
-                                $corrSuccess = false;
-                            }
-                        }
-                        if ($corrSuccess){
-                            $messages[] = $prettyMethod.' de certaines données en BD échouée';
-                        } else {
-                            $messages[] = $prettyMethod.' en BD tout à fait réussie';
-                        }
-                    }
-                }
-            }
-        } elseif ($method === 'delete'){
-            // suppression données
-            $id = intval($_POST['id']);
-            if($this -> delete($id) === false) {
-                $messages[] = 'Suppression générale en BD échouée';
-            } else {
-                $messages[] = 'Suppression générale en BD réussie';
-                $success = true;
-                foreach ($mult as $ctd){
-                    $this -> deleteFromCorrTable($ctd,$id);
-                }
-            }    
-        } else {
-            $messages[] = 'méthode inconnue';
+
+
+    public function getChildInfos($id)
+    {
+        if (!is_numeric($id)){
+            return false;
         }
-        return [$success,$messages];
+
+        $sql = 'SELECT `chd_id` , `chd_firstname` , `chd_lastname` , `chd_birthday` , `chd_gender` , `chd_hobbies` , `chd_comments` , `chd_img_path` , `chd_inserted` , `chd_updated` , `child`.`class_cls_id` , `user_usr_id` , `parent`.`usr_lastname` AS par_lastname, `parent`.`usr_firstname` AS par_firstname, `parent`.`usr_address` AS par_address, `parent`.`usr_tel_mobile_1` AS par_mobile, `educator`.`usr_lastname` , `educator`.`usr_firstname` , `prg_name` , `nur_name` , `cls_name` , `cit_name` , `scy_year`
+                FROM `child`
+                INNER JOIN user AS parent ON child.user_usr_id = parent.usr_id
+                INNER JOIN class ON child.class_cls_id = class.cls_id
+                INNER JOIN user AS educator ON class.cls_id = educator.class_cls_id
+                INNER JOIN city ON parent.city_cit_id = city.cit_id
+                INNER JOIN nursery ON parent.nursery_nur_id = nursery.nur_id
+                INNER JOIN school_year ON class.school_year_scy_id = school_year.scy_id
+                INNER JOIN program ON class.program_prg_id = program.prg_id WHERE ' . $this->primaryKey .'  = :id LIMIT 1';
+        $sth = $this->dbh->prepare($sql);
+        $sth->bindValue(':id', $id);
+        $sth->execute();
+
+        return $sth->fetch();
     }
+
     
     
         /**
@@ -258,5 +210,5 @@ abstract class ModelTemplate extends Model
         }
         
         
-    
+
 }

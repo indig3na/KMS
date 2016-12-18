@@ -24,7 +24,7 @@ class UserController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new UserModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_address','usr_email','usr_tel_mobile_1','usr_tel_mobile_2','usr_tel_bureau','usr_tel_domicile','city_cit_id','nursery_nur_id',/*'class_cls_id'*/]);
+        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id',/*'class_cls_id'*/]);
 
         //stocker les données des autres tables de DB dans $fkdata
         $fkData = array();
@@ -42,7 +42,7 @@ class UserController extends ControllerTemplate
             //titre de page
             'title' => 'User',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Firstname *', 'Lastname *','Address *','Email*','Mobile Phone Number 1 *','Mobile Phone Number 2 *','Home Phone Number  *','Office Phone Number 1 *','City','nursery'/*, 'class'*/],
+            'header' => ['Firstname *', 'Lastname *','Email*','Contact_No *','City','nursery'/*, 'class'*/],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'usr_id',
             //données
