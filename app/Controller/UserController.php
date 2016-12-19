@@ -7,7 +7,7 @@
  */
 
 namespace Controller;
-use Controller\ControllerTemplate;
+use \W\Controller\Controller;
 use Model\UserModel;
 use Model\CityModel;
 use Model\NurseryModel;
@@ -15,7 +15,7 @@ use Model\ClassModel;
 use \W\Security\AuthentificationModel;
 use Controller\MailerController;
 
-class UserController extends ControllerTemplate
+class UserController extends Controller
 {
     /**
      *  CRUD Child table in GET method
@@ -71,7 +71,7 @@ class UserController extends ControllerTemplate
     }
     
     public function loginPost(){
-        debug($_POST);
+        //debug($_POST);
         $errorList = array();
         $login = isset($_POST['login']) ? $_POST['login'] : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -91,7 +91,7 @@ class UserController extends ControllerTemplate
             $errorList[]= 'Le password doit faire au moins 8 caractères ! <br>';
             $formOk = false;
         }
-        print_r($formOk);
+        //print_r($formOk);
         if($formOk){
             // instancie la classe authentificationModel et permet de savoir si 
             // un user existe ou pas dans la base
@@ -104,8 +104,18 @@ class UserController extends ControllerTemplate
             //  debug($userData);
             // On met le user en session    
                 $auth->logUserIn($userData);
-            // puis on le redirige sur le vue default/home
-                $this->redirectToRoute('crud_child_get');
+                //récupération des infos du user connecté
+                $user_logged = $this->getUser();
+                if($user_logged['usr_role']=='ROLE_ADMIN'){
+                    $this->redirectToRoute('default_home');
+                } 
+                if($user_logged['usr_role']=='ROLE_PAR') {
+                    $this->redirectToRoute('child_child_get');
+                }
+                if($user_logged['usr_role']=='ROLE_EDU') {
+                    $this->redirectToRoute('class_class_get');
+                }
+               
             }
         }
         $this->show('default/home', array('errorList' =>$errorList));
@@ -119,7 +129,8 @@ class UserController extends ControllerTemplate
     }
     
     public function lostpasswordPost(){
-        debug($_POST);
+    //4
+    //   debug($_POST);
        $login = isset($_POST['login']) ? $_POST['login'] : '';
       
       // debug($emailLogin);
@@ -171,7 +182,8 @@ class UserController extends ControllerTemplate
                     // On met à jour le password
                     $authentificationModel = new AuthentificationModel();
                     $userData = $userModel->update(array(
-                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1)
+                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1),
+                        'usr_token' => ''
                     ), $userReinit['usr_id'] );
                     // Si l'insertion a fonctionné
                     if($userData !== false){
@@ -206,6 +218,13 @@ class UserController extends ControllerTemplate
         $this->show('user/passwordreinit', array(
             'errorList' => array(),
             'email' => ''));
+    }
+    
+    public function logout(){
+        $auth = new AuthentificationModel();
+        $auth->logUserOut();
+        // On redirige vers la home
+       $this->redirectToRoute('default_home');
     }
 
 }

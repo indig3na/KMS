@@ -5,8 +5,10 @@
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
     <!-- Table -->
+    <?php/** print_r($w_user) **/ ?>
+   
     <?php if (!empty($data)): ?>
-        <table class="table">
+        <table class=" table">
             <thead>
             <tr>
                 <?php foreach ($header as $value): ?>
