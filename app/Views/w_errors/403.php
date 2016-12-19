@@ -10,7 +10,7 @@
 </head>
 <h2>403! Forbidden!!</h2>
 <div>
-    <img src="<?= $this->assetUrl('img/403.jpg') ?>" height="800" width="1400" alt="" />
+    <img src="<?= $this->assetUrl('img/403.jpg') ?>" height="600" width="1000" alt="" />
     <div>
         <a href="<?= $this->url('default_home') ?>"> BACK TO Home </a>
     </div>

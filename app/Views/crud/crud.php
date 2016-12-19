@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => $title]) ?>
+<?php $this->layout('layoutsystem', ['title' => $title]) ?>
 
 <?php $this->start('main_content')?>
 

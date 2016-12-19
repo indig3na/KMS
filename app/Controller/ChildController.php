@@ -21,29 +21,38 @@ class ChildController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new ChildModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments'/*,'chd_img_path','class_cls_id'*/,'user_usr_id']);
-        $childData = $model->getChildInfos($_GET['id']);
+        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments'/*,'chd_img_path'*/,'class_cls_id','user_usr_id']);
+        if(!empty($_GET['id'])) {
+            $childData = $model->find($_GET['id']);
+        }
+        else
+        {
+            $childData = '';
+        }
         //stocker les données des autres tables de DB dans $fkdata
         $fkData = array();
+        //$flData = array();
 
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
-        //$classModel = new ClassModel();
-        //$fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
 
         $userModel = new UserModel();
         $fkData['user_usr_id'] = $userModel ->findIndexedColumn(/*'usr_firstname',*/'usr_lastname');
+
+        $classModel = new ClassModel();
+        $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
 
         $vars = [
             //titre de page
             'title' => 'Child',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Firstname *', 'Lastname *','birthday *','gender *','hobbies','comments','Parent'],
+            'header' => ['Firstname *', 'Lastname *','birthday *','gender *','hobbies','comments','Classe','Parent'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
             //données
             'data' => $tabledata,
             'childData' => $childData,
-            'fkData' => $fkData,
+            'fkData' => $fkData//,
+            //'flData' => $flData
         ];
         $this->show('child/child',$vars);
     }
