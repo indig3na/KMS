@@ -128,18 +128,25 @@
 
             <p>Enter your email and password</p>
 
-            <form action="" class="form-inline">
+            <form action="" class="form-inline" method="POST">
                 <div class="form-group">
                     <label for="useremail">Login</label>
-                    <input type="email" class="form-control" id="useremail" placeholder="Your email">
+                    <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">
                 </div>
                 <div class="form-group">
                     <label for="userpassword">Password</label>
-                    <input type="text" class="form-control" id="userpassword" placeholder="Enter your Password">
+                    <input type="text" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
                 <button type="submit" class="btn btn-default">Login</button>
                 <hr>
             </form>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-0"></div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <a href="<?= $this->url('user_lostpassword')?>"><span class="glyphicon glyphicon-refresh"></span> Password oublié </a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-0"></div>
+            </div>
         </div>
         <!-- end Container-->
 

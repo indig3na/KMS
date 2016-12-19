@@ -28,9 +28,21 @@ $w_routes = array(
     //Child
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
+
     //user
     ['GET', '/app/manage/user/', 'User#user_get', 'user_user_get'],
     ['POST', '/app/manage/user/', 'User#user_post', 'user_user_post'],
+
+    //Users login
+    ['GET','/', 'User#login', 'user_login'],
+    ['POST','/', 'User#loginPost', 'user_login_post'],
+    //MDP oublié
+    ['GET','/app/manage/user/lostpassword/', 'User#lostpassword', 'user_lostpassword'],
+    ['POST','/app/manage/user/lostpassword/', 'User#lostpasswordPost', 'user_lostpassword_post'],
+    //MDP réinitialisé
+    ['GET','/app/manage/user/passwordreinit/[:token]/', 'User#passwordreinit', 'user_passwordreinit'],
+    ['POST','/app/manage/user/passwordreinit/[:token]/', 'User#passwordreinitPost', 'user_passwordreinit_post'],
+
     //Program
     ['GET', '/app/manage/program/', 'Program#program_get', 'crud_program_get'],
     ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
