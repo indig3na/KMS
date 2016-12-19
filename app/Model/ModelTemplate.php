@@ -25,7 +25,7 @@ abstract class ModelTemplate extends Model
     {
         $sql = 'SELECT ' . implode(', ', $cols) . ' FROM ' . $this->table;
         if(!empty($wherecol)){
-            $sql .= 'WHERE '. htmlspecialchars($wherecol, ENT_QUOTES | ENT_HTML5).' = '.intval($whereval);
+            $sql .= ' WHERE '. htmlspecialchars($wherecol, ENT_QUOTES | ENT_HTML5).' = "'.htmlspecialchars($whereval, ENT_QUOTES | ENT_HTML5).'"';
         }
         if (!empty($orderBy)) {
 
