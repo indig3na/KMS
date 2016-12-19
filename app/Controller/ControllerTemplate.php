@@ -12,29 +12,39 @@ class ControllerTemplate extends Controller
     /**
      * S'occupe de la base de données
      * 
-     * @param $model object Modèle
-     * @param $postfields array Liste des indexes attendus dans $_POST
+     * @param $model object Modèle correspondant à la table en DB
+     * @param $postfields array Liste des indexes attendus dans $_POST => indexes des colonnes en DB
      * @param $mult array Optionnel: Liste des indexes attendus pour les  tables de correspondances
-     * 
+     * Default: []
+     * @param $data Optionnel: array qui contient au lieu de $_POST les données à insérer en DB
+     * Default: NULL
      */
-    public function db_post($model,$postfields,$mult=[]){
+    public function db_post($model,$postfields,$mult=[],$rawData = NULL){
+        if (!isset($rawData)){
+            $rawData = $_POST;
+        }
+        $data=self::clean($rawData);
         $success = false;
-        if (in_array($method = $_POST['method'],['insert','update'])){
-            //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip($postfields));
-            $corrTableData = array_intersect_key($_POST, array_flip(array_keys($mult)));
+        if (in_array($method = $data['method'],['insert','update'])){
+            //récupérer les champs nécessaires de $_POST et les renommer
+            $dbKeys = array_intersect_key($postfields,$data);
+            $dbValues = array_intersect_key($data,$postfields);
+            $dbData = array_combine($dbKeys,$dbValues);
+            
+            $corrTableDbData = array_intersect_key($data,$mult);
+           
             //validation données
-            $messages = $this -> validate($data);
+            $messages = $this -> validate($dbData, $method);
             //modifier la BD
             if(empty($messages)){
                 //insertion données
                 if ($method === 'insert'){
                     $prettyMethod='Insertion';
-                    $result = $model ->insert($data);
+                    $result = $model ->insert($dbData);
                 } else if ($method === 'update'){
                     $prettyMethod='Modification';
-                    $id = intval($_POST['id']);
-                    $result = $model ->update($data,$id);
+                    $id = intval($data['id']);
+                    $result = $model ->update($dbData,$id);
                 }
                 if($result === false){
                     $messages[] = $prettyMethod.' générale en BD échouée';
@@ -47,8 +57,8 @@ class ControllerTemplate extends Controller
                             $model -> deleteFromCorrTable($ctd,$id);
                         }
                         $corrSuccess = true;
-                        foreach ($corrTableData[$multKey] as $corrData){
-                            $insert = [$ctd[1] => $id, $ctd[2] => $corrData];
+                        foreach ($corrTableDbData[$multKey] as $corrDbData){
+                            $insert = [$ctd[1] => $id, $ctd[2] => intval($corrDbData)];
                             if($model->insertIntoCorrTable($insert,$ctd) === false){
                                 $corrSuccess = false;
                             }
@@ -63,7 +73,7 @@ class ControllerTemplate extends Controller
             }
         } elseif ($method === 'delete'){
             // suppression données
-            $id = intval($_POST['id']);
+            $id = intval($data['id']);
             if($model -> delete($id) === false) {
                 $messages[] = 'Suppression générale en BD échouée';
             } else {
@@ -77,5 +87,14 @@ class ControllerTemplate extends Controller
             $messages[] = 'méthode inconnue';
         }
         return [$success, $messages];
+    }
+    
+    /*
+     * Recursively cleans an array using htmlspecialchars
+     * @param $arr array Array to be cleaned
+     * @returns array
+     */
+    public static function clean ($arr){
+        return is_array($arr) ? array_map('self::clean',$arr) : htmlspecialchars($arr, ENT_HTML5 | ENT_QUOTES);
     }
 }

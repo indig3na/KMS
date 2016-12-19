@@ -126,8 +126,8 @@ $(function () {
         e.preventDefault();
 
         // récupérer les données des input de la ligne ajout
-        var data = $(this).parent().parent().find('.kms-add-inp').serializeArray();
-        var mult = $(this).parent().parent().find('.kms-add-inp.chosen-select[multiple]');
+        var data = $(this).closest('.kms-dataset').find('.kms-add').serializeArray();
+        var mult = $(this).closest('.kms-dataset').find('.kms-add.kms-select[multiple]');
         mult.each(function(){
             $(this).val().map(function(opt,index){
                 data.push({name: mult.attr('name')+'['+index+']', value: opt});
@@ -152,37 +152,36 @@ $(function () {
     function crudUpdatePrepare() {
 
         //sélectionner la ligne de table courante
-        var tr = $(this).parent().parent();
+        var tr = $(this).closest('.kms-dataset');
 
         //stocker la valeur des td de la ligne courante dans val et supprimer les td
         var val = [];
-        tr.children('.kms-datacolumn').each(function () {
+        tr.children('.kms-data').each(function () {
             //stocker la/les valeurs de select dans un sous-array
-            if($(this).hasClass('kms-datacolumn-select')){
+            if($(this).hasClass('kms-select')){
                 var sel = [];
-                $(this).children('span').each(function () {
-                    sel.push($(this).attr('value'));
+                $(this).children('.kms-option').each(function () {
+                    sel.push($(this).data('val'));
                 }); 
                 val.push(sel);
             //stocker les valeurs d'input en string
             } else {
                 val.push($(this).html().trim());
             }
-            //supprimer
-            $(this).remove();
         });
-        console.log(val);
+            //supprimer
+        tr.children().not('.kms-action').remove();
         //copier les input de la ligne ajout dans la ligne courante
-        tr.prepend($('.kms-add-inp').clone());
-        tr.find('.kms-add-inp').wrap('<td></td>');
-
+        tr.prepend($('#kms-add').children().clone());
+        //remplacer les boutons
+        tr.find('.kms-action.kms-update').replaceAll(tr.find('.kms-action.kms-add'));
         //changer ensuite les classes de add en update
-        tr.find('.kms-add-inp').addClass('kms-update-inp');
-        tr.find('.kms-update-inp').removeClass('kms-add-inp');
+        tr.find('.kms-add').addClass('kms-update');
+        tr.find('.kms-update').removeClass('kms-add');
         //insérer les valeurs depuis le tableau val
-        tr.find('.kms-update-inp').each(function () {
+        tr.find('.kms-update').each(function () {
             //sélectionner la/les bonnes valeurs du select
-            if($(this).hasClass('chosen-select')){
+            if($(this).hasClass('kms-select')){
                 $(this).children('[value="'+val.shift().join('"], [value="')+'"]').attr('selected','true');
                 //appliquer la librairie chosen au select nouvellement crée
                 $(this).css({display:'initial'});
@@ -205,17 +204,24 @@ $(function () {
     function crudUpdate() {
 
         // récupérer les données des input de la ligne courante
-        var data = $(this).parent().parent().find('.kms-update-inp').not('.chosen-select[multiple]').serializeArray();
-        var mult = $(this).parent().parent().find('.kms-update-inp.chosen-select[multiple]');
+        tr = $(this).closest('.kms-dataset');
+        var data = tr.find('.kms-update').not('.kms-select[multiple]').serializeArray();
+        var mult = tr.find('.kms-update.kms-select[multiple]');
         mult.each(function(){
             $(this).val().map(function(opt,index){
                 data.push({name: mult.attr('name')+'['+index+']', value: opt});
             });
         });
         // ajouter le paramètre 'method' et l'id de la ligne courante
-        data.push({name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'update'});
+        data.push({name: 'id', value: tr.data('id')}, {name: 'method', value: 'update'});
         ajaxCall(data);
     }
+    
+    //enrégistrer directement depuis le bouton (sans passer par crudUpdatePrepare)
+    $('.kms-crud-save-btn').click(function (e) {
+        e.preventDefault();
+        crudUpdate.call(this);
+    });
 
     //----------delete----------
 
@@ -223,7 +229,7 @@ $(function () {
         e.preventDefault();
         if (confirm('Voulez-vous vraiment supprimer cette ligne ?')){
             // ajouter l'id de la ligne courante
-            data = [{name: 'id', value: $(this).attr('value')}, {name: 'method', value: 'delete'}];
+            data = [{name: 'id', value: $(this).closest('.kms-dataset').data('id')}, {name: 'method', value: 'delete'}];
             ajaxCall(data);
         }
     });

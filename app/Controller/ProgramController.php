@@ -72,17 +72,19 @@ class ProgramController extends ControllerTemplate
         $model = new ProgramModel;
         $controller = new ProgramController();
         $postfieldsMult = ['activities' => ['program_has_activity','program_prg_id','activity_act_id']];
-        $postfields = ['prg_name'];
+        $postfields = ['prg_name' => 'prg_name'];
         
         return $controller->db_post($model,$postfields,$postfieldsMult);
     }
     /**
-     * fonction dfe validation de données pour programm
+     * fonction de validation de données pour programm
      */
-    public function validate($data){
+    public function validate($data, $method){
         $messages = array();
-        if (empty($data['prg_name'])){
-            $messages[] = 'Nom du programme doit être renseigné';
+        if ($method === 'insert' || ($method === 'update' && isset($data['prg_name']))){
+            if (empty($data['prg_name'])){
+                $messages[] = 'Nom du programme doit être renseigné';
+            }
         }
         return $messages;
     }

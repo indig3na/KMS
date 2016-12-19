@@ -31,7 +31,7 @@ class ChildController extends ControllerTemplate
         //$fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
 
         $userModel = new UserModel();
-        $fkData['user_usr_id'] = $userModel ->findIndexedColumn(/*'usr_firstname',*/'usr_lastname');
+        $fkData['user_usr_id'] = $userModel ->findIndexedColumns(['usr_firstname','usr_lastname'],' ','WHERE usr_role = "ROLE_PAR"');
 
         $vars = [
             //titre de page
