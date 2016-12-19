@@ -116,7 +116,7 @@ class ChildController extends ControllerTemplate
                 //check
                 if ($extension != '.php') {
                     //je téléverse le fichier
-                    if (move_uploaded_file($fileUpload['tmp_name'], 'filesId/'.$fileUpload['name'])) {
+                    if (move_uploaded_file($fileUpload['tmp_name'], '../../public/assets/img/filesId/'.$fileUpload['name'])) {
                         $succesList[]= 'fichier téléversé';
                     }else{
 
