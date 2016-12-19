@@ -25,7 +25,7 @@ class UserController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new UserFunctionsModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id','usr_role'],'usr_role','ROLE_PAR');
+        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id','usr_role'],'usr_role','ROLE_EDU');
         if(!empty($_GET['id'])) {
             $userData = $model->find($_GET['id']);
         }
@@ -61,6 +61,133 @@ class UserController extends ControllerTemplate
 
         ];
         $this->show('user/user',$vars);
+    }
+    
+     /**
+     * CRUD User table in POST method
+     */
+    public function user_post()
+    {
+        if (!empty($_POST)) {
+
+            $firstname = isset($_POST['usr_firstname']) ? trim(strip_tags($_POST['usr_firstname'])) : '';
+            $lastname = isset($_POST['usr_lastname']) ? trim(strip_tags($_POST['usr_lastname'])) : '';
+            $address = isset($_POST['usr_address']) ? trim(strip_tags($_POST['usr_address'])) : '';
+            $tel_mobile_1 = isset($_POST['usr_tel_mobile_1']) ? trim(strip_tags($_POST['usr_tel_mobile_1'])) : '';
+            $tel_domicile = isset($_POST['usr_tel_domicile']) ? trim(strip_tags($_POST['usr_tel_domicile'])) : '';
+            $email = isset($_POST['usr_email']) ? trim(strip_tags($_POST['usr_email'])) : '';
+            $role = isset($_POST['usr_role']) ? trim(strip_tags($_POST['usr_role'])) : '';
+            $nursery = isset($_POST['nursery_nur_id']) ? trim(strip_tags($_POST['nursery_nur_id'])) : '';
+            $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
+            $class = isset($_POST['class_cls_id']) ? trim(strip_tags($_POST['class_cls_id'])) : '';
+
+            $method = $_POST['method'];
+            $id = '';
+
+            // activity input validation
+            $succesList = array();
+            $success = false;
+            $errorList = array();
+            $data = array();
+            if (empty($firstname)) {
+                $errorList[] = 'firstname required';
+                $success = false;
+            }
+            if (strlen($firstname)<3) {
+                $errorList[] = 'firstname must be 3 caractere or more';
+                $success = false;
+            }
+            if (empty($lastname)) {
+                $errorList[] = 'laststname required';
+                $success = false;
+            }
+            if (strlen($lastname)<3) {
+                $errorList[] = 'lastname must be 3 caractere or more';
+                $success = false;
+            }
+            if (empty($address)) {
+                $errorList[] = 'Adresse required';
+                $success = false;
+            }
+            if (empty($email)) {
+                $errorList[] = 'Adresse E-mail required';
+                $success = false;
+            }
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Adresse E-mail valide required';
+                $success = false;
+            }
+            if(!in_array($role,['ROLE_ADMIN','ROLE_EDU','ROLE_PAR'])){
+                $errorList[] = 'Role non reconnu';
+                $success = false;
+            }
+
+            $data = [
+                'usr_firstname' => $firstname,
+                'usr_lastname' => $lastname,
+                'usr_address' => $address,
+                'usr_tel_mobile_1' => $tel_mobile_1,
+                'usr_tel_domicile' => $tel_domicile,
+                'usr_email' => $email,
+                'usr_role' => $role,
+                'nursery_nur_id' => $nursery,
+                'city_cit_id' => $city,
+                'class_cls_id' => $class,
+
+            ];
+            // if input ok
+            if (empty($errorList)) {
+
+                $model = new UserFunctionsModel();
+                //Insert data
+                if ($method === 'insert') {
+                    $insertData = $model->insert($data);
+                    // if not inserted error
+                    if ($insertData === false) {
+                        $errorList[] = 'Insert Error<br>';
+                    } else {
+                        $succesList[] = 'user info inserted';
+                        $success = true;
+                    }
+                } //update data for given Id
+                elseif ($method === 'update') {
+                    $id = $_POST['id'];
+                    $updateData = $model->update($data, $id, $stripTags = true);
+                    // if not updated error
+                    if ($updateData === false) {
+                        $errorList[] = 'Update Error<br>';
+                    } else {
+                        $succesList[] = 'user infos Updated';
+                        $success = true;
+                    }
+                }
+
+
+            }
+            //delete data for a given Id
+            if ($method === 'delete') {
+                $id = $_POST['id'];
+                $model = new UserFunctionsModel();
+                $deletedData = $model->delete($id);
+                // if not deleted error
+                // if not updated error
+                if ($deletedData === false) {
+                    $errorList[] = 'Delete Error<br>';
+                } else {
+                    $succesList[] = 'user infos Deleted';
+                    $success = true;
+                }
+
+            }
+            // show json errorList and/or successList message
+            if ($success) {
+                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+            } else {
+                $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
+            }
+        }
+
+
     }
     
     public function login(){

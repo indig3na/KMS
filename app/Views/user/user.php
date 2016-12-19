@@ -127,42 +127,42 @@
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
                     <label for="inputEmail3">Firstname *</label>
-                    <input type="text" name="usr_firstname" class="form-control" required placeholder="<?= $userData['usr_firstname'] ?>">
+                    <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3">Lastname * </label>
-                    <input type="text" name="usr_lastname" class="form-control" required placeholder="<?= $userData['usr_lastname'] ?>">
+                    <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Address</label>
-                    <input type="date"  name="usr_address"  class="form-control" placeholder="<?= $userData['usr_address'] ?>">
+                    <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
 
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Contact mobile_no</label>
-                    <input type="date"  name="usr_tel_mobile1"  class="form-control" laceholder="<?= $userData['usr_tel_mobile1'] ?>">
+                    <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                 </div>
 
                 <div class="form-group">
                     <label for="inputFormUser">Contact home_no</label>
-                    <input type="date"  name="usr_tel_domicile"  class="form-control" laceholder="<?= $userData['usr_tel_domicile'] ?>">
+                    <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Email</label>
-                    <input type="email" name="usr_email" class="form-control" placeholder="<?= $userData['usr_email'] ?>" >
+                    <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  placeholder="<?= $userData['usr_role'] ?>">
+                    <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputform">Nursery</label>
 
-                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                    <select data-placeholder="Sélectionnez des parents" name="nursery_nur_id" class="form-control chosen-select">
                         <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -172,9 +172,9 @@
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
-                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez des classes" name="class_cls_id" class="form-control chosen-select" >
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -182,12 +182,12 @@
                 <div class="form-group">
                     <label for="inputform">City</label>
 
-                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez des classes" name="city_cit_id" class="form-control chosen-select" >
                         <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-
+                    
                 </div>
 
                 <div class="form-group">
@@ -195,6 +195,8 @@
                     <input type="file" name="photo">
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="method" value="update"/>
+                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
                     <button type="submit" class="btn btn-primary" >Edit user</button>
                 </div>
             </form>
@@ -236,7 +238,7 @@
                         <?php foreach ($data as $row): ?>
                                 <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
                                     <?php foreach ($row as $key => $value): ?>
-                                        <?php if ($key == $primaryKey): ?>
+                                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
                                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                                             <td class="kms-data kms-select">
                                                 <?php if(empty($value)): ?>

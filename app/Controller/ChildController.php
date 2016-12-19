@@ -21,7 +21,7 @@ class ChildController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new ChildModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments'/*,'chd_img_path'*/,'class_cls_id','user_usr_id']);
+        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','chd_img_path','class_cls_id','user_usr_id']);
         if(!empty($_GET['id'])) {
             $childData = $model->find($_GET['id']);
         }
@@ -50,6 +50,7 @@ class ChildController extends ControllerTemplate
             'primaryKey' => 'chd_id',
             //données
             'data' => $tabledata,
+            'ignoreData' => ['chd_img_path'],
             'childData' => $childData,
             'fkData' => $fkData//,
             //'flData' => $flData

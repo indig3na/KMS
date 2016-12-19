@@ -39,7 +39,7 @@
             <?php foreach ($data as $row): ?>
                 <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
                     <?php foreach ($row as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
+                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                             <td class="kms-data kms-select">
                                 <?php if(empty($value)): ?>
