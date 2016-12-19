@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <title>KMS</title>
     <meta name="description" content="school App">
-
+    <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/chosen.min.css') ?>">
     <!-- Latest compiled and minified CSS -->
