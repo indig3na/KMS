@@ -113,6 +113,8 @@ $(document).ready(function() {
             //supprimer
         detached.push(tr.children().not('.kms-action').detach());
         detachedId.push(tr.data('id'));
+        console.log(detached);
+        console.log(detachedId);
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('#kms-add').children().clone());
         //remplacer les boutons
@@ -138,7 +140,7 @@ $(document).ready(function() {
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
         $(this).after(' <a class="btn btn-info btn-flat kms-crud-abort-btn" href="#"><i class="fa fa-close"></i></a> ');
         
-        $('.kms-crud-abort-btn').click(function (e) {
+        $(this).next().click(function (e) {
             e.preventDefault();
             tr = $(this).closest('.kms-dataset');
             id = tr.data('id');
@@ -147,6 +149,8 @@ $(document).ready(function() {
             tr.prepend(detached[index]);
             detached.splice(index,1);
             detachedId.splice(index,1);
+            console.log(detached);
+            console.log(detachedId);
             $(this).remove();
             tr.find('.kms-crud-update-btn').html('<i class="fa fa-pencil"></i>').addClass('btn-info').removeClass('btn-success').off('click').click(function(e) {
                 e.preventDefault();
