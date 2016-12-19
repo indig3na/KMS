@@ -18,14 +18,49 @@ use Controller\MailerController;
 
 class UserController extends Controller
 {
+    
+    
+    public function admin_get(){
+        $this->user_get('ROLE_ADMIN');
+    }
+    
+    public function edu_get(){
+        $this->user_get('ROLE_EDU');
+    }
+    
+    public function par_get(){
+        $this->user_get('ROLE_PAR');
+    }
+    
+    
     /**
      *  CRUD Child table in GET method
      */
-    public function user_get(){
+    public function user_get($role=NULL){
         //model nécessaire pour acces BD
         $model = new UserFunctionsModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id','usr_role'],'usr_role','ROLE_EDU');
+        switch ($role){
+            case 'ROLE_ADMIN':
+                $prettyRole = 'Administrateur';
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_ADMIN'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+                break;
+            case 'ROLE_EDU':
+                $prettyRole = 'Éducateur';
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'usr_role','ROLE_EDU'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class','Role'];
+                break;
+            case 'ROLE_PAR':
+                $prettyRole = 'Parent';
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+                break;
+            default: $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'',''];
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+        }
+        $tabledata = $model -> findAllColumns($query[0],$query[1],$query[2]);
         if(!empty($_GET['id'])) {
             $userData = $model->find($_GET['id']);
         }
@@ -51,13 +86,14 @@ class UserController extends Controller
             //titre de page
             'title' => 'User',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class','Role'],
+            'header' => $header,
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'usr_id',
             //données
             'data' => $tabledata,
             'userData' => $userData,
-            'fkData' => $fkData
+            'fkData' => $fkData,
+            'role' => $prettyRole
 
         ];
         $this->show('user/user',$vars);
