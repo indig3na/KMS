@@ -100,7 +100,7 @@ class UserController extends Controller
                     $this->redirectToRoute('default_home');
                 } 
                 if($user_logged['usr_role']=='ROLE_PAR') {
-                    $this->redirectToRoute('crud_child_get');
+                    $this->redirectToRoute('child_child_get');
                 }
                 if($user_logged['usr_role']=='ROLE_EDU') {
                     $this->redirectToRoute('class_class_get');
@@ -108,7 +108,7 @@ class UserController extends Controller
                
             }
         }
-        // $this->show('default/home', array('errorList' =>$errorList));
+        $this->show('default/home', array('errorList' =>$errorList));
     }
      public function lostpassword (){
        // debug($_POST);
@@ -210,6 +210,11 @@ class UserController extends Controller
             'email' => ''));
     }
     
-   
+    public function logout(){
+        $auth = new AuthentificationModel();
+        $auth->logUserOut();
+        // On redirige vers la home
+       $this->redirectToRoute('default_home');
+    }
 
 }
