@@ -354,5 +354,6 @@ class UserController extends Controller
         // On redirige vers la home
        $this->redirectToRoute('default_home');
     }
+    
 
 }

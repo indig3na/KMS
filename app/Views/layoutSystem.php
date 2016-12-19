@@ -75,7 +75,7 @@
                 <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>calendar</a>
             </li>
             <li>
-                <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes Shedule</a>
+                <a href="<?= $this->url('class_class_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes</a>
             </li>
             <li>
                 <a href="<?= $this->url('user_user_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educator</a>
@@ -90,7 +90,7 @@
                 <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
             </li>
             <li>
-                <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classes</a>
+                <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classrooms</a>
             </li>
             <li>
                 <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Program</a>

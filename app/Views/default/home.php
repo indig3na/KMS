@@ -135,7 +135,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userpassword">Password</label>
-                    <input type="text" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
+                    <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
                 <button type="submit" class="btn btn-default">Login</button>
                 <hr>
