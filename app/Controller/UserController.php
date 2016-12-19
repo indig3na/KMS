@@ -7,24 +7,25 @@
  */
 
 namespace Controller;
-use Controller\ControllerTemplate;
+use \W\Controller\Controller;
 use Model\UserModel;
+use Model\UserFunctionsModel;
 use Model\CityModel;
 use Model\NurseryModel;
 use Model\ClassModel;
 use \W\Security\AuthentificationModel;
 use Controller\MailerController;
 
-class UserController extends ControllerTemplate
+class UserController extends Controller
 {
     /**
      *  CRUD Child table in GET method
      */
     public function user_get(){
         //model nécessaire pour acces BD
-        $model = new UserModel();
+        $model = new UserFunctionsModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id','usr_role']);
+        $tabledata = $model -> findAllColumns(['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id','usr_role'],'usr_role','ROLE_EDU');
         if(!empty($_GET['id'])) {
             $userData = $model->find($_GET['id']);
         }
@@ -62,6 +63,133 @@ class UserController extends ControllerTemplate
         $this->show('user/user',$vars);
     }
     
+     /**
+     * CRUD User table in POST method
+     */
+    public function user_post()
+    {
+        if (!empty($_POST)) {
+
+            $firstname = isset($_POST['usr_firstname']) ? trim(strip_tags($_POST['usr_firstname'])) : '';
+            $lastname = isset($_POST['usr_lastname']) ? trim(strip_tags($_POST['usr_lastname'])) : '';
+            $address = isset($_POST['usr_address']) ? trim(strip_tags($_POST['usr_address'])) : '';
+            $tel_mobile_1 = isset($_POST['usr_tel_mobile_1']) ? trim(strip_tags($_POST['usr_tel_mobile_1'])) : '';
+            $tel_domicile = isset($_POST['usr_tel_domicile']) ? trim(strip_tags($_POST['usr_tel_domicile'])) : '';
+            $email = isset($_POST['usr_email']) ? trim(strip_tags($_POST['usr_email'])) : '';
+            $role = isset($_POST['usr_role']) ? trim(strip_tags($_POST['usr_role'])) : '';
+            $nursery = isset($_POST['nursery_nur_id']) ? trim(strip_tags($_POST['nursery_nur_id'])) : '';
+            $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
+            $class = isset($_POST['class_cls_id']) ? trim(strip_tags($_POST['class_cls_id'])) : '';
+
+            $method = $_POST['method'];
+            $id = '';
+
+            // activity input validation
+            $succesList = array();
+            $success = false;
+            $errorList = array();
+            $data = array();
+            if (empty($firstname)) {
+                $errorList[] = 'firstname required';
+                $success = false;
+            }
+            if (strlen($firstname)<3) {
+                $errorList[] = 'firstname must be 3 caractere or more';
+                $success = false;
+            }
+            if (empty($lastname)) {
+                $errorList[] = 'laststname required';
+                $success = false;
+            }
+            if (strlen($lastname)<3) {
+                $errorList[] = 'lastname must be 3 caractere or more';
+                $success = false;
+            }
+            if (empty($address)) {
+                $errorList[] = 'Adresse required';
+                $success = false;
+            }
+            if (empty($email)) {
+                $errorList[] = 'Adresse E-mail required';
+                $success = false;
+            }
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Adresse E-mail valide required';
+                $success = false;
+            }
+            if(!in_array($role,['ROLE_ADMIN','ROLE_EDU','ROLE_PAR'])){
+                $errorList[] = 'Role non reconnu';
+                $success = false;
+            }
+
+            $data = [
+                'usr_firstname' => $firstname,
+                'usr_lastname' => $lastname,
+                'usr_address' => $address,
+                'usr_tel_mobile_1' => $tel_mobile_1,
+                'usr_tel_domicile' => $tel_domicile,
+                'usr_email' => $email,
+                'usr_role' => $role,
+                'nursery_nur_id' => $nursery,
+                'city_cit_id' => $city,
+                'class_cls_id' => $class,
+
+            ];
+            // if input ok
+            if (empty($errorList)) {
+
+                $model = new UserFunctionsModel();
+                //Insert data
+                if ($method === 'insert') {
+                    $insertData = $model->insert($data);
+                    // if not inserted error
+                    if ($insertData === false) {
+                        $errorList[] = 'Insert Error<br>';
+                    } else {
+                        $succesList[] = 'user info inserted';
+                        $success = true;
+                    }
+                } //update data for given Id
+                elseif ($method === 'update') {
+                    $id = $_POST['id'];
+                    $updateData = $model->update($data, $id, $stripTags = true);
+                    // if not updated error
+                    if ($updateData === false) {
+                        $errorList[] = 'Update Error<br>';
+                    } else {
+                        $succesList[] = 'user infos Updated';
+                        $success = true;
+                    }
+                }
+
+
+            }
+            //delete data for a given Id
+            if ($method === 'delete') {
+                $id = $_POST['id'];
+                $model = new UserFunctionsModel();
+                $deletedData = $model->delete($id);
+                // if not deleted error
+                // if not updated error
+                if ($deletedData === false) {
+                    $errorList[] = 'Delete Error<br>';
+                } else {
+                    $succesList[] = 'user infos Deleted';
+                    $success = true;
+                }
+
+            }
+            // show json errorList and/or successList message
+            if ($success) {
+                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+            } else {
+                $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
+            }
+        }
+
+
+    }
+    
     public function login(){
         
         $errorList = array();
@@ -71,7 +199,7 @@ class UserController extends ControllerTemplate
     }
     
     public function loginPost(){
-        debug($_POST);
+        //debug($_POST);
         $errorList = array();
         $login = isset($_POST['login']) ? $_POST['login'] : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -91,7 +219,7 @@ class UserController extends ControllerTemplate
             $errorList[]= 'Le password doit faire au moins 8 caractères ! <br>';
             $formOk = false;
         }
-        print_r($formOk);
+        //print_r($formOk);
         if($formOk){
             // instancie la classe authentificationModel et permet de savoir si 
             // un user existe ou pas dans la base
@@ -104,8 +232,18 @@ class UserController extends ControllerTemplate
             //  debug($userData);
             // On met le user en session    
                 $auth->logUserIn($userData);
-            // puis on le redirige sur le vue default/home
-                $this->redirectToRoute('crud_child_get');
+                //récupération des infos du user connecté
+                $user_logged = $this->getUser();
+                if($user_logged['usr_role']=='ROLE_ADMIN'){
+                    $this->redirectToRoute('default_home');
+                } 
+                if($user_logged['usr_role']=='ROLE_PAR') {
+                    $this->redirectToRoute('child_child_get');
+                }
+                if($user_logged['usr_role']=='ROLE_EDU') {
+                    $this->redirectToRoute('class_class_get');
+                }
+               
             }
         }
         $this->show('default/home', array('errorList' =>$errorList));
@@ -119,7 +257,8 @@ class UserController extends ControllerTemplate
     }
     
     public function lostpasswordPost(){
-        debug($_POST);
+    //4
+    //   debug($_POST);
        $login = isset($_POST['login']) ? $_POST['login'] : '';
       
       // debug($emailLogin);
@@ -171,7 +310,8 @@ class UserController extends ControllerTemplate
                     // On met à jour le password
                     $authentificationModel = new AuthentificationModel();
                     $userData = $userModel->update(array(
-                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1)
+                        'usr_password' => $authentificationModel->hashPassword($passwordLogin1),
+                        'usr_token' => ''
                     ), $userReinit['usr_id'] );
                     // Si l'insertion a fonctionné
                     if($userData !== false){
@@ -206,6 +346,13 @@ class UserController extends ControllerTemplate
         $this->show('user/passwordreinit', array(
             'errorList' => array(),
             'email' => ''));
+    }
+    
+    public function logout(){
+        $auth = new AuthentificationModel();
+        $auth->logUserOut();
+        // On redirige vers la home
+       $this->redirectToRoute('default_home');
     }
 
 }

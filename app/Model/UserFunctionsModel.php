@@ -9,6 +9,7 @@ namespace Model;
 class UserFunctionsModel extends ModelTemplate
 {
     public function __construct() {
+        parent::__construct();
         $this ->setTable('user');
         $this ->setPrimaryKey('usr_id');
     }

@@ -120,46 +120,49 @@
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
                     <label for="inputEmail3">Firstname *</label>
-                    <input type="text" name="usr_firstname" class="form-control" required placeholder="<?= $childData['chd_firstname'] ?>">
+                    <input type="text" name="chd_firstname" class="form-control" required value="<?= $childData['chd_firstname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3">Lastname * </label>
-                    <input type="text" name="usr_lastname" class="form-control" required placeholder="<?= $childData['chd_lastname'] ?>">
+                    <input type="text" name="chd_lastname" class="form-control" required value="<?= $childData['chd_lastname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputform">Gender</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="usr_gender" value="M">
+                            <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
                             Male
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="usr_gender" value="F">
+                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
                             Female
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputform">Birthday</label>
-                    <input type="date"  name="usr_birthday"  class="form-control">
+                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
 
                 </div>
                 <div class="form-group">
                     <label for="inputform">Comments</label>
-                    <input type="text" name="usr_comments" class="form-control" placeholder="<?= $childData['chd_comments'] ?>" >
+                    <input type="text" name="chd_comments" class="form-control" value="<?= $childData['chd_comments'] ?>" >
                 </div>
                 <div class="form-group">
                     <label for="inputform">Hobbies</label>
-                    <input type="text" name="usr_interest" class="form-control"  placeholder="<?= $childData['chd_hobbies'] ?>">
+                    <input type="text" name="chd_hobbies" class="form-control"  value="<?= $childData['chd_hobbies'] ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="inputform">Photo</label>
+                    <img src="<?= $this ->assetUrl('img/avatar/'.$childData['chd_img_path']) ?>"/>
                     <input type="file" name="photo">
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="method" value="update"/>
+                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
                     <button type="submit" class="btn btn-primary" >Edit child</button>
                 </div>
             </form>
@@ -191,27 +194,37 @@
                         <tbody>
                             <tr>
                                 <?php foreach ($header as $value): ?>
-                                    <th style="width: 250px;"><?= $value ?></th>
+                                    <th><?= $value ?></th>
                                 <?php endforeach ?>
                                 <th>Action</th>
                             </tr>
                             <?php //lignes de données ?>
                             <?php foreach ($data as $row): ?>
-                            <tr  total-items="totalItems" >
-                                <?php foreach ($row as $key => $value): ?>
-                                    <?php if ($key == $primaryKey): ?>
-                                    <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                                        <td class="kms-datacolumn" style="width: 250px;"><?= $fkData[$key][$value] ?></td>
-                                    <?php
-                                    else: ?>
-                                        <td class="kms-datacolumn"><?= $value ?></td>
-                                    <?php endif ?>
-                                <?php endforeach ?>
-                                <td class="kms-action">
-                                    <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
-                                    <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
+                                <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
+                                    <?php foreach ($row as $key => $value): ?>
+                                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
+                                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
+                                            <td class="kms-data kms-select">
+                                                <?php if(empty($value)): ?>
+                                                <?php elseif (is_array($value)): ?>
+                                                    <?php foreach ($value as $val): ?>
+                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                                    <?php endforeach ?>
+                                                <?php else: ?>
+                                                    <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                                <?php endif ?>
+                                            </td>
+                                        <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
+                                            <td class="kms-data"><img src="<?= $this ->assetUrl('img/avatar/'.$value) ?>" style="max-height:50px"/></td>
+                                        <?php else: ?>
+                                            <td class="kms-data"><?= $value ?></td>
+                                        <?php endif ?>
+                                        <?php endforeach ?>
+                                    <td class="kms-action kms-update">
+                                        <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>

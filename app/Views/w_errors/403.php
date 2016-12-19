@@ -1,6 +1,13 @@
 <?php $this->layout('layout', ['title' => '403']) ?>
 
 <?php $this->start('main_content'); ?>
+<head>
+    <style>
+        body{
+            background-color: black;
+        }
+    </style>
+</head>
 <h2>403! Forbidden!!</h2>
 <div>
     <img src="<?= $this->assetUrl('img/403.jpg') ?>" height="600" width="1000" alt="" />

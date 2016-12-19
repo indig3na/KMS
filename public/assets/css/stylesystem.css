@@ -102,6 +102,19 @@
     margin:0;
 }
 
+/*Views/crud.php*/
+td.kms-data{
+    vertical-align:middle !important;
+}
+ul.chosen-choices.form-control{
+    height:34px;
+    padding:4px 12px
+}
+ul.chosen-choices.form-control li.search-choice{
+    margin-top: 2px;
+}
+
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;

@@ -41,60 +41,38 @@ class CityController extends ControllerTemplate
     /**
      * Page de gestion CRUD pour table country en POST
      */
-    public function city_post()
-    {
+    public function city_post(){
+        $postfields = ['cit_name' => 'cit_name','country_cou_id' => 'country_cou_id'];
+        list($success,$messages) = self::city_post_db($postfields);
+        $code = $success ? 1 : 0;
+        $this->showJson(['code' => $code, 'message' => implode('
+', $messages)]);
+    }
+    /**
+     * fonction CRUD program
+     */
+    public static function city_post_db($postfields,$data = NULL){
         //initialiser
         $model = new CityModel;
-        $success = false;
-        $errors = array();
-        if (in_array($method = $_POST['method'], ['insert', 'update'])) {
-            //récupérer les champs nécessaires de $-POST
-            $data = array_intersect_key($_POST, array_flip(['cit_name', 'country_cou_id']));
-            //validation données
-            if (empty($data['cit_name'])) {
-                $errors[] = 'Nom de la ville doit être renseigné';
-            }
-            if (empty($data['country_cou_id'])) {
-                $errors[] = 'Pays doit être renseigné';
-            }
-            //modifier la BD
-            if (empty($errors)) {
-                //insertion données
-                if ($method === 'insert') {
-                    if ($model->insert($data) === false) {
-                        $errors[] = 'Insertion en base de données échouée';
-                    } else {
-                        $message = 'Inseré en base de données';
-                        $success = true;
-                    }
-                    //modification données
-                } else {
-                    $id = intval($_POST['id']);
-                    if ($model->update($data, $id) === false) {
-                        $errors[] = 'Modification de la base de données échouée';
-                    } else {
-                        $message = 'Modifié dans la base de données';
-                        $success = true;
-                    }
-                }
-            }
-        } elseif ($method === 'delete') {
-            // suppression données
-            $id = intval($_POST['id']);
-            if ($model->delete($id) === false) {
-                $errors[] = 'Suppression de la base de données échouée';
-            } else {
-                $message = 'Supprimé de la base de données';
-                $success = true;
-            }
-        } else {
-            $errors[] = 'méthode inconnue';
-        }
-        if ($success) {
-            $this->showJson(['code' => 1, 'message' => $message]);
-        } else {
-            $this->showJson(['code' => 0, 'message' => implode('<br/>', $errors)]);
-        }
+        $controller = new CityController();
+        
+        return $controller->db_post($model,$postfields,[],$data);
     }
-
+    /**
+     * fonction dfe validation de données pour programm
+     */
+    public function validate($data, $method){
+        $messages = array();
+        if ($method === 'insert' || ($method === 'update' && isset($data['cit_name']))){
+            if (empty($data['cit_name'])){
+                $messages[] = 'Nom de la ville doit être renseigné';
+            }
+        }
+        if ($method === 'insert' || ($method === 'update' && isset($data['country_cou_id']))){
+            if (empty($data['country_cou_id'])){
+                $messages[] = 'Nom du pays doit être renseigné';
+            }
+        }
+        return $messages;
+    }
 }
