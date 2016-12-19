@@ -214,10 +214,12 @@
                                                     <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
                                                 <?php endif ?>
                                             </td>
+                                        <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
+                                            <td class="kms-data"><img src="<?= $this ->assetUrl('img/avatar/'.$value) ?>" style="max-height:50px"/></td>
                                         <?php else: ?>
                                             <td class="kms-data"><?= $value ?></td>
                                         <?php endif ?>
-                                    <?php endforeach ?>
+                                        <?php endforeach ?>
                                     <td class="kms-action kms-update">
                                         <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
                                         <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>

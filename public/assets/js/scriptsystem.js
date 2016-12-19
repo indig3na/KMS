@@ -87,7 +87,8 @@ $(document).ready(function() {
         e.preventDefault();
         crudUpdatePrepare.call(this);
     });
-
+    var detached = [];
+    var detachedId = [];
     //si bouton 'modifier' cliqué - fonction principale
     function crudUpdatePrepare() {
 
@@ -108,10 +109,10 @@ $(document).ready(function() {
             } else {
                 val.push($(this).html().trim());
             }
-            console.log(val);
         });
             //supprimer
-        tr.children().not('.kms-action').remove();
+        detached.push(tr.children().not('.kms-action').detach());
+        detachedId.push(tr.data('id'));
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('#kms-add').children().clone());
         //remplacer les boutons
@@ -135,8 +136,25 @@ $(document).ready(function() {
         });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
-
-        $(this).html('Enrégistrer').off('click').click(function(e) {
+        $(this).after(' <a class="btn btn-info btn-flat kms-crud-abort-btn" href="#"><i class="fa fa-close"></i></a> ');
+        
+        $('.kms-crud-abort-btn').click(function (e) {
+            e.preventDefault();
+            tr = $(this).closest('.kms-dataset');
+            id = tr.data('id');
+            tr.children().not('.kms-action').remove();
+            index=detachedId.indexOf(id);
+            tr.prepend(detached[index]);
+            detached.splice(index,1);
+            detachedId.splice(index,1);
+            $(this).remove();
+            tr.find('.kms-crud-update-btn').html('<i class="fa fa-pencil"></i>').addClass('btn-info').removeClass('btn-success').off('click').click(function(e) {
+                e.preventDefault();
+                crudUpdatePrepare.call(this);
+            });
+        });
+        
+        $(this).html('<i class="fa fa-save"></i>').addClass('btn-success').removeClass('btn-info').off('click').click(function(e) {
             e.preventDefault();
             crudUpdate.call(this);
         });
@@ -164,7 +182,7 @@ $(document).ready(function() {
         e.preventDefault();
         crudUpdate.call(this);
     });
-
+    
     //----------delete----------
 
     $('.kms-crud-delete-btn').click(function (e) {
