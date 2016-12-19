@@ -15,7 +15,7 @@ class ClassroomController extends ControllerTemplate
             $tabledata = $model -> findAllColumns(['clr_id','clr_name','clr_name', 'clr_caracteristics', 'clr_description']);
             $vars = [
                 'title' => 'Liste des salles',
-                'header' => ['Nom *', 'CaractÃ©ristiques', 'Description'],
+                'header' => ['Nom *', 'Caractéristiques', 'Description'],
                 'primaryKey' => 'clr_id',
                 'data' => $tabledata
             ];

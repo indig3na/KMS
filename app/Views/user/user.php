@@ -10,7 +10,7 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Add children</h3>
+                <h3 class="box-title">Add user</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
@@ -50,52 +50,35 @@
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <label for="inputFormUser">City</label>
+                    <label for="inputform">Nursery</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fkData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
+                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                        <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
 
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($flData) && in_array($key, array_keys($flData))): ?>
-                            <label for="inputFormUser">Nursery</label>
+                    <label for="inputform">Classe</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($flData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fmData) && in_array($key, array_keys($fmData))): ?>
-                            <label for="inputFormUser">Class</label>
+                    <label for="inputform">City</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fmData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
 

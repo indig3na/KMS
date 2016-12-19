@@ -57,9 +57,11 @@
                             <td class="kms-data"><?= $value ?></td>
                         <?php endif ?>
                     <?php endforeach ?>
+
                     <td class="kms-action kms-update">
                         <a class="btn btn-info btn-flat kms-crud-update-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-danger btn-flat kms-crud-delete-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
+
                     </td>
                 </tr>
             <?php endforeach ?>

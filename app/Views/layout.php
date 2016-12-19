@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <title>KMS</title>
     <meta name="description" content="school App">
-
+    <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/chosen.min.css') ?>">
     <!-- Latest compiled and minified CSS -->
@@ -14,7 +14,7 @@
 </head>
 
 <body data-spy="scroll" data-target="#my-navbar">
-<div class="container">
+
 
     <section>
         <?= $this->section('main_content') ?>
@@ -22,7 +22,7 @@
 
     <footer>
     </footer>
-</div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
