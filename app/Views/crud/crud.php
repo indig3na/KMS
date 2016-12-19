@@ -24,7 +24,7 @@
                     <?php if ($key == $primaryKey): ?>
                     <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                         <td>
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control kms-add-inp chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
+                            <select data-placeholder="Cliquez pour sélectionner ou chercher..." class="form-control kms-add-inp chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
                                 <?php foreach ($fkData[$key] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>
@@ -47,10 +47,10 @@
                                 <?php if(empty($value)): ?>
                                 <?php elseif (is_array($value)): ?>
                                     <?php foreach ($value as $val): ?>
-                                        <span class="well well-sm" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                        <span class="well well-sm" data-id="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
                                     <?php endforeach ?>
                                 <?php else: ?>
-                                    <span value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                    <span data-id="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
                                 <?php endif ?>
                             </td>
                         <?php else: ?>
@@ -58,8 +58,8 @@
                         <?php endif ?>
                     <?php endforeach ?>
                     <td class="kms-action">
-                        <a class="btn btn-success kms-crud-update-btn" href="#" value="<?= $row[$primaryKey] ?>">Modifier</a>
-                        <a class="btn btn-danger kms-crud-delete-btn" href="#" value="<?= $row[$primaryKey] ?>">X</a>
+                        <a class="btn btn-success kms-crud-update-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>">Modifier</a>
+                        <a class="btn btn-danger kms-crud-delete-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>">X</a>
                     </td>
                 </tr>
             <?php endforeach ?>

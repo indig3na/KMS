@@ -35,13 +35,6 @@ class ProgramModel extends ModelTemplate
             $this->prg_updated = $prg_updated;
         }
         
-        public function validate($data){
-            $messages = array();
-            if (empty($data['prg_name'])){
-                $messages[] = 'Nom de la ville doit être renseigné';
-            }
-            return $messages;
-        }
         //-----------------GETTERS & SETTERS--------------
         
 	public function getPrg_id() {
