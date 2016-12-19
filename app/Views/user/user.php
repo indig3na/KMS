@@ -123,7 +123,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Contact mobile_no</label>
-                    <input type="date"  name="usr_tel_mobile1"  class="form-control" value="<?= $userData['usr_tel_mobile1'] ?>">
+                    <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                 </div>
 
@@ -143,9 +143,9 @@
                 <div class="form-group">
                     <label for="inputform">Nursery</label>
 
-                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                    <select data-placeholder="Sélectionnez des parents" name="nursery_nur_id" class="form-control chosen-select">
                         <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -155,9 +155,9 @@
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
-                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez des classes" name="class_cls_id" class="form-control chosen-select" >
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -165,12 +165,12 @@
                 <div class="form-group">
                     <label for="inputform">City</label>
 
-                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez des classes" name="city_cit_id" class="form-control chosen-select" >
                         <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-
+                    
                 </div>
 
                 <div class="form-group">
@@ -178,6 +178,8 @@
                     <input type="file" name="photo">
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="method" value="update"/>
+                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
                     <button type="submit" class="btn btn-primary" >Edit user</button>
                 </div>
             </form>
@@ -211,23 +213,30 @@
                         <tbody>
                         <tr>
                             <?php foreach ($header as $value): ?>
-                                <th style="width: 250px;"><?= $value ?></th>
+                                <th><?= $value ?></th>
                             <?php endforeach ?>
                             <th>Action</th>
                         </tr>
                         <?php //lignes de données ?>
                         <?php foreach ($data as $row): ?>
-                            <tr  total-items="totalItems" >
-                                <?php foreach ($row as $key => $value): ?>
-                                    <?php if ($key == $primaryKey): ?>
-                                    <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                                        <td class="kms-datacolumn" style="width: 250px;"><?= $fkData[$key][$value] ?></td>
-                                    <?php
-                                    else: ?>
-                                        <td class="kms-datacolumn"><?= $value ?></td>
-                                    <?php endif ?>
-
-                                <?php endforeach ?>
+                                <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
+                                    <?php foreach ($row as $key => $value): ?>
+                                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
+                                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
+                                            <td class="kms-data kms-select">
+                                                <?php if(empty($value)): ?>
+                                                <?php elseif (is_array($value)): ?>
+                                                    <?php foreach ($value as $val): ?>
+                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                                    <?php endforeach ?>
+                                                <?php else: ?>
+                                                    <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                                <?php endif ?>
+                                            </td>
+                                        <?php else: ?>
+                                            <td class="kms-data"><?= $value ?></td>
+                                        <?php endif ?>
+                                    <?php endforeach ?>
                                 <td class="kms-action">
                                     <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
                                     <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>

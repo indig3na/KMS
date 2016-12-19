@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <div class="btn-group navbar-btn navbar-right">
                 <a href="#login" class="btn btn-primary">Login</a>
-                <a href="" class="btn btn-primary">Logout</a>
+                <a class="btn btn-primary" href="<?= $this->url('users_logout')?>">Logout</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="#gallery">Gallery</a>

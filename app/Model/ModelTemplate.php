@@ -13,16 +13,20 @@ abstract class ModelTemplate extends Model
      * Récupère les lignes sélectionnées de la table
      * fonction copiée/collée de \W\Model::findAll
      * @param $cols array Les colonnes à retourner
+     * @param $wherecol string colonne sur laquelle porte le tri
+     * @param $whereval int valeur recherchée dans $wherecol
      * @param $orderBy La colonne en fonction de laquelle trier
      * @param $orderDir La direction du tri, ASC ou DESC
      * @param $limit Le nombre maximum de résultat à récupérer
      * @param $offset La position à partir de laquelle récupérer les résultats
      * @return array Les données sous forme de tableau multidimensionnel
      */
-    public function findAllColumns($cols = ['*'], $orderBy = '', $orderDir = 'ASC', $limit = null, $offset = null)
+    public function findAllColumns($cols = ['*'], $wherecol = '', $whereval = '', $orderBy = '', $orderDir = 'ASC', $limit = null, $offset = null)
     {
-
         $sql = 'SELECT ' . implode(', ', $cols) . ' FROM ' . $this->table;
+        if(!empty($wherecol)){
+            $sql .= ' WHERE '. htmlspecialchars($wherecol, ENT_QUOTES | ENT_HTML5).' = "'.htmlspecialchars($whereval, ENT_QUOTES | ENT_HTML5).'"';
+        }
         if (!empty($orderBy)) {
 
             //sécurisation des paramètres, pour éviter les injections SQL
@@ -77,7 +81,39 @@ abstract class ModelTemplate extends Model
         }
         return $result;
     }
-
+    
+    /*
+     * Récupère les colonnes spécifiées et les associe à la primary key de la table
+     * @var $columns string/array la/les colonnes à récupérer
+     * @var $separator string Optionnel: retourner les colonnes dans une chaîne de caractères, séparées par $separator, au lieu d'un array
+     * @var $where string Optionnel: permet d'ajouter un statement Where à la requête. Sans aucune sécurisation!
+     */
+    
+    public function findIndexedColumns($columns,$separator = NULL, $where = ''){
+        $colArr = (is_array($columns)) ? $columns : [$columns];
+        //Sélectionner l'id et a colonne $column
+        $sql = 'SELECT ' . $this->primaryKey . ', ' . implode(', ',$colArr) . ' FROM ' . $this->table . ' ' . $where;
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute();
+        $data = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        //si erreur, renvoyer false
+        if ($data === false) {
+            return false;
+        }
+        //si réussite, créer un array associatif id => valeur de la colonne spécifiée
+        $pk = $this->primaryKey;
+        $result = array();
+        foreach ($data as $row) {
+            $id = $row[$pk];
+            unset($row[$pk]);
+            if (isset($separator)){
+                $result[$id] = empty($row) ? '' : implode($separator, $row);
+            } else {
+                $result[$id] = $row;
+            }
+        }
+        return $result;
+    }
 
     public function getChildInfos($id)
     {
@@ -103,112 +139,112 @@ abstract class ModelTemplate extends Model
 
     
     
-        /**
-         * requete depuis un tableau de correspondance
-         * 
-         * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
-         * 
-         * table_correspondance = nom de la table de correspondance
-         * 
-         * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
-         * 
-         * clé_destination = dans table_correspondance, nom de la clé du tableau lié
-         * 
-         * 
-         * 
-         * @param $id int Optionnel retourner seulement les données pour un id spécifique 
-         */
-        public function getCorrTableData($tableInfo, $id=0){
-            $table = $this ->getTable();
-            $pk = $this->getPrimaryKey();
-            $this->setTable($tableInfo[0]);
-            $this->setPrimaryKey($tableInfo[1]);
-            
-            $sql = '
-                SELECT *
-                FROM '.$tableInfo[0].'
-            ';
-            if (isset($col)){
-                $sql+= 'WHERE '.$tableInfo[1].' = :id';
-            }
-            $sth = $this->dbh->prepare($sql);
-            if (isset($col)){
-                $sth ->bindValue(':id', $id);
-            }
-            $sth->execute();
-            $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
-            $result = array();
-            foreach ($query as $row){
-                $result[$row[$tableInfo[1]]][] = $row[$tableInfo[2]];
-            }
-            $this->setTable($table);
-            $this->setPrimaryKey($pk); 
-            
-            return $result;
+    /**
+     * requete depuis un tableau de correspondance
+     * 
+     * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
+     * 
+     * table_correspondance = nom de la table de correspondance
+     * 
+     * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
+     * 
+     * clé_destination = dans table_correspondance, nom de la clé du tableau lié
+     * 
+     * 
+     * 
+     * @param $id int Optionnel retourner seulement les données pour un id spécifique 
+     */
+    public function getCorrTableData($tableInfo, $id=0){
+        $table = $this ->getTable();
+        $pk = $this->getPrimaryKey();
+        $this->setTable($tableInfo[0]);
+        $this->setPrimaryKey($tableInfo[1]);
+
+        $sql = '
+            SELECT *
+            FROM '.$tableInfo[0].'
+        ';
+        if (isset($col)){
+            $sql+= 'WHERE '.$tableInfo[1].' = :id';
         }
-        
-        /**
-         * Insère dans un tableau de correspondance
-         * 
-         * @param $data array les données à passer la fonction insert() de W 
-         * 
-         * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
-         * 
-         * table_correspondance = nom de la table de correspondance
-         * 
-         * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
-         * 
-         * clé_destination = dans table_correspondance, nom de la clé du tableau lié
-         * 
-         */
-        public function insertIntoCorrTable($data,$tableInfo){
-            $table = $this ->getTable();
-            $pk = $this->getPrimaryKey();
-            $this->setTable($tableInfo[0]);
-            $this->setPrimaryKey($tableInfo[1]);
-            
-            $result = $this->insert($data);
-            
-            $this->setTable($table);
-            $this->setPrimaryKey($pk);
-            return $result;
-        }
-        
-        /**
-         * Supprime dans un tableau de correspondance
-         * 
-         * @param $data array les données à passer la fonction insert() de W 
-         * 
-         * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
-         * 
-         * table_correspondance = nom de la table de correspondance
-         * 
-         * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
-         * 
-         * clé_destination = dans table_correspondance, nom de la clé du tableau lié
-         * 
-         * @param $id int L'id de base pour lequel les entrées dopivent être supprimées
-         */
-        public function deleteFromCorrTable($tableInfo,$id){
-            $table = $this ->getTable();
-            $pk = $this->getPrimaryKey();
-            $this->setTable($tableInfo[0]);
-            $this->setPrimaryKey($tableInfo[1]);
-            
-            $sql = '
-                DELETE
-                FROM '.$tableInfo[0].'
-                WHERE '.$tableInfo[1].' = :id
-            ';
-            $sth = $this->dbh->prepare($sql);
+        $sth = $this->dbh->prepare($sql);
+        if (isset($col)){
             $sth ->bindValue(':id', $id);
-            
-            $this->setTable($table);
-            $this->setPrimaryKey($pk);
-            
-            return $sth->execute();
         }
-        
+        $sth->execute();
+        $query = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $result = array();
+        foreach ($query as $row){
+            $result[$row[$tableInfo[1]]][] = $row[$tableInfo[2]];
+        }
+        $this->setTable($table);
+        $this->setPrimaryKey($pk); 
+
+        return $result;
+    }
+
+    /**
+     * Insère dans un tableau de correspondance
+     * 
+     * @param $data array les données à passer la fonction insert() de W 
+     * 
+     * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
+     * 
+     * table_correspondance = nom de la table de correspondance
+     * 
+     * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
+     * 
+     * clé_destination = dans table_correspondance, nom de la clé du tableau lié
+     * 
+     */
+    public function insertIntoCorrTable($data,$tableInfo){
+        $table = $this ->getTable();
+        $pk = $this->getPrimaryKey();
+        $this->setTable($tableInfo[0]);
+        $this->setPrimaryKey($tableInfo[1]);
+
+        $result = $this->insert($data);
+
+        $this->setTable($table);
+        $this->setPrimaryKey($pk);
+        return $result;
+    }
+
+    /**
+     * Supprime dans un tableau de correspondance
+     * 
+     * @param $data array les données à passer la fonction insert() de W 
+     * 
+     * @param $tableInfo array [table_correspondance, clé_base, clé_destination]
+     * 
+     * table_correspondance = nom de la table de correspondance
+     * 
+     * clé_base = dans table_correspondance, nom de la clé du tableau qui fait la liaison
+     * 
+     * clé_destination = dans table_correspondance, nom de la clé du tableau lié
+     * 
+     * @param $id int L'id de base pour lequel les entrées dopivent être supprimées
+     */
+    public function deleteFromCorrTable($tableInfo,$id){
+        $table = $this ->getTable();
+        $pk = $this->getPrimaryKey();
+        $this->setTable($tableInfo[0]);
+        $this->setPrimaryKey($tableInfo[1]);
+
+        $sql = '
+            DELETE
+            FROM '.$tableInfo[0].'
+            WHERE '.$tableInfo[1].' = :id
+        ';
+        $sth = $this->dbh->prepare($sql);
+        $sth ->bindValue(':id', $id);
+
+        $this->setTable($table);
+        $this->setPrimaryKey($pk);
+
+        return $sth->execute();
+    }
+    
         
 
 }
