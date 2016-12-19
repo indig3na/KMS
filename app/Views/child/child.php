@@ -157,8 +157,8 @@
 
                 <div class="form-group">
                     <label for="inputform">Photo</label>
-                    <img src="<?= $this ->assetUrl('img/avatar/'.$childData['chd_img_path']) ?>"/>
-                    <input type="file" name="photo">
+                    <img src="<?= $this ->assetUrl('img/filesId//'.$childData['chd_img_path']) ?>"/>
+                    <input type="file" name="photo" id="photo">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
@@ -215,7 +215,7 @@
                                                 <?php endif ?>
                                             </td>
                                         <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
-                                            <td class="kms-data"><img src="<?= $this ->assetUrl('img/avatar/'.$value) ?>" style="max-height:50px"/></td>
+                                            <td class="kms-data"><img src="<?= $this ->assetUrl('img/filesId/'.$value) ?>" style="max-height:50px"/></td>
                                         <?php else: ?>
                                             <td class="kms-data"><?= $value ?></td>
                                         <?php endif ?>
