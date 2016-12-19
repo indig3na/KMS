@@ -168,6 +168,7 @@ $(function () {
             } else {
                 val.push($(this).html().trim());
             }
+            console.log(val);
         });
             //supprimer
         tr.children().not('.kms-action').remove();
@@ -175,6 +176,7 @@ $(function () {
         tr.prepend($('#kms-add').children().clone());
         //remplacer les boutons
         tr.find('.kms-action.kms-update').replaceAll(tr.find('.kms-action.kms-add'));
+        tr.find('.chosen-container').remove();
         //changer ensuite les classes de add en update
         tr.find('.kms-add').addClass('kms-update');
         tr.find('.kms-update').removeClass('kms-add');
@@ -188,7 +190,7 @@ $(function () {
                 styleSelect($(this));
             //afficher le texte dans l'input
             } else {
-                $(this).val(val.shift().trim());
+                $(this).val(val.shift());
             }
         });
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
