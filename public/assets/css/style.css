@@ -18,20 +18,8 @@ body{
 
 #myMap {
 	width: 100%;
-	height: 350px;
+	height: 370px;
 	margin-bottom: 15px;
 	border: 1px solid #D6D2D2;
 	border-radius: 5px;
-}
-
-/*Views/crud.php*/
-td.kms-datacolumn{
-    vertical-align:middle !important;
-}
-ul.chosen-choices.form-control{
-    height:34px;
-    padding:4px 12px
-}
-ul.chosen-choices.form-control li.search-choice{
-    margin-top: 2px;
 }

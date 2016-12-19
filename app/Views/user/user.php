@@ -10,7 +10,7 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Add children</h3>
+                <h3 class="box-title">Add user</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
@@ -50,52 +50,35 @@
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <label for="inputFormUser">City</label>
+                    <label for="inputform">Nursery</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fkData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
+                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                        <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
 
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($flData) && in_array($key, array_keys($flData))): ?>
-                            <label for="inputFormUser">Nursery</label>
+                    <label for="inputform">Classe</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($flData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fmData) && in_array($key, array_keys($fmData))): ?>
-                            <label for="inputFormUser">Class</label>
+                    <label for="inputform">City</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fmData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
 
@@ -127,35 +110,35 @@
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
                     <label for="inputEmail3">Firstname *</label>
-                    <input type="text" name="usr_firstname" class="form-control" required placeholder="<?= $userData['usr_firstname'] ?>">
+                    <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3">Lastname * </label>
-                    <input type="text" name="usr_lastname" class="form-control" required placeholder="<?= $userData['usr_lastname'] ?>">
+                    <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Address</label>
-                    <input type="date"  name="usr_address"  class="form-control" placeholder="<?= $userData['usr_address'] ?>">
+                    <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
 
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Contact mobile_no</label>
-                    <input type="date"  name="usr_tel_mobile1"  class="form-control" laceholder="<?= $userData['usr_tel_mobile1'] ?>">
+                    <input type="date"  name="usr_tel_mobile1"  class="form-control" value="<?= $userData['usr_tel_mobile1'] ?>">
 
                 </div>
 
                 <div class="form-group">
                     <label for="inputFormUser">Contact home_no</label>
-                    <input type="date"  name="usr_tel_domicile"  class="form-control" laceholder="<?= $userData['usr_tel_domicile'] ?>">
+                    <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Email</label>
-                    <input type="email" name="usr_email" class="form-control" placeholder="<?= $userData['usr_email'] ?>" >
+                    <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  placeholder="<?= $userData['usr_role'] ?>">
+                    <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputform">Nursery</label>

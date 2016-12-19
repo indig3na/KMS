@@ -56,8 +56,8 @@
                         <?php endif ?>
                     <?php endforeach ?>
                     <td class="kms-action">
-                        <a class="btn btn-success kms-crud-update-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>">Modifier</a>
-                        <a class="btn btn-danger kms-crud-delete-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>">X</a>
+                        <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
+                        <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
                     </td>
                 </tr>
             <?php endforeach ?>
