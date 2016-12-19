@@ -61,7 +61,7 @@ class UserController extends Controller
     }
     
     public function loginPost(){
-        debug($_POST);
+        //debug($_POST);
         $errorList = array();
         $login = isset($_POST['login']) ? $_POST['login'] : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -81,7 +81,7 @@ class UserController extends Controller
             $errorList[]= 'Le password doit faire au moins 8 caractères ! <br>';
             $formOk = false;
         }
-        print_r($formOk);
+        //print_r($formOk);
         if($formOk){
             // instancie la classe authentificationModel et permet de savoir si 
             // un user existe ou pas dans la base
@@ -94,13 +94,21 @@ class UserController extends Controller
             //  debug($userData);
             // On met le user en session    
                 $auth->logUserIn($userData);
+                //récupération des infos du user connecté
                 $user_logged = $this->getUser();
-                debug($user_logged);
-            // puis on ge redirige sur le vue default/home
-               // $this->redirectToRoute('default_home');
+                if($user_logged['usr_role']=='ROLE_ADMIN'){
+                    $this->redirectToRoute('default_home');
+                } 
+                if($user_logged['usr_role']=='ROLE_PAR') {
+                    $this->redirectToRoute('crud_child_get');
+                }
+                if($user_logged['usr_role']=='ROLE_EDU') {
+                    $this->redirectToRoute('class_class_get');
+                }
+               
             }
         }
-        $this->show('default/home', array('errorList' =>$errorList));
+        // $this->show('default/home', array('errorList' =>$errorList));
     }
      public function lostpassword (){
        // debug($_POST);
@@ -111,7 +119,8 @@ class UserController extends Controller
     }
     
     public function lostpasswordPost(){
-        debug($_POST);
+    //4
+    //   debug($_POST);
        $login = isset($_POST['login']) ? $_POST['login'] : '';
       
       // debug($emailLogin);
