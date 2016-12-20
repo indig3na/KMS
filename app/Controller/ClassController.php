@@ -33,8 +33,8 @@ class ClassController extends ControllerTemplate{
         $fkData['school_year_scy_id'] =  $schoolYearModel->findIndexedColumn('scy_year');
         $fkData['classroom_clr_id'] = $classroomModel->findIndexedColumn('clr_name');
         $vars = [
-            'title' => 'Class',
-            'header' => ['Class', 'Program', 'SchoolYear', 'Classroom'],
+            'title' => 'Classe',
+            'header' => ['Classe', 'Programme', 'Année scolaire', 'Salle de classe'],
             'primaryKey' => 'cls_id',
             'data' => $tabledata,
             'fkData' => $fkData

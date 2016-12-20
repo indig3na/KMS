@@ -7,7 +7,6 @@
  */
 
 namespace Controller;
-use \W\Controller\Controller;
 use Model\UserModel;
 use Model\UserFunctionsModel;
 use Model\CityModel;
@@ -16,7 +15,7 @@ use Model\ClassModel;
 use \W\Security\AuthentificationModel;
 use Controller\MailerController;
 
-class UserController extends Controller
+class UserController extends ControllerTemplate
 {
     
     
@@ -31,7 +30,17 @@ class UserController extends Controller
     public function par_get(){
         $this->user_get('ROLE_PAR');
     }
+    public function admin_post(){
+        $this->user_post();
+    }
     
+    public function edu_post(){
+        $this->user_post();
+    }
+    
+    public function par_post(){
+        $this->user_post();
+    }
     
     /**
      *  CRUD Child table in GET method
@@ -42,23 +51,24 @@ class UserController extends Controller
         //récupérer données
         switch ($role){
             case 'ROLE_ADMIN':
-                $prettyRole = 'Administrateur';
+                $prettyRole = 'administrateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_ADMIN'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
                 break;
             case 'ROLE_EDU':
-                $prettyRole = 'Éducateur';
+                $prettyRole = 'éducateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'usr_role','ROLE_EDU'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement', 'Classe'];
                 break;
             case 'ROLE_PAR':
-                $prettyRole = 'Parent';
+                $prettyRole = 'parent';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
                 break;
-            default: $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'',''];
-                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+            default: 
+                $prettyRole = 'utilisateur';
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'',''];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement','Classe'];
         }
         $tabledata = $model -> findAllColumns($query[0],$query[1],$query[2]);
         if(!empty($_GET['id'])) {
@@ -84,7 +94,7 @@ class UserController extends Controller
 
         $vars = [
             //titre de page
-            'title' => 'User',
+            'title' => mb_convert_case($prettyRole,MB_CASE_TITLE,'UTF-8'),
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
             'header' => $header,
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete

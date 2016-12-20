@@ -24,8 +24,8 @@ class NurseryController extends ControllerTemplate
         $fkData['city_cit_id'] = $cityModel->findIndexedColumn('cit_name');
 
         $vars = [
-            'title' => 'Nursery',
-            'header' => ['Nursery', 'Address', 'Email', 'Telephone', 'Website', 'City'],
+            'title' => 'Établissement',
+            'header' => ['Établissement', 'Adresse', 'Adresse E-mail', 'Téléphone', 'Site Web', 'Ville'],
             'primaryKey' => 'nur_id',
             'data' => $tabledata,
             'fkData' => $fkData

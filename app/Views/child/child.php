@@ -230,7 +230,7 @@
                                 <?php endforeach ?>
                             <?php
                             else:
-                                echo '<tr><td style="text-align:center"><span>Vide!</span></td></tr>';
+                                echo '<tr><td style="text-align:center"><span>Aucun enfant!</span></td></tr>';
                             endif
                             ?>
                         </tbody>
