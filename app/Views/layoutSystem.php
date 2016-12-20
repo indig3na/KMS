@@ -93,6 +93,9 @@
                 <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
             </li>
             <li>
+                <a href="<?= $this->url('crud_activity_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-magic   fa-stack-1x "></i></span>Activity</a>
+            </li>
+            <li>
                 <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classes</a>
             </li>
             <li>

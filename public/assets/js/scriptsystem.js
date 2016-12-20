@@ -322,7 +322,7 @@ $(document).ready(function() {
                 {
                     activeView: weekView,
                     boundingBox: '#myScheduler',
-                    date: new Date(2013, 3, 25),
+                    date: new Date(),
                     eventRecorder: eventRecorder,
                     items: events,
                     render: true,
