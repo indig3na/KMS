@@ -51,9 +51,9 @@ class ChildController extends ControllerTemplate
 
         $vars = [
             //titre de page
-            'title' => 'Child',
+            'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Firstname *', 'Lastname *','birthday *','gender *','hobbies','comments','Classe','Parent','Portrait'],
+            'header' => ['Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent','Portrait'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
             //données
@@ -92,27 +92,27 @@ class ChildController extends ControllerTemplate
             $errorList = array();
             $data = array();
             if (empty($firstname)) {
-                $errorList[] = 'firstname required';
+                $errorList[] = 'Prénom requis';
                 $success = false;
             }
             if (strlen($firstname)<3) {
-                $errorList[] = 'firstname must be 3 caractere or more';
+                $errorList[] = 'Prénom doit comprendre au moins 3 caractères';
                 $success = false;
             }
             if (empty($lastname)) {
-                $errorList[] = 'laststname required';
+                $errorList[] = 'Nom requis';
                 $success = false;
             }
             if (strlen($lastname)<3) {
-                $errorList[] = 'lastname must be 3 caractere or more';
+                $errorList[] = 'Nom doit comprendre au moins 3 caractères';
                 $success = false;
             }
             if (empty($birthday)) {
-                $errorList[] = 'birthday required';
+                $errorList[] = 'Date de naissance requise';
                 $success = false;
             }
             if (!($gender === 'F'|| $gender === 'M')) {
-                $errorList[] = 'Gender must be F or M';
+                $errorList[] = 'Sexe requis';
                 $success = false;
             }
             //si des fichiers ont été téléversés
@@ -153,9 +153,9 @@ class ChildController extends ControllerTemplate
                     $childData = $model->insert($data);
                     // if not inserted error
                     if ($childData === false) {
-                        $errorList[] = 'Insert Error<br>';
+                        $errorList[] = 'Erreur d\'insertion<br>';
                     } else {
-                        $succesList[] = 'child info inserted';
+                        $succesList[] = 'Information sur l\'enfant inséré';
                         $success = true;
                     }
                 } //update data for given Id
@@ -164,9 +164,9 @@ class ChildController extends ControllerTemplate
                     $updateData = $model->update($data, $id, $stripTags = true);
                     // if not updated error
                     if ($updateData === false) {
-                        $errorList[] = 'Update Error<br>';
+                        $errorList[] = 'Erreur de mise à jour<br>';
                     } else {
-                        $succesList[] = 'child infos Updated';
+                        $succesList[] = 'Information sur l\'enfant mis à jour';
                         $success = true;
                     }
                 }
@@ -181,9 +181,9 @@ class ChildController extends ControllerTemplate
                 // if not deleted error
                 // if not updated error
                 if ($deletedData === false) {
-                    $errorList[] = 'Delete Error<br>';
+                    $errorList[] = 'Erreur de suppression<br>';
                 } else {
-                    $succesList[] = 'child infos Deleted';
+                    $succesList[] = 'Information sur l\'enfant supprimé';
                     $success = true;
                 }
 

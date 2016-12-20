@@ -1,4 +1,10 @@
 /**********layoutsystem style*************/
+
+.panel-heading h3{
+    display: inline-block;
+    margin: 0;
+}
+
 /* Toggle Styles */
 
 #wrapper {

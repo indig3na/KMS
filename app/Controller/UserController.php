@@ -30,7 +30,17 @@ class UserController extends ControllerTemplate
     public function par_get(){
         $this->user_get('ROLE_PAR');
     }
+    public function admin_post(){
+        $this->user_post();
+    }
     
+    public function edu_post(){
+        $this->user_post();
+    }
+    
+    public function par_post(){
+        $this->user_post();
+    }
     
     /**
      *  CRUD Child table in GET method
@@ -43,22 +53,22 @@ class UserController extends ControllerTemplate
             case 'ROLE_ADMIN':
                 $prettyRole = 'administrateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_ADMIN'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
                 break;
             case 'ROLE_EDU':
                 $prettyRole = 'éducateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'usr_role','ROLE_EDU'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement', 'Classe'];
                 break;
             case 'ROLE_PAR':
                 $prettyRole = 'parent';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
                 break;
             default: 
                 $prettyRole = 'utilisateur';
-                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'',''];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'',''];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement','Classe'];
         }
         $tabledata = $model -> findAllColumns($query[0],$query[1],$query[2]);
         if(!empty($_GET['id'])) {

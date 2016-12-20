@@ -98,6 +98,9 @@
             <li>
                 <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programmes</a>
             </li>
+            <li>
+                <a href="<?= $this->url('schoolYear_schoolyear_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Années scolaires</a>
+            </li>
 
             <li>
                 <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-clock-o  fa-stack-1x "></i></span>Events</a>
