@@ -32,7 +32,7 @@ function initMenu() {
 }
 $(document).ready(function() {
     initMenu();
-    
+
     //
     function unfold(callFrom,callTo,getKey){
         $.ajax({
@@ -55,15 +55,15 @@ $(document).ready(function() {
             unfold.call(this.parentNode,callFrom,callTo,getKey);
         });
     }
-    
+
     if (window.location.pathname.endsWith('/class/')){
-        
+
         $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/class/','/child/','class');
         });
-    }    
+    }
     if (window.location.pathname.endsWith('/parent/')){
-        
+
         $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/parent/','/child/','parent');
         });
@@ -77,7 +77,7 @@ $(document).ready(function() {
             dataType: 'json',
             data: data
         }).done(function (response) {
-            //reload on success, else show errors           
+            //reload on success, else show errors
             if (response.code == 0) {
                 alert(response.message);
             } else if (response.code == 1) {
@@ -115,7 +115,7 @@ $(document).ready(function() {
     });
 
 
-    //----------update------------  
+    //----------update------------
 
     //si bouton 'modifier' cliqué
     $('.kms-crud-update-btn').click(function (e) {
@@ -138,7 +138,7 @@ $(document).ready(function() {
                 var sel = [];
                 $(this).children('.kms-option').each(function () {
                     sel.push($(this).data('val'));
-                }); 
+                });
                 val.push(sel);
             //stocker les valeurs d'input en string
             } else {
@@ -172,7 +172,7 @@ $(document).ready(function() {
         //changer le texte du bouton 'Modifier' en 'Enrégistrer'
         //changer la fonction appelée par le clic de crudUpdatePrepare en crudUpdate
         $(this).after(' <a class="btn btn-info btn-flat kms-crud-abort-btn" href="#"><i class="fa fa-close"></i></a> ');
-        
+
         $(this).next().click(function (e) {
             e.preventDefault();
             tr = $(this).closest('.kms-dataset');
@@ -190,7 +190,7 @@ $(document).ready(function() {
                 crudUpdatePrepare.call(this);
             });
         });
-        
+
         $(this).html('<i class="fa fa-save"></i>').addClass('btn-success').removeClass('btn-info').off('click').click(function(e) {
             e.preventDefault();
             crudUpdate.call(this);
@@ -213,13 +213,13 @@ $(document).ready(function() {
         data.push({name: 'id', value: tr.data('id')}, {name: 'method', value: 'update'});
         ajaxCall(data);
     }
-    
+
     //enrégistrer directement depuis le bouton (sans passer par crudUpdatePrepare)
     $('.kms-crud-save-btn').click(function (e) {
         e.preventDefault();
         crudUpdate.call(this);
     });
-    
+
     //----------delete----------
 
     $('.kms-crud-delete-btn').click(function (e) {
@@ -272,6 +272,50 @@ $(document).ready(function() {
         //ajaxCall(data);
 
     });
+    //-------------------------daily report functioning---------------//
+
+    $( "#manger" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionManger, #home" ).show( "fast" );
+    });
+
+    $( "#matin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+    $( "#fisio" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionFisio, #home" ).show( "fast" );
+    });
+
+    $( "#sieste" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionSieste, #home" ).show( "fast" );
+    });
+
+    $( "#comments" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#text, #home" ).show( "fast" );
+    });
+
+    $( "#submitComments" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
+        $( ".menu1" ).show( "fast" );
+    });
+
 
 
     //----------------Select child-------------------
@@ -331,12 +375,6 @@ $(document).ready(function() {
             );
         }
     );
-
-
-
-
-
-
 
 
 

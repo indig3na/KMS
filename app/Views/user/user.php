@@ -45,8 +45,8 @@
                     <input type="email" name="usr_email" class="form-control" placeholder="Email" >
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  placeholder="role">
+                    <label>Role : <?= $title ?></label>
+                    <input type="hidden" name="usr_role" value = <?= ['administrateur' => 'ROLE_ADMIN', 'éducateur' => 'ROLE_EDU', 'parent' => 'ROLE_PAR'][$role] ?>>
                 </div>
 
                 <div class="form-group">
@@ -88,7 +88,7 @@
                     <input type="file" name="photo" id="photo">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" >Edit user</button>
+                    <button type="submit" class="btn btn-primary" >Ajouter comme <?= $role ?></button>
                 </div>
             </form>
         </div>
@@ -103,7 +103,7 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Edit <?= $role ?></h3>
+                <h3 class="box-title">Modifier <?= $role ?></h3>
             </div>
         </div>
         <div class="box-body table-responsive">
@@ -184,7 +184,7 @@
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
                     <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Edit user</button>
+                    <button type="submit" class="btn btn-primary" >Modifier</button>
                 </div>
             </form>
         </div>
@@ -201,6 +201,7 @@
         <div class="box col-xs-12">
             <div class="box-header">
                 <br>
+
                 <div class="box-tools">
                     <div class="input-group">
                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 250px; height: 36px;" placeholder="Search for...">

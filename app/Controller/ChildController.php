@@ -50,10 +50,12 @@ class ChildController extends ControllerTemplate
         $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
 
         $vars = [
-            // page title
-            'title' => 'Child',
+
+            //titre de page
+            'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Prénom', 'Nom','Date de naissance','Sexe','Interets','commentaires','Classe','Parent','Portrait'],
+            'header' => ['Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent','Portrait'],
+
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
             //données
@@ -93,27 +95,28 @@ class ChildController extends ControllerTemplate
             $errorList = array();
             $data = array();
             if (empty($firstname)) {
-                $errorList[] = 'Le prénom est obligatoire';
+
+                $errorList[] = 'Prénom requis';
                 $success = false;
             }
             if (strlen($firstname)<3) {
-                $errorList[] = 'Le prénom doit contenir ou moins 3 caractères';
+                $errorList[] = 'Prénom doit comprendre au moins 3 caractères';
                 $success = false;
             }
             if (empty($lastname)) {
-                $errorList[] = 'Le nom est obligatoire';
+                $errorList[] = 'Nom requis';
                 $success = false;
             }
             if (strlen($lastname)<3) {
-                $errorList[] = 'Le nom doit contenir ou moins 3 caractères';
+                $errorList[] = 'Nom doit comprendre au moins 3 caractères';
                 $success = false;
             }
             if (empty($birthday)) {
-                $errorList[] = 'La date de naissance et obligatoire';
+                $errorList[] = 'Date de naissance requise';
                 $success = false;
             }
             if (!($gender === 'F'|| $gender === 'M')) {
-                $errorList[] = 'Sex de l\enfant doit être F ou M';
+                $errorList[] = 'Sexe requis';
                 $success = false;
             }
             //if file upoladed
@@ -164,9 +167,10 @@ class ChildController extends ControllerTemplate
                     $childData = $model->insert($data);
                     // if not inserted error
                     if ($childData === false) {
-                        $errorList[] = 'Erreur dans l\'insertion ';
+
+                        $errorList[] = 'Erreur d\'insertion<br>';
                     } else {
-                        $succesList[] = 'Les informations de l\'enfant ont été inseré avec succes';
+                        $succesList[] = 'Information sur l\'enfant inséré';
                         $success = true;
                     }
                 } //update data for given Id
@@ -175,9 +179,9 @@ class ChildController extends ControllerTemplate
                     $updateData = $model->update($data, $id, $stripTags = true);
                     // if not updated error
                     if ($updateData === false) {
-                        $errorList[] = 'Erreur dans la mise a jour';
+                        $errorList[] = 'Erreur de mise à jour<br>';
                     } else {
-                        $succesList[] = 'Les informations de l\'enfant ont été mis a jour avec succes';
+                        $succesList[] = 'Information sur l\'enfant mis à jour';
                         $success = true;
                     }
                 }
@@ -191,9 +195,10 @@ class ChildController extends ControllerTemplate
                 $deletedData = $model->delete($id);
                 // if not deleted error
                 if ($deletedData === false) {
-                    $errorList[] = 'Delete Error<br>';
+                    $errorList[] = 'Erreur de suppression<br>';
                 } else {
-                    $succesList[] = 'Les informations de l\'enfant ont été supprimé avec succes';
+
+                    $succesList[] = 'Information sur l\'enfant supprimé';
                     $success = true;
                 }
 

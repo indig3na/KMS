@@ -4,7 +4,14 @@
     <?php $this->start('main_content')?>
 
     <div class="panel panel-success">
-        <div class="panel-heading"><?= $title ?></div>
+        <div class="panel-heading">
+            <h3><?= $title ?></h3>
+            <select class="pull-right"  name="current_school_year">
+                <option value="1">2015-2016</option>
+                <option value="2">2016-2017</option>
+                <option value="3">2017-2018</option>
+            </select>
+        </div>
         <!-- Table -->
 <?php endif; ?>
     <table class=" table table-hover">
@@ -68,7 +75,7 @@
             </tbody>
         <?php
         else:
-            echo '<tr><td style="text-align:center"><span>Vide!</span></td></tr>';
+            echo '<tr><td style="text-align:center"><span>Aucun(e) '.$title.'</span></td></tr>';
         endif
         ?>
     </table>

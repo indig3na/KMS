@@ -24,7 +24,6 @@
                             <?php endif ?>
                         <?php endforeach ?>
                         <td class="kms-action"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
-                    </form>
                 </tr>
                 <?php foreach ($data as $row):?>
                     <tr>

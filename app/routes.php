@@ -28,6 +28,9 @@ $w_routes = array(
     //Child
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
+    //DailyReport
+    ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
+    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
 
     //user
     ['GET', '/app/manage/administrator/', 'User#admin_get', 'user_admin_get'],
