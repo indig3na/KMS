@@ -14,7 +14,7 @@
 </head>
 
 <body data-spy="scroll" data-target="#my-navbar">
-<div class="container">
+
 
     <section>
         <?= $this->section('main_content') ?>
@@ -22,7 +22,7 @@
 
     <footer>
     </footer>
-</div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
