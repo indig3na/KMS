@@ -21,7 +21,15 @@ class ChildController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new ChildModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path']);
+        if (isset ($_GET['class'])){
+            $class = intval($_GET['class']);
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'class_cls_id',$class);    
+        } elseif (isset ($_GET['parent'])){
+            $parent = intval($_GET['parent']);
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'user_usr_id',$parent);    
+        } else {
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path']);    
+        }
         if(!empty($_GET['id'])) {
             $childData = $model->find($_GET['id']);
         }
@@ -78,7 +86,7 @@ class ChildController extends ControllerTemplate
             $method = $_POST['method'];
             $id = '';
 
-            // activity input validation
+            // validation des données pour children
             $succesList = array();
             $success = false;
             $errorList = array();
@@ -106,6 +114,25 @@ class ChildController extends ControllerTemplate
             if (!($gender === 'F'|| $gender === 'M')) {
                 $errorList[] = 'Gender must be F or M';
                 $success = false;
+            }
+            //si des fichiers ont été téléversés
+            if (sizeof($_FILES) > 0) {
+                //je récupère les données du fichier 'filForm'
+                $fileUpload = $_FILES['photo'];
+                //verification des fichier (sécurité)
+                $extension = substr($fileUpload['name'], -4);
+                //check
+                if ($extension != '.php') {
+                    //je téléverse le fichier
+                    if (move_uploaded_file($fileUpload['tmp_name'], '../../public/assets/img/filesId/'.$fileUpload['name'])) {
+                        $succesList[]= 'fichier téléversé';
+                    }else{
+
+                        $errorList[]= 'Erreur dans le téléversement';
+                    }
+                }else{
+                    $errorList[]= 'Format fichier incorrect';
+                }
             }
 
             $data = [

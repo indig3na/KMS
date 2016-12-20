@@ -50,7 +50,7 @@ class ProgramController extends ControllerTemplate
             //données
             'data' => $tabledata,
             'fkData' => $fkData,
-            'mult' => array_keys($mult)
+            'mult' => array_keys($mult),
         ];
         $this->show('crud/crud',$vars);
     }

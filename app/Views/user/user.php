@@ -10,12 +10,12 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Add user</h3>
+                <h3 class="box-title">Ajout <?= $role ?></h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" id="addchildtolist" name="addchild" role="form" novalidate>
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" id="addchildtolist" name="addchild" role="form" novalidate>
                 <div class="form-group" >
                     <label for="inputEmail3">Firstname *</label>
                     <input type="text" name="usr_firstname" class="form-control" required placeholder="Firstname">
@@ -83,8 +83,9 @@
                 </div>
 
                 <div class="form-group">
+                    <input type="hidden" name="submitFile" value="1" />
                     <label for="inputFormUser">Photo</label>
-                    <input type="file" name="photo">
+                    <input type="file" name="photo" id="photo">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" >Edit user</button>
@@ -102,42 +103,42 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Edit user</h3>
+                <h3 class="box-title">Edit <?= $role ?></h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
-                    <label for="inputEmail3">Firstname *</label>
+                    <label for="inputForm">Firstname *</label>
                     <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Lastname * </label>
+                    <label for="inputForm">Lastname * </label>
                     <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Address</label>
+                    <label for="inputForm">Address</label>
                     <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Contact mobile_no</label>
+                    <label for="inputForm">Contact mobile_no</label>
                     <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="inputFormUser">Contact home_no</label>
+                    <label for="inputForm">Contact home_no</label>
                     <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Email</label>
+                    <label for="inputForm">Email</label>
                     <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Role</label>
+                    <label for="inputForm">Role</label>
                     <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
                 </div>
                 <div class="form-group">
@@ -151,7 +152,7 @@
 
 
                 </div>
-
+                <?php if ($userData['usr_role'] == 'ROLE_EDU'): ?>
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
@@ -160,8 +161,8 @@
                             <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-
                 </div>
+                <?php endif ?>
                 <div class="form-group">
                     <label for="inputform">City</label>
 
@@ -174,8 +175,11 @@
                 </div>
 
                 <div class="form-group">
+                    <input type="hidden" name="submitFile" value="1" />
                     <label for="inputFormUser">Photo</label>
                     <input type="file" name="photo">
+                    <p class="help-block">toutes les extensions sont autorisées</p>
+                    <br />
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
@@ -196,7 +200,7 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">add user</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">List Users</h3>
+                <h3 class="box-title"><?= $role ?>s</h3>
                 <div class="box-tools">
                     <div class="input-group">
                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">

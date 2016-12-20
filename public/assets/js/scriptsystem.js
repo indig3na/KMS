@@ -32,7 +32,42 @@ function initMenu() {
 }
 $(document).ready(function() {
     initMenu();
-
+    
+    //
+    function unfold(callFrom,callTo,getKey){
+        $.ajax({
+            url: window.location.href.replace(callFrom,callTo),
+            type: 'get',
+            data: {[getKey]:$(this).data('id')},
+            context: this
+        }).done(function (response) {
+            $(this).after('<tr><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
+            $(this).next().find('.kms-action').remove();
+            $(this).next().fadeIn();
+            $(this).addClass('kms-unfolded').children().not('.kms-action').off('click').click(function(){
+                fold.call(this,callFrom,callTo,getKey);
+            });
+        });
+    }
+    function fold(callFrom,callTo,getKey){
+        $(this).parent().next().fadeOut(400,function(){$(this).remove();});
+        $(this).parent().removeClass('kms-unfolded').children().not('.kms-action').off('click').click(function(){
+            unfold.call(this.parentNode,callFrom,callTo,getKey);
+        });
+    }
+    
+    if (window.location.pathname.endsWith('/class/')){
+        
+        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+            unfold.call(this.parentNode,'/class/','/child/','class');
+        });
+    }    
+    if (window.location.pathname.endsWith('/parent/')){
+        
+        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+            unfold.call(this.parentNode,'/parent/','/child/','parent');
+        });
+    }
     //--------------------------CRUD add/update/delete -----------------------
 
     function ajaxCall(data) {
@@ -113,8 +148,6 @@ $(document).ready(function() {
             //supprimer
         detached.push(tr.children().not('.kms-action').detach());
         detachedId.push(tr.data('id'));
-        console.log(detached);
-        console.log(detachedId);
         //copier les input de la ligne ajout dans la ligne courante
         tr.prepend($('#kms-add').children().clone());
         //remplacer les boutons
@@ -235,7 +268,6 @@ $(document).ready(function() {
     //----------------edit -------------------
     $('.kms-crud-edit-btn').click(function (e) {
         e.preventDefault();
-        $('#list').hide();
         location.search = '?id='+$(this).closest('.kms-dataset').data('id');
         //ajaxCall(data);
 
