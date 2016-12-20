@@ -78,13 +78,16 @@
                 <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes Shedule</a>
             </li>
             <li>
-                <a href="<?= $this->url('user_user_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educator</a>
+                <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa  fa-graduation-cap  fa-stack-1x "></i></span>Educator</a>
+            </li>
+            <li>
+                <a href="<?= $this->url('user_admin_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open  fa-stack-1x "></i></span>Administrator</a>
             </li>
             <li>
                 <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Children</a>
             </li>
             <li>
-                <a href="<?= $this->url('user_user_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
+                <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
             </li>
             <li>
                 <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>

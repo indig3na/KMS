@@ -30,8 +30,14 @@ $w_routes = array(
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
 
     //user
-    ['GET', '/app/manage/user/', 'User#user_get', 'user_user_get'],
-    ['POST', '/app/manage/user/', 'User#user_post', 'user_user_post'],
+    ['GET', '/app/manage/administrator/', 'User#admin_get', 'user_admin_get'],
+    ['POST', '/app/manage/administrator/', 'User#admin_post', 'user_admin_post'],
+    //user
+    ['GET', '/app/manage/educator/', 'User#edu_get', 'user_edu_get'],
+    ['POST', '/app/manage/educator/', 'User#edu_post', 'user_edu_post'],
+    //user
+    ['GET', '/app/manage/parent/', 'User#par_get', 'user_par_get'],
+    ['POST', '/app/manage/parent/', 'User#par_post', 'user_par_post'],
 
     //Users login
     ['GET','/', 'User#login', 'user_login'],

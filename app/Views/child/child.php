@@ -189,50 +189,53 @@
                 </div>
                 <div class="box-body table-responsive">
                     <!-- Table -->
-                    <?php if (!empty($data)): ?>
                     <table class="table table-hover">
                         <tbody>
-                            <tr>
-                                <?php foreach ($header as $value): ?>
-                                    <th><?= $value ?></th>
-                                <?php endforeach ?>
-                                <th>Action</th>
-                            </tr>
-                            <?php //lignes de données ?>
-                            <?php foreach ($data as $row): ?>
-                                <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
-                                    <?php foreach ($row as $key => $value): ?>
-                                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
-                                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                                            <td class="kms-data kms-select">
-                                                <?php if(empty($value)): ?>
-                                                <?php elseif (is_array($value)): ?>
-                                                    <?php foreach ($value as $val): ?>
-                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
-                                                    <?php endforeach ?>
-                                                <?php else: ?>
-                                                    <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
-                                                <?php endif ?>
-                                            </td>
-                                        <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
-                                            <td class="kms-data"><img src="<?= $this ->assetUrl('img/filesId/'.$value) ?>" style="max-height:50px"/></td>
-                                        <?php else: ?>
-                                            <td class="kms-data"><?= $value ?></td>
-                                        <?php endif ?>
-                                        <?php endforeach ?>
-                                    <td class="kms-action kms-update">
-                                        <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
-                                        <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
-                                    </td>
+
+                            <?php if (!empty($data)): ?>
+                                <tr>
+                                    <?php foreach ($header as $value): ?>
+                                        <th><?= $value ?></th>
+                                    <?php endforeach ?>
+                                    <th class="kms-action">Action</th>
+
                                 </tr>
-                            <?php endforeach ?>
+                                <?php //lignes de données ?>
+                                <?php foreach ($data as $row): ?>
+                                    <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
+                                        <?php foreach ($row as $key => $value): ?>
+                                            <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
+                                            <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
+                                                <td class="kms-data kms-select">
+                                                    <?php if(empty($value)): ?>
+                                                    <?php elseif (is_array($value)): ?>
+                                                        <?php foreach ($value as $val): ?>
+                                                            <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                                        <?php endforeach ?>
+                                                    <?php else: ?>
+                                                        <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                                    <?php endif ?>
+                                                </td>
+                                            <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
+                                                <td class="kms-data"><img src="<?= $this ->assetUrl('img/avatar/'.$value) ?>" style="max-height:50px"/></td>
+                                            <?php else: ?>
+                                                <td class="kms-data"><?= $value ?></td>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        <td class="kms-action kms-update">
+                                            <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
+                                            <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            <?php
+                            else:
+                                echo '<tr><td style="text-align:center"><span>Vide!</span></td></tr>';
+                            endif
+                            ?>
                         </tbody>
                     </table>
-                    <?php
-                    else:
-                        echo '<span>Vide!</span>';
-                    endif
-                    ?>
+                    
                 </div>
             </div>
     </div>

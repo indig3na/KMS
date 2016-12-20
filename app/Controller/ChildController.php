@@ -21,7 +21,15 @@ class ChildController extends ControllerTemplate
         //model nécessaire pour acces BD
         $model = new ChildModel();
         //récupérer données
-        $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path']);
+        if (isset ($_GET['class'])){
+            $class = intval($_GET['class']);
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'class_cls_id',$class);    
+        } elseif (isset ($_GET['parent'])){
+            $parent = intval($_GET['parent']);
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'user_usr_id',$parent);    
+        } else {
+            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path']);    
+        }
         if(!empty($_GET['id'])) {
             $childData = $model->find($_GET['id']);
         }
