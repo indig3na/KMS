@@ -4,8 +4,11 @@
 
 <div style="" class="container">
     <h1 style="text-align: center;">My Day today</h1>
+
     <p>name:</p>
+
     <p>date:</p>
+
     <div class="menu1">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <a href="" id="manger" class="btn btn-block btn-primary ">Manger</a>
@@ -54,54 +57,52 @@
         </div>
     </div>
 
-    <a  id="home" style="display: none;" href=""> BACK TO Home </a>
+    <a id="home" style="display: none;" href=""> BACK TO Home </a>
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 <script>
-    $( "#manger" ).click(function(event) {
+    $("#manger").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#optionManger, #home" ).show( "fast" );
+        $(".menu1").hide("drop", {direction: "down"}, "fast");
+        $("#optionManger, #home").show("fast");
     });
 
-    $( "#matin" ).click(function(event) {
+    $("#matin").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#quant, #home" ).show( "fast" );
+        $("#optionManger").hide("drop", {direction: "down"}, "fast");
+        $("#quant, #home").show("fast");
     });
 
-    $( "#fisio" ).click(function(event) {
+    $("#fisio").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#optionFisio, #home" ).show( "fast" );
+        $(".menu1").hide("drop", {direction: "down"}, "fast");
+        $("#optionFisio, #home").show("fast");
     });
 
-    $( "#sieste" ).click(function(event) {
+    $("#sieste").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#optionSieste, #home" ).show( "fast" );
+        $(".menu1").hide("drop", {direction: "down"}, "fast");
+        $("#optionSieste, #home").show("fast");
     });
 
-    $( "#comments" ).click(function(event) {
+    $("#comments").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#text, #home" ).show( "fast" );
+        $(".menu1").hide("drop", {direction: "down"}, "fast");
+        $("#text, #home").show("fast");
     });
 
-    $( "#submitComments" ).click(function(event) {
+    $("#submitComments").click(function (event) {
         event.preventDefault();
         //console.log("click");
-        $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
-        $( ".menu1" ).show( "fast" );
+        $("#text, #home").hide("drop", {direction: "down"}, "fast");
+        $(".menu1").show("fast");
     });
 
 </script>
