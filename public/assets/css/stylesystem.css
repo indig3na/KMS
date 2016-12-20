@@ -106,12 +106,20 @@
 td.kms-data{
     vertical-align:middle !important;
 }
+span.kms-option{
+    display:inline-block;
+    margin: 5px 0;
+}
 ul.chosen-choices.form-control{
-    height:34px;
-    padding:4px 12px
+    min-height:34px;
+    padding:4px 12px;
+    width: 100%;
 }
 ul.chosen-choices.form-control li.search-choice{
     margin-top: 2px;
+}
+ul.chosen-choices.form-control li.search-field input, ul.chosen-choices.form-control li.search-field{
+    width: 100% !important;
 }
 
 

@@ -197,10 +197,9 @@
 
 <section class="content" id="list">
     <div class="panel panel-success">
-        <div class="panel-heading"><?= $title ?> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout <?= $role ?></a></div>
+        <div class="panel-heading"><h3 class="box-title" style="display:inline"> <?= $title ?>s</h3> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout <?= $role ?></a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title"><?= $title ?>s</h3>
                 <div class="box-tools">
                     <div class="input-group">
                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">

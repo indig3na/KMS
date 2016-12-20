@@ -4,7 +4,7 @@
     <?php $this->start('main_content')?>
 
     <div class="panel panel-success">
-        <div class="panel-heading"><?= $title ?></div>
+        <div class="panel-heading"><h3 style="margin:0"><?= $title ?></h3></div>
         <!-- Table -->
 <?php endif; ?>
     <table class=" table table-hover">
