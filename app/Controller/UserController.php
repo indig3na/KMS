@@ -44,17 +44,17 @@ class UserController extends Controller
             case 'ROLE_ADMIN':
                 $prettyRole = 'Administrateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_ADMIN'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
                 break;
             case 'ROLE_EDU':
                 $prettyRole = 'Éducateur';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'usr_role','ROLE_EDU'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class','Role'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery', 'Class'];
                 break;
             case 'ROLE_PAR':
                 $prettyRole = 'Parent';
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery','Role'];
+                $header =['Firstname ', 'Lastname ','Email','Contact_No ','City','Nursery'];
                 break;
             default: $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id','class_cls_id'],'',''];
                 $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];

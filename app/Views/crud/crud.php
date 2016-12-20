@@ -1,20 +1,20 @@
-<?php $this->layout('layoutsystem', ['title' => $title]) ?>
+<?php if (!isset ($tableonly)): ?>
+    <?php $this->layout('layoutsystem', ['title' => $title]) ?>
 
-<?php $this->start('main_content')?>
+    <?php $this->start('main_content')?>
 
-<div class="panel panel-success">
-    <div class="panel-heading"><?= $title ?></div>
-    <!-- Table -->
-    <?php/** print_r($w_user) **/ ?>
-   
-    <?php if (!empty($data)): ?>
-        <table class=" table">
+    <div class="panel panel-success">
+        <div class="panel-heading"><?= $title ?></div>
+        <!-- Table -->
+<?php endif; ?>
+    <table class=" table table-hover">
+        <?php if (!empty($data)): ?>
             <thead>
             <tr>
                 <?php foreach ($header as $value): ?>
                     <th><?= $value ?></th>
                 <?php endforeach ?>
-                <th>Action</th>
+                <th class="kms-action">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -66,12 +66,14 @@
                 </tr>
             <?php endforeach ?>
             </tbody>
-        </table>
-    <?php
-    else:
-        echo '<span>Vide!</span>';
-    endif
-    ?>
-</div>
-<?php $this->stop('main_content') ?>
+        <?php
+        else:
+            echo '<tr><td style="text-align:center"><span>Vide!</span></td></tr>';
+        endif
+        ?>
+    </table>
+<?php if (!isset ($tableonly)): ?>
+    </div>
+    <?php $this->stop('main_content') ?>
+<?php endif ?>
 
