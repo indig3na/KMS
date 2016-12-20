@@ -19,6 +19,9 @@ class ControllerTemplate extends Controller
      * @param $data Optionnel: array qui contient au lieu de $_POST les données à insérer en DB
      * Default: NULL
      */
+    public function assetUrl($path){
+        echo (empty($_SERVER['W_BASE'])) ? '' : $_SERVER['W_BASE'] . '/assets/' . ltrim($path, '/');
+    }
     public function db_post($model,$postfields,$mult=[],$rawData = NULL){
         if (!isset($rawData)){
             $rawData = $_POST;
