@@ -5,17 +5,17 @@
 <div class="panel panel-success">
     <div class="panel-heading"><?= $title ?></div>
     <!-- Table -->
-    <?php/** print_r($w_user) **/ ?>
+    
    
     <?php if (!empty($data)): ?>
         <table class=" table">
             <thead>
-            <tr>
-                <?php foreach ($header as $value): ?>
-                    <th><?= $value ?></th>
-                <?php endforeach ?>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <?php foreach ($header as $value): ?>
+                        <th><?= $value ?></th>
+                    <?php endforeach ?>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
             <?php //ligne d'ajout ?>
@@ -35,6 +35,7 @@
                         <td><input class="form-control kms-add kms-inp" type="text" name="<?= $key ?>"/></td>
                     <?php endif ?>
                 <?php endforeach ?>
+                
                 <td class="kms-action kms-add"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
             </tr>
             <?php //lignes de données ?>

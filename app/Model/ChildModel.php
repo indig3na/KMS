@@ -345,19 +345,23 @@ class ChildModel extends ModelTemplate
         return $this->dbh;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public function getListClass($classId){
+         $sql = '
+                SELECT *
+                FROM '.$this->table.'
+                WHERE class_cls_id = :classId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':classId', $classId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+    
 }

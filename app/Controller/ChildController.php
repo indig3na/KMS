@@ -169,7 +169,15 @@ class ChildController extends ControllerTemplate
             }
         }
 
-
+        
+    }
+    public function childList_get($classId){
+        debug($classId);
+        $child = new ChildModel();
+        $childList = $child ->getListClass($classId);
+        debug($childList);
+        
+       $this->show('child/ChildList_get',array('childList'=> $childList));
     }
 
 }
