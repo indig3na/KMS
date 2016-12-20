@@ -157,8 +157,8 @@
 
                 <div class="form-group">
                     <label for="inputform">Photo</label>
-                    <img src="<?= $this ->assetUrl('img/avatar/'.$childData['chd_img_path']) ?>"/>
-                    <input type="file" name="photo">
+                    <img src="<?= $this ->assetUrl('img/filesId//'.$childData['chd_img_path']) ?>"/>
+                    <input type="file" name="photo" id="photo">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
@@ -191,12 +191,14 @@
                     <!-- Table -->
                     <table class="table table-hover">
                         <tbody>
+
                             <?php if (!empty($data)): ?>
                                 <tr>
                                     <?php foreach ($header as $value): ?>
                                         <th><?= $value ?></th>
                                     <?php endforeach ?>
                                     <th class="kms-action">Action</th>
+
                                 </tr>
                                 <?php //lignes de données ?>
                                 <?php foreach ($data as $row): ?>

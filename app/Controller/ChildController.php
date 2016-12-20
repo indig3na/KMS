@@ -86,7 +86,7 @@ class ChildController extends ControllerTemplate
             $method = $_POST['method'];
             $id = '';
 
-            // activity input validation
+            // validation des données pour children
             $succesList = array();
             $success = false;
             $errorList = array();
@@ -114,6 +114,25 @@ class ChildController extends ControllerTemplate
             if (!($gender === 'F'|| $gender === 'M')) {
                 $errorList[] = 'Gender must be F or M';
                 $success = false;
+            }
+            //si des fichiers ont été téléversés
+            if (sizeof($_FILES) > 0) {
+                //je récupère les données du fichier 'filForm'
+                $fileUpload = $_FILES['photo'];
+                //verification des fichier (sécurité)
+                $extension = substr($fileUpload['name'], -4);
+                //check
+                if ($extension != '.php') {
+                    //je téléverse le fichier
+                    if (move_uploaded_file($fileUpload['tmp_name'], '../../public/assets/img/filesId/'.$fileUpload['name'])) {
+                        $succesList[]= 'fichier téléversé';
+                    }else{
+
+                        $errorList[]= 'Erreur dans le téléversement';
+                    }
+                }else{
+                    $errorList[]= 'Format fichier incorrect';
+                }
             }
 
             $data = [
