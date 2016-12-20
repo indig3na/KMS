@@ -66,7 +66,7 @@ class DailyReportController extends ControllerTemplate{
         $errorList = array();
         $data = array();
 
-        if (empty($date)) {
+        if (!isset($date)) {
             $errorList[] = 'La date est a remplir!!';
             $success = false;
         }
@@ -86,6 +86,7 @@ class DailyReportController extends ControllerTemplate{
         if (empty($errorList)) {
 
             $dailyReportModel = new DailyReportModel();
+
             //Insert
             if ($method === 'insert') {
                 $tableData = $dailyReportModel->insert($data);

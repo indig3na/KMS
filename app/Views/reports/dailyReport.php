@@ -4,11 +4,37 @@
 
 <div style="" class="container">
     <h1 style="text-align: center;">My Day today</h1>
+    <div>
+        <h4>Nom du Enfant:</h4>
+        <select data-placeholder="Sélectionnez le enfant" class="form-control chosen-select">
+            <?php foreach ($fkData['child_chd_id'] as $id => $value): ?>
+                <option value="<?= $id ?>"><?= $value ?></option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker1').datetimepicker();
+                });
+            </script>
+        </div>
+    </div>
 
-    <p>name:</p>
 
-    <p>date:</p>
-
+    <br>
+    <br>
     <div class="menu1">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <a href="" id="manger" class="btn btn-block btn-primary ">Manger</a>
@@ -53,7 +79,7 @@
         <div class="col-xs-12 col-md-12 col-lg-12">
             <h4>Only fill if no option available on the Maim Menu</h4>
             <textarea rows="10" cols="151" placeholder="Comments here..."></textarea>
-            <button id="submitComments" type="submit" class="btn btn-block btn-primary">Submit</button>
+            <button id="submitComments" type="submit" class="btn btn-block btn-success">Submit</button>
         </div>
     </div>
 

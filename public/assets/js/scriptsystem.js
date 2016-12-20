@@ -272,6 +272,50 @@ $(document).ready(function() {
         //ajaxCall(data);
 
     });
+    //-------------------------daily report functioning---------------//
+
+    $( "#manger" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionManger, #home" ).show( "fast" );
+    });
+
+    $( "#matin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+    $( "#fisio" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionFisio, #home" ).show( "fast" );
+    });
+
+    $( "#sieste" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#optionSieste, #home" ).show( "fast" );
+    });
+
+    $( "#comments" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#text, #home" ).show( "fast" );
+    });
+
+    $( "#submitComments" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
+        $( ".menu1" ).show( "fast" );
+    });
+
 
 
     //----------------Select child-------------------
@@ -333,55 +377,6 @@ $(document).ready(function() {
     );
 
 
-
-
-
-
-
-
-//-------------------------daily report functioning---------------//
-
-$( "#manger" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-    $( "#optionManger, #home" ).show( "fast" );
-});
-
-$( "#matin" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
-    $( "#quant, #home" ).show( "fast" );
-});
-
-$( "#fisio" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-    $( "#optionFisio, #home" ).show( "fast" );
-});
-
-$( "#sieste" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-    $( "#optionSieste, #home" ).show( "fast" );
-});
-
-$( "#comments" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
-    $( "#text, #home" ).show( "fast" );
-});
-
-$( "#submitComments" ).click(function(event) {
-    event.preventDefault();
-    //console.log("click");
-    $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
-    $( ".menu1" ).show( "fast" );
-});
 
 
 });
