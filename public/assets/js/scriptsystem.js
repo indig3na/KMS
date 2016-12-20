@@ -145,6 +145,7 @@ $(document).ready(function() {
                 val.push($(this).html().trim());
             }
         });
+        console.log(val);
             //supprimer
         detached.push(tr.children().not('.kms-action').detach());
         detachedId.push(tr.data('id'));
@@ -182,8 +183,6 @@ $(document).ready(function() {
             tr.prepend(detached[index]);
             detached.splice(index,1);
             detachedId.splice(index,1);
-            console.log(detached);
-            console.log(detachedId);
             $(this).remove();
             tr.find('.kms-crud-update-btn').html('<i class="fa fa-pencil"></i>').addClass('btn-info').removeClass('btn-success').off('click').click(function(e) {
                 e.preventDefault();

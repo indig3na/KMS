@@ -32,6 +32,7 @@
                     <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                         <td>
                             <select data-placeholder="Cliquez pour sélectionner ou chercher..." class="form-control kms-add kms-select chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
+                                <!--<option value="0">.</option>-->
                                 <?php foreach ($fkData[$key] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>

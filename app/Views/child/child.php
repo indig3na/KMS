@@ -10,38 +10,38 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Add children</h3>
+                <h3 class="box-title">Ajout enfant</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" id="addchildtolist" name="addchild" role="form" novalidate>
                 <div class="form-group" >
-                    <label for="inputEmail3">Firstname *</label>
-                    <input type="text" name="chd_firstname" class="form-control " required placeholder="firstname">
+                    <label for="inputEmail3">Prénom *</label>
+                    <input type="text" name="chd_firstname" class="form-control " required placeholder="Prénom">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Lastname * </label>
-                    <input type="text" name="chd_lastname" class="form-control " required placeholder="lastname">
+                    <label for="inputEmail3">Nom * </label>
+                    <input type="text" name="chd_lastname" class="form-control " required placeholder="Nom">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Birthday</label>
+                    <label for="inputform">Date de naissance</label>
                     <input type="date"  name="chd_birthday"  class="form-control">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="inputform">Gender</label>
+                    <label for="inputform">Sexe</label>
                     <div class="radio ">
                         <label>
-                            <input type="radio" name="chd_gender" value="M">
-                            Male
+                            <input type="radio" name="chd_gender" value="F">
+                            Féminin
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="F" >
-                            Female
+                            <input type="radio" name="chd_gender" value="M" >
+                            Masculin
                         </label>
                     </div>
                 </div>
@@ -69,24 +69,13 @@
 
                 </div>
 
-
-
                 <div class="form-group">
-                    <label for="inputform">Phone_No</label>
-                    <input type="text" name="phoneNo" class="form-control "  placeholder="phone_no">
+                    <label for="inputform">Commentaires</label>
+                    <input type="text" name="chd_comments" class="form-control" placeholder="commentaires" >
                 </div>
                 <div class="form-group">
-                    <label for="inputform">mobile_No</label>
-                    <input type="text" name="mobileNo" class="form-control"  placeholder="mobile_no">
-
-                </div>
-                <div class="form-group">
-                    <label for="inputform">Comments</label>
-                    <input type="text" name="chd_comments" class="form-control" placeholder="comments" >
-                </div>
-                <div class="form-group">
-                    <label for="inputform">Hobbies</label>
-                    <input type="text" name="chd_interest" class="form-control "  placeholder="Hobbies">
+                    <label for="inputform">Intérêts</label>
+                    <input type="text" name="chd_interest" class="form-control "  placeholder="Intérêts">
                 </div>
 
                 <div class="form-group">
@@ -94,7 +83,7 @@
                     <input type="file" name="chd_photo">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary " >Add child</button>
+                    <button type="submit" class="btn btn-primary " >Ajouter</button>
                 </div>
             </form>
         </div>
@@ -112,46 +101,46 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Edit children</h3>
+                <h3 class="box-title">Modifier enfant</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
-                    <label for="inputEmail3">Firstname *</label>
+                    <label for="inputEmail3">Prénom *</label>
                     <input type="text" name="chd_firstname" class="form-control" required value="<?= $childData['chd_firstname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Lastname * </label>
+                    <label for="inputEmail3">Nom * </label>
                     <input type="text" name="chd_lastname" class="form-control" required value="<?= $childData['chd_lastname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Gender</label>
+                    <label for="inputform">Sexe</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
-                            Male
+                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
+                            Féminin
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
-                            Female
+                            <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
+                            Masculin
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Birthday</label>
+                    <label for="inputform">Date de naissance</label>
                     <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
 
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Comments</label>
+                    <label for="inputform">Commentaires</label>
                     <input type="text" name="chd_comments" class="form-control" value="<?= $childData['chd_comments'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Hobbies</label>
+                    <label for="inputform">Intérêts</label>
                     <input type="text" name="chd_hobbies" class="form-control"  value="<?= $childData['chd_hobbies'] ?>">
                 </div>
 
@@ -163,7 +152,7 @@
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
                     <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Edit child</button>
+                    <button type="submit" class="btn btn-primary" >Modifier enfant</button>
                 </div>
             </form>
         </div>
@@ -177,10 +166,10 @@
     <div class="panel-heading"><?= $title ?> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">add child</a></div>
             <div class="box col-xs-12">
                 <div class="box-header">
-                    <h3 class="box-title">List children</h3>
+                    <h3 class="box-title">Enfants</h3>
                     <div class="box-tools">
                         <div class="input-group">
-                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
+                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Recherche">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-default"><i class="fa fa-search "></i></button>
                             </div>
@@ -223,8 +212,8 @@
                                             <?php endif ?>
                                             <?php endforeach ?>
                                         <td class="kms-action kms-update">
-                                            <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
-                                            <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
+                                            <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Modifier" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
+                                            <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Supprimer" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>

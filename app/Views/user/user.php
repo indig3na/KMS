@@ -138,8 +138,8 @@
                     <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputForm">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
+                    <label>Role : <?= $title ?></label>
+                    <input type="hidden" name="usr_role" value = <?= ['administrateur' => 'ROLE_ADMIN', 'éducateur' => 'ROLE_EDU', 'parent' => 'ROLE_PAR'][$role] ?>>
                 </div>
                 <div class="form-group">
                     <label for="inputform">Nursery</label>
