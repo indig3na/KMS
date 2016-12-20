@@ -42,7 +42,7 @@ class ProgramController extends ControllerTemplate
          
         $vars = [
             //titre de page
-            'title' => 'Program',
+            'title' => 'Programme',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
             'header' => ['Programme *','Activités'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
@@ -50,7 +50,7 @@ class ProgramController extends ControllerTemplate
             //données
             'data' => $tabledata,
             'fkData' => $fkData,
-            'mult' => array_keys($mult)
+            'mult' => array_keys($mult),
         ];
         $this->show('crud/crud',$vars);
     }

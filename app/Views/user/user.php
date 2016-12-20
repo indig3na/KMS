@@ -4,18 +4,18 @@
 
 <!--display-->
 <?php// var_dump($userData) ;?>
-
+<!--add user-->
 <section class="content" id="addchild">
     <div class="panel panel-success">
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Add children</h3>
+                <h3 class="box-title">Ajout <?= $role ?></h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" id="addchildtolist" name="addchild" role="form" novalidate>
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" id="addchildtolist" name="addchild" role="form" novalidate>
                 <div class="form-group" >
                     <label for="inputEmail3">Firstname *</label>
                     <input type="text" name="usr_firstname" class="form-control" required placeholder="Firstname">
@@ -45,66 +45,50 @@
                     <input type="email" name="usr_email" class="form-control" placeholder="Email" >
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  placeholder="role">
+                    <label>Role : <?= $title ?></label>
+                    <input type="hidden" name="usr_role" value = <?= ['administrateur' => 'ROLE_ADMIN', 'éducateur' => 'ROLE_EDU', 'parent' => 'ROLE_PAR'][$role] ?>>
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                            <label for="inputFormUser">City</label>
+                    <label for="inputform">Nursery</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fkData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
+                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                        <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
 
                 </div>
 
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($flData) && in_array($key, array_keys($flData))): ?>
-                            <label for="inputFormUser">Nursery</label>
+                    <label for="inputform">Classe</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($flData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
                 <div class="form-group">
-                    <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
-                        <?php elseif (isset($fmData) && in_array($key, array_keys($fmData))): ?>
-                            <label for="inputFormUser">Class</label>
+                    <label for="inputform">City</label>
 
-                            <select data-placeholder="Sélectionnez des <?= $key ?>" class="form-control chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
-                                <?php foreach ($fmData[$key] as $id => $value): ?>
-                                    <option value="<?= $id ?>"><?= $value ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        <?php endif ?>
-                    <?php endforeach ?>
-
+                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
+                            <option value="<?= $id ?>"><?= $value ?></option>
+                        <?php endforeach ?>
+                    </select>
 
                 </div>
 
                 <div class="form-group">
+                    <input type="hidden" name="submitFile" value="1" />
                     <label for="inputFormUser">Photo</label>
-                    <input type="file" name="photo">
+                    <input type="file" name="photo" id="photo">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" >Edit user</button>
+                    <button type="submit" class="btn btn-primary" >Ajouter comme <?= $role ?></button>
                 </div>
             </form>
         </div>
@@ -113,48 +97,48 @@
 
 
 <?php if (!empty($_GET['id'])):?>
-<!--edit child-->
+<!--edit user-->
 <section class="content" id="editchild">
     <div class="panel panel-success">
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Edit user</h3>
+                <h3 class="box-title">Modifier <?= $role ?></h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" name="addchild" role="form" novalidate>
+            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate>
                 <div class="form-group" >
-                    <label for="inputEmail3">Firstname *</label>
+                    <label for="inputForm">Firstname *</label>
                     <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Lastname * </label>
+                    <label for="inputForm">Lastname * </label>
                     <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Address</label>
+                    <label for="inputForm">Address</label>
                     <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Contact mobile_no</label>
+                    <label for="inputForm">Contact mobile_no</label>
                     <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="inputFormUser">Contact home_no</label>
+                    <label for="inputForm">Contact home_no</label>
                     <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Email</label>
+                    <label for="inputForm">Email</label>
                     <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Role</label>
+                    <label for="inputForm">Role</label>
                     <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
                 </div>
                 <div class="form-group">
@@ -168,7 +152,7 @@
 
 
                 </div>
-
+                <?php if ($userData['usr_role'] == 'ROLE_EDU'): ?>
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
@@ -177,8 +161,8 @@
                             <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-
                 </div>
+                <?php endif ?>
                 <div class="form-group">
                     <label for="inputform">City</label>
 
@@ -191,13 +175,16 @@
                 </div>
 
                 <div class="form-group">
+                    <input type="hidden" name="submitFile" value="1" />
                     <label for="inputFormUser">Photo</label>
                     <input type="file" name="photo">
+                    <p class="help-block">toutes les extensions sont autorisées</p>
+                    <br />
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
                     <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Edit user</button>
+                    <button type="submit" class="btn btn-primary" >Modifier</button>
                 </div>
             </form>
         </div>
@@ -206,23 +193,25 @@
 
 <?php else :?>
 
-<!--list item-->
+<!--list display-->
 
 <section class="content" id="list">
     <div class="panel panel-success">
-        <div class="panel-heading"><?= $title ?> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">add user</a></div>
+        <div class="panel-heading"><h3 style="display: inline;"><?= $title ?></h3> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">add user</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">List Users</h3>
+                <br>
+
                 <div class="box-tools">
                     <div class="input-group">
-                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
+                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 250px; height: 36px;" placeholder="Search for...">
                         <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default"><i class="fa fa-search "></i></button>
+                            <button class="btn btn-sm btn-default"><i class="fa fa-search fa-2x "></i></button>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="box-body table-responsive">
                 <!-- Table -->
                 <?php if (!empty($data)): ?>

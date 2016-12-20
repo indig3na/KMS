@@ -46,40 +46,73 @@
                 <li data-target="#screenshot-carousel" data-slide-to="1"></li>
                 <li data-target="#screenshot-carousel" data-slide-to="2"></li>
                 <li data-target="#screenshot-carousel" data-slide-to="3"></li>
+                <li data-target="#screenshot-carousel" data-slide-to="4"></li>
+                <li data-target="#screenshot-carousel" data-slide-to="5"></li>
+                <li data-target="#screenshot-carousel" data-slide-to="6"></li>
+                <li data-target="#screenshot-carousel" data-slide-to="7"></li>
+
+
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="<?= $this->assetUrl('img/highway.jpg') ?>" alt="Text of the image">
+                    <img src="<?= $this->assetUrl('img/nursery/creche1.jpg') ?>" alt="Text of the image">
 
                     <div class="carousel-caption">
-                        <h3>Highway heading</h3>
+                        <h3>Nursery Building</h3>
 
                         <p>This is the caption</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="<?= $this->assetUrl('img/river.jpg') ?>" alt="Text of the image">
+                    <img src="<?= $this->assetUrl('img/nursery/creche2.jpg') ?>" alt="Text of the image">
 
                     <div class="carousel-caption">
-                        <h3>River heading</h3>
+                        <h3>Nursery 2 heading</h3>
 
                         <p>This is the caption</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="<?= $this->assetUrl('img/street.jpg') ?>" alt="Text of the image">
+                    <img src="<?= $this->assetUrl('img/nursery/creche3.jpg') ?>" alt="Text of the image">
 
                     <div class="carousel-caption">
-                        <h3>Street heading</h3>
+                        <h3>Nursery 3 heading</h3>
 
                         <p>This is the caption</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="<?= $this->assetUrl('img/painting.jpg') ?>" alt="Text of the image">
+                    <img src="<?= $this->assetUrl('img/nursery/creche4.jpg') ?>" alt="Text of the image">
 
                     <div class="carousel-caption">
-                        <h3>Painting heading</h3>
+                        <h3>Nursery 4 heading</h3>
+
+                        <p>This is the caption</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="<?= $this->assetUrl('img/nursery/creche5.jpg') ?>" alt="Text of the image">
+
+                    <div class="carousel-caption">
+                        <h3>Nursery 5 heading</h3>
+
+                        <p>This is the caption</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="<?= $this->assetUrl('img/nursery/creche6.jpg') ?>" alt="Text of the image">
+
+                    <div class="carousel-caption">
+                        <h3>Nursery 6 heading</h3>
+
+                        <p>This is the caption</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="<?= $this->assetUrl('img/nursery/creche4.jpg') ?>" alt="Text of the image">
+
+                    <div class="carousel-caption">
+                        <h3>Nursery 7 heading</h3>
 
                         <p>This is the caption</p>
                     </div>
@@ -172,9 +205,10 @@
                     fringilla ac, tincidunt id massa. Proin et odio mattis, venenatis lacus vel, faucibus elit</p>
             </div>
             <div class="col-sm-4">
-                <img src="<?= $this->assetUrl('img/imac.jpg') ?>" class="img-responsive" alt="image">
+                <img src="<?= $this->assetUrl('img/nursery/creche12.jpg') ?>" class="img-responsive" alt="image">
             </div>
         </div>
+        <hr>
         <!-- End row -->
         <div class="row">
             <div class="col-sm-8">
@@ -184,9 +218,10 @@
                     fringilla ac, tincidunt id massa. Proin et odio mattis, venenatis lacus vel, faucibus elit</p>
             </div>
             <div class="col-sm-4">
-                <img src="<?= $this->assetUrl('img/smartphone.jpg') ?>" class="img-responsive" alt="image">
+                <img src="<?= $this->assetUrl('img/nursery/creche13.jpg') ?>" class="img-responsive" alt="image">
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-sm-8">
                 <h3>This is the heading</h3>
@@ -195,7 +230,7 @@
                     fringilla ac, tincidunt id massa. Proin et odio mattis, venenatis lacus vel, faucibus elit</p>
             </div>
             <div class="col-sm-4">
-                <img src="<?= $this->assetUrl('img/user.jpg') ?>" class="img-responsive" alt="image">
+                <img src="<?= $this->assetUrl('img/nursery/creche14.jpg') ?>" class="img-responsive" alt="image">
             </div>
         </div>
 
@@ -311,8 +346,8 @@
                     <p>Send us a message, or contact us from the address below</p>
                     <address>
                         <strong>TamTam Nursery School.</strong></br>
-                        111, south case avenue </br>
-                        Argonne - chicago</br>
+                        111, rue adresse </br>
+                        Differdange - Luxembourg</br>
                         P: +1 9999999999
                     </address>
                 </div>
@@ -343,7 +378,7 @@
                     <div class="form-group">
                         <label for="userPhone">Your Phone Number</label>
 
-                        <input type="number" class="form-control" name="userphone" id="userphone"
+                        <input type="text" class="form-control" name="userphone" id="userphone"
                                placeholder="Enter your phone number.">
 
                     </div>

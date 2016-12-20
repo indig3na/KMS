@@ -8,4 +8,5 @@
     <div id="myScheduler"></div>
 </section>
 <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
-<?php $this->stop('main_content') ?>
+<script type="text/javascript" src="<?= $this->assetUrl('js/scriptcalendar.js') ?>"></script>
+    <?php $this->stop('main_content') ?>
