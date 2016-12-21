@@ -97,99 +97,99 @@
 
 
 <?php if (!empty($_GET['id'])):?>
-<!--edit user-->
-<section class="content" id="editchild">
-    <div class="panel panel-success">
-        <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
-        <div class="box col-xs-12">
-            <div class="box-header">
-                <h3 class="box-title">Modifier <?= $role ?></h3>
+    <!--edit user-->
+    <section class="content" id="editchild">
+        <div class="panel panel-success">
+            <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
+            <div class="box col-xs-12">
+                <div class="box-header">
+                    <h3 class="box-title">Modifier <?= $role ?></h3>
+                </div>
+            </div>
+            <div class="box-body table-responsive">
+                <!-- Form -->
+                <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate>
+                    <div class="form-group" >
+                        <label for="inputForm">Firstname *</label>
+                        <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputForm">Lastname * </label>
+                        <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputForm">Address</label>
+                        <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="inputForm">Contact mobile_no</label>
+                        <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputForm">Contact home_no</label>
+                        <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="inputForm">Email</label>
+                        <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="inputForm">Role</label>
+                        <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputform">Nursery</label>
+
+                        <select data-placeholder="Sélectionnez des parents" name="nursery_nur_id" class="form-control chosen-select">
+                            <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                                <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
+                            <?php endforeach ?>
+                        </select>
+
+
+                    </div>
+                    <?php if ($userData['usr_role'] == 'ROLE_EDU'): ?>
+                    <div class="form-group">
+                        <label for="inputform">Classe</label>
+
+                        <select data-placeholder="Sélectionnez des classes" name="class_cls_id" class="form-control chosen-select" >
+                            <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
+                                <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <?php endif ?>
+                    <div class="form-group">
+                        <label for="inputform">City</label>
+
+                        <select data-placeholder="Sélectionnez des classes" name="city_cit_id" class="form-control chosen-select" >
+                            <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
+                                <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
+                            <?php endforeach ?>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" name="submitFile" value="1" />
+                        <label for="inputFormUser">Photo</label>
+                        <input type="file" name="photo">
+                        <p class="help-block">toutes les extensions sont autorisées</p>
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="method" value="update"/>
+                        <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
+                        <button type="submit" class="btn btn-primary" >Modifier</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="box-body table-responsive">
-            <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate>
-                <div class="form-group" >
-                    <label for="inputForm">Firstname *</label>
-                    <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="inputForm">Lastname * </label>
-                    <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="inputForm">Address</label>
-                    <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
-
-                </div>
-                <div class="form-group">
-                    <label for="inputForm">Contact mobile_no</label>
-                    <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
-
-                </div>
-
-                <div class="form-group">
-                    <label for="inputForm">Contact home_no</label>
-                    <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
-
-                </div>
-                <div class="form-group">
-                    <label for="inputForm">Email</label>
-                    <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
-                </div>
-                <div class="form-group">
-                    <label for="inputForm">Role</label>
-                    <input type="text" name="usr_role" class="form-control"  value="<?= $userData['usr_role'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="inputform">Nursery</label>
-
-                    <select data-placeholder="Sélectionnez des parents" name="nursery_nur_id" class="form-control chosen-select">
-                        <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
-                        <?php endforeach ?>
-                    </select>
-
-
-                </div>
-                <?php if ($userData['usr_role'] == 'ROLE_EDU'): ?>
-                <div class="form-group">
-                    <label for="inputform">Classe</label>
-
-                    <select data-placeholder="Sélectionnez des classes" name="class_cls_id" class="form-control chosen-select" >
-                        <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <?php endif ?>
-                <div class="form-group">
-                    <label for="inputform">City</label>
-
-                    <select data-placeholder="Sélectionnez des classes" name="city_cit_id" class="form-control chosen-select" >
-                        <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    
-                </div>
-
-                <div class="form-group">
-                    <input type="hidden" name="submitFile" value="1" />
-                    <label for="inputFormUser">Photo</label>
-                    <input type="file" name="photo">
-                    <p class="help-block">toutes les extensions sont autorisées</p>
-                    <br />
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="method" value="update"/>
-                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Modifier</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
 
 <?php else :?>
 
@@ -214,48 +214,46 @@
             <br>
             <div class="box-body table-responsive">
                 <!-- Table -->
-                <?php if (!empty($data)): ?>
-                    <table class="table table-hover">
-                        <tbody>
-                        <tr>
-                            <?php foreach ($header as $value): ?>
-                                <th><?= $value ?></th>
-                            <?php endforeach ?>
-                            <th>Action</th>
-                        </tr>
-                        <?php //lignes de données ?>
-                        <?php foreach ($data as $row): ?>
-                                <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
-                                    <?php foreach ($row as $key => $value): ?>
-                                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
-                                        <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
-                                            <td class="kms-data kms-select">
-                                                <?php if(empty($value)): ?>
-                                                <?php elseif (is_array($value)): ?>
-                                                    <?php foreach ($value as $val): ?>
-                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
-                                                    <?php endforeach ?>
-                                                <?php else: ?>
-                                                    <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
-                                                <?php endif ?>
-                                            </td>
-                                        <?php else: ?>
-                                            <td class="kms-data"><?= $value ?></td>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                <td class="kms-action">
-                                    <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
-                                    <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
-                                </td>
+                <table class="table table-hover">
+                    <tbody>
+                        <?php if (!empty($data)): ?>
+                            <tr>
+                                <?php foreach ($header as $value): ?>
+                                    <th><?= $value ?></th>
+                                <?php endforeach ?>
+                                <th>Action</th>
                             </tr>
-                        <?php endforeach ?>
-                        </tbody>
-                    </table>
-                <?php
-                else:
-                    echo '<span>Vide!</span>';
-                endif
-                ?>
+                            <?php //lignes de données ?>
+                                <?php foreach ($data as $row): ?>
+                                    <tr class="kms-dataset" data-id="<?= $row[$primaryKey] ?>">
+                                        <?php foreach ($row as $key => $value): ?>
+                                            <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
+                                            <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
+                                                <td class="kms-data kms-select">
+                                                    <?php if(empty($value)): ?>
+                                                    <?php elseif (is_array($value)): ?>
+                                                        <?php foreach ($value as $val): ?>
+                                                            <span class="well well-sm kms-option" data-val="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                                        <?php endforeach ?>
+                                                    <?php else: ?>
+                                                        <span class="kms-option" data-val="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                                    <?php endif ?>
+                                                </td>
+                                            <?php else: ?>
+                                                <td class="kms-data"><?= $value ?></td>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                    <td class="kms-action">
+                                        <a type="button" class="btn btn-info btn-flat kms-crud-edit-btn" title="Edit" tooltip href="#"><i class="fa fa-pencil"></i></a>
+                                        <a type="button" class="btn btn-danger btn-flat kms-crud-delete-btn" title="Remove" tooltip href="#"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else:
+                            echo '<tr><td style="text-align:center"><span>Aucun enfant!</span></td></tr>';
+                        endif ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ class ClassroomController extends ControllerTemplate
 	} 
     public function classroom_post() {
         if (in_array($method = $_POST['method'],['insert','update'])){
-            //validation donnÃ©es
+            //validation données
             $success = false;
             $errors = array();
             $data = array_intersect_key($_POST, array_flip(['clr_name', 'clr_caracteristics', 'clr_description']));

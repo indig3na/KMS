@@ -1,3 +1,6 @@
+<?php// $_SESSION['user']['usr_role'] = 'ROLE_EDU' ?>
+<?php// $_SESSION['user']['usr_role'] = 'ROLE_PAR' ?>
+<?php// $_SESSION['user']['usr_role'] = 'ROLE_ADMIN' ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +81,37 @@
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>calendar</a>
+                    <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Établissement</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('user_admin_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open   fa-stack-1x "></i></span>Administrateurs</a>
+                </li>
+            <?php  endif ; ?>    
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Salles de classe</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('schoolYear_schoolyear_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-calendar-o fa-stack-1x "></i></span>Années scolaires</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programme</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activités</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educateurs</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
@@ -86,19 +119,25 @@
                     <a href="<?= $this->url('class_class_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes</a>
                 </li>
             <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educator</a>
-                </li>
-            <?php  endif ; ?>
+            
             <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_PAR')): ?>
                 <li>
-                    <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Children</a>
+                    <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
                 </li>
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
-                    <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des enfants</a>
+                    <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
+                </li>
+            <?php  endif ; ?>
+           <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('dailyReport_dailyReport_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
                 </li>
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
@@ -106,29 +145,15 @@
                     <a href="<?= $this->url('child_parentList_get', ['classeId'=>$w_user['class_cls_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Contact des parents</a>
                 </li>
             <?php  endif ; ?>
-            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN')): ?>
+
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
+                    <a href="<?= $this->url('crud_city_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-building fa-stack-1x "></i></span>Villes</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classrooms</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Program</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
-                <li>
-                    <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activité</a>
+                    <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>Calendrier</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>

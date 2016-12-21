@@ -126,7 +126,7 @@ class UserController extends ControllerTemplate
             $nursery = isset($_POST['nursery_nur_id']) ? trim(strip_tags($_POST['nursery_nur_id'])) : '';
             $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
             $class = isset($_POST['class_cls_id']) ? trim(strip_tags($_POST['class_cls_id'])) : '';
-
+            
             $method = $_POST['method'];
             $id = '';
 
@@ -187,6 +187,8 @@ class UserController extends ControllerTemplate
                 $model = new UserFunctionsModel();
                 //Insert data
                 if ($method === 'insert') {
+                    $token = \W\Security\StringUtils::randomString(32);
+                    $data['usr_token'] = $token;
                     $insertData = $model->insert($data);
                     // if not inserted error
                     if ($insertData === false) {
@@ -194,6 +196,15 @@ class UserController extends ControllerTemplate
                     } else {
                         $succesList[] = 'user info inserted';
                         $success = true;
+                        
+                        $emailToSend = new MailerController();
+                        $mailContent= 'Bienvenue sur notre site, '.$firstname.' '.$lastname.'!'
+                                . '<br><br>'
+                                . 'Cliquez sur le lien ci-dessous pour vous connecter et initialiser votre mot de passe:<br>'
+                                . '<a style="display:block;padding:10px;border-radius:10px;background-color:blue" href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
+                                .'http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token))
+                                . '</a>';
+                        $emailToSend->emailSent($email,$mailContent );
                     }
                 } //update data for given Id
                 elseif ($method === 'update') {

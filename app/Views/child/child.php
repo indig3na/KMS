@@ -218,7 +218,6 @@
                 <!-- Table -->
                 <table class="table table-hover">
                     <tbody>
-
                         <?php if (!empty($data)): ?>
                             <tr>
                                 <?php foreach ($header as $value): ?>
