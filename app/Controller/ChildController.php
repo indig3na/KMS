@@ -213,11 +213,11 @@ class ChildController extends ControllerTemplate
 
         
     }
-    public function childList_get($classId){
-        debug($classId);
+    public function childList_get($userId){
+       // debug($userId);
         $child = new ChildModel();
-        $childList = $child ->getListClass($classId);
-        debug($childList);
+        $childList = $child ->getListClass($userId);
+       // debug($childList);
         
        $this->show('child/ChildList_get',array('childList'=> $childList));
     }

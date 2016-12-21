@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-<!--?php print_r($childList); ?-->
+<?php/* debug($childList);*/ ?>
 <!--display-->
 <table class="table table-hover table-striped">
     <caption><h1>Liste de la classe</h1></caption>
