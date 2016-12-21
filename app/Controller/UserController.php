@@ -103,7 +103,7 @@ class UserController extends ControllerTemplate
             'data' => $tabledata,
             'userData' => $userData,
             'fkData' => $fkData,
-            'role' => $prettyRole
+            'role' => $role
 
         ];
         $this->show('user/user',$vars);

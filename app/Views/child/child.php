@@ -18,21 +18,21 @@
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" enctype="multipart/form-data" id="addchildtolist" name="addchild" role="form">
                 <div class="form-group" >
-                    <label for="inputEmail3">Prénom</label>
-                    <input type="text" name="chd_firstname" class="form-control " required placeholder="firstname">
+                    <label for="inputEmail3">Prénom *</label>
+                    <input type="text" name="chd_firstname" class="form-control " required placeholder="Prénom">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Nom </label>
-                    <input type="text" name="chd_lastname" class="form-control " required placeholder="lastname">
+                    <label for="inputEmail3">Nom *</label>
+                    <input type="text" name="chd_lastname" class="form-control " required placeholder="Nom">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Date de naissance</label>
+                    <label for="inputform">Date de naissance *</label>
                     <input type="date"  name="chd_birthday"  class="form-control">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="inputform">Sexe</label>
+                    <label for="inputform">Sexe *</label>
                     <div class="radio ">
                         <label>
                             <input type="radio" name="chd_gender" value="M">
@@ -50,7 +50,7 @@
                 <div class="form-group">
                             <label for="inputform">Parent</label>
 
-                            <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                            <select data-placeholder="Sélectionnez un parent" class="form-control chosen-select">
                                 <option value="0"></option>
                                 <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
@@ -63,7 +63,7 @@
                 <div class="form-group">
                             <label for="inputform">Classe</label>
 
-                            <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                            <select data-placeholder="Sélectionnez une classe" class="form-control chosen-select" >
                                 <option value="0"></option>
                                 <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
@@ -71,25 +71,13 @@
                             </select>
 
                 </div>
-
-
-
-                <div class="form-group">
-                    <label for="inputform">Numero de téléphone</label>
-                    <input type="text" name="phoneNo" class="form-control "  placeholder="phone_no">
-                </div>
-                <div class="form-group">
-                    <label for="inputform">Numero de téléphone 2</label>
-                    <input type="text" name="mobileNo" class="form-control"  placeholder="mobile_no">
-
-                </div>
                 <div class="form-group">
                     <label for="inputform">Commentaires</label>
-                    <input type="text" name="chd_comments" class="form-control" placeholder="comments" >
+                    <input type="text" name="chd_comments" class="form-control" placeholder="Commentaires..." >
                 </div>
                 <div class="form-group">
-                    <label for="inputform">interets</label>
-                    <input type="text" name="chd_interest" class="form-control "  placeholder="Hobbies">
+                    <label for="inputform">Intérêts</label>
+                    <input type="text" name="chd_interest" class="form-control "  placeholder="Intérêts...">
                 </div>
 
                 <div class="form-group">
@@ -116,22 +104,27 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Annuler</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Edit children</h3>
+                <h3 class="box-title">Modifier Enfant</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form">
                 <div class="form-group" >
-                    <label for="inputEmail3">Prénom</label>
+                    <label for="inputEmail3">Prénom *</label>
                     <input type="text" name="chd_firstname" class="form-control" required value="<?= $childData['chd_firstname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Nom </label>
+                    <label for="inputEmail3">Nom *</label>
                     <input type="text" name="chd_lastname" class="form-control" required value="<?= $childData['chd_lastname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Sexe</label>
+                    <label for="inputform">Date de naissance</label>
+                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
+
+                </div>
+                <div class="form-group">
+                    <label for="inputform">Sexe *</label>
                     <div class="radio">
                         <label>
                             <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
@@ -146,14 +139,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Date de naissance</label>
-                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
-
-                </div>
-                <div class="form-group">
                     <label for="inputform">Parent</label>
 
-                    <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                    <select data-placeholder="Sélectionnez un parent" class="form-control chosen-select">
                         <option value="0"></option>
                         <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
                             <option <?= $childData['user_usr_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
@@ -166,7 +154,7 @@
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
-                    <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez une classe" class="form-control chosen-select" >
                         <option value="0"></option>
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                             <option <?= $childData['class_cls_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
@@ -179,7 +167,7 @@
                     <input type="text" name="chd_comments" class="form-control" value="<?= $childData['chd_comments'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Interets</label>
+                    <label for="inputform">Intérêts</label>
                     <input type="text" name="chd_hobbies" class="form-control"  value="<?= $childData['chd_hobbies'] ?>">
                 </div>
 
@@ -192,7 +180,7 @@
                 <div class="form-group">
                     <input type="hidden" name="method" value="update"/>
                     <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Modifier enfant</button>
+                    <button type="submit" class="btn btn-primary" >Modifier Enfant</button>
                 </div>
             </form>
         </div>
