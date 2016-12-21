@@ -333,7 +333,35 @@ $(document).ready(function() {
         $( ".menu1" ).show( "fast" );
     });
 
+    //-------------------------monthly report functioning---------------//
 
+    $( "#devCog" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text1, #home" ).show( "fast" );
+    });
+
+    $( "#devMot" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text2, #home" ).show( "fast" );
+    });
+
+    $( "#motFin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text3, #home" ).show( "fast" );
+    });
+    $( "#devlin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text4, #home" ).show( "fast" );
+    });
+    $( "#devEmo" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text5, #home" ).show( "fast" );
+    });
 
     //----------------Select child-------------------
    /* $('#child').hide();
@@ -347,12 +375,12 @@ $(document).ready(function() {
 
     });*/
 
-    //--------------------------Dqte Picker---------------------//
+    //--------------------------Date Picker---------------------//
 
 
 $( function() {
     $( "#datepicker" ).datepicker();
-} );
+});
 
 
 });
