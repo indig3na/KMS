@@ -51,6 +51,7 @@
                             <label for="inputform">Parent</label>
 
                             <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                                <option value="0"></option>
                                 <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>
@@ -63,6 +64,7 @@
                             <label for="inputform">Classe</label>
 
                             <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                                <option value="0"></option>
                                 <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
                                 <?php endforeach ?>
@@ -152,8 +154,9 @@
                     <label for="inputform">Parent</label>
 
                     <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
+                        <option value="0"></option>
                         <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option <?= $childData['user_usr_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -164,8 +167,9 @@
                     <label for="inputform">Classe</label>
 
                     <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <option value="0"></option>
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
-                            <option value="<?= $id ?>"><?= $value ?></option>
+                            <option <?= $childData['class_cls_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 

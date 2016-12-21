@@ -65,6 +65,7 @@
                     <label for="inputform">Classe</label>
 
                     <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <option value="0"></option>
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                             <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
@@ -75,6 +76,7 @@
                     <label for="inputform">City</label>
 
                     <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
+                        <option value="0"></option>
                         <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
                             <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
@@ -145,6 +147,7 @@
                         <label for="inputform">Nursery</label>
 
                         <select data-placeholder="Sélectionnez des parents" name="nursery_nur_id" class="form-control chosen-select">
+                            <option value="0"></option>
                             <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                             <?php endforeach ?>
@@ -157,6 +160,7 @@
                         <label for="inputform">Classe</label>
 
                         <select data-placeholder="Sélectionnez des classes" name="class_cls_id" class="form-control chosen-select" >
+                            <option value="0"></option>
                             <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                             <?php endforeach ?>

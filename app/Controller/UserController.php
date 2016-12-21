@@ -293,7 +293,7 @@ class UserController extends ControllerTemplate
                 $user_logged = $this->getUser();
                 $userIdConnected = $user_logged['usr_id'];
                if($user_logged['usr_role']=='ROLE_ADMIN'){
-                    $this->redirectToRoute('default_home');
+                    $this->redirectToRoute('class_class_get');
                 } 
                 if($user_logged['usr_role']=='ROLE_PAR') {
                     $this->redirectToRoute('child_child_get');

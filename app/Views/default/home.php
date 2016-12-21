@@ -168,7 +168,7 @@
                     </button> <br><br>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <form action="" class="form-inline" method="POST">
+            <form action="<?= $this->url('user_login_post')?>" class="form-inline" method="POST">
                 <div class="form-group">
                     <label for="useremail">Login</label>
                     <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">

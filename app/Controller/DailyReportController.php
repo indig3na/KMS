@@ -10,7 +10,7 @@ namespace Controller;
 
 use Model\DailyReportModel;
 use Model\ChildModel;
-use Model\UserModel;
+use Model\UserFunctionsModel;
 
 
 class DailyReportController extends ControllerTemplate{
@@ -27,9 +27,9 @@ class DailyReportController extends ControllerTemplate{
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $childModel = new ChildModel();
-        $userModel = new UserModel();
-        $fkData['child_chd_id'] = $childModel->findIndexedColumn('chd_firstname');
-        $fkData['user_usr_id'] = $userModel->findIndexedColumn('usr_firstname');
+        $userModel = new UserFunctionsModel();
+        $fkData['child_chd_id'] = $childModel->findIndexedColumns(['chd_firstname','chd_lastname'],' ');
+        $fkData['user_usr_id'] = $userModel->findIndexedColumns(['usr_firstname','usr_lastname'],' ');
 
         $vars = [
             'title' => 'Daily Report',
