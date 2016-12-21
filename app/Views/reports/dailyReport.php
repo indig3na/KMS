@@ -38,32 +38,37 @@
 
     <div style="display: none;" id="optionManger">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <a href="" id="matin" class="btn btn-block btn-primary ">Guter matin</a>
+            <a href="" id="matin" class="btn btn-block btn-primary ">Goûter matin</a>
             <a href="" id="midi" class="btn btn-block btn-primary ">Repas midi</a>
-            <a href="" id="aprésmidi" class="btn btn-block btn-primary ">Guter aprés-midi</a>
+            <a href="" id="apresmidi" class="btn btn-block btn-primary ">Goûter aprés-midi</a>
         </div>
     </div>
 
     <div style="display: none;" id="quant">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <a href="" id="tBien" class="btn btn-block btn-primary ">Três bien</a>
-            <a href="" id="bien" class="btn btn-block btn-primary ">Bien</a>
-            <a href="" id="mal" class="btn btn-block btn-primary ">Mal</a>
+            <form>
+                <input type="hidden" id="mangerType" name="repas" value=""/>
+                <input type="submit" id="tBien" name="quant" class="btn btn-block btn-primary "value="Très bien"/>
+                <input type="submit" id="bien" name="quant" class="btn btn-block btn-primary "value="Bien"/>
+                <input type="submit" id="mal" name="quant" class="btn btn-block btn-primary "value="Mal"/>
+            </form>
         </div>
     </div>
 
     <div style="display: none;" id="optionFisio">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <a href="" id="wet" class="btn btn-block btn-primary ">J'ai fais Pipi</a>
-            <a href="" id="midi" class="btn btn-block btn-primary ">J'ai fais Caca</a>
+            <input type="hidden" id="fisioType" name="fisio" value=""/>
+            <input type="submit" id="wet" name="quelle" class="btn btn-block btn-primary "value="Pipi">
+            <input type="submit" id="poo" name="quelle" class="btn btn-block btn-primary "value="Caca">
         </div>
     </div>
 
     <div style="display: none;" id="optionSieste">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <a href="" id="45m" class="btn btn-block btn-primary ">Sieste 45 min</a>
-            <a href="" id="60m" class="btn btn-block btn-primary ">Sieste 60 min</a>
-            <a href="" id="90m" class="btn btn-block btn-primary ">Sieste 90 min</a>
+            <input type="hidden" id="siesteType" name="repas" value=""/>
+            <input type="submit" id="45m" class="btn btn-block btn-primary "value="Sieste 45 min">
+            <input type="submit" id="60m" class="btn btn-block btn-primary "value="Sieste 60 min">
+            <input type="submit" id="90m" class="btn btn-block btn-primary "value="Sieste 90 min">
         </div>
     </div>
 

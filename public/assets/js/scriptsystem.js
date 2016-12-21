@@ -284,6 +284,23 @@ $(document).ready(function() {
     $( "#matin" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
+        $( "#mangerType").val( "matin");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+    $( "#midi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "midi");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+        $( "#apresmidi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "apresmidi");
         $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#quant, #home" ).show( "fast" );
     });
@@ -293,6 +310,14 @@ $(document).ready(function() {
         //console.log("click");
         $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#optionFisio, #home" ).show( "fast" );
+    });
+
+    $( "#pipi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#fisioType").val( "pipi");
+        $( "#optionFisio, #home" ).hide( "drop", { direction: "down" }, "fast" );
+        $( ".menu1" ).show( "fast" );
     });
 
     $( "#sieste" ).click(function(event) {
