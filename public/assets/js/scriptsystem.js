@@ -89,7 +89,7 @@ $(document).ready(function() {
     //fonction pour appliquer la librairie chosen à un objet et l'afficher comme un formulaire bootstrap
     function styleSelect(jqobj){
         jqobj.chosen({disable_search_threshold:8});
-        jqobj.next().css({width:'100%'}).children('ul').addClass('form-control');
+        jqobj.next().css({width:'100%'}).children('ul,a').addClass('form-control');
     }
     //initialiser la librairie chosen sur les select
     styleSelect($('.chosen-select'));

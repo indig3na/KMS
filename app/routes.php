@@ -32,6 +32,8 @@ $w_routes = array(
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //Liste des parents d'élèves d'une classe
     ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
+    //Liste des rapports journaliers d'une classe
+    ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
     //DailyReport
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
@@ -50,10 +52,10 @@ $w_routes = array(
     ['POST', '/app/manage/parent/', 'User#par_post', 'user_par_post'],
 
     //Users login
-    ['GET','/', 'User#login', 'user_login'],
-    ['POST','/', 'User#loginPost', 'user_login_post'],
+    ['GET','/login/', 'User#login', 'user_login'],
+    ['POST','/login/', 'User#loginPost', 'user_login_post'],
     //logout
-    ['GET','/', 'User#logout', 'users_logout'],
+    ['GET','/logout/', 'User#logout', 'users_logout'],
     //MDP oublié
     ['GET','/app/manage/user/lostpassword/', 'User#lostpassword', 'user_lostpassword'],
     ['POST','/app/manage/user/lostpassword/', 'User#lostpasswordPost', 'user_lostpassword_post'],

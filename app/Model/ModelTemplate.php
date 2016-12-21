@@ -137,6 +137,31 @@ abstract class ModelTemplate extends Model
         return $sth->fetch();
     }
 
+     /**
+     * Compte les occurences de valeurs dans une colonne et associe ce nombre à la valeur
+     * @param $column Le nom de la colonne
+     * @returns array associatif colonneVal => nombre d'éléments
+     */
+    public function countByCol($column)
+    {
+        //Sélectionner l'id et a colonne $column
+        $sql = ''
+            . 'SELECT count(*) AS Count, `' . $column . '` FROM ' . $this->table.'
+            GROUP BY `' .$column. '`';
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute();
+        $data = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        //si erreur, renvoyer false
+        if ($data === false) {
+            return false;
+        }
+        //si réussite, créer un array associatif id => valeur de la colonne spécifiée
+        $result = array();
+        foreach ($data as $row) {
+            $result[$row[$column]] = $row['Count'];
+        }
+        return $result;
+    }
     
     
     /**
