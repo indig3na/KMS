@@ -100,7 +100,12 @@
                     <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des enfants</a>
                 </li>
             <?php  endif ; ?>
-            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('child_parentList_get', ['classeId'=>$w_user['class_cls_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Contact des parents</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN')): ?>
                 <li>
                     <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
                 </li>

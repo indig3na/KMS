@@ -13,17 +13,14 @@
             <th>Nom</th>
             <th>Date de naissance</th>
             <th>Hobby</th>
+            <th>Remarques</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($childList as $currentChild) : ?>
-        <tr>
+        <tr class="kms-dataset">
             <td>
-               <?php if ($currentChild['chd_comments']=='M') : ?>
-                <span class="glyphicon glyphicon-log-out"></span>
-               <?php else : ?>
-                <span class="glyphicon glyphicon-log-out"></span>
-               <?php endif; ?> 
+               <img src="<?= $this ->assetUrl('img/filesId/'.$currentChild['chd_img_path']) ?>" style="max-height:30px"/> 
             </td>
             <td>
                <?= $currentChild['chd_firstname'] ?> 
@@ -36,6 +33,9 @@
             </td>
             <td>
                <?= $currentChild['chd_hobbies'] ?> 
+            <td>
+               <?= $currentChild['chd_comments'] ?> 
+            </td>
             </td>
         </tr>
         <?php endforeach; ?>
