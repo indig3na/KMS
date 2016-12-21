@@ -54,7 +54,7 @@ class ProgramController extends ControllerTemplate
         ];
         
         if ($this->getUser()['usr_role'] == 'ROLE_EDU'){
-            $vars['noAction'] = true;
+            $vars['noAction'] = 'true';
         }
         $this->show('crud/crud',$vars);
     }
