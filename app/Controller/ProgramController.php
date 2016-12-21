@@ -52,6 +52,10 @@ class ProgramController extends ControllerTemplate
             'fkData' => $fkData,
             'mult' => array_keys($mult),
         ];
+        
+        if ($this->getUser()['usr_role'] == 'ROLE_EDU'){
+            $vars['noAction'] = true;
+        }
         $this->show('crud/crud',$vars);
     }
 
