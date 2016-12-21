@@ -49,10 +49,10 @@ $w_routes = array(
     ['POST', '/app/manage/parent/', 'User#par_post', 'user_par_post'],
 
     //Users login
-    ['GET','/', 'User#login', 'user_login'],
-    ['POST','/', 'User#loginPost', 'user_login_post'],
+    ['GET','/login/', 'User#login', 'user_login'],
+    ['POST','/login/', 'User#loginPost', 'user_login_post'],
     //logout
-    ['GET','/', 'User#logout', 'users_logout'],
+    ['GET','/logout/', 'User#logout', 'users_logout'],
     //MDP oublié
     ['GET','/app/manage/user/lostpassword/', 'User#lostpassword', 'user_lostpassword'],
     ['POST','/app/manage/user/lostpassword/', 'User#lostpasswordPost', 'user_lostpassword_post'],
