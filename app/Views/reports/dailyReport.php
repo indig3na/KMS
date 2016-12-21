@@ -15,18 +15,10 @@
         </select>
         <div>
             <h4>Date:</h4>
-            <p>Date: <input type="text" id="datepicker"></p>
+            <p>Date: <input type="text" id="datepicker" value="<?= date("Y-m-d") ?>"></p>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    
+
     <div class="menu1">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <a href="" id="manger" class="btn btn-block btn-primary ">Manger</a>
@@ -46,7 +38,7 @@
 
     <div style="display: none;" id="quant">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form>
+            <form action="" method="post">
                 <input type="hidden" id="mangerType" name="repas" value=""/>
                 <input type="submit" id="tBien" name="quant" class="btn btn-block btn-primary "value="Très bien"/>
                 <input type="submit" id="bien" name="quant" class="btn btn-block btn-primary "value="Bien"/>
@@ -57,26 +49,31 @@
 
     <div style="display: none;" id="optionFisio">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <input type="hidden" id="fisioType" name="fisio" value=""/>
+            <form action="" method="post">
             <input type="submit" id="wet" name="quelle" class="btn btn-block btn-primary "value="Pipi">
             <input type="submit" id="poo" name="quelle" class="btn btn-block btn-primary "value="Caca">
+            </form>
         </div>
     </div>
 
     <div style="display: none;" id="optionSieste">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <input type="hidden" id="siesteType" name="repas" value=""/>
-            <input type="submit" id="45m" class="btn btn-block btn-primary "value="Sieste 45 min">
-            <input type="submit" id="60m" class="btn btn-block btn-primary "value="Sieste 60 min">
-            <input type="submit" id="90m" class="btn btn-block btn-primary "value="Sieste 90 min">
+            <form action="" method="post">
+            <input type="submit" id="45m" name="sieste" class="btn btn-block btn-primary "value="Sieste 45 min">
+            <input type="submit" id="60m" name="sieste" class="btn btn-block btn-primary "value="Sieste 60 min">
+            <input type="submit" id="90m" name="sieste" class="btn btn-block btn-primary "value="Sieste 90 min">
+            </form>
         </div>
     </div>
 
     <div style="display: none;" id="text">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <h4>Only fill if no option available on the Maim Menu</h4>
-            <textarea rows="10" cols="151" placeholder="Comments here..."></textarea>
-            <button id="submitComments" type="submit" class="btn btn-block btn-success">Submit</button>
+            <h4>Only fill if no option available on the Main Menu</h4>
+            <form action="">
+                <textarea name="comments" rows="10" cols="177"></textarea>
+                <br><br>
+                <input type="submit" class="btn btn-block btn-primary">
+            </form>
         </div>
     </div>
 

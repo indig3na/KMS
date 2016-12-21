@@ -312,14 +312,6 @@ $(document).ready(function() {
         $( "#optionFisio, #home" ).show( "fast" );
     });
 
-    $( "#pipi" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#fisioType").val( "pipi");
-        $( "#optionFisio, #home" ).hide( "drop", { direction: "down" }, "fast" );
-        $( ".menu1" ).show( "fast" );
-    });
-
     $( "#sieste" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
