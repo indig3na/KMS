@@ -30,6 +30,8 @@ $w_routes = array(
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
     //Liste des élèves
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
+    //Liste des parents d'élèves d'une classe
+    ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
     //DailyReport
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
