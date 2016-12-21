@@ -526,6 +526,7 @@ class UserModel extends UsersModel
      * @param $column Le nom de la colonne
      * @returns array associatif primaryKey => colonne
      */
+
     public function findIndexedColumn($column)
     {
         //Sélectionner l'id et a colonne $column

@@ -280,14 +280,15 @@ class UserController extends ControllerTemplate
                 $auth->logUserIn($userData);
                 //récupération des infos du user connecté
                 $user_logged = $this->getUser();
-                if($user_logged['usr_role']=='ROLE_ADMIN'){
+                $userIdConnected = $user_logged['usr_id'];
+               if($user_logged['usr_role']=='ROLE_ADMIN'){
                     $this->redirectToRoute('default_home');
                 } 
                 if($user_logged['usr_role']=='ROLE_PAR') {
                     $this->redirectToRoute('child_child_get');
                 }
                 if($user_logged['usr_role']=='ROLE_EDU') {
-                    $this->redirectToRoute('class_class_get');
+                    $this->redirectToRoute('child_childList_get', ['userId' => $userIdConnected]);
                 }
                
             }
@@ -400,5 +401,6 @@ class UserController extends ControllerTemplate
         // On redirige vers la home
        $this->redirectToRoute('default_home');
     }
+    
 
 }

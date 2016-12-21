@@ -18,31 +18,31 @@
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" action="" enctype="multipart/form-data" id="addchildtolist" name="addchild" role="form">
                 <div class="form-group" >
-                    <label for="inputEmail3">Prénom *</label>
+                    <label for="inputEmail3">Prénom</label>
                     <input type="text" name="chd_firstname" class="form-control " required placeholder="firstname">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Nom *</label>
+                    <label for="inputEmail3">Nom </label>
                     <input type="text" name="chd_lastname" class="form-control " required placeholder="lastname">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Date de naissance *</label>
+                    <label for="inputform">Date de naissance</label>
                     <input type="date"  name="chd_birthday"  class="form-control">
 
                 </div>
 
                 <div class="form-group">
-                    <label for="inputform">Sexe *</label>
+                    <label for="inputform">Sexe</label>
                     <div class="radio ">
                         <label>
-                            <input type="radio" name="chd_gender" value="F">
-                            Féminin
+                            <input type="radio" name="chd_gender" value="M">
+                            Male
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="M" >
-                            Masculin
+                            <input type="radio" name="chd_gender" value="F" >
+                            Female
                         </label>
                     </div>
                 </div>
@@ -69,14 +69,25 @@
                             </select>
 
                 </div>
+
+
+
                 <div class="form-group">
-                    <label for="inputform">Commentaires</label>
-                    <input type="text" name="chd_comments" class="form-control" placeholder="commentaires" >
+                    <label for="inputform">Numero de téléphone</label>
+                    <input type="text" name="phoneNo" class="form-control "  placeholder="phone_no">
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Intérêts</label>
-                    <input type="text" name="chd_interest" class="form-control "  placeholder="Intérêts">
+                    <label for="inputform">Numero de téléphone 2</label>
+                    <input type="text" name="mobileNo" class="form-control"  placeholder="mobile_no">
 
+                </div>
+                <div class="form-group">
+                    <label for="inputform">Commentaires</label>
+                    <input type="text" name="chd_comments" class="form-control" placeholder="comments" >
+                </div>
+                <div class="form-group">
+                    <label for="inputform">interets</label>
+                    <input type="text" name="chd_interest" class="form-control "  placeholder="Hobbies">
                 </div>
 
                 <div class="form-group">
@@ -85,8 +96,7 @@
                     <input type="file" name="chd_photo">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary " >Ajouter</button>
-
+                    <button type="submit" class="btn btn-primary ">Ajout enfant</button>
                 </div>
             </form>
         </div>
@@ -104,48 +114,46 @@
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Annuler</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
-                <h3 class="box-title">Modifier enfant</h3>
+                <h3 class="box-title">Edit children</h3>
             </div>
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
             <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form">
                 <div class="form-group" >
-                    <label for="inputEmail3">Prénom *</label>
+                    <label for="inputEmail3">Prénom</label>
                     <input type="text" name="chd_firstname" class="form-control" required value="<?= $childData['chd_firstname'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3">Nom * </label>
-
+                    <label for="inputEmail3">Nom </label>
                     <input type="text" name="chd_lastname" class="form-control" required value="<?= $childData['chd_lastname'] ?>">
                 </div>
-                
                 <div class="form-group">
-                    <label for="inputform">Date de naissance *</label>
-                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
-
-                </div>
-                <div class="form-group">
-                    <label for="inputform">Sexe *</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
-                            Féminin
-                        </label>
-                    </div>
+                    <label for="inputform">Sexe</label>
                     <div class="radio">
                         <label>
                             <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
-                            Masculin
+                            Male
                         </label>
                     </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
+                            Female
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputform">Date de naissance</label>
+                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
+
                 </div>
                 <div class="form-group">
                     <label for="inputform">Parent</label>
 
                     <select data-placeholder="Sélectionnez des parents" class="form-control chosen-select">
                         <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
-                            <option <?= $childData['user_usr_id'] == $id ? 'selected' : '' ?> value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -157,7 +165,7 @@
 
                     <select data-placeholder="Sélectionnez des classes" class="form-control chosen-select" >
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
-                            <option <?= $childData['class_cls_id'] == $id ? 'selected' : '' ?> value="<?= $id ?>"><?= $value ?></option>
+                            <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
 
@@ -167,7 +175,7 @@
                     <input type="text" name="chd_comments" class="form-control" value="<?= $childData['chd_comments'] ?>" >
                 </div>
                 <div class="form-group">
-                    <label for="inputform">Intérêts</label>
+                    <label for="inputform">Interets</label>
                     <input type="text" name="chd_hobbies" class="form-control"  value="<?= $childData['chd_hobbies'] ?>">
                 </div>
 
@@ -190,9 +198,8 @@
 <!--list display-->
 <?php else: ?>
 <section class="content" id="list">
-
     <div class="panel panel-success" >
-        <div class="panel-heading"><h3><?= $title ?> </h3><a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout enfant</a></div>
+        <div class="panel-heading"><h3 style="display: inline;"><?= $title ?> </h3><a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout enfant</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
                 <div class="box-tools">
@@ -230,10 +237,10 @@
                                                 <?php if(empty($value)): ?>
                                                 <?php elseif (is_array($value)): ?>
                                                     <?php foreach ($value as $val): ?>
-                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
+                                                        <span class="well well-sm kms-option" data-val="<?= $val ?>" value="<?= $val ?>"><?= $fkData[$key][$val] ?></span>
                                                     <?php endforeach ?>
                                                 <?php else: ?>
-                                                    <span class="kms-option" data-val="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
+                                                    <span class="kms-option" data-val="<?= $value ?> "value="<?= $value ?>"><?= $fkData[$key][$value] ?></span>
                                                 <?php endif ?>
                                             </td>
                                         <?php elseif(isset($img) && in_array($key,$img) && !empty($value)): ?>
@@ -255,6 +262,7 @@
                         ?>
                     </tbody>
                 </table>
+
             </div>
         </div>
 

@@ -18,9 +18,9 @@ class ChildController extends ControllerTemplate
      *  CRUD Child table in GET method
      */
     public function child_get(){
-        //model nécessaire pour acces BD
+        //model to access db
         $model = new ChildModel();
-        //récupérer données
+        //get datas
         if (isset ($_GET['class'])){
             $class = intval($_GET['class']);
             $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'class_cls_id',$class);    
@@ -50,10 +50,12 @@ class ChildController extends ControllerTemplate
         $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
 
         $vars = [
+
             //titre de page
             'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
             'header' => ['Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent','Portrait'],
+
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
             //données
@@ -82,16 +84,18 @@ class ChildController extends ControllerTemplate
             $gender = isset($_POST['chd_gender']) ? trim(strip_tags($_POST['chd_gender'])) : '';
             $hobbies = isset($_POST['chd_hobbies']) ? trim(strip_tags($_POST['chd_hobbies'])) : '';
             $comments = isset($_POST['chd_comments']) ? trim(strip_tags($_POST['chd_comments'])) : '';
+            $photoId = '';
 
             $method = $_POST['method'];
             $id = '';
 
-            // validation des données pour children
+            // children form data validation
             $succesList = array();
             $success = false;
             $errorList = array();
             $data = array();
             if (empty($firstname)) {
+
                 $errorList[] = 'Prénom requis';
                 $success = false;
             }
@@ -115,16 +119,25 @@ class ChildController extends ControllerTemplate
                 $errorList[] = 'Sexe requis';
                 $success = false;
             }
-            //si des fichiers ont été téléversés
-            if (sizeof($_FILES) > 0) {
-                //je récupère les données du fichier 'filForm'
-                $fileUpload = $_FILES['photo'];
-                //verification des fichier (sécurité)
+            //if file upoladed
+
+
+            // Check file size
+            if (sizeof($_FILES) > 500000)
+            {
+                $errorList[] = "Taille de l'image dépasse 5Mb.";
+            }
+            elseif (sizeof($_FILES) > 0)
+            {
+                // get file data from form
+                $fileUpload = $_FILES['chd_photo'];
+                //Check file security extension
                 $extension = substr($fileUpload['name'], -4);
                 //check
                 if ($extension != '.php') {
-                    //je téléverse le fichier
-                    if (move_uploaded_file($fileUpload['tmp_name'], '../../public/assets/img/filesId/'.$fileUpload['name'])) {
+                    //Upload file
+                    if (move_uploaded_file($fileUpload['tmp_name'], '../public/assets/img/filesId/'.$fileUpload['name'])) {
+                        $photoId =$fileUpload['name'];
                         $succesList[]= 'fichier téléversé';
                     }else{
 
@@ -135,6 +148,7 @@ class ChildController extends ControllerTemplate
                 }
             }
 
+            // data
             $data = [
                 'chd_firstname' => $firstname,
                 'chd_lastname' => $lastname,
@@ -142,7 +156,7 @@ class ChildController extends ControllerTemplate
                 'chd_gender' => $gender,
                 'chd_hobbies' => $hobbies,
                 'chd_comments' => $comments,
-
+                'chd_img_path' => $photoId
             ];
             // if input ok
             if (empty($errorList)) {
@@ -153,6 +167,7 @@ class ChildController extends ControllerTemplate
                     $childData = $model->insert($data);
                     // if not inserted error
                     if ($childData === false) {
+
                         $errorList[] = 'Erreur d\'insertion<br>';
                     } else {
                         $succesList[] = 'Information sur l\'enfant inséré';
@@ -179,10 +194,10 @@ class ChildController extends ControllerTemplate
                 $model = new ChildModel();
                 $deletedData = $model->delete($id);
                 // if not deleted error
-                // if not updated error
                 if ($deletedData === false) {
                     $errorList[] = 'Erreur de suppression<br>';
                 } else {
+
                     $succesList[] = 'Information sur l\'enfant supprimé';
                     $success = true;
                 }
@@ -196,7 +211,15 @@ class ChildController extends ControllerTemplate
             }
         }
 
-
+        
+    }
+    public function childList_get($userId){
+       // debug($userId);
+        $child = new ChildModel();
+        $childList = $child ->getListClass($userId);
+       // debug($childList);
+        
+       $this->show('child/ChildList_get',array('childList'=> $childList));
     }
 
 }
