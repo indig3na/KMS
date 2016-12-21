@@ -345,19 +345,29 @@ class ChildModel extends ModelTemplate
         return $this->dbh;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public function getListClass($userId){
+         $sql = '
+                SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    class ON class.cls_id = child.class_cls_id
+                        INNER JOIN
+                    user ON class.cls_id = user.class_cls_id
+                AND user.usr_id =:userId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':userId', $userId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+    
 }

@@ -157,10 +157,17 @@
 <section id="login">
     <div class="well">
         <div class="container text-center">
-            <h3>Login for more stuff</h3>
+            <h3>Connexion</h3>
 
-            <p>Enter your email and password</p>
-
+            <p>Saisissez votre email et mot de passe</p>
+            
+            <?php if(sizeof($errorList > 0)) : ?>
+                <?php foreach ($errorList as $currentErrorList) : ?>
+                    <button type="button" class="btn btn-danger btn-block">
+                        <?php echo $currentErrorList; ?>
+                    </button> <br><br>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <form action="" class="form-inline" method="POST">
                 <div class="form-group">
                     <label for="useremail">Login</label>
@@ -168,7 +175,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userpassword">Password</label>
-                    <input type="text" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
+                    <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
                 <button type="submit" class="btn btn-default">Login</button>
                 <hr>
@@ -481,39 +488,6 @@
 
 <footer>
     <hr>
-    <div class="container text-center">
-        <h3>Login for more stuff</h3>
-
-        <p>Enter your email and password</p>
-
-        <form action="" class="form-inline">
-            <div class="form-group">
-                <label for="useremail">Login</label>
-                <input type="email" class="form-control" id="useremail" placeholder="Your email">
-            </div>
-            <div class="form-group">
-                <label for="userpassword">Password</label>
-                <input type="text" class="form-control" id="userpassword" placeholder="Enter your Password">
-            </div>
-            <button type="submit" class="btn btn-default">Login</button>
-            <hr>
-        </form>
-
-        </form>
-
-        <hr>
-        <ul class="list-inline">
-            <li><a href="http://www.twitter.com/Ahrach">Twitter</a></li>
-            <li><a href="http://www.facebook.com/Ahrach">Facebook</a></li>
-            <li><a href="http://www.youtube.com/ahrach">YouTube</a></li>
-        </ul>
-
-        <p>&copy; Copyright @ 2016</p>
-
-    </div>
-    <!-- end Container-->
-
-
 </footer>
 <!--Google Maps API-->
 <script type="text/javascript"

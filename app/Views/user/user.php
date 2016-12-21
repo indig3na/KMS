@@ -4,7 +4,7 @@
 
 <!--display-->
 <?php// var_dump($userData) ;?>
-
+<!--add user-->
 <section class="content" id="addchild">
     <div class="panel panel-success">
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
@@ -97,7 +97,7 @@
 
 
 <?php if (!empty($_GET['id'])):?>
-<!--edit child-->
+<!--edit user-->
 <section class="content" id="editchild">
     <div class="panel panel-success">
         <div class="panel-heading"><?= $title ?> <a class="btn btn-danger kms-crud-cancel-btn btn-flat pull-right" style="margin-top:-6px;">Cancel</a></div>
@@ -193,22 +193,25 @@
 
 <?php else :?>
 
-<!--list item-->
+<!--list display-->
 
 <section class="content" id="list">
     <div class="panel panel-success">
-        <div class="panel-heading"><h3 class="box-title" style="display:inline"> <?= $title ?>s</h3> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout <?= $role ?></a></div>
+        <div class="panel-heading"><h3 style="display: inline;"><?= $title ?></h3> <a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">add user</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
+                <br>
+
                 <div class="box-tools">
                     <div class="input-group">
-                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
+                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 250px; height: 36px;" placeholder="Search for...">
                         <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default"><i class="fa fa-search "></i></button>
+                            <button class="btn btn-sm btn-default"><i class="fa fa-search fa-2x "></i></button>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="box-body table-responsive">
                 <!-- Table -->
                 <?php if (!empty($data)): ?>

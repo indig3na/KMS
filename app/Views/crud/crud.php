@@ -42,6 +42,7 @@
                         <td><input class="form-control kms-add kms-inp" type="text" name="<?= $key ?>"/></td>
                     <?php endif ?>
                 <?php endforeach ?>
+                
                 <td class="kms-action kms-add"><a class="btn btn-success" href="#" id="kms-crud-add-btn">Ajouter</a></td>
             </tr>
             <?php //lignes de données ?>

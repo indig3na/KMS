@@ -10,7 +10,8 @@ class DefaultController extends ControllerTemplate
      */
     public function home()
     {
-        $this->show('default/home');
+        $errorList = array();
+        $this->show('default/home', array('errorList'=>$errorList));
     }
 
 }

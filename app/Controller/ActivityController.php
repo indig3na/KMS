@@ -21,8 +21,8 @@ class ActivityController extends ControllerTemplate
         $activitymodel = new ActivityModel();
         $tabledata = $activitymodel->findAllColumns(['act_id', 'act_name', 'act_material', 'act_description']);
         $actVars = [
-            'title' => 'Activity',
-            'header' => ['Activity', 'Material', 'Description'],
+            'title' => 'Activités',
+            'header' => ['Activités', 'Materiels', 'Déscription'],
             'primaryKey' => 'act_id',
             'data' => $tabledata
         ];
@@ -47,7 +47,7 @@ class ActivityController extends ControllerTemplate
         $errorList = array();
         $data = array();
         if (empty($name)) {
-            $errorList[] = 'Activity required<br>';
+            $errorList[] = 'Activité obligatoire';
             $success = false;
         }
         $data = [
@@ -64,9 +64,9 @@ class ActivityController extends ControllerTemplate
                 $activityData = $activityModel->insert($data);
                 // if not inserted error
                 if ($activityData === false) {
-                    $errorList[] = 'Insert Error<br>';
+                    $errorList[] = 'Erreur dans l\'insertion';
                 } else {
-                    $succesList[] = 'Activity inserted';
+                    $succesList[] = 'Activité insérée';
                     $success = true;
                 }
             } //update data for given Id
@@ -75,9 +75,9 @@ class ActivityController extends ControllerTemplate
                 $updateData = $activityModel->update($data, $id, $stripTags = true);
                 // if not updated error
                 if ($updateData === false) {
-                    $errorList[] = 'Update Error<br>';
+                    $errorList[] = 'Erreur dans la mise à jour';
                 } else {
-                    $succesList[] = 'Activity Updated';
+                    $succesList[] = 'Activité mise à jour';
                     $success = true;
                 }
             }
@@ -92,9 +92,9 @@ class ActivityController extends ControllerTemplate
             // if not deleted error
             // if not updated error
             if ($deletedData === false) {
-                $errorList[] = 'Delete Error<br>';
+                $errorList[] = 'Erreur dans la suppression';
             } else {
-                $succesList[] = 'Activity Deleted';
+                $succesList[] = 'Activité supprimée';
                 $success = true;
             }
 

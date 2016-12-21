@@ -33,24 +33,25 @@
             <li class="dropdown user user-menu">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i>
-                    <span>Username <i class="caret"></i></span>
+                    <span><?= $w_user['usr_firstname'].' '.$w_user['usr_lastname'] ?></span>
+                    <!--span>Username <i class="caret"></i></span-->
                 </a>
-                <ul class="dropdown-menu">
+                <!--ul class="dropdown-menu">
                     <li class="user-body">
                         <div class="col-xs-4 text-center">
                             <a href="#accountSettings/profile">change Prof</a>
                         </div>
-                        <div class="col-xs-4 text-center">
+                        <!--div class="col-xs-4 text-center">
                             <a href="#accountSettings/email">changEmail</a>
                         </div>
                         <div class="col-xs-4 text-center">
                             <a href="#accountSettings/password">changepswd</a>
                         </div>
                     </li>
-                </ul>
+                </ul-->
             </li>
             <li class="dropdown user user-menu">
-                <a href="#">
+                <a href="<?= $this->url('users_logout')?>">
                     <i class="fa fa-fw fa-sign-out"></i>
                     <span>Lougout</span>
                 </a>
@@ -59,11 +60,13 @@
     </div><!-- end top navbar -->
 
 </nav>
+    
+   <?php/* debug($w_user) */?>
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
             <li class="active">
                 <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Dashboard</a>
                 <ul class="nav-pills nav-stacked" style="list-style-type:none;">
@@ -71,44 +74,67 @@
                     <li><a href="#">link2</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>Calendrier</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('class_class_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa  fa-graduation-cap  fa-stack-1x "></i></span>Educateurs</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('user_admin_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open  fa-stack-1x "></i></span>Administration</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Établissements</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Salles de classe</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programmes</a>
-            </li>
-            <li>
-                <a href="<?= $this->url('schoolYear_schoolyear_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Années scolaires</a>
-            </li>
-
-            <li>
-                <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-clock-o  fa-stack-1x "></i></span>Events</a>
-            </li>
-
-            <li>
-                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
-            </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>calendar</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('class_class_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educator</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_PAR')): ?>
+                <li>
+                    <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Children</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des enfants</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classrooms</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Program</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activité</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-clock-o  fa-stack-1x "></i></span>Events</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+                </li>
+            <?php  endif ; ?>
         </ul>
     </div><!-- end side bar -->
 

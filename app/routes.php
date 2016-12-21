@@ -28,6 +28,8 @@ $w_routes = array(
     //Child
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
+    //Liste des élèves
+    ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //DailyReport
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
@@ -59,8 +61,6 @@ $w_routes = array(
     ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
     //Calendar
     ['GET', '/app/manage/calendar/', 'Calendar#calendar_get', 'calendar_calendar_get'],
-
-
 );
 
 
