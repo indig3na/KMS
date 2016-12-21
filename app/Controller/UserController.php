@@ -241,7 +241,7 @@ class UserController extends ControllerTemplate
         $errorList = array();
         $login = '';
     
-        $this->show('default/home', array('errorList' =>$errorList, $email));
+        $this->show('default/home', array('errorList' =>$errorList, 'login'=> $login));
     }
     
     public function loginPost(){
@@ -291,6 +291,8 @@ class UserController extends ControllerTemplate
                     $this->redirectToRoute('child_childList_get', ['userId' => $userIdConnected]);
                 }
                
+            }else{
+                $errorList[]='Identifiant ou mot de passe invalide !<br>';
             }
         }
         $this->show('default/home', array('errorList' =>$errorList));

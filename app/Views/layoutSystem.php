@@ -120,7 +120,7 @@
                     <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Program</a>
                 </li>
             <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
                     <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activité</a>
                 </li>
