@@ -131,7 +131,7 @@
                     <a href="<?= $this->url('schoolYear_schoolyear_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-calendar-o fa-stack-1x "></i></span>Années scolaires</a>
                 </li>
             <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
                     <a href="<?= $this->url('crud_city_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-building fa-stack-1x "></i></span>Villes</a>
                 </li>
