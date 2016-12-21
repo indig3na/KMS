@@ -284,6 +284,23 @@ $(document).ready(function() {
     $( "#matin" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
+        $( "#mangerType").val( "matin");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+    $( "#midi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "midi");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+        $( "#apresmidi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "apresmidi");
         $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#quant, #home" ).show( "fast" );
     });
@@ -293,6 +310,14 @@ $(document).ready(function() {
         //console.log("click");
         $( ".menu1" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#optionFisio, #home" ).show( "fast" );
+    });
+
+    $( "#pipi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#fisioType").val( "pipi");
+        $( "#optionFisio, #home" ).hide( "drop", { direction: "down" }, "fast" );
+        $( ".menu1" ).show( "fast" );
     });
 
     $( "#sieste" ).click(function(event) {
@@ -329,54 +354,13 @@ $(document).ready(function() {
         $('#child').show();
 
     });*/
-    //---------------------------Calendar----------------
-    YUI().use(
-        'aui-scheduler',
-        function(Y) {
-            var events = [
-                {
-                    content: 'Partial Lunar Eclipse',
-                    endDate: new Date(2016, 12, 25, 5),
-                    startDate: new Date(2016, 12, 25, 1)
-                },
-                {
-                    color: "#8d8",
-                    content: 'Earth Day Lunch',
-                    disabled: true,
-                    endDate: new Date(2016, 12, 22, 13),
-                    meeting: true,
-                    reminder: true,
-                    startDate: new Date(2016, 12, 22, 12)
-                },
-                {
-                    content: "Weeklong",
-                    endDate: new Date(2016, 12, 27),
-                    startDate: new Date(2016, 12, 21)
-                }
-            ];
 
-            var agendaView = new Y.SchedulerAgendaView();
-            var dayView = new Y.SchedulerDayView();
-            var weekView = new Y.SchedulerWeekView();
-            var monthView = new Y.SchedulerMonthView();
-
-            var eventRecorder = new Y.SchedulerEventRecorder();
-
-            new Y.Scheduler(
-                {
-                    activeView: weekView,
-                    boundingBox: '#myScheduler',
-                    date: new Date(),
-                    eventRecorder: eventRecorder,
-                    items: events,
-                    render: true,
-                    views: [dayView, weekView, monthView, agendaView]
-                }
-            );
-        }
-    );
+    //--------------------------Dqte Picker---------------------//
 
 
+$( function() {
+    $( "#datepicker" ).datepicker();
+} );
 
 
 });
