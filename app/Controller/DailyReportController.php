@@ -110,18 +110,7 @@ class DailyReportController extends ControllerTemplate{
                 }
             }
         }
-        //delete
-        if ($method === 'delete') {
-            $id = $_POST['id'];
-            $dailyReportModel = new DailyReportModel();
-            $deletedData = $dailyReportModel->delete($id);
-            if ($deletedData === false) {
-                $errorList[] = 'Deletion Error';
-            } else {
-                $succesList[] = 'Report Deleted';
-                $success = true;
-            }
-        }
+
         // show json errorList and/or successList message
         if ($success) {
             $this->showJson(['code' => 1, 'message' => implode('
