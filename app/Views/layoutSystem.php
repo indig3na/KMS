@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- Optional theme -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/stylesystem.css') ?>">
@@ -100,7 +101,7 @@
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programme</a>
+                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programmes</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
@@ -127,6 +128,11 @@
             <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
                     <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des Enfants</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
+                <li>
+                    <a href="<?= $this->url('dailyReport_dailyReport_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Rapports journaliers</a>
                 </li>
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_ADMIN')): ?>

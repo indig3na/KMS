@@ -32,9 +32,16 @@ $w_routes = array(
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //Liste des parents d'élèves d'une classe
     ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
+    //Liste des rapports journaliers d'une classe
+    ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
     //DailyReport
+    ['GET', '/app/manage/dailyReport/[:date]/[:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
+    ['POST', '/app/manage/dailyReport/['./*@[0-9]{4}-[0-9]{2}-[0-9]{2}*/':date]/[:childId]/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
-    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    //['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    //MonthlyReport
+    ['GET', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_get', 'monthlyReport_monthlyReport_get'],
+    ['POST', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_post', 'monthlyReport_monthlyReport_post'],
 
     //user
     ['GET', '/app/manage/administrator/', 'User#admin_get', 'user_admin_get'],
@@ -47,10 +54,10 @@ $w_routes = array(
     ['POST', '/app/manage/parent/', 'User#par_post', 'user_par_post'],
 
     //Users login
-//    ['GET','/', 'User#login', 'user_login'],
-    ['POST','/', 'User#loginPost', 'user_login_post'],
+    ['GET','/login/', 'User#login', 'user_login'],
+    ['POST','/login/', 'User#loginPost', 'user_login_post'],
     //logout
-    ['GET','/', 'User#logout', 'user_logout'],
+    ['GET','/logout/', 'User#logout', 'users_logout'],
     //MDP oublié
     ['GET','/app/manage/user/lostpassword/', 'User#lostpassword', 'user_lostpassword'],
     ['POST','/app/manage/user/lostpassword/', 'User#lostpasswordPost', 'user_lostpassword_post'],

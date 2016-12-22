@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <div class="btn-group navbar-btn navbar-right">
                 <a href="#login" class="btn btn-primary">Login</a>
-                <a class="btn btn-primary" href="<?= $this->url('user_logout')?>">Logout</a>
+                <a class="btn btn-primary" href="<?= $this->url('users_logout') ?>">Logout</a>
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="#gallery">Gallery</a>
@@ -168,7 +168,7 @@
                     </button> <br><br>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <form action="" class="form-inline" method="POST">
+            <form action="<?= $this->url('user_login_post')?>" class="form-inline" method="POST">
                 <div class="form-group">
                     <label for="useremail">Login</label>
                     <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">

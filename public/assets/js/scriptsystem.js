@@ -89,7 +89,7 @@ $(document).ready(function() {
     //fonction pour appliquer la librairie chosen à un objet et l'afficher comme un formulaire bootstrap
     function styleSelect(jqobj){
         jqobj.chosen({disable_search_threshold:8});
-        jqobj.next().css({width:'100%'}).children('ul').addClass('form-control');
+        jqobj.next().css({width:'100%'}).children('ul,a').addClass('form-control');
     }
     //initialiser la librairie chosen sur les select
     styleSelect($('.chosen-select'));
@@ -312,14 +312,6 @@ $(document).ready(function() {
         $( "#optionFisio, #home" ).show( "fast" );
     });
 
-    $( "#pipi" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#fisioType").val( "pipi");
-        $( "#optionFisio, #home" ).hide( "drop", { direction: "down" }, "fast" );
-        $( ".menu1" ).show( "fast" );
-    });
-
     $( "#sieste" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
@@ -341,7 +333,35 @@ $(document).ready(function() {
         $( ".menu1" ).show( "fast" );
     });
 
+    //-------------------------monthly report functioning---------------//
 
+    $( "#devCog" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text1, #home" ).show( "fast" );
+    });
+
+    $( "#devMot" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text2, #home" ).show( "fast" );
+    });
+
+    $( "#motFin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text3, #home" ).show( "fast" );
+    });
+    $( "#devlin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text4, #home" ).show( "fast" );
+    });
+    $( "#devEmo" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text5, #home" ).show( "fast" );
+    });
 
     //----------------Select child-------------------
    /* $('#child').hide();
@@ -355,12 +375,12 @@ $(document).ready(function() {
 
     });*/
 
-    //--------------------------Dqte Picker---------------------//
+    //--------------------------Date Picker---------------------//
 
 
 $( function() {
     $( "#datepicker" ).datepicker();
-} );
+});
 
 
 });

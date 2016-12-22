@@ -23,12 +23,12 @@ class ChildController extends ControllerTemplate
         //get datas
         if (isset ($_GET['class'])){
             $class = intval($_GET['class']);
-            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'class_cls_id',$class);    
+            $tabledata = $model -> findAllColumns(['chd_img_path','chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id'],'class_cls_id',$class);    
         } elseif (isset ($_GET['parent'])){
             $parent = intval($_GET['parent']);
-            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path'],'user_usr_id',$parent);    
+            $tabledata = $model -> findAllColumns(['chd_img_path','chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id'],'user_usr_id',$parent);    
         } else {
-            $tabledata = $model -> findAllColumns(['chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id','chd_img_path']);    
+            $tabledata = $model -> findAllColumns(['chd_img_path','chd_id','chd_firstname','chd_lastname','chd_birthday','chd_gender','chd_hobbies','chd_comments','class_cls_id','user_usr_id']);    
         }
         if(!empty($_GET['id'])) {
             $childData = $model->find($_GET['id']);
@@ -48,13 +48,13 @@ class ChildController extends ControllerTemplate
 
         $classModel = new ClassModel();
         $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
-
+        
         $vars = [
 
             //titre de page
             'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent','Portrait'],
+            'header' => ['','Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent'],
 
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
@@ -206,7 +206,7 @@ class ChildController extends ControllerTemplate
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+                $this ->redirectToRoute('child_child_get');
             } else {
                 $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
             }

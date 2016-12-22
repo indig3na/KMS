@@ -9,7 +9,7 @@
 namespace Model;
 
 /**
- * Modèle pour la table Nursery
+ * Modèle pour la table DailyReport
  * one foreign key
  */
 class DailyReportModel extends ModelTemplate
@@ -52,21 +52,32 @@ class DailyReportModel extends ModelTemplate
     protected $drp_date;
 
     public function __construct($drp_id = 0, $drp_repas_matin = NULL, $drp_repas_midi = NULL, $drp_repas_apresmidi = NULL, $drp_fisio_wet = 0, $drp_fisio_poo = 0, $drp_sieste = 0, $drp_comments = NULL, $drp_date = '0000-00-00')
-{
-    parent::__construct();
-    $this->setPrimaryKey('drp_id');
+    {
+        parent::__construct();
+        $this->setPrimaryKey('drp_id');
 
-    $this->drp_id = $drp_id;
-    $this->drp_repas_matin = $drp_repas_matin;
-    $this->drp_repas_midi = $drp_repas_midi;
-    $this->drp_repas_apresmidi = $drp_repas_apresmidi;
-    $this->drp_fisio_wet = $drp_fisio_wet;
-    $this->drp_fisio_poo = $drp_fisio_poo;
-    $this->drp_sieste = $drp_sieste;
-    $this->drp_comments = $drp_comments;
-    $this->drp_date = $drp_date;
-}
+        $this->drp_id = $drp_id;
+        $this->drp_repas_matin = $drp_repas_matin;
+        $this->drp_repas_midi = $drp_repas_midi;
+        $this->drp_repas_apresmidi = $drp_repas_apresmidi;
+        $this->drp_fisio_wet = $drp_fisio_wet;
+        $this->drp_fisio_poo = $drp_fisio_poo;
+        $this->drp_sieste = $drp_sieste;
+        $this->drp_comments = $drp_comments;
+        $this->drp_date = $drp_date;
+    }
+    public function findDailyReport($childId,$date){
+        if (!is_numeric($childId)){
+            return false;
+        }
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE child_chd_id  = :childId AND drp_date  = :date  LIMIT 1';
+        $sth = $this->dbh->prepare($sql);
+        $sth->bindValue(':childId', $childId);
+        $sth->bindValue(':date', $date);
+        $sth->execute();
 
+        return $sth->fetch();
+    }
      //-----------------GETTERS & SETTERS--------------
 
     /**

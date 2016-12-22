@@ -12,13 +12,13 @@
 
     <?php $this->start('main_content')?>
 
-    <div class="panel panel-success">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3><?= $title ?></h3>
         </div>
         <!-- Table -->
 <?php endif; ?>
-    <table class=" table table-hover">
+    <table class=" table table-hover table-striped">
         <?php if (!empty($data)): ?>
             <thead>
             <tr>
@@ -32,10 +32,13 @@
             <?php if(!isset($noAction)): //ligne d'ajout ?>
                 <tr id="kms-add" class="kms-dataset">
                     <?php foreach ($data[0] as $key => $value): ?>
-                        <?php if ($key == $primaryKey): ?>
+                        <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
+                        <?php elseif (isset($ignoreAdd) && in_array($key,$ignoreAdd)): ?>
+                            <td></td>
                         <?php elseif (isset($fkData) && in_array($key, array_keys($fkData))): ?>
                             <td>
-                                <select data-placeholder="Cliquez pour sélectionner ou chercher..." class="form-control kms-add kms-select chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
+                                <select data-placeholder="Sélectionnez..." class="form-control kms-add kms-select chosen-select" <?= isset($mult) && in_array($key,$mult) ? 'multiple' : '' ?> name="<?= $key ?>">
+                                    <option value="0"></option>
                                     <?php foreach ($fkData[$key] as $id => $value): ?>
                                         <option value="<?= $id ?>"><?= $value ?></option>
                                     <?php endforeach ?>
