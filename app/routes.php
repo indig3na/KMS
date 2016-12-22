@@ -29,16 +29,18 @@ $w_routes = array(
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
     //Liste des élèves
+    ['GET', '/app/manage/childClassList/[:userId]/', 'Child#childClassList_get', 'child_childClassList_get'],
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //Liste des parents d'élèves d'une classe
     ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
     //Liste des rapports journaliers d'une classe
     ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
     //DailyReport - single
-    ['GET', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
+    ['GET', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_dontUse'],
     ['POST', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
     //Child daily report
-    ['GET', '/app/manage/childDailyReport/[:date]/[:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'],
+    ['GET', '/app/manage/childDailyReport/[:date]/[:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'], 
+    ['GET', '/app/manage/dailyReport/[:date]/[:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
     //DailyReport - selectList
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_redirect', 'dailyReport_dailyReport_redirect'],
