@@ -37,6 +37,8 @@ $w_routes = array(
     //DailyReport - single
     ['GET', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
     ['POST', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    //Child daily report
+    ['GET', '/app/manage/childDailyReport/[:date]/[:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'],
     //DailyReport - selectList
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_redirect', 'dailyReport_dailyReport_redirect'],

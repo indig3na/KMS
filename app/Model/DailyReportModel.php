@@ -260,7 +260,7 @@ class DailyReportModel extends ModelTemplate
             debug($stmt->errorInfo());
         }
         else {
-            return $stmt->fetchAll();
+            return $stmt->fetch();
         }
         
         return false;
