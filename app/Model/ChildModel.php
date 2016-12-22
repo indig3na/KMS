@@ -373,7 +373,7 @@ public function getListClass($userId){
         
         return false;
     }
-    public function getParentList($classeId){
+    public function getParentList($userId){
          $sql = '
                SELECT 
                     *
