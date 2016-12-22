@@ -4,7 +4,6 @@ namespace Controller;
 
 use Model\ProgramModel;
 use Model\ActivityModel;
-use Model\ClassModel;
 
 class ProgramController extends ControllerTemplate
 {
@@ -17,8 +16,6 @@ class ProgramController extends ControllerTemplate
         $pk = $model ->getPrimaryKey();
         //récupérer données
         $tabledata = $model -> findAllColumns(['prg_id','prg_name']);
-        $classModel = new ClassModel;
-        $classNr = $classModel->countByCol('program_prg_id');
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $fkData = array();
         //-vide-
@@ -35,7 +32,6 @@ class ProgramController extends ControllerTemplate
             //inclure les données de la table de correspondance dans la table données
             foreach ($tabledata as &$row){
                $row[$multKey]= isset ($multdata[$multKey][$row[$pk]]) ? $multdata[$multKey][$row[$pk]] : Null;
-               $row['classNr']= isset ($classNr[$row['prg_id']]) ? $classNr[$row['prg_id']] : Null;               
             }
             unset($row);
             $activityModel = new ActivityModel(); //automatically call right model???
@@ -48,19 +44,14 @@ class ProgramController extends ControllerTemplate
             //titre de page
             'title' => 'Programme',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['Programme *','Activités','Nombre de classes'],
+            'header' => ['Programme *','Activités'],
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'prg_id',
             //données
             'data' => $tabledata,
             'fkData' => $fkData,
             'mult' => array_keys($mult),
-            'ignoreAdd' => ['classNr']
         ];
-        
-        if ($this->getUser()['usr_role'] == 'ROLE_EDU'){
-            $vars['noAction'] = 'true';
-        }
         $this->show('crud/crud',$vars);
     }
 

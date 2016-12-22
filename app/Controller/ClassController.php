@@ -9,7 +9,6 @@
 namespace Controller;
 
 use Model\ClassModel;
-use Model\ChildModel;
 use Model\ProgramModel;
 use Model\SchoolYearModel;
 use Model\ClassroomModel;
@@ -23,13 +22,7 @@ class ClassController extends ControllerTemplate{
     {
         $model = new ClassModel();
         $tabledata = $model->findAllColumns(['cls_id', 'cls_name', 'program_prg_id', 'school_year_scy_id', 'classroom_clr_id' ]);
-        //Ajout Effectifs
-        $childModel= new ChildModel;
-        $size = $childModel ->countByCol('class_cls_id');
-        foreach ($tabledata as &$row){
-            $row['class_size'] = isset ($size[$row['cls_id']]) ? $size[$row['cls_id']] : Null;
-         }
-         unset($row);
+
         //initialisation of $fkdata
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
@@ -41,11 +34,10 @@ class ClassController extends ControllerTemplate{
         $fkData['classroom_clr_id'] = $classroomModel->findIndexedColumn('clr_name');
         $vars = [
             'title' => 'Classe',
-            'header' => ['Classe', 'Programme', 'Année scolaire', 'Salle de classe', 'Effectif'],
+            'header' => ['Classe', 'Programme', 'Année scolaire', 'Salle de classe'],
             'primaryKey' => 'cls_id',
             'data' => $tabledata,
-            'fkData' => $fkData,
-            'ignoreAdd' => ['class_size']
+            'fkData' => $fkData
         ];
         $this->show('crud/crud', $vars);
     }

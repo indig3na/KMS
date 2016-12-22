@@ -9,7 +9,7 @@
 namespace Model;
 
 /**
- * Modèle pour la table DailyReport
+ * Modèle pour la table Nursery
  * one foreign key
  */
 class DailyReportModel extends ModelTemplate
@@ -52,7 +52,7 @@ class DailyReportModel extends ModelTemplate
     protected $drp_date;
 
     public function __construct($drp_id = 0, $drp_repas_matin = NULL, $drp_repas_midi = NULL, $drp_repas_apresmidi = NULL, $drp_fisio_wet = 0, $drp_fisio_poo = 0, $drp_sieste = 0, $drp_comments = NULL, $drp_date = '0000-00-00')
-    {
+{
     parent::__construct();
     $this->setPrimaryKey('drp_id');
 
@@ -65,7 +65,7 @@ class DailyReportModel extends ModelTemplate
     $this->drp_sieste = $drp_sieste;
     $this->drp_comments = $drp_comments;
     $this->drp_date = $drp_date;
-    }
+}
 
      //-----------------GETTERS & SETTERS--------------
 

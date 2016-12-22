@@ -116,7 +116,7 @@ span.kms-option{
     display:inline-block;
     margin: 5px 0;
 }
-ul.chosen-choices.form-control,a.chosen-single.form-control{
+ul.chosen-choices.form-control{
     min-height:34px;
     padding:4px 12px;
     width: 100%;

@@ -2,8 +2,6 @@
 
 <?php $this->start('main_content') ?>
 
-
-
 <div style="" class="container">
     <h1 style="text-align: center;">My Day today</h1>
     <div>
@@ -13,12 +11,30 @@
                 <option value="<?= $id ?>"><?= $value ?></option>
             <?php endforeach ?>
         </select>
-        <div>
-            <h4>Date:</h4>
-            <p>Date: <input type="text" id="datepicker" value="<?= date("Y-m-d") ?>"></p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker1').datetimepicker();
+                });
+            </script>
         </div>
     </div>
 
+
+    <br>
+    <br>
     <div class="menu1">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <a href="" id="manger" class="btn btn-block btn-primary ">Manger</a>
@@ -30,56 +46,45 @@
 
     <div style="display: none;" id="optionManger">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <a href="" id="matin" class="btn btn-block btn-primary ">Goûter matin</a>
+            <a href="" id="matin" class="btn btn-block btn-primary ">Guter matin</a>
             <a href="" id="midi" class="btn btn-block btn-primary ">Repas midi</a>
-            <a href="" id="apresmidi" class="btn btn-block btn-primary ">Goûter aprés-midi</a>
+            <a href="" id="aprésmidi" class="btn btn-block btn-primary ">Guter aprés-midi</a>
         </div>
     </div>
 
     <div style="display: none;" id="quant">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
-                <input type="hidden" id="mangerType" name="repas" value=""/>
-                <input type="submit" id="tBien" name="quant" class="btn btn-block btn-primary "value="Très bien"/>
-                <input type="submit" id="bien" name="quant" class="btn btn-block btn-primary "value="Bien"/>
-                <input type="submit" id="mal" name="quant" class="btn btn-block btn-primary "value="Mal"/>
-            </form>
+            <a href="" id="tBien" class="btn btn-block btn-primary ">Três bien</a>
+            <a href="" id="bien" class="btn btn-block btn-primary ">Bien</a>
+            <a href="" id="mal" class="btn btn-block btn-primary ">Mal</a>
         </div>
     </div>
 
     <div style="display: none;" id="optionFisio">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
-            <input type="submit" id="wet" name="quelle" class="btn btn-block btn-primary "value="Pipi">
-            <input type="submit" id="poo" name="quelle" class="btn btn-block btn-primary "value="Caca">
-            </form>
+            <a href="" id="wet" class="btn btn-block btn-primary ">J'ai fais Pipi</a>
+            <a href="" id="midi" class="btn btn-block btn-primary ">J'ai fais Caca</a>
         </div>
     </div>
 
     <div style="display: none;" id="optionSieste">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
-            <input type="submit" id="45m" name="sieste" class="btn btn-block btn-primary "value="Sieste 45 min">
-            <input type="submit" id="60m" name="sieste" class="btn btn-block btn-primary "value="Sieste 60 min">
-            <input type="submit" id="90m" name="sieste" class="btn btn-block btn-primary "value="Sieste 90 min">
-            </form>
+            <a href="" id="45m" class="btn btn-block btn-primary ">Sieste 45 min</a>
+            <a href="" id="60m" class="btn btn-block btn-primary ">Sieste 60 min</a>
+            <a href="" id="90m" class="btn btn-block btn-primary ">Sieste 90 min</a>
         </div>
     </div>
 
     <div style="display: none;" id="text">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <h4>Only fill if no option available on the Main Menu</h4>
-            <form method="post">
-                <textarea name="comments" rows="10" cols="177"></textarea>
-                <br><br>
-                <input type="submit" class="btn btn-block btn-primary">
-            </form>
+            <h4>Only fill if no option available on the Maim Menu</h4>
+            <textarea rows="10" cols="151" placeholder="Comments here..."></textarea>
+            <button id="submitComments" type="submit" class="btn btn-block btn-success">Submit</button>
         </div>
     </div>
 
     <a id="home" style="display: none;" href=""> BACK TO Home </a>
 
 </div>
-
 
 <?php $this->stop('main_content') ?>
