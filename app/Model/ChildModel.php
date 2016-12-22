@@ -373,5 +373,33 @@ public function getListClass($userId){
         
         return false;
     }
+
+    public function getParentList($userId){
+         $sql = '
+               SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    class ON class.cls_id = child.class_cls_id
+                        INNER JOIN
+                    user ON user.usr_id = child.user_usr_id
+                        INNER JOIN 
+                    city ON city.cit_id = user.city_cit_id
+                AND class.cls_id = :classeId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':classeId', $classeId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+
     
 }
