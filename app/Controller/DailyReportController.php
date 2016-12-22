@@ -53,7 +53,9 @@ class DailyReportController extends ControllerTemplate{
             'header' => ['Report', 'Repas matin', 'Repas midi', 'Repas apres-midi', 'Wet', 'Poo', 'Sieste', 'Comments', 'Child', 'User', 'Date'],
             'primaryKey' => 'drp_id',
             'data' => $tabledata,
-            'fkData' => $fkData
+            'fkData' => $fkData,
+            'child' => $child,
+            'date' => $date,
         ];
         // pour debug
         $this->show('reports/dailyReport', $vars);
