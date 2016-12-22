@@ -400,4 +400,50 @@ public function getListClass($userId){
         return false;
     }
     
+    public function getParentChildDailyReport($userId){
+        $sql = '
+               SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    user ON user.usr_id = child.user_usr_id
+                        INNER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id
+                        AND child.user_usr_id =:userId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':userId', $userId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+    public function getParentChild($userId){
+        $sql = 'SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    user ON user.usr_id = child.user_usr_id
+                        AND child.user_usr_id = :userId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':userId', $userId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+    
 }

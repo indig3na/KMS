@@ -35,6 +35,8 @@ $w_routes = array(
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //Liste des parents d'élèves d'une classe
     ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
+    //Liste des enfants d'un parent
+    ['GET', '/app/manage/childParentList/[:userId]/', 'Child#parentChildGet', 'child_parent_child_get'],
     //Liste des rapports journaliers d'une classe
     ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
     //DailyReport - single

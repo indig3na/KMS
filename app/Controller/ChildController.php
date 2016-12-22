@@ -231,13 +231,20 @@ class ChildController extends ControllerTemplate
        $this->show('child/ChildList_get',array('childList'=> $childList));
     }
     
-        public function parentList_get($classeId){
+    public function parentList_get($classeId){
        // debug($classeId);
         $child = new ChildModel();
         $parentList = $child ->getParentList($classeId);
        // debug($parentList);
         
        $this->show('child/parentList_get',array('parentList'=> $parentList));
+    }
+    
+    public function parentChildGet($userId){
+        $childDailyReport = new ChildModel();
+        $childDailyReportList = $childDailyReport->getParentChildDailyReport($userId);
+        $children = $childDailyReport->getParentChild($userId);
+        $this->show('child/childParentList',array('childDailyReportList'=> $childDailyReportList, 'children'=>$children));
     }
 
 }

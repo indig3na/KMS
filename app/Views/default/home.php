@@ -837,7 +837,7 @@
                     <label for="useremail">Login</label>
                     <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">
                 </div>
-                <div class="form-grouuser_login_postp">
+                <div class="form-group">
                     <label for="userpassword">Password</label>
                     <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
