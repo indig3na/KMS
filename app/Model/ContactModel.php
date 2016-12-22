@@ -7,10 +7,10 @@
  */
 
 namespace Model;
-use W\Model\UsersModel;
+use Model\ModelTemplate;
 
 
-class ContactModel extends UsersModel{
+class ContactModel extends ModelTemplate {
     /**
      * @var int
      */
