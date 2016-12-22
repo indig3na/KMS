@@ -132,7 +132,7 @@
                     <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-clock-o  fa-stack-1x "></i></span>Events</a>
                 </li>
             <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_PAR'): ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
                     <a href="<?= $this->url('contact_contact_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
                 </li>
