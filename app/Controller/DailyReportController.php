@@ -10,7 +10,7 @@ namespace Controller;
 
 use Model\DailyReportModel;
 use Model\ChildModel;
-use Model\UserFunctionsModel;
+use Model\UserModel;
 
 
 class DailyReportController extends ControllerTemplate{
@@ -48,9 +48,9 @@ class DailyReportController extends ControllerTemplate{
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $childModel = new ChildModel();
-        $userModel = new UserFunctionsModel();
-        $fkData['child_chd_id'] = $childModel->findIndexedColumns(['chd_firstname','chd_lastname'],' ');
-        $fkData['user_usr_id'] = $userModel->findIndexedColumns(['usr_firstname','usr_lastname'],' ');
+        $userModel = new UserModel();
+        $fkData['child_chd_id'] = $childModel->findIndexedColumn('chd_firstname');
+        $fkData['user_usr_id'] = $userModel->findIndexedColumn('usr_firstname');
 
         $vars = [
             'title' => 'Daily Report',
@@ -144,7 +144,18 @@ class DailyReportController extends ControllerTemplate{
                 }
             }
         }
-
+        //delete
+        if ($method === 'delete') {
+            $id = $_POST['id'];
+            $dailyReportModel = new DailyReportModel();
+            $deletedData = $dailyReportModel->delete($id);
+            if ($deletedData === false) {
+                $errorList[] = 'Deletion Error';
+            } else {
+                $succesList[] = 'Report Deleted';
+                $success = true;
+            }
+        }
         // show json errorList and/or successList message
         if ($success) {
             $this->showJson(['code' => 1, 'message' => implode('
@@ -154,5 +165,11 @@ class DailyReportController extends ControllerTemplate{
             ', $errorList)]);
         }
     }
-
+    
+    public function getTheDailyReport($date, $childId){
+        $daylyReport = new DailyReportModel();
+        $childDaylyReport = $daylyReport->dailyReport_get($date, $childId);
+        $this->show('dailyReport/get_the_daily_report',array('childDaylyReport'=> $childDaylyReport));
+    }
+            
 }

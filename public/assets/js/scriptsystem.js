@@ -34,7 +34,7 @@ $(document).ready(function() {
     initMenu();
 
     //
-    function unfold(callFrom,callTo,getKey){
+    function unfold(callFrom,callTo,getKey=''){
         $.ajax({
             url: window.location.href.replace(callFrom,callTo),
             type: 'get',
@@ -59,7 +59,7 @@ $(document).ready(function() {
     if (window.location.pathname.endsWith('/class/')){
 
         $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
-            unfold.call(this.parentNode,'/class/','/child/','class');
+            unfold.call(this.parentNode,'/class/','/childClassList/'+$(this.parentNode).data('id')+'/','class');
         });
     }
     if (window.location.pathname.endsWith('/parent/')){
@@ -89,7 +89,7 @@ $(document).ready(function() {
     //fonction pour appliquer la librairie chosen à un objet et l'afficher comme un formulaire bootstrap
     function styleSelect(jqobj){
         jqobj.chosen({disable_search_threshold:8});
-        jqobj.next().css({width:'100%'}).children('ul,a').addClass('form-control');
+        jqobj.next().css({width:'100%'}).children('ul').addClass('form-control');
     }
     //initialiser la librairie chosen sur les select
     styleSelect($('.chosen-select'));
@@ -284,23 +284,6 @@ $(document).ready(function() {
     $( "#matin" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
-        $( "#mangerType").val( "matin");
-        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#quant, #home" ).show( "fast" );
-    });
-
-    $( "#midi" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#mangerType").val( "midi");
-        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
-        $( "#quant, #home" ).show( "fast" );
-    });
-
-        $( "#apresmidi" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#mangerType").val( "apresmidi");
         $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#quant, #home" ).show( "fast" );
     });
@@ -333,35 +316,7 @@ $(document).ready(function() {
         $( ".menu1" ).show( "fast" );
     });
 
-    //-------------------------monthly report functioning---------------//
 
-    $( "#devCog" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#text1, #home" ).show( "fast" );
-    });
-
-    $( "#devMot" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#text2, #home" ).show( "fast" );
-    });
-
-    $( "#motFin" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#text3, #home" ).show( "fast" );
-    });
-    $( "#devlin" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#text4, #home" ).show( "fast" );
-    });
-    $( "#devEmo" ).click(function(event) {
-        event.preventDefault();
-        //console.log("click");
-        $( "#text5, #home" ).show( "fast" );
-    });
 
     //----------------------lost password------------------//
     /*
@@ -386,10 +341,31 @@ $(document).ready(function() {
     //--------------------------Date Picker---------------------//
 
 
-$( function() {
-    $( "#datepicker" ).datepicker();
-});
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    });
 
+    //----------------------contact form parent----------------------//
+
+    var form = $('#main-contact-form');
+    var form_status = $('<div class="form_status"></div>');
+    form.submit(function(event){
+        event.preventDefault();
+
+        var data = $(this).serializeArray();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            beforeSend: function(){
+                form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Message en cours d\'envoie...</p>').fadeIn());
+            }
+        }).done(function(data){
+            console.log(data);
+            form_status.html('<p class="text-success">Merci de nous avoir laissé un mots , on vous contactera dés que possible</p>').delay(3000).fadeOut();
+        });
+    });
 
 });
 
