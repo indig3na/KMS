@@ -103,7 +103,7 @@ class UserController extends ControllerTemplate
             'data' => $tabledata,
             'userData' => $userData,
             'fkData' => $fkData,
-            'role' => $role
+            'role' => $prettyRole
 
         ];
         $this->allowTo('ROLE_ADMIN');
@@ -127,7 +127,7 @@ class UserController extends ControllerTemplate
             $nursery = isset($_POST['nursery_nur_id']) ? trim(strip_tags($_POST['nursery_nur_id'])) : '';
             $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
             $class = isset($_POST['class_cls_id']) ? trim(strip_tags($_POST['class_cls_id'])) : '';
-            
+
             $method = $_POST['method'];
             $id = '';
 
@@ -188,8 +188,6 @@ class UserController extends ControllerTemplate
                 $model = new UserFunctionsModel();
                 //Insert data
                 if ($method === 'insert') {
-                    $token = \W\Security\StringUtils::randomString(32);
-                    $data['usr_token'] = $token;
                     $insertData = $model->insert($data);
                     // if not inserted error
                     if ($insertData === false) {
@@ -197,15 +195,6 @@ class UserController extends ControllerTemplate
                     } else {
                         $succesList[] = 'user info inserted';
                         $success = true;
-                        
-                        $emailToSend = new MailerController();
-                        $mailContent= 'Bienvenue sur notre site, '.$firstname.' '.$lastname.'!'
-                                . '<br><br>'
-                                . 'Cliquez sur le lien ci-dessous pour vous connecter et initialiser votre mot de passe:<br>'
-                                . '<a style="display:block;padding:10px;border-radius:10px;background-color:blue" href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
-                                .'http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token))
-                                . '</a>';
-                        $emailToSend->emailSent($email,$mailContent );
                     }
                 } //update data for given Id
                 elseif ($method === 'update') {
@@ -253,7 +242,7 @@ class UserController extends ControllerTemplate
         $errorList = array();
         $login = '';
     
-        $this->show('default/home', array('errorList' =>$errorList, 'login'=> $login));
+        $this->show('default/home', array('errorList' =>$errorList, $email));
     }
     
     public function loginPost(){
@@ -294,7 +283,7 @@ class UserController extends ControllerTemplate
                 $user_logged = $this->getUser();
                 $userIdConnected = $user_logged['usr_id'];
                if($user_logged['usr_role']=='ROLE_ADMIN'){
-                    $this->redirectToRoute('class_class_get');
+                    $this->redirectToRoute('default_home');
                 } 
                 if($user_logged['usr_role']=='ROLE_PAR') {
                     $this->redirectToRoute('child_child_get');
@@ -303,8 +292,6 @@ class UserController extends ControllerTemplate
                     $this->redirectToRoute('child_childList_get', ['userId' => $userIdConnected]);
                 }
                
-            }else{
-                $errorList[]='Identifiant ou mot de passe invalide !<br>';
             }
         }
         $this->show('default/home', array('errorList' =>$errorList));

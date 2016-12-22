@@ -1,6 +1,3 @@
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_EDU' ?>
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_PAR' ?>
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_ADMIN' ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/stylesystem.css') ?>">
@@ -81,37 +77,7 @@
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Établissement</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('user_admin_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-folder-open   fa-stack-1x "></i></span>Administrateurs</a>
-                </li>
-            <?php  endif ; ?>    
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Salles de classe</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('schoolYear_schoolyear_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-calendar-o fa-stack-1x "></i></span>Années scolaires</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Programmes</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activités</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
-                <li>
-                    <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educateurs</a>
+                    <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>calendar</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
@@ -119,20 +85,20 @@
                     <a href="<?= $this->url('class_class_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-list  fa-stack-1x "></i></span>Classes</a>
                 </li>
             <?php  endif ; ?>
-            
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('user_edu_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-suitcase  fa-stack-1x "></i></span>Educator</a>
+                </li>
+            <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_PAR')): ?>
                 <li>
-                    <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
+                    <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Children</a>
                 </li>
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
-                    <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
-                </li>
-            <?php  endif ; ?>
-            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_PAR')): ?>
-                <li>
-                    <a href="<?= $this->url('dailyReport_dailyReport_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Rapports journaliers</a>
+
+                    <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des enfants</a>
                 </li>
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_EDU')): ?>
@@ -140,20 +106,25 @@
                     <a href="<?= $this->url('user_par_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-users   fa-stack-1x "></i></span>Parents</a>
                 </li>
             <?php  endif ; ?>
-            <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
-                <li>
-                    <a href="<?= $this->url('child_parentList_get', ['classeId'=>$w_user['class_cls_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Contact des parents</a>
-                </li>
-            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
 
-            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('crud_city_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa  fa-building fa-stack-1x "></i></span>Villes</a>
+                    <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="<?= $this->url('calendar_calendar_get') ?> "> <span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar  fa-stack-1x "></i></span>Calendrier</a>
+                    <a href="<?= $this->url('classroom_classroom_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap   fa-stack-1x "></i></span>Classrooms</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('crud_program_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-book    fa-stack-1x "></i></span>Program</a>
+                </li>
+            <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+                <li>
+                    <a href="<?= $this->url('crud_activity_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-magic fa-stack-1x "></i></span>Activité</a>
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
@@ -193,6 +164,13 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript" src="/path/to/moment.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/transition.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/collapse.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap-datetimepicker.min.js"></script>
+
 
 <!--Chosen - select enhancer-->
 <script src="<?= $this->assetUrl('js/chosen.jquery.min.js') ?>"></script>

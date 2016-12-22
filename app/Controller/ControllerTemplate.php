@@ -22,9 +22,6 @@ class ControllerTemplate extends Controller
     public function assetUrl($path){
         echo (empty($_SERVER['W_BASE'])) ? '' : $_SERVER['W_BASE'] . '/assets/' . ltrim($path, '/');
     }
-    public function baseUrl(){
-        echo (empty($_SERVER['W_BASE'])) ? '' : $_SERVER['W_BASE'];
-    }
     public function db_post($model,$postfields,$mult=[],$rawData = NULL){
         if (!isset($rawData)){
             $rawData = $_POST;

@@ -2,10 +2,10 @@
 
 <?php $this->start('main_content') ?>
 
-<?php/* debug($childList);*/ ?>
+<?php/* debug($childList); */?>
 <!--display-->
+<h1 align="center">Liste de la classe :<?= $childList[0]['cls_name'] ?></h1><br><br>
 <table class="table table-hover table-striped">
-    <caption><h1>Liste de la classe</h1></caption>
     <thead>
         <tr>
             <th></th>
@@ -13,14 +13,21 @@
             <th>Nom</th>
             <th>Date de naissance</th>
             <th>Hobby</th>
+
             <th>Remarques</th>
+            <th>Parent</th>
+            <th><span class="glyphicon glyphicon-folder-open"></span></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($childList as $currentChild) : ?>
-        <tr class="kms-dataset">
+        <tr>
             <td>
-               <img src="<?= $this ->assetUrl('img/filesId/'.$currentChild['chd_img_path']) ?>" style="max-height:30px"/> 
+               <?php if ($currentChild['chd_comments']=='M') : ?>
+                <span class="glyphicon glyphicon-log-out"></span>
+               <?php else : ?>
+                <span class="glyphicon glyphicon-log-out"></span>
+               <?php endif; ?> 
             </td>
             <td>
                <?= $currentChild['chd_firstname'] ?> 
@@ -32,10 +39,19 @@
                <?= $currentChild['chd_birthday'] ?> 
             </td>
             <td>
-               <?= $currentChild['chd_hobbies'] ?> 
+               <?= $currentChild['chd_hobbies'] ?>
             <td>
                <?= $currentChild['chd_comments'] ?> 
             </td>
+            <td>
+               <?= $currentChild['usr_firstname'].' '.$currentChild['usr_lastname'] ?> 
+            </td>
+            <td>
+                <a href="<?= $this->url('daily_report_get_the_daily_report', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span> Daily report
+                    </button>
+                </a>
             </td>
         </tr>
         <?php endforeach; ?>

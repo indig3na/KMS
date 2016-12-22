@@ -31,17 +31,30 @@ $w_routes = array(
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
     //Liste des élèves
+    ['GET', '/app/manage/childClassList/[:userId]/', 'Child#childClassList_get', 'child_childClassList_get'],
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
+
+    //DailyReport
+
     //Liste des parents d'élèves d'une classe
     ['GET', '/app/manage/parentList/[:classeId]/', 'Child#parentList_get', 'child_parentList_get'],
     //Liste des rapports journaliers d'une classe
     ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
-    //DailyReport
+    //DailyReport - single - edit
+    ['GET', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_dontUse'],
+    ['POST', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    //astuce pour recuperer l url
+    ['GET', '/app/manage/dailyReport/[:date]/[:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
+    //Child daily report - view
+    ['GET', '/app/manage/childDailyReport/[:date]/[:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'],
+    //DailyReport - selectList
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
-    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_redirect', 'dailyReport_dailyReport_redirect'],
+
     //MonthlyReport
     ['GET', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_get', 'monthlyReport_monthlyReport_get'],
     ['POST', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_post', 'monthlyReport_monthlyReport_post'],
+
 
     //user
     ['GET', '/app/manage/administrator/', 'User#admin_get', 'user_admin_get'],
@@ -54,10 +67,10 @@ $w_routes = array(
     ['POST', '/app/manage/parent/', 'User#par_post', 'user_par_post'],
 
     //Users login
-    ['GET','/login/', 'User#login', 'user_login'],
-    ['POST','/login/', 'User#loginPost', 'user_login_post'],
+    ['GET','/', 'User#login', 'user_login'],
+    ['POST','/', 'User#loginPost', 'user_login_post'],
     //logout
-    ['GET','/logout/', 'User#logout', 'users_logout'],
+    ['GET','/', 'Users#logout', 'users_logout'],
     //MDP oublié
     ['GET','/app/manage/user/lostpassword/', 'User#lostpassword', 'user_lostpassword'],
     ['POST','/app/manage/user/lostpassword/', 'User#lostpasswordPost', 'user_lostpassword_post'],
@@ -68,6 +81,7 @@ $w_routes = array(
     //Program
     ['GET', '/app/manage/program/', 'Program#program_get', 'crud_program_get'],
     ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
+
 
     //Contact form parent
     ['GET','/app/manage/contact/', 'Contact#contact_get', 'contact_contact_get'],

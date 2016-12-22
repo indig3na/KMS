@@ -13,12 +13,10 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    overflow: hidden;
 }
 
 #wrapper.toggled {
     padding-left: 250px;
-    overflow: scroll;
 }
 
 #sidebar-wrapper {
@@ -29,6 +27,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
+    overflow-x: hidden;
     background: #000;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -43,7 +42,6 @@
     position: absolute;
     padding: 15px;
     width: 100%;
-    overflow-x: hidden;
 }
 .xyz{
     min-width: 360px;
@@ -52,8 +50,14 @@
     position: relative;
     margin-right: 0px;
 }
+.container{
+    width:100%;
+}
 .fixed-brand{
     width: auto;
+}
+.table-responsive{
+    overflow-x: auto;
 }
 /* Sidebar Styles */
 
@@ -116,7 +120,7 @@ span.kms-option{
     display:inline-block;
     margin: 5px 0;
 }
-ul.chosen-choices.form-control,a.chosen-single.form-control{
+ul.chosen-choices.form-control{
     min-height:34px;
     padding:4px 12px;
     width: 100%;
