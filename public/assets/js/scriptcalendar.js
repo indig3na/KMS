@@ -3,13 +3,13 @@ YUI().use(
     function(Y) {
         var events = [
             {
-                content: 'Partial Lunar Eclipse',
+                content: 'Theater',
                 endDate: new Date(2016, 11, 25, 5),
                 startDate: new Date(2016, 11, 25, 1)
             },
             {
                 color: "#8d8",
-                content: 'Earth Day Lunch',
+                content: 'Groupe Day Lunch',
                 disabled: true,
                 endDate: new Date(2016, 11, 22, 13),
                 meeting: true,

@@ -366,6 +366,16 @@ $(document).ready(function() {
         $( "#text5, #home" ).show( "fast" );
     });
 
+
+    //----------------------lost password------------------//
+    /*
+    $( "#lostPassBtn" ).click(function(event) {
+        event.preventDefault();
+        console.log("click");
+        $( "#lostPass" ).hide( "drop", { direction: "down" }, "fast" );
+    });
+    */
+   
     //----------------Select child-------------------
    /* $('#child').hide();
     $('.kms-crud-select-btn').click(function (e) {
@@ -381,10 +391,31 @@ $(document).ready(function() {
     //--------------------------Date Picker---------------------//
 
 
-$( function() {
-    $( "#datepicker" ).datepicker();
-});
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    });
 
+    //----------------------contact form parent----------------------//
+
+    var form = $('#main-contact-form');
+    var form_status = $('<div class="form_status"></div>');
+    form.submit(function(event){
+        event.preventDefault();
+
+        var data = $(this).serializeArray();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            beforeSend: function(){
+                form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Message en cours d\'envoie...</p>').fadeIn());
+            }
+        }).done(function(data){
+            console.log(data);
+            form_status.html('<p class="text-success">Merci de nous avoir laissé un mots , on vous contactera dés que possible</p>').delay(3000).fadeOut();
+        });
+    });
 
 });
 

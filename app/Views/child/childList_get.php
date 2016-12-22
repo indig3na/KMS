@@ -42,11 +42,11 @@
                <?= $currentChild['usr_firstname'].' '.$currentChild['usr_lastname'] ?> 
             </td>
             <td>
-                <a href="<?= $this->url('dailyReport_dailyReport_post'), array('date'=>$currentChild['drp_updated'], 'childId'=>$currentChild['chd_id'])?>">
+                <a href="<?= $this->url('daily_report_get_the_daily_report', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span> Daily report
                     </button>
-                </a> 
+                </a>
             </td>
         </tr>
         <?php endforeach; ?>

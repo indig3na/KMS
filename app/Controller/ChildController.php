@@ -207,7 +207,7 @@ class ChildController extends ControllerTemplate
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this ->redirectToRoute('child_child_get');
+                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
             } else {
                 $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
             }

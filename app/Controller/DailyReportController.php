@@ -14,6 +14,23 @@ use Model\UserFunctionsModel;
 
 
 class DailyReportController extends ControllerTemplate{
+
+
+    public function dailyReportSingle_get($date,$childId){
+        $childId = intval($childId);
+        $date = trim(strip_tags($date));
+        $model = new DailyReportModel();
+        $report = $model ->findDailyReport($childId, $date);
+        $childModel = new ChildModel();
+        $child = $childModel->find($childId);
+        $vars = [
+            'title'=> 'Rapport journalier',
+            'report' => $report,
+            'child' => $child,
+            'date' => $date,
+        ];
+        $this->show('reports/dailyReportSingle',$vars);
+    }
     /**
      * Page de gestion CRUD pour table dailyReport en GET
      */
@@ -22,6 +39,10 @@ class DailyReportController extends ControllerTemplate{
         $model = new DailyReportModel();
         $tabledata = $model->findAllColumns(['drp_id', 'drp_repas_matin', 'drp_repas_midi', 'drp_repas_apresmidi', 'drp_fisio_wet',
             'drp_fisio_poo', 'drp_sieste', 'drp_comments', 'child_chd_id', 'user_usr_id', 'drp_date']);
+
+        //initialisation of $child et $date a vide
+        $date = '';
+        $child = '';
 
         //initialisation of $fkdata
         $fkData = array();
@@ -36,7 +57,9 @@ class DailyReportController extends ControllerTemplate{
             'header' => ['Report', 'Repas matin', 'Repas midi', 'Repas apres-midi', 'Wet', 'Poo', 'Sieste', 'Comments', 'Child', 'User', 'Date'],
             'primaryKey' => 'drp_id',
             'data' => $tabledata,
-            'fkData' => $fkData
+            'fkData' => $fkData,
+            'child' => $child,
+            'date' => $date,
         ];
         // pour debug
         $this->show('reports/dailyReport', $vars);
@@ -45,43 +68,54 @@ class DailyReportController extends ControllerTemplate{
     /**
      * Page de gestion CRUD pour table dailyReport en POST
      */
-    public function dailyReport_post()
+    public function dailyReport_post($date,$childId)
     {
-        $date = isset($_POST['drp_date']) ? trim(strip_tags($_POST['drp_date'])) : '';
-        $repasMatin = isset($_POST['drp_repas_matin']) ? trim(strip_tags($_POST['drp_repas_matin'])) : '';
-        $repasMidi = isset($_POST['drp_repas_midi']) ? trim(strip_tags($_POST['drp_repas_midi'])) : '';
-        $repasApresmidi = isset($_POST['drp_repas_apresmidi']) ? trim(strip_tags($_POST['drp_repas_apresmidi'])) : '';
-        $wet = isset($_POST['drp_fisio_wet']) ? trim(strip_tags($_POST['drp_fisio_wet'])) : '';
-        $caca = isset($_POST['drp_fisio_poo']) ? trim(strip_tags($_POST['drp_fisio_poo'])) : '';
-        $sieste = isset($_POST['drp_sieste']) ? trim(strip_tags($_POST['drp_sieste'])) : '';
-        $comments = isset($_POST['drp_comments']) ? trim(strip_tags($_POST['drp_comments'])) : '';
-        $child = isset($_POST['child_chd_id']) ? trim(strip_tags($_POST['child_chd_id'])) : '';
-        $user = isset($_POST['user_usr_id']) ? trim(strip_tags($_POST['user_usr_id'])) : '';
-        $method = $_POST['method'];
-        $id = '';
 
+        $childId = intval($childId);
+        $date = trim(strip_tags($date));
+        $mealQuant = isset($_POST['quant']) ? trim(strip_tags($_POST['quant'])) : '';
+        $mealType = isset($_POST['repas']) ? trim(strip_tags($_POST['repas'])) : '';
+        $fisio = isset($_POST['quelle']) ? trim(strip_tags($_POST['quelle'])) : '';
+        $sieste = isset($_POST['sieste']) ? trim(strip_tags($_POST['sieste'])) : '';
+        $comments = isset($_POST['comments']) ? trim(strip_tags($_POST['comments'])) : '';
+        $user = $this -> getUser()['usr_id'];
+
+        $model = new DailyReportModel();
+        $report = $model ->findDailyReport($childId, $date);
+        if (empty($report)){
+            $method = 'insert';
+        } else {
+            $method = 'update';
+        }
+        //$method = $_POST['method'];
+        $id = '';
+        debug($report);
         //validation
         $succesList = array();
         $success = false;
         $errorList = array();
-        $data = array();
 
         if (!isset($date)) {
             $errorList[] = 'La date est a remplir!!';
             $success = false;
         }
-        $data = [
-            'drp_date' => $date,
-            'drp_repas_matin' => $repasMatin,
-            'drp_repas_midi' => $repasMidi,
-            'drp_repas_apresmidi' => $repasApresmidi,
-            'drp_fisio_wet' => $wet,
-            'drp_fisio_poo' => $caca,
-            'drp_sieste' => $sieste,
-            'drp_comments' => $comments,
-            'child_chd_id' => $child,
-            'user_usr_id' => $user
-        ];
+        if ($mealType=='matin') {
+            $report['drp_repas_matin'] = $mealQuant;
+        } elseif ($mealType=='midi') {
+            $report['drp_repas_midi'] = $mealQuant;
+        } elseif ($mealType=='apresmidi') {
+            $report['drp_repas_apresmidi'] = $mealQuant;
+        }
+
+        if ($fisio == 'Pipi'){
+            $report['drp_fisio_wet']++;
+        } elseif ($fisio == 'Caca'){
+            $report['drp_fisio_poo']++;
+        }
+        $report['drp_comments']=$comments;
+        $report['drp_sieste']=$sieste;
+        $data = $report;
+        debug($data);
         // if input ok
         if (empty($errorList)) {
 
@@ -99,7 +133,7 @@ class DailyReportController extends ControllerTemplate{
                 }
             }//update
             elseif ($method === 'update') {
-                $id = $_POST['id'];
+                $id = $report['drp_id'];
                 $updateData = $dailyReportModel->update($data, $id, $stripTags = true);
                 // if not updated error
                 if ($updateData === false) {
