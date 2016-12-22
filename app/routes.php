@@ -2,6 +2,8 @@
 
 $w_routes = array(
     ['GET', '/', 'Default#home', 'default_home'],
+    //Contact form
+    ['POST','/ajax/contact/', 'Default#home_post', 'default_home_post'],
 
     //--------------------- CRUD ------------
     //Country
