@@ -55,7 +55,7 @@
                 </ul-->
             </li>
             <li class="dropdown user user-menu">
-                <a href="<?= $this->url('user_logout')?>">
+                <a href="<?= $this->url('users_logout')?>">
                     <i class="fa fa-fw fa-sign-out"></i>
                     <span>Lougout</span>
                 </a>
