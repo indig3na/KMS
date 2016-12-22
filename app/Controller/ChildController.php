@@ -225,9 +225,7 @@ class ChildController extends ControllerTemplate
     public function childClassList_get($classId){
        // debug($userId);
         $child = new ChildModel();
-        $childList = $child ->findAllColumns(['*'], 'class_cls_id', $classId);
-       // debug($childList);
-        
+        $childList = $child ->getListByClass($classId);
        $this->show('child/ChildList_get',array('childList'=> $childList));
     }
     

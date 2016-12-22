@@ -2,9 +2,9 @@
 
 <?php $this->start('main_content') ?>
 
-<?php debug($childList); ?>
 <!--display-->
 <table class="table table-hover table-striped">
+    <?php if(!empty($childList)): ?>
     <caption><h1>Liste de la classe :<?= $childList[0]['cls_name'] ?></h1></caption>
     <thead>
         <tr>
@@ -51,6 +51,9 @@
         </tr>
         <?php endforeach; ?>
     </tbody>
+    <?php else: ?>
+    <tr><td style="text-align:center">Aucun enfant!</td></tr>
+    <?php endif ?>
 </table>
 <?php $this->stop('main_content') ?>
 
