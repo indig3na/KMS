@@ -2,7 +2,7 @@
 
 $w_routes = array(
     ['GET', '/', 'Default#home', 'default_home'],
-    //Contact form
+    //Contact form home page
     ['POST','/ajax/contact/', 'Default#home_post', 'default_home_post'],
 
     //--------------------- CRUD ------------
@@ -68,6 +68,12 @@ $w_routes = array(
     //Program
     ['GET', '/app/manage/program/', 'Program#program_get', 'crud_program_get'],
     ['POST', '/app/manage/program/', 'Program#program_post', 'crud_program_post'],
+
+    //Contact form parent
+    ['GET','/app/manage/contact/', 'Contact#contact_get', 'contact_contact_get'],
+    ['POST','/app/manage/contact/', 'Contact#contact_post', 'contact_contact_post'],
+    //Message
+    ['GET','/app/manage/message/', 'Message#message_get', 'crud_message_get'],
     //Calendar
     ['GET', '/app/manage/calendar/', 'Calendar#calendar_get', 'calendar_calendar_get'],
 );

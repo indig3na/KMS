@@ -882,7 +882,7 @@
                           Differdange,Luxembourg<br>
                           <abbr title="Phone">P:</abbr> (00352) 456-7890
                         </address>
-                        <form id="main-contact-form" name="contact-form" method="post" action="">
+                        <form id="main-contact-form" name="contact-form" method="post" action="<?= $this->url('default_home_post') ?>">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" placeholder="Name" required>
                             </div>
