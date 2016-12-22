@@ -19,11 +19,12 @@ class ClassroomController extends ControllerTemplate
                 'primaryKey' => 'clr_id',
                 'data' => $tabledata
             ];
+            $this->allowTo('ROLE_ADMIN');
             $this->show('classroom/classroom',$vars);
 	} 
     public function classroom_post() {
         if (in_array($method = $_POST['method'],['insert','update'])){
-            //validation données
+            //validation donnÃ©es
             $success = false;
             $errors = array();
             $data = array_intersect_key($_POST, array_flip(['clr_name', 'clr_caracteristics', 'clr_description']));

@@ -26,6 +26,7 @@ class ActivityController extends ControllerTemplate
             'primaryKey' => 'act_id',
             'data' => $tabledata
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $actVars);
     }
 
