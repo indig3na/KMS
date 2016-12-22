@@ -223,4 +223,22 @@ class ChildController extends ControllerTemplate
        $this->show('child/ChildList_get',array('childList'=> $childList));
     }
 
+    public function childClassList_get($classId){
+       // debug($userId);
+        $child = new ChildModel();
+        $childList = $child ->findAllColumns(['*'], 'class_cls_id', $classId);
+       // debug($childList);
+        
+       $this->show('child/ChildList_get',array('childList'=> $childList));
+    }
+    
+        public function parentList_get($classeId){
+       // debug($classeId);
+        $child = new ChildModel();
+        $parentList = $child ->getParentList($classeId);
+       // debug($parentList);
+        
+       $this->show('child/parentList_get',array('parentList'=> $parentList));
+    }
+
 }

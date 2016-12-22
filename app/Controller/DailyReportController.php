@@ -131,5 +131,11 @@ class DailyReportController extends ControllerTemplate{
             ', $errorList)]);
         }
     }
-
+    
+    public function getTheDailyReport($date, $childId){
+        $daylyReport = new DailyReportModel();
+        $childDaylyReport = $daylyReport->dailyReport_get($date, $childId);
+        $this->show('dailyReport/get_the_daily_report',array('childDaylyReport'=> $childDaylyReport));
+    }
+            
 }
