@@ -40,6 +40,10 @@ class DailyReportController extends ControllerTemplate{
         $tabledata = $model->findAllColumns(['drp_id', 'drp_repas_matin', 'drp_repas_midi', 'drp_repas_apresmidi', 'drp_fisio_wet',
             'drp_fisio_poo', 'drp_sieste', 'drp_comments', 'child_chd_id', 'user_usr_id', 'drp_date']);
 
+        //initialisation of $child et $date a vide
+        $date = '';
+        $child = '';
+
         //initialisation of $fkdata
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
