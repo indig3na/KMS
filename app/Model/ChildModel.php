@@ -355,6 +355,10 @@ public function getListClass($userId){
                     class ON class.cls_id = child.class_cls_id
                         INNER JOIN
                     user ON class.cls_id = user.class_cls_id
+                        INNER JOIN
+                    user as parent ON parent.usr_id = child.user_usr_id
+                    	INNER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id
                 AND user.usr_id =:userId
                 ';
         $stmt = $this->dbh->prepare($sql);
