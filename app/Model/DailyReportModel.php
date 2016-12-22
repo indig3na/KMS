@@ -66,7 +66,19 @@ class DailyReportModel extends ModelTemplate
     $this->drp_comments = $drp_comments;
     $this->drp_date = $drp_date;
 }
+public function findDailyReport($childId,$date){
 
+        if (!is_numeric($childId)){
+            return false;
+        }
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE child_chd_id  = :childId AND drp_date  = :date  LIMIT 1';
+        $sth = $this->dbh->prepare($sql);
+        $sth->bindValue(':childId', $childId);
+        $sth->bindValue(':date', $date);
+        $sth->execute();
+
+        return $sth->fetch();
+    }
      //-----------------GETTERS & SETTERS--------------
 
     /**
