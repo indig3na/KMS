@@ -832,12 +832,12 @@
         <div class="container text-center">
             <p>Enter your email and password</p>
 
-            <form action="" class="form-inline" method="POST">
+            <form action="<?= $this->url('user_login_post') ?>" class="form-inline" method="POST">
                 <div class="form-group">
                     <label for="useremail">Login</label>
                     <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">
                 </div>
-                <div class="form-group">
+                <div class="form-grouuser_login_postp">
                     <label for="userpassword">Password</label>
                     <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
