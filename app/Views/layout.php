@@ -1,19 +1,32 @@
+
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>KMS</title>
-    <meta name="description" content="school App">
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/style.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/chosen.min.css') ?>">
-    <!-- Latest compiled and minified CSS -->
-    <!-- Latest compiled and minified CSS -->
+    <!-- core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="<?= $this->assetUrl('css/animate.min.css') ?>" rel="stylesheet">
+    <link href="<?= $this->assetUrl('css/owl.carousel.css') ?>" rel="stylesheet">
+    <link href="<?= $this->assetUrl('css/owl.transitions.css') ?>" rel="stylesheet">
+    <link href="<?= $this->assetUrl('css/prettyPhoto.css') ?>" rel="stylesheet">
+    <link href="<?= $this->assetUrl('css/main.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/chosen.min.css') ?>">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= $this->assetUrl('img/ico/apple-touch-icon-114-precomposed.png') ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= $this->assetUrl('images/ico/apple-touch-icon-72-precomposed.png') ?>">
+    <link rel="apple-touch-icon-precomposed" href="<?= $this->assetUrl('img/ico/apple-touch-icon-57-precomposed.png') ?>">
+</head><!--/head-->
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-</head>
+<body id="home" class="homepage">
 
-<body data-spy="scroll" data-target="#my-navbar">
 
 
     <section>
@@ -24,15 +37,24 @@
     </footer>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--Chosen - select enhancer-->
-<script src="<?= $this->assetUrl('js/chosen.jquery.min.js') ?>"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="<?= $this->assetUrl('js/script.js') ?>"></script>
+
+
+
+
+    <!--<script src="<?= $this->assetUrl('js/jquery.js') ?>"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="<?= $this->assetUrl('js/chosen.jquery.min.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/bootstrap.min.js') ?>"></script>
+    <!--<script src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
+    <script src="<?= $this->assetUrl('js/owl.carousel.min.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/mousescroll.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/smoothscroll.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/jquery.prettyPhoto.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/jquery.isotope.min.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/jquery.inview.min.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/wow.min.js') ?>"></script>
+    <script src="<?= $this->assetUrl('js/main.js') ?>"></script>
+
 </body>
 </html>

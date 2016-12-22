@@ -9,7 +9,7 @@
 namespace Model;
 
 /**
- * Modèle pour la table DailyReport
+ * Modèle pour la table Nursery
  * one foreign key
  */
 class DailyReportModel extends ModelTemplate
