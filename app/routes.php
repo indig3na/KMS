@@ -33,8 +33,15 @@ $w_routes = array(
     //Liste des élèves
     ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
     //DailyReport
+    ['GET', '/app/manage/dailyReport/[:date]/[:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
+    ['POST', '/app/manage/dailyReport/['./*@[0-9]{4}-[0-9]{2}-[0-9]{2}*/':date]/[:childId]/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
-    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+
+    //['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    //MonthlyReport
+    ['GET', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_get', 'monthlyReport_monthlyReport_get'],
+    ['POST', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_post', 'monthlyReport_monthlyReport_post'],
+
 
     //user
     ['GET', '/app/manage/administrator/', 'User#admin_get', 'user_admin_get'],

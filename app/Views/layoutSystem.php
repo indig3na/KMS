@@ -97,6 +97,7 @@
             <?php  endif ; ?>
             <?php if (($w_user['usr_role'] == 'ROLE_EDU')): ?>
                 <li>
+
                     <a href="<?= $this->url('child_childList_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Liste des enfants</a>
                 </li>
             <?php  endif ; ?>
@@ -106,6 +107,7 @@
                 </li>
             <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
+
                 <li>
                     <a href="<?= $this->url('nursery_nursery_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-university   fa-stack-1x "></i></span>Nursery</a>
                 </li>
