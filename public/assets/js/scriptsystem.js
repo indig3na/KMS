@@ -34,7 +34,7 @@ $(document).ready(function() {
     initMenu();
 
     //
-    function unfold(callFrom,callTo,getKey){
+    function unfold(callFrom,callTo,getKey=''){
         $.ajax({
             url: window.location.href.replace(callFrom,callTo),
             type: 'get',
@@ -59,7 +59,7 @@ $(document).ready(function() {
     if (window.location.pathname.endsWith('/class/')){
 
         $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
-            unfold.call(this.parentNode,'/class/','/child/','class');
+            unfold.call(this.parentNode,'/class/','/childClassList/'+$(this.parentNode).data('id')+'/','class');
         });
     }
     if (window.location.pathname.endsWith('/parent/')){
