@@ -239,5 +239,31 @@ class DailyReportModel extends ModelTemplate
     {
         $this->dbh = $dbh;
     }
+    
+    public function dailyReport_get($date, $childId)
+    {
+    $sql = '
+        SELECT 
+            *
+        FROM
+            daily_report
+                INNER JOIN
+            child ON child.chd_id = daily_report.child_chd_id
+                AND daily_report.child_chd_id = :childId
+                AND daily_report.drp_date = :date
+                 ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':childId', $childId);
+        $stmt->bindValue(':date', $date);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
 
 }

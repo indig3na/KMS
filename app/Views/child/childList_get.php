@@ -2,10 +2,10 @@
 
 <?php $this->start('main_content') ?>
 
-<?php/* debug($childList);*/ ?>
+<?php debug($childList); ?>
 <!--display-->
 <table class="table table-hover table-striped">
-    <caption><h1>Liste de la classe</h1></caption>
+    <caption><h1>Liste de la classe :<?= $childList[0]['cls_name'] ?></h1></caption>
     <thead>
         <tr>
             <th></th>
@@ -14,6 +14,8 @@
             <th>Date de naissance</th>
             <th>Hobby</th>
             <th>Remarques</th>
+            <th>Parent</th>
+            <th><span class="glyphicon glyphicon-folder-open"></span></th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +38,15 @@
             <td>
                <?= $currentChild['chd_comments'] ?> 
             </td>
+            <td>
+               <?= $currentChild['usr_firstname'].' '.$currentChild['usr_lastname'] ?> 
+            </td>
+            <td>
+                <a href="<?= $this->url('dailyReport_dailyReport_post'), array('date'=>$currentChild['drp_updated'], 'childId'=>$currentChild['chd_id'])?>">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span> Daily report
+                    </button>
+                </a> 
             </td>
         </tr>
         <?php endforeach; ?>
