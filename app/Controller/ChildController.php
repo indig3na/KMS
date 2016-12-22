@@ -48,7 +48,7 @@ class ChildController extends ControllerTemplate
 
         $classModel = new ClassModel();
         $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
-        
+
         $vars = [
 
             //titre de page
