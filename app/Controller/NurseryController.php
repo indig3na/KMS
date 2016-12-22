@@ -32,6 +32,7 @@ class NurseryController extends ControllerTemplate
         ];
         // pour debug
         //$this->showForbidden();
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $vars);
     }
 

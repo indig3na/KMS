@@ -47,6 +47,7 @@ class ClassController extends ControllerTemplate{
             'fkData' => $fkData,
             'ignoreAdd' => ['class_size']
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $vars);
     }
     /**

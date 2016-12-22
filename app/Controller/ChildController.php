@@ -66,6 +66,7 @@ class ChildController extends ControllerTemplate
             'fkData' => $fkData//,
             //'flData' => $flData
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('child/child',$vars);
     }
 

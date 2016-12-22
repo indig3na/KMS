@@ -16,7 +16,7 @@ class CalendarController extends Controller {
 
     public function calendar_get()
     {
-
+        $this->allowTo('ROLE_ADMIN');
         $this->show('calendar/calendar');
     }
 
