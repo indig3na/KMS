@@ -106,6 +106,7 @@ class UserController extends ControllerTemplate
             'role' => $prettyRole
 
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('user/user',$vars);
     }
     

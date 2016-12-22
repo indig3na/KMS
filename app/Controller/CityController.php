@@ -35,6 +35,7 @@ class CityController extends ControllerTemplate
             'data' => $tabledata,
             'fkData' => $fkData
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $vars);
     }
 
