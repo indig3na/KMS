@@ -15,9 +15,7 @@ use Model\UserFunctionsModel;
 
 class DailyReportController extends ControllerTemplate{
 
-    /**
-     * Page de gestion CRUD pour table dailyReport en GET
-     */
+
     public function dailyReportSingle_get($date,$childId){
         $childId = intval($childId);
         $date = trim(strip_tags($date));
@@ -33,7 +31,9 @@ class DailyReportController extends ControllerTemplate{
         ];
         $this->show('reports/dailyReportSingle',$vars);
     }
-
+    /**
+     * Page de gestion CRUD pour table dailyReport en GET
+     */
     public function dailyReport_get()
     {
         $model = new DailyReportModel();

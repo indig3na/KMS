@@ -363,6 +363,14 @@ $(document).ready(function() {
         $( "#text5, #home" ).show( "fast" );
     });
 
+    //----------------------lost password------------------//
+    /*
+    $( "#lostPassBtn" ).click(function(event) {
+        event.preventDefault();
+        console.log("click");
+        $( "#lostPass" ).hide( "drop", { direction: "down" }, "fast" );
+    });
+    */
     //----------------Select child-------------------
    /* $('#child').hide();
     $('.kms-crud-select-btn').click(function (e) {
