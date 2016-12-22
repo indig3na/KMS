@@ -102,7 +102,7 @@ class ActivityController extends ControllerTemplate
         }
         // show json errorList and/or successList message
         if ($success) {
-            $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+            $this->show('crud/crud');
         } else {
             $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
         }
