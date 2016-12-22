@@ -41,9 +41,11 @@ $(document).ready(function() {
             data: {[getKey]:$(this).data('id')},
             context: this
         }).done(function (response) {
-            $(this).after('<tr><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
+            $(this).after('<tr class="kms-subtable"><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
             $(this).next().find('.kms-action').remove();
-            $(this).next().fadeIn();
+            $(this).next().css('cursor','pointer').fadeIn().click(function(){
+                fold.call(this.previousSibling.firstChild,callFrom,callTo,getKey);
+            });
             $(this).addClass('kms-unfolded').children().not('.kms-action').off('click').click(function(){
                 fold.call(this,callFrom,callTo,getKey);
             });
@@ -58,13 +60,13 @@ $(document).ready(function() {
 
     if (window.location.pathname.endsWith('/class/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/class/','/childClassList/'+$(this.parentNode).data('id')+'/','class');
         });
     }
     if (window.location.pathname.endsWith('/parent/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/parent/','/child/','parent');
         });
     }
@@ -74,6 +76,7 @@ $(document).ready(function() {
         $.ajax({
             url: '',
             type: 'post',
+            //contentType:'multipart/form-data',
             dataType: 'json',
             data: data
         }).done(function (response) {
@@ -196,10 +199,10 @@ $(document).ready(function() {
             crudUpdate.call(this);
         });
     }
-
+//console.log($('.kms-file'));
     //si bouton 'modifier' cliqué - fonction principale
     function crudUpdate() {
-
+        //debuf fileupload console.log($('.kms-file').get(0).files[0]);
         // récupérer les données des input de la ligne courante
         tr = $(this).closest('.kms-dataset');
         var data = tr.find('.kms-update').not('.kms-select[multiple]').serializeArray();

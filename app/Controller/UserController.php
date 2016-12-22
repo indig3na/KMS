@@ -62,8 +62,8 @@ class UserController extends ControllerTemplate
                 break;
             case 'ROLE_PAR':
                 $prettyRole = 'parent';
-                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id'],'usr_role','ROLE_PAR'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville'];
                 break;
             default: 
                 $prettyRole = 'utilisateur';
