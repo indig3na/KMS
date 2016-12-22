@@ -206,7 +206,7 @@
                     <br>
                 </div>
             </div>
-            <div class="box-body table-responsive">
+            <div class="box-body table-responsive kms-datatable">
                 <!-- Table -->
                 <table class="table table-hover">
                     <tbody>

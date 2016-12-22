@@ -54,7 +54,7 @@ class ChildController extends ControllerTemplate
             //titre de page
             'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['','Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent'],
+            'header' => ['','Prénom', 'Nom','Date de naissance','Sexe','Intérêts','Commentaires','Classe','Parent'],
 
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
@@ -124,6 +124,7 @@ class ChildController extends ControllerTemplate
 
 
             // Check file size
+            debug(sizeof($_FILES));
             if (sizeof($_FILES) > 500000)
             {
                 $errorList[] = "Taille de l'image dépasse 5Mb.";

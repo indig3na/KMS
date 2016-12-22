@@ -215,9 +215,9 @@
                 </div>
             </div>
             <br>
-            <div class="box-body table-responsive">
+            <div class="box-body table-responsive kms-datatable">
                 <!-- Table -->
-                <table class="table table-hover">
+                <table class="table table-hover kms-datatable">
                     <tbody>
                         <?php if (!empty($data)): ?>
                             <tr>
