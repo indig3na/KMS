@@ -19,6 +19,7 @@ class ClassroomController extends ControllerTemplate
                 'primaryKey' => 'clr_id',
                 'data' => $tabledata
             ];
+            $this->allowTo('ROLE_ADMIN');
             $this->show('classroom/classroom',$vars);
 	} 
     public function classroom_post() {

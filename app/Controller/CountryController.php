@@ -26,6 +26,7 @@ class CountryController extends ControllerTemplate
             //données
             'data' => $tabledata
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $vars);
     }
 

@@ -20,6 +20,7 @@ class SchoolYearController extends ControllerTemplate
             'primaryKey' => 'scy_id',
             'data' => $tabledata
         ];
+        $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud', $vars);
     }
 
