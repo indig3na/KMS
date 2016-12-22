@@ -35,8 +35,8 @@ $w_routes = array(
     //Liste des rapports journaliers d'une classe
     ['GET', '/app/manage/dailyReportList/[:classeId]/', 'DailyReport#dailyReportList_get', 'dailyReport_dailyReportList_get'],
     //DailyReport
-    ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
-    ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
+    ['GET', '/app/manage/dailyReportSingle/', 'dailyReportSingle#dailyReportSingle_get', 'dailyReportSingle_dailyReportSingle_get'],
+    ['POST', '/app/manage/dailyReportSingle/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
     //MonthlyReport
     ['GET', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_get', 'monthlyReport_monthlyReport_get'],
     ['POST', '/app/manage/monthlyReport/', 'MonthlyReport#monthlyReport_post', 'monthlyReport_monthlyReport_post'],

@@ -7,15 +7,9 @@
 <div style="" class="container">
     <h1 style="text-align: center;">My Day today</h1>
     <div>
-        <h4>Nom du Enfant:</h4>
-        <select data-placeholder="Sélectionnez le enfant" class="form-control chosen-select">
-            <?php foreach ($fkData['child_chd_id'] as $id => $value): ?>
-                <option value="<?= $id ?>"><?= $value ?></option>
-            <?php endforeach ?>
-        </select>
+        <h4><?= $child['chd_firstname'].' '.$child['chd_lastname']  ?></h4>
         <div>
-            <h4>Date:</h4>
-            <p>Date: <input type="text" id="datepicker" value="<?= date("Y-m-d") ?>"></p>
+            <h4><?= $date ?></h4>
         </div>
     </div>
 
@@ -38,7 +32,7 @@
 
     <div style="display: none;" id="quant">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
+            <form action="" method="post">
                 <input type="hidden" id="mangerType" name="repas" value=""/>
                 <input type="submit" id="tBien" name="quant" class="btn btn-block btn-primary "value="Très bien"/>
                 <input type="submit" id="bien" name="quant" class="btn btn-block btn-primary "value="Bien"/>
@@ -49,19 +43,19 @@
 
     <div style="display: none;" id="optionFisio">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
-            <input type="submit" id="wet" name="quelle" class="btn btn-block btn-primary "value="Pipi">
-            <input type="submit" id="poo" name="quelle" class="btn btn-block btn-primary "value="Caca">
+            <form action="" method="post">
+                <input type="submit" id="wet" name="quelle" class="btn btn-block btn-primary "value="Pipi">
+                <input type="submit" id="poo" name="quelle" class="btn btn-block btn-primary "value="Caca">
             </form>
         </div>
     </div>
 
     <div style="display: none;" id="optionSieste">
         <div class="col-xs-12 col-md-12 col-lg-12">
-            <form method="post">
-            <input type="submit" id="45m" name="sieste" class="btn btn-block btn-primary "value="Sieste 45 min">
-            <input type="submit" id="60m" name="sieste" class="btn btn-block btn-primary "value="Sieste 60 min">
-            <input type="submit" id="90m" name="sieste" class="btn btn-block btn-primary "value="Sieste 90 min">
+            <form action="" method="post">
+                <input type="submit" id="45m" name="sieste" class="btn btn-block btn-primary "value="Sieste 45 min">
+                <input type="submit" id="60m" name="sieste" class="btn btn-block btn-primary "value="Sieste 60 min">
+                <input type="submit" id="90m" name="sieste" class="btn btn-block btn-primary "value="Sieste 90 min">
             </form>
         </div>
     </div>
@@ -69,8 +63,8 @@
     <div style="display: none;" id="text">
         <div class="col-xs-12 col-md-12 col-lg-12">
             <h4>Only fill if no option available on the Main Menu</h4>
-            <form method="post">
-                <textarea name="comments" rows="10" cols="177"></textarea>
+            <form action="" method="post">
+                <textarea name="comments" rows="10" cols="177"><?= $report['drp_comments'] ?></textarea>
                 <br><br>
                 <input type="submit" class="btn btn-block btn-primary">
             </form>
