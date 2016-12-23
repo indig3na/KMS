@@ -17,18 +17,24 @@ class DailyReportController extends ControllerTemplate{
 
 
     public function dailyReportSingle_get($date,$childId){
+        
         $childId = intval($childId);
         $date = trim(strip_tags($date));
+        
         $model = new DailyReportModel();
         $report = $model ->findDailyReport($childId, $date);
         $childModel = new ChildModel();
         $child = $childModel->find($childId);
+        $fkData['child_chd_id'] = $childModel->findIndexedColumns(['chd_firstname','chd_lastname'],' ');
+       
         $vars = [
             'title'=> 'Rapport journalier',
             'report' => $report,
             'child' => $child,
             'date' => $date,
+            'fkData' => $fkData,
         ];
+        
         $this->show('reports/dailyReportSingle',$vars);
     }
     /**
@@ -36,30 +42,16 @@ class DailyReportController extends ControllerTemplate{
      */
     public function dailyReport_get()
     {
-        $model = new DailyReportModel();
-        $tabledata = $model->findAllColumns(['drp_id', 'drp_repas_matin', 'drp_repas_midi', 'drp_repas_apresmidi', 'drp_fisio_wet',
-            'drp_fisio_poo', 'drp_sieste', 'drp_comments', 'child_chd_id', 'user_usr_id', 'drp_date']);
-
-        //initialisation of $child et $date a vide
-        $date = '';
-        $child = '';
-
         //initialisation of $fkdata
         $fkData = array();
         //Pour chaque Foreign key, initialiser le modèle et stocker la table de valeurs
         $childModel = new ChildModel();
-        $userModel = new UserFunctionsModel();
         $fkData['child_chd_id'] = $childModel->findIndexedColumns(['chd_firstname','chd_lastname'],' ');
-        $fkData['user_usr_id'] = $userModel->findIndexedColumns(['usr_firstname','usr_lastname'],' ');
-
+        
+        
         $vars = [
-            'title' => 'Daily Report',
-            'header' => ['Report', 'Repas matin', 'Repas midi', 'Repas apres-midi', 'Wet', 'Poo', 'Sieste', 'Comments', 'Child', 'User', 'Date'],
-            'primaryKey' => 'drp_id',
-            'data' => $tabledata,
+            'title' => 'Rapport journalier',
             'fkData' => $fkData,
-            'child' => $child,
-            'date' => $date,
         ];
         // pour debug
         $this->show('reports/dailyReport', $vars);
@@ -70,26 +62,25 @@ class DailyReportController extends ControllerTemplate{
      */
     public function dailyReport_post($date,$childId)
     {
-
         $childId = intval($childId);
         $date = trim(strip_tags($date));
         $mealQuant = isset($_POST['quant']) ? trim(strip_tags($_POST['quant'])) : '';
         $mealType = isset($_POST['repas']) ? trim(strip_tags($_POST['repas'])) : '';
         $fisio = isset($_POST['quelle']) ? trim(strip_tags($_POST['quelle'])) : '';
-        $sieste = isset($_POST['sieste']) ? trim(strip_tags($_POST['sieste'])) : '';
-        $comments = isset($_POST['comments']) ? trim(strip_tags($_POST['comments'])) : '';
+        $sieste = isset($_POST['sieste']) ? trim(strip_tags($_POST['sieste'])) : NULL;
+        $comments = isset($_POST['comments']) ? trim(strip_tags($_POST['comments'])) : NULL;
         $user = $this -> getUser()['usr_id'];
 
         $model = new DailyReportModel();
         $report = $model ->findDailyReport($childId, $date);
         if (empty($report)){
             $method = 'insert';
+            $report['drp_date'] = date('Y-m-d');
         } else {
             $method = 'update';
         }
         //$method = $_POST['method'];
         $id = '';
-        debug($report);
         //validation
         $succesList = array();
         $success = false;
@@ -112,10 +103,11 @@ class DailyReportController extends ControllerTemplate{
         } elseif ($fisio == 'Caca'){
             $report['drp_fisio_poo']++;
         }
-        $report['drp_comments']=$comments;
-        $report['drp_sieste']=$sieste;
+        isset($comments) ? $report['drp_comments']=$comments : '';
+        isset ($sieste) ? $report['drp_sieste']=$sieste : '';
+        $report['child_chd_id']=$childId;
+        $report['user_usr_id']=$this -> getUser()['usr_id'];
         $data = $report;
-        debug($data);
         // if input ok
         if (empty($errorList)) {
 
@@ -147,12 +139,23 @@ class DailyReportController extends ControllerTemplate{
 
         // show json errorList and/or successList message
         if ($success) {
-            $this->showJson(['code' => 1, 'message' => implode('
-            ', $succesList)]);
+            $this->redirectToRoute('dailyReport_dailyReportSingle_get',['date' => $date, 'childId' => $childId]);
         } else {
-            $this->showJson(['code' => 0, 'message' => implode('
-            ', $errorList)]);
+            $vars = [
+            'title'=> 'Rapport journalier',
+            'report' => $report,
+            'child' => $child,
+            'date' => $date,
+            'message' => implode('
+', $errorList)
+        ];
+        
+        $this->show('reports/dailyReportSingle',$vars);
         }
     }
-
+    public function getTheDailyReport($date, $childId){
+        $dailyReport = new DailyReportModel();
+        $childDaylyReport = $dailyReport->dailyReport_get($date, $childId);
+        $this->show('dailyReport/get_the_daily_report',array('childDaylyReport'=> $childDaylyReport));
+    }
 }

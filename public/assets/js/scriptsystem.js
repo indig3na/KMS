@@ -2,6 +2,9 @@
  * Created by Hicham on 18/12/2016.
  * layoutsystem script
  */
+
+var baseUrl = 'http://localhost/KMS/public';
+
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -335,7 +338,16 @@ $(document).ready(function() {
         $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
         $( ".menu1" ).show( "fast" );
     });
-
+    $( "#reportChild.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
+    $( "#datepicker.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
     //-------------------------monthly report functioning---------------//
 
     $( "#devCog" ).click(function(event) {
@@ -392,7 +404,7 @@ $(document).ready(function() {
 
 
     $( function() {
-        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker({ "dateFormat" : "yy-mm-dd" });
     });
 
     //----------------------contact form parent----------------------//

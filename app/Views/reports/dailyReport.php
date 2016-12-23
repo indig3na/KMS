@@ -7,19 +7,22 @@
         <h1 style="text-align: center;">My Day today</h1>
         <div>
             <h4>Nom du Enfant:</h4>
-            <select data-placeholder="Sélectionnez le enfant" class="form-control chosen-select">
+            <select id="reportChild" data-placeholder="Sélectionnez le enfant" class="drp form-control chosen-select">
                 <?php foreach ($fkData['child_chd_id'] as $id => $value): ?>
                     <option value="<?= $id ?>"><?= $value ?></option>
                 <?php endforeach ?>
             </select>
             <div>
                 <h4>Date:</h4>
-                <p>Date: <input type="text" id="datepicker" value="<?= date("Y-m-d") ?>"></p>
+                <p>Date: <input class="drp" type="text" id="datepicker" value="<?= date("Y-m-d") ?>"></p>
             </div>
 
         </div>
-
-
+        <?php if(isset($messages)): ?>
+        <div class="alert alert-danger">
+            <?= $messages ?>
+        </div>
+        <?php endif ?>
         <div class="menu1">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="" id="manger" class="btn btn-block btn-primary ">Manger</a>

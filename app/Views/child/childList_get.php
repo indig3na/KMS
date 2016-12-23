@@ -41,6 +41,7 @@
             <td>
                <?= $currentChild['usr_firstname'].' '.$currentChild['usr_lastname'] ?> 
             </td>
+            <?php if ($w_user['usr_role'] === 'ROLE_PAR'): ?>
             <td>
                 <a href="<?= $this->url('daily_report_get_the_daily_report', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
                     <button type="button" class="btn btn-default btn-sm">
@@ -48,6 +49,15 @@
                     </button>
                 </a>
             </td>
+            <?php else: ?>
+            <td>
+                <a href="<?= $this->url('dailyReport_dailyReportSingle_get', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span> Daily report
+                    </button>
+                </a>
+            </td>
+            <?php endif ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

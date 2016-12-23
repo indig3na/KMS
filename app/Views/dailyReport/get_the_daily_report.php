@@ -27,7 +27,7 @@
             <td><?= $childDaylyReport['drp_repas_apresmidi'] ?></td>
             <td><?= $childDaylyReport['drp_fisio_wet'] ?> fois</td>
             <td><?= $childDaylyReport['drp_fisio_poo'] ?> fois</td>
-            <td><?= $childDaylyReport['drp_sieste'] ?> mn</td>
+            <td><?= $childDaylyReport['drp_sieste'] ?></td>
             <td><?= $childDaylyReport['drp_comments'] ?></td>
         </tr>
     </tbody>

@@ -72,7 +72,8 @@ class DailyReportModel extends ModelTemplate
         }
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE child_chd_id  = :childId AND drp_date  = :date  LIMIT 1';
         $sth = $this->dbh->prepare($sql);
-        $sth->bindValue(':childId', $childId);
+        debug($sql);
+        $sth->bindValue(':childId', $childId, \PDO::PARAM_INT);
         $sth->bindValue(':date', $date);
         $sth->execute();
 
