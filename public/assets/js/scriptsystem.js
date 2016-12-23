@@ -2,6 +2,9 @@
  * Created by Hicham on 18/12/2016.
  * layoutsystem script
  */
+
+var baseUrl = 'http://localhost/KMS/public';
+
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -41,9 +44,11 @@ $(document).ready(function() {
             data: {[getKey]:$(this).data('id')},
             context: this
         }).done(function (response) {
-            $(this).after('<tr><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
+            $(this).after('<tr class="kms-subtable"><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
             $(this).next().find('.kms-action').remove();
-            $(this).next().fadeIn();
+            $(this).next().css('cursor','pointer').fadeIn().click(function(){
+                fold.call(this.previousSibling.firstChild,callFrom,callTo,getKey);
+            });
             $(this).addClass('kms-unfolded').children().not('.kms-action').off('click').click(function(){
                 fold.call(this,callFrom,callTo,getKey);
             });
@@ -58,13 +63,13 @@ $(document).ready(function() {
 
     if (window.location.pathname.endsWith('/class/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/class/','/childClassList/'+$(this.parentNode).data('id')+'/','class');
         });
     }
     if (window.location.pathname.endsWith('/parent/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/parent/','/child/','parent');
         });
     }
@@ -74,6 +79,7 @@ $(document).ready(function() {
         $.ajax({
             url: '',
             type: 'post',
+            //contentType:'multipart/form-data',
             dataType: 'json',
             data: data
         }).done(function (response) {
@@ -89,7 +95,7 @@ $(document).ready(function() {
     //fonction pour appliquer la librairie chosen à un objet et l'afficher comme un formulaire bootstrap
     function styleSelect(jqobj){
         jqobj.chosen({disable_search_threshold:8});
-        jqobj.next().css({width:'100%'}).children('ul').addClass('form-control');
+        jqobj.next().css({width:'100%'}).children('ul,a').addClass('form-control');
     }
     //initialiser la librairie chosen sur les select
     styleSelect($('.chosen-select'));
@@ -196,10 +202,10 @@ $(document).ready(function() {
             crudUpdate.call(this);
         });
     }
-
+//console.log($('.kms-file'));
     //si bouton 'modifier' cliqué - fonction principale
     function crudUpdate() {
-
+        //debuf fileupload console.log($('.kms-file').get(0).files[0]);
         // récupérer les données des input de la ligne courante
         tr = $(this).closest('.kms-dataset');
         var data = tr.find('.kms-update').not('.kms-select[multiple]').serializeArray();
@@ -231,7 +237,7 @@ $(document).ready(function() {
         }
     });
 
-    //----------------add child user-------------------
+    //----------------add -------------------
     $('#addchild').hide();
     $('.kms-crud-addchild-btn').click(function (e) {
         e.preventDefault();
@@ -255,7 +261,7 @@ $(document).ready(function() {
 
 
 
-    //----------------cancel an add/edit child user -------------------
+    //----------------cancel an add/edit -------------------
     $('.kms-crud-cancel-btn').click(function (e) {
         e.preventDefault();
         $('#addchild').hide();
@@ -265,7 +271,7 @@ $(document).ready(function() {
     });
 
 
-    //----------------edit child user -------------------
+    //----------------edit -------------------
     $('.kms-crud-edit-btn').click(function (e) {
         e.preventDefault();
         location.search = '?id='+$(this).closest('.kms-dataset').data('id');
@@ -284,6 +290,23 @@ $(document).ready(function() {
     $( "#matin" ).click(function(event) {
         event.preventDefault();
         //console.log("click");
+        $( "#mangerType").val( "matin");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+    $( "#midi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "midi");
+        $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
+        $( "#quant, #home" ).show( "fast" );
+    });
+
+        $( "#apresmidi" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#mangerType").val( "apresmidi");
         $( "#optionManger" ).hide( "drop", { direction: "down" }, "fast" );
         $( "#quant, #home" ).show( "fast" );
     });
@@ -315,7 +338,45 @@ $(document).ready(function() {
         $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
         $( ".menu1" ).show( "fast" );
     });
+    $( "#reportChild.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
+    $( "#datepicker.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
+    //-------------------------monthly report functioning---------------//
 
+    $( "#devCog" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text1, #home" ).show( "fast" );
+    });
+
+    $( "#devMot" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text2, #home" ).show( "fast" );
+    });
+
+    $( "#motFin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text3, #home" ).show( "fast" );
+    });
+    $( "#devlin" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text4, #home" ).show( "fast" );
+    });
+    $( "#devEmo" ).click(function(event) {
+        event.preventDefault();
+        //console.log("click");
+        $( "#text5, #home" ).show( "fast" );
+    });
 
 
     //----------------------lost password------------------//
@@ -326,6 +387,7 @@ $(document).ready(function() {
         $( "#lostPass" ).hide( "drop", { direction: "down" }, "fast" );
     });
     */
+   
     //----------------Select child-------------------
    /* $('#child').hide();
     $('.kms-crud-select-btn').click(function (e) {
@@ -342,7 +404,7 @@ $(document).ready(function() {
 
 
     $( function() {
-        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker({ "dateFormat" : "yy-mm-dd" });
     });
 
     //----------------------contact form parent----------------------//
@@ -364,11 +426,8 @@ $(document).ready(function() {
         }).done(function(data){
             console.log(data);
             form_status.html('<p class="text-success">Merci de nous avoir laissé un mots , on vous contactera dés que possible</p>').delay(3000).fadeOut();
-
-
         });
     });
-
 
 });
 
