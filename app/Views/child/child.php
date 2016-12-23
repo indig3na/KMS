@@ -50,7 +50,7 @@
                 <div class="form-group">
                             <label for="inputform">Parent</label>
 
-                            <select data-placeholder="Sélectionnez un parent" class="form-control chosen-select">
+                            <select data-placeholder="Sélectionnez un parent" name="user_usr_id" class="form-control chosen-select">
                                 <option value="0"></option>
                                 <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
@@ -63,7 +63,7 @@
                 <div class="form-group">
                             <label for="inputform">Classe</label>
 
-                            <select data-placeholder="Sélectionnez une classe" class="form-control chosen-select" >
+                            <select data-placeholder="Sélectionnez une classe" name="class_cls_id" class="form-control chosen-select" >
                                 <option value="0"></option>
                                 <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                                     <option value="<?= $id ?>"><?= $value ?></option>
@@ -188,7 +188,7 @@
 <!--list display-->
 <?php else: ?>
 <section class="content" id="list">
-    <div class="panel panel-success" >
+    <div class="panel panel-default" >
         <div class="panel-heading"><h3 style="display: inline;"><?= $title ?> </h3><a class="btn btn-success kms-crud-addchild-btn btn-flat pull-right" style="margin-top:-5px;">Ajout enfant</a></div>
         <div class="box col-xs-12">
             <div class="box-header">
