@@ -202,7 +202,7 @@ class UserController extends ControllerTemplate
                         $mailContent= 'Bienvenue sur notre site, '.$firstname.' '.$lastname.'!'
                             . '<br><br>'
                             . 'Cliquez sur le lien ci-dessous pour vous connecter et initialiser votre mot de passe:<br>'
-                            . '<a style="display:block;padding:10px;border-radius:10px;background-color:blue" href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
+                            . '<a href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
                             .'http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token))
                             . '</a>';
                         $emailToSend->emailSent($email,$mailContent );
