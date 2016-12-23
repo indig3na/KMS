@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">No. téléphone mobile</label>
-                    <input type="text"  name="usr_tel_mobile1"  class="form-control" laceholder="contact mobile_no">
+                    <input type="text"  name="usr_tel_mobile_1"  class="form-control" laceholder="contact mobile_no">
 
                 </div>
 
@@ -54,9 +54,8 @@
                             <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-                <?php endif ?>
-
                 </div>
+                <?php endif ?>
                 <?php if ($role ==='ROLE_EDU'): ?>
                 <div class="form-group">
                     <label for="inputform">Classe</label>
@@ -203,16 +202,15 @@
             <div class="box-header">
                 <br>
 
-                <div class="box-tools">
+                <?php /*<div class="box-tools">
                     <div class="input-group">
                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 250px; height: 36px;" placeholder="Rechercher...">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search fa-2x "></i></button>
                         </div>
                     </div>
-                </div>
+                </div> */ ?>
             </div>
-            <br>
             <div class="box-body table-responsive kms-datatable">
                 <!-- Table -->
                 <table class="table table-hover kms-datatable">

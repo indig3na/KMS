@@ -196,14 +196,14 @@
             <div class="box-header">
                 <div class="box-tools">
                     <br>
-                    <div class="input-group">
+                    <?php /*<div class="input-group">
                         <input type="text" name="table_search" class="form-control input-md pull-right" style="width: 250px; height: 36px;" placeholder="Search for">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search fa-2x "></i></button>
                         </div>
                     </div>
 
-                    <br>
+                    <br>*/ ?>
                 </div>
             </div>
             <div class="box-body table-responsive kms-datatable">

@@ -239,9 +239,11 @@ class UserController extends ControllerTemplate
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this->showJson(['code' => 1, 'message' => implode('<br>', $successList)]);
+                $this->showJson(['code' => 1, 'message' => implode('
+', $successList)]);
             } else {
-                $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
+                $this->showJson(['code' => 0, 'message' => implode('
+', $errorList)]);
             }
         }
         $this ->redirectToRoute('user_par_get');
