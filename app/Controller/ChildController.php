@@ -124,7 +124,7 @@ class ChildController extends ControllerTemplate
 
 
             // Check file size
-            debug(sizeof($_FILES));
+            //debug(sizeof($_FILES));
             if (sizeof($_FILES) > 500000)
             {
                 $errorList[] = "Taille de l'image dépasse 5Mb.";

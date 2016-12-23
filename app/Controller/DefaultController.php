@@ -30,7 +30,7 @@ class DefaultController extends ControllerTemplate
             $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
             $subject = isset($_POST['subject']) ? strip_tags($_POST['subject']) : '';
             $message = isset($_POST['message']) ? strip_tags($_POST['message']) : '';
-            print_r($_POST);
+            //print_r($_POST);
 
             if (empty($name)) {
                 $errorList[] = 'Nom vide !';
