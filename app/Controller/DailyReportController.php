@@ -75,7 +75,7 @@ class DailyReportController extends ControllerTemplate{
         $report = $model ->findDailyReport($childId, $date);
         if (empty($report)){
             $method = 'insert';
-            $report['drp_date'] = date('Y-m-d');
+            $report['drp_date'] = $date;
         } else {
             $method = 'update';
         }
