@@ -121,18 +121,18 @@
                     </div>
                     <div class="form-group">
                         <label for="inputForm">Adresse</label>
-                        <input type="date"  name="usr_address"  class="kms-update form-control" value="<?= $userData['usr_address'] ?>">
+                        <input type="text"  name="usr_address"  class="kms-update form-control" value="<?= $userData['usr_address'] ?>">
 
                     </div>
                     <div class="form-group">
                         <label for="inputForm">No. téléphone mobile</label>
-                        <input type="date"  name="usr_tel_mobile_1"  class="kms-update form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
+                        <input type="number"  name="usr_tel_mobile_1"  class="kms-update form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                     </div>
 
                     <div class="form-group">
                         <label for="inputForm">No. téléphone fixe</label>
-                        <input type="date"  name="usr_tel_domicile"  class="kms-update form-control" value="<?= $userData['usr_tel_domicile'] ?>">
+                        <input type="number"  name="usr_tel_domicile"  class="kms-update form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                     </div>
                     <div class="form-group">

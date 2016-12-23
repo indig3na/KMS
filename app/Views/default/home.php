@@ -12,7 +12,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="">KMS</a>
+                    <a class="navbar-brand" href="index.html"><img src="" alt="">KMS</a>
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-right">
@@ -562,7 +562,7 @@
             <div class="col-sm-6 col-md-3">
                 <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
                     <div class="team-img">
-                        <img class="img-responsive" src="images/team/01.jpg" alt="">
+                        <img class="img-responsive" src="" alt="">
                     </div>
                     <div class="team-info">
                         <h3>Bin Burhan</h3>
@@ -580,7 +580,7 @@
             <div class="col-sm-6 col-md-3">
                 <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
                     <div class="team-img">
-                        <img class="img-responsive" src="images/team/02.jpg" alt="">
+                        <img class="img-responsive" src="" alt="">
                     </div>
                     <div class="team-info">
                         <h3>Jane Man</h3>
@@ -598,7 +598,7 @@
             <div class="col-sm-6 col-md-3">
                 <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
                     <div class="team-img">
-                        <img class="img-responsive" src="images/team/03.jpg" alt="">
+                        <img class="img-responsive" src="" alt="">
                     </div>
                     <div class="team-info">
                         <h3>Pahlwan</h3>
@@ -616,7 +616,7 @@
             <div class="col-sm-6 col-md-3">
                 <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
                     <div class="team-img">
-                        <img class="img-responsive" src="images/team/04.jpg" alt="">
+                        <img class="img-responsive" src="" alt="">
                     </div>
                     <div class="team-info">
                         <h3>Nora Nassir</h3>
@@ -837,7 +837,7 @@
                     <label for="useremail">Login</label>
                     <input type="email" name="login" class="form-control" id="useremail" placeholder="Your email">
                 </div>
-                <div class="form-grouuser_login_postp">
+                <div class="form-group">
                     <label for="userpassword">Password</label>
                     <input type="password" name="password" class="form-control" id="userpassword" placeholder="Enter your Password">
                 </div>
