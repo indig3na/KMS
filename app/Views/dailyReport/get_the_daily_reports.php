@@ -5,8 +5,9 @@
 <?php /* debug($childDaylyReport); */?>
 <!--display-->
 
-<h1 align="center">Rapport journalier de : <?= $childDaylyReport['chd_firstname'].' '.$childDaylyReport['chd_lastname'] ?></h1><br><br>
+<h1 align="center">Rapports journaliers de : <?= $childDaylyReports[0]['chd_firstname'].' '.$childDaylyReports[0]['chd_lastname'] ?></h1><br><br>
 <table class="table table-hover table-striped">
+        <?php if (!empty($childDaylyReports[0]['drp_id'])): ?>
     <thead>
         <tr>
             <th>Date</th>
@@ -20,6 +21,7 @@
         </tr>
     </thead>
     <tbody>
+        <?php foreach ($childDaylyReports as $childDaylyReport): ?>
         <tr class="kms-dataset">
             <td><?= $childDaylyReport['drp_date'] ?></td>
             <td><?= $childDaylyReport['drp_repas_matin'] ?></td>
@@ -30,7 +32,11 @@
             <td><?= $childDaylyReport['drp_sieste'] ?></td>
             <td><?= $childDaylyReport['drp_comments'] ?></td>
         </tr>
+        <?php endforeach ?>
     </tbody>
+    <?php else: ?>
+    <tr><td style="text-align: center">Aucun rapport disponible</td></tr>
+    <?php endif ?>
 </table>
 <?php $this->stop('main_content') ?>
 

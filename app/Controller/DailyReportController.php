@@ -158,4 +158,9 @@ class DailyReportController extends ControllerTemplate{
         $childDaylyReport = $dailyReport->dailyReport_get($date, $childId);
         $this->show('dailyReport/get_the_daily_report',array('childDaylyReport'=> $childDaylyReport));
     }
+    public function getChildDailyReports($childId){
+        $dailyReport = new DailyReportModel();
+        $childDaylyReports = $dailyReport->childDailyReports_get($childId);
+        $this->show('dailyReport/get_the_daily_reports',array('childDaylyReports'=> $childDaylyReports));
+    }
 }

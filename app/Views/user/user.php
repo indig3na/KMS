@@ -41,7 +41,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Adresse E-mail</label>
+                    <label for="inputFormUser">Adresse E-mail *</label>
                     <input type="email" name="usr_email" class="form-control" placeholder="Email" >
                 </div>
                 <?php if ($role !=='ROLE_PAR'): ?>
@@ -50,6 +50,7 @@
 
                     <select data-placeholder="Sélectionnez un établissement" class="form-control chosen-select">
                         <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                            <option value="0"></option>
                             <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
@@ -136,7 +137,7 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="inputForm">Adresse E-mail</label>
+                        <label for="inputForm">Adresse E-mail *</label>
                         <input type="email" name="usr_email" class="kms-update form-control" value="<?= $userData['usr_email'] ?>" >
                     </div>
                     <?php if ($role !=='ROLE_PAR'): ?>
@@ -167,6 +168,7 @@
                         <label for="inputform">Ville</label>
 
                         <select data-placeholder="Sélectionnez une ville" name="city_cit_id" class="kms-update form-control chosen-select" >
+                            <option value="0"></option>
                             <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                             <?php endforeach ?>

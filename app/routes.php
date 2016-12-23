@@ -31,8 +31,8 @@ $w_routes = array(
     ['GET', '/app/manage/child/', 'Child#child_get', 'child_child_get'],
     ['POST', '/app/manage/child/', 'Child#child_post', 'child_child_post'],
     //Liste des élèves
-    ['GET', '/app/manage/childClassList/[:userId]/', 'Child#childClassList_get', 'child_childClassList_get'],
-    ['GET', '/app/manage/childList/[:userId]/', 'Child#childList_get', 'child_childList_get'],
+    ['GET', '/app/manage/childClassList/[i:userId]/', 'Child#childClassList_get', 'child_childClassList_get'],
+    ['GET', '/app/manage/childList/[i:userId]/', 'Child#childList_get', 'child_childList_get'],
 
     //DailyReport
 
@@ -44,9 +44,11 @@ $w_routes = array(
     ['GET', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_dontUse'],
     ['POST', '@/app/manage/dailyReport/(?\'date\'[0-9]{4}\-[0-9]{2}-[0-9]{2})/(?\'childId\'[0-9]{2})/', 'DailyReport#dailyReport_post', 'dailyReport_dailyReport_post'],
     //astuce pour recuperer l url
-    ['GET', '/app/manage/dailyReport/[:date]/[:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
+    ['GET', '/app/manage/dailyReport/[:date]/[i:childId]/', 'DailyReport#dailyReportSingle_get', 'dailyReport_dailyReportSingle_get'],
     //Child daily report - view
-    ['GET', '/app/manage/childDailyReport/[:date]/[:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'],
+    ['GET', '/app/view/child/[i:userId]/', 'Child#childParentList_get', 'child_childparentlist_get'],
+    ['GET', '/app/view/allDailyReports/[i:childId]/', 'DailyReport#getChildDailyReports', 'daily_report_child_daily_reports'],
+    ['GET', '/app/view/dailyReport/[:date]/[i:childId]/', 'DailyReport#getTheDailyReport', 'daily_report_get_the_daily_report'],
     //DailyReport - selectList
     ['GET', '/app/manage/dailyReport/', 'DailyReport#dailyReport_get', 'dailyReport_dailyReport_get'],
     ['POST', '/app/manage/dailyReport/', 'DailyReport#dailyReport_redirect', 'dailyReport_dailyReport_redirect'],

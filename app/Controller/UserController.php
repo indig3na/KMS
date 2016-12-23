@@ -297,7 +297,7 @@ class UserController extends ControllerTemplate
                     $this->redirectToRoute('class_class_get');
                 } 
                 if($user_logged['usr_role']=='ROLE_PAR') {
-                    $this->redirectToRoute('child_child_get');
+                    $this->redirectToRoute('child_childparentlist_get', ['userId' => $userIdConnected]);
                 }
                 if($user_logged['usr_role']=='ROLE_EDU') {
                     $this->redirectToRoute('child_childList_get', ['userId' => $userIdConnected]);

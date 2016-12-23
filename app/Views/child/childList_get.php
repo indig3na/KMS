@@ -4,8 +4,10 @@
 
 <!--display-->
 <table class="table table-hover table-striped">
-    <?php if(!empty($childList)): ?>
+    <?php if (!empty($childList)): ?>
+    <?php if (!$w_user['usr_role'] === 'ROLE_PAR'): ?>
     <caption><h1>Liste de la classe :<?= $childList[0]['cls_name'] ?></h1></caption>
+    <?php endif ?>
     <thead>
         <tr>
             <th></th>
@@ -43,7 +45,7 @@
             </td>
             <?php if ($w_user['usr_role'] === 'ROLE_PAR'): ?>
             <td>
-                <a href="<?= $this->url('daily_report_get_the_daily_report', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
+                <a href="<?= $this->url('daily_report_child_daily_reports', array('childId'=>$currentChild['chd_id']))?>">
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span> Daily report
                     </button>
@@ -51,7 +53,7 @@
             </td>
             <?php else: ?>
             <td>
-                <a href="<?= $this->url('dailyReport_dailyReportSingle_get', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
+                <a href="<?= $this->url('dailyReport_dailyReportSingle_get', array('date'=>date('Y-m-d'), 'childId'=>$currentChild['chd_id']))?>">
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-pencil"></span> Daily report
                     </button>

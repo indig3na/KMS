@@ -5,7 +5,7 @@
 
 
 <div style="" class="container">
-    
+    <h1 style="text-align: center;">Rapport journalier</h1>
     <h4>Nom de l'enfant:</h4>
     <select id="reportChild" data-placeholder="Sélectionnez le enfant" class="drp form-control chosen-select">
         <?php foreach ($fkData['child_chd_id'] as $id => $value): ?>
@@ -14,7 +14,7 @@
     </select>
     <div>
         <h4>Date:</h4>
-        <p>Date: <input class="drp" type="text" id="datepicker" value="<?= $date ?>"></p>
+        <p><input class="drp" type="text" id="datepicker" value="<?= $date ?>"></p>
     </div>
 
     </div>

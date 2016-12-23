@@ -370,6 +370,32 @@ public function getListByClass($classId){
         
         return false;
     }
+public function getListByParent($userId){
+         $sql = '
+                SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    user as parent ON parent.usr_id = child.user_usr_id
+                        Left outer JOIN
+                    class ON class.cls_id = child.class_cls_id
+                    	LEFT OUTER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id
+                WHERE child.user_usr_id = :userId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':userId', $userId,\PDO::PARAM_INT);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
 public function getListClass($userId){
          $sql = '
                 SELECT 
