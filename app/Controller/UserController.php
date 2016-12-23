@@ -62,8 +62,8 @@ class UserController extends ControllerTemplate
                 break;
             case 'ROLE_PAR':
                 $prettyRole = 'parent';
-                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id','nursery_nur_id'],'usr_role','ROLE_PAR'];
-                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville','Établissement'];
+                $query = [['usr_id','usr_firstname','usr_lastname','usr_email','usr_tel_mobile_1','city_cit_id'],'usr_role','ROLE_PAR'];
+                $header =['Prénom ', 'Nom ','Adresse E-mail',' No. téléphone principal','Ville'];
                 break;
             default: 
                 $prettyRole = 'utilisateur';
@@ -127,41 +127,41 @@ class UserController extends ControllerTemplate
             $nursery = isset($_POST['nursery_nur_id']) ? trim(strip_tags($_POST['nursery_nur_id'])) : '';
             $city = isset($_POST['city_cit_id']) ? trim(strip_tags($_POST['city_cit_id'])) : '';
             $class = isset($_POST['class_cls_id']) ? trim(strip_tags($_POST['class_cls_id'])) : '';
-            
+
             $method = $_POST['method'];
             $id = '';
 
             // activity input validation
-            $succesList = array();
+            $successList = array();
             $success = false;
             $errorList = array();
             $data = array();
             if (empty($firstname)) {
-                $errorList[] = 'firstname required';
+                $errorList[] = 'Prenom est vide';
                 $success = false;
             }
             if (strlen($firstname)<3) {
-                $errorList[] = 'firstname must be 3 caractere or more';
+                $errorList[] = 'Prenom doit comporter  3 charactere ou plus';
                 $success = false;
             }
             if (empty($lastname)) {
-                $errorList[] = 'laststname required';
+                $errorList[] = 'Nom est vide';
                 $success = false;
             }
             if (strlen($lastname)<3) {
-                $errorList[] = 'lastname must be 3 caractere or more';
+                $errorList[] = 'Nom doit comporter  3 charactere ou plus';
                 $success = false;
             }
             if (empty($address)) {
-                $errorList[] = 'Adresse required';
+                $errorList[] = 'Adresse  est vide';
                 $success = false;
             }
             if (empty($email)) {
-                $errorList[] = 'Adresse E-mail required';
+                $errorList[] = 'Adresse E-mail vide';
                 $success = false;
             }
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                $errorList[] = 'Adresse E-mail valide required';
+                $errorList[] = 'Adresse E-mail valide requise';
                 $success = false;
             }
             if(!in_array($role,['ROLE_ADMIN','ROLE_EDU','ROLE_PAR'])){
@@ -195,16 +195,16 @@ class UserController extends ControllerTemplate
                     if ($insertData === false) {
                         $errorList[] = 'Insert Error<br>';
                     } else {
-                        $succesList[] = 'user info inserted';
+                        $successList[] = 'information inséré';
                         $success = true;
-                        
+
                         $emailToSend = new MailerController();
                         $mailContent= 'Bienvenue sur notre site, '.$firstname.' '.$lastname.'!'
-                                . '<br><br>'
-                                . 'Cliquez sur le lien ci-dessous pour vous connecter et initialiser votre mot de passe:<br>'
-                                . '<a style="display:block;padding:10px;border-radius:10px;background-color:blue" href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
-                                .'http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token))
-                                . '</a>';
+                            . '<br><br>'
+                            . 'Cliquez sur le lien ci-dessous pour vous connecter et initialiser votre mot de passe:<br>'
+                            . '<a style="display:block;padding:10px;border-radius:10px;background-color:blue" href ="http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token)).'">'
+                            .'http://localhost'.$this->generateUrl('user_passwordreinit', array('token'=>$token))
+                            . '</a>';
                         $emailToSend->emailSent($email,$mailContent );
                     }
                 } //update data for given Id
@@ -213,9 +213,9 @@ class UserController extends ControllerTemplate
                     $updateData = $model->update($data, $id, $stripTags = true);
                     // if not updated error
                     if ($updateData === false) {
-                        $errorList[] = 'Update Error<br>';
+                        $errorList[] = 'Erreur dans la mise à jour';
                     } else {
-                        $succesList[] = 'user infos Updated';
+                        $successList[] = 'Utilisateur mis à jour';
                         $success = true;
                     }
                 }
@@ -232,19 +232,21 @@ class UserController extends ControllerTemplate
                 if ($deletedData === false) {
                     $errorList[] = 'Delete Error<br>';
                 } else {
-                    $succesList[] = 'user infos Deleted';
+                    $successList[] = 'Utilisateur supprimé';
                     $success = true;
                 }
 
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+                $this->showJson(['code' => 1, 'message' => implode('
+', $successList)]);
             } else {
-                $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
+                $this->showJson(['code' => 0, 'message' => implode('
+', $errorList)]);
             }
         }
-
+        $this ->redirectToRoute('user_par_get');
 
     }
     

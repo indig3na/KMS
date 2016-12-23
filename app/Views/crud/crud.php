@@ -12,7 +12,7 @@
 
     <?php $this->start('main_content')?>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default table-responsive kms-datatable">
         <div class="panel-heading">
             <h3><?= $title ?></h3>
         </div>
@@ -29,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            <?php if(!isset($noAction)): //ligne d'ajout ?>
+            <?php if(!isset($noAction)&&!isset($noAdd)): //ligne d'ajout ?>
                 <tr id="kms-add" class="kms-dataset">
                     <?php foreach ($data[0] as $key => $value): ?>
                         <?php if ($key == $primaryKey || (isset($ignoreData) && in_array($key,$ignoreData))): ?>
@@ -75,8 +75,12 @@
                     <?php endforeach ?>
                     <?php if(!isset($noAction)): ?>    
                         <td class="kms-action kms-update">
+                            <?php if(!isset($noEdit)): ?>  
                             <a class="btn btn-info btn-flat kms-crud-update-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>"><i class="fa fa-pencil"></i></a>
+                            <?php endif ?>
+                            <?php if(!isset($noDelete)): ?>  
                             <a class="btn btn-danger btn-flat kms-crud-delete-btn" href="#" data-id="<?= $row[$primaryKey] ?>" value="<?= $row[$primaryKey] ?>"><i class="fa fa-trash-o"></i></a>
+                            <?php endif ?>
                         </td>
                     <?php endif ?>
                 </tr>

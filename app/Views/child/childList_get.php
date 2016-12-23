@@ -1,12 +1,15 @@
 <?php $this->layout('layoutSystem', ['title' => '']) ?>
 
 <?php $this->start('main_content') ?>
-
 <?php /*debug($childList); */?>
 <!--display-->
 <?php if (!empty($childList)) : ?>
 <h1 align="center">Liste de la classe :<?= $childList[0]['cls_name'] ?></h1><br><br>
 <table class="table table-hover table-striped">
+    <?php/* if (!empty($childList)): */?>
+    <?php/* if (!$w_user['usr_role'] === 'ROLE_PAR'): */?>
+    <caption><h1>Liste de la classe :<?= $childList[0]['cls_name'] ?></h1></caption>
+    <?php /*endif */?>
     <thead>
         <tr>
             <th></th>
@@ -42,13 +45,23 @@
             <td>
                <?= $currentChild['usr_firstname'].' '.$currentChild['usr_lastname'] ?> 
             </td>
+            <?php if ($w_user['usr_role'] === 'ROLE_PAR'): ?>
             <td>
-                <a href="<?= $this->url('daily_report_get_the_daily_report', array('date'=>$currentChild['drp_date'], 'childId'=>$currentChild['chd_id']))?>">
+                <a href="<?= $this->url('daily_report_child_daily_reports', array('childId'=>$currentChild['chd_id']))?>">
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span> Daily report
                     </button>
-                </a> 
+                </a>
             </td>
+            <?php else: ?>
+            <td>
+                <a href="<?= $this->url('dailyReport_dailyReportSingle_get', array('date'=>date('Y-m-d'), 'childId'=>$currentChild['chd_id']))?>">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span> Daily report
+                    </button>
+                </a>
+            </td>
+            <?php endif ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

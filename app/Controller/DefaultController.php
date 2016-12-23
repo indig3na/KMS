@@ -11,6 +11,8 @@ class DefaultController extends ControllerTemplate
      */
     public function home()
     {
+        $errorList = array();
+        $this->show('default/home', array('errorList'=>$errorList));
         $this->show('default/home');
     }
 
@@ -28,7 +30,7 @@ class DefaultController extends ControllerTemplate
             $email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
             $subject = isset($_POST['subject']) ? strip_tags($_POST['subject']) : '';
             $message = isset($_POST['message']) ? strip_tags($_POST['message']) : '';
-            print_r($_POST);
+            //print_r($_POST);
 
             if (empty($name)) {
                 $errorList[] = 'Nom vide !';
@@ -77,7 +79,7 @@ class DefaultController extends ControllerTemplate
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
+                $this ->redirectToRoute('default_home');
             } else {
                 $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
             }

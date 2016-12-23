@@ -57,6 +57,9 @@
     width: auto;
 }
 .table-responsive{
+    overflow-x: visible;
+}
+.kms-datatable{
     overflow-x: auto;
 }
 /* Sidebar Styles */

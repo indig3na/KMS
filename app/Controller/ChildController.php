@@ -48,13 +48,13 @@ class ChildController extends ControllerTemplate
 
         $classModel = new ClassModel();
         $fkData['class_cls_id'] = $classModel ->findIndexedColumn('cls_name');
-
+        
         $vars = [
 
             //titre de page
             'title' => 'Enfant',
             //titres des colonnes de table (correspond aux paramètres de la fonction findAllColumns ci-dessus, sauf le primary key
-            'header' => ['','Prénom *', 'Nom *','Date de naissance *','Sexe *','Intérêts','Commentaires','Classe','Parent'],
+            'header' => ['','Prénom', 'Nom','Date de naissance','Sexe','Intérêts','Commentaires','Classe','Parent'],
 
             //colonne id de la table: la colonne n'est pas affichée, mais l'id est retourné lors dun update/delete
             'primaryKey' => 'chd_id',
@@ -124,6 +124,7 @@ class ChildController extends ControllerTemplate
 
 
             // Check file size
+            //debug(sizeof($_FILES));
             if (sizeof($_FILES) > 500000)
             {
                 $errorList[] = "Taille de l'image dépasse 5Mb.";
@@ -206,7 +207,7 @@ class ChildController extends ControllerTemplate
             }
             // show json errorList and/or successList message
             if ($success) {
-                $this ->redirectToRoute('child_child_get');
+                $this->showJson(['code' => 1, 'message' => implode('<br>', $succesList)]);
             } else {
                 $this->showJson(['code' => 0, 'message' => implode('<br>', $errorList)]);
             }
@@ -220,15 +221,19 @@ class ChildController extends ControllerTemplate
         $childList = $child ->getListClass($userId);
        // debug($childList);
         
-       $this->show('child/ChildList_get',array('childList'=> $childList));
+       $this->show('child/childList_get',array('childList'=> $childList));
     }
     public function childClassList_get($classId){
        // debug($userId);
         $child = new ChildModel();
-        $childList = $child ->findAllColumns(['*'], 'class_cls_id', $classId);
-       // debug($childList);
-        
-       $this->show('child/ChildList_get',array('childList'=> $childList));
+        $childList = $child ->getListByClass($classId);
+       $this->show('child/childList_get',array('childList'=> $childList));
+    }
+    public function childParentList_get($userId){
+       // debug($userId);
+        $child = new ChildModel();
+        $childList = $child ->getListByParent($userId);
+       $this->show('child/childList_get',array('childList'=> $childList));
     }
     
     public function parentList_get($classeId){

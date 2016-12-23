@@ -344,7 +344,58 @@ class ChildModel extends ModelTemplate
     {
         return $this->dbh;
     }
-
+public function getListByClass($classId){
+         $sql = '
+                SELECT 
+                    *
+                FROM
+                    class
+                        INNER JOIN
+                    child ON class.cls_id = child.class_cls_id
+                        INNER JOIN
+                    user as parent ON parent.usr_id = child.user_usr_id
+                    	LEFT OUTER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id
+                WHERE class.cls_id = :classId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':classId', $classId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
+public function getListByParent($userId){
+         $sql = '
+                SELECT 
+                    *
+                FROM
+                    child
+                        INNER JOIN
+                    user as parent ON parent.usr_id = child.user_usr_id
+                        Left outer JOIN
+                    class ON class.cls_id = child.class_cls_id
+                    	LEFT OUTER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id
+                WHERE child.user_usr_id = :userId
+                ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':userId', $userId,\PDO::PARAM_INT);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll();
+        }
+        
+        return false;
+    }
 public function getListClass($userId){
          $sql = '
                 SELECT 
@@ -357,7 +408,7 @@ public function getListClass($userId){
                     user ON class.cls_id = user.class_cls_id
                         INNER JOIN
                     user as parent ON parent.usr_id = child.user_usr_id
-                    	INNER JOIN
+                    	LEFT OUTER JOIN
                     daily_report ON daily_report.child_chd_id = child.chd_id
                 AND user.usr_id =:userId
                 ';

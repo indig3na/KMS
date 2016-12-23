@@ -218,9 +218,9 @@ jQuery(function($) {'use strict';
 
 
     var form = $('#main-contact-form');
+    var form_status = $('<div class="form_status"></div>');
 	form.submit(function(event){
 		event.preventDefault();
-		var form_status = $('<div class="form_status"></div>');
 		var data = $(this).serializeArray();
 		$.ajax({
 			url: $(this).attr('action'),
@@ -228,7 +228,7 @@ jQuery(function($) {'use strict';
 			dataType: 'json',
 			data: data,
 			beforeSend: function(){
-				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn() );
+				form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Email is sending...</p>').fadeIn().delay(1000).fadeOut() );
 			}
 		}).done(function(data){
 			form_status.html('<p class="text-success">Thank you for contact us. As early as possible  we will contact you</p>').delay(3000).fadeOut();

@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputFormUser">No. téléphone mobile</label>
-                    <input type="text"  name="usr_tel_mobile1"  class="form-control" laceholder="contact mobile_no">
+                    <input type="text"  name="usr_tel_mobile_1"  class="form-control" laceholder="contact mobile_no">
 
                 </div>
 
@@ -41,7 +41,7 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="inputFormUser">Adresse E-mail</label>
+                    <label for="inputFormUser">Adresse E-mail *</label>
                     <input type="email" name="usr_email" class="form-control" placeholder="Email" >
                 </div>
                 <?php if ($role !=='ROLE_PAR'): ?>
@@ -50,12 +50,12 @@
 
                     <select data-placeholder="Sélectionnez un établissement" class="form-control chosen-select">
                         <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
+                            <option value="0"></option>
                             <option value="<?= $id ?>"><?= $value ?></option>
                         <?php endforeach ?>
                     </select>
-                <?php endif ?>
-
                 </div>
+                <?php endif ?>
                 <?php if ($role ==='ROLE_EDU'): ?>
                 <div class="form-group">
                     <label for="inputform">Classe</label>
@@ -110,53 +110,52 @@
             </div>
             <div class="box-body table-responsive">
                 <!-- Form -->
-                <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate>
+                <form class="kms-dataset form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form" novalidate data-id="<?= $_GET['id'] ?>">
                     <div class="form-group" >
                         <label for="inputForm">Prénom *</label>
-                        <input type="text" name="usr_firstname" class="form-control" required value="<?= $userData['usr_firstname'] ?>">
+                        <input type="text" name="usr_firstname" class="kms-update form-control" required value="<?= $userData['usr_firstname'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="inputForm">Nom * </label>
-                        <input type="text" name="usr_lastname" class="form-control" required value="<?= $userData['usr_lastname'] ?>">
+                        <input type="text" name="usr_lastname" class="kms-update form-control" required value="<?= $userData['usr_lastname'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="inputForm">Adresse</label>
-                        <input type="date"  name="usr_address"  class="form-control" value="<?= $userData['usr_address'] ?>">
+                        <input type="text"  name="usr_address"  class="kms-update form-control" value="<?= $userData['usr_address'] ?>">
 
                     </div>
                     <div class="form-group">
                         <label for="inputForm">No. téléphone mobile</label>
-                        <input type="date"  name="usr_tel_mobile_1"  class="form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
+                        <input type="number"  name="usr_tel_mobile_1"  class="kms-update form-control" value="<?= $userData['usr_tel_mobile_1'] ?>">
 
                     </div>
 
                     <div class="form-group">
                         <label for="inputForm">No. téléphone fixe</label>
-                        <input type="date"  name="usr_tel_domicile"  class="form-control" value="<?= $userData['usr_tel_domicile'] ?>">
+                        <input type="number"  name="usr_tel_domicile"  class="kms-update form-control" value="<?= $userData['usr_tel_domicile'] ?>">
 
                     </div>
                     <div class="form-group">
-                        <label for="inputForm">Adresse E-mail</label>
-                        <input type="email" name="usr_email" class="form-control" value="<?= $userData['usr_email'] ?>" >
+                        <label for="inputForm">Adresse E-mail *</label>
+                        <input type="email" name="usr_email" class="kms-update form-control" value="<?= $userData['usr_email'] ?>" >
                     </div>
                     <?php if ($role !=='ROLE_PAR'): ?>
                     <div class="form-group">
                         <label for="inputform">Établissement</label>
 
-                        <select data-placeholder="Sélectionnez un établissement" name="nursery_nur_id" class="form-control chosen-select">
+                        <select data-placeholder="Sélectionnez un établissement" name="nursery_nur_id" class="form-control kms-update  chosen-select">
                             <option value="0"></option>
                             <?php foreach ($fkData['nursery_nur_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['nursery_nur_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                             <?php endforeach ?>
                         </select>
-                    <?php endif ?>
-
                     </div>
+                    <?php endif ?>
                     <?php if ($role === 'ROLE_EDU'): ?>
                     <div class="form-group">
                         <label for="inputform">Classe</label>
 
-                        <select data-placeholder="Sélectionnez une classe" name="class_cls_id" class="form-control chosen-select" >
+                        <select data-placeholder="Sélectionnez une classe" name="class_cls_id" class="form-control kms-update  chosen-select" >
                             <option value="0"></option>
                             <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['class_cls_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
@@ -167,7 +166,8 @@
                     <div class="form-group">
                         <label for="inputform">Ville</label>
 
-                        <select data-placeholder="Sélectionnez une ville" name="city_cit_id" class="form-control chosen-select" >
+                        <select data-placeholder="Sélectionnez une ville" name="city_cit_id" class="kms-update form-control chosen-select" >
+                            <option value="0"></option>
                             <?php foreach ($fkData['city_cit_id'] as $id => $value): ?>
                                 <option value="<?= $id ?>" <?= $userData['city_cit_id'] == $id ? 'selected' : ''?> ><?= $value ?></option>
                             <?php endforeach ?>
@@ -176,18 +176,15 @@
                     </div>
                     <?php if ($role !=='ROLE_PAR'): ?>
                     <div class="form-group">
-                        <input type="hidden" name="submitFile" value="1" />
                         <label for="inputFormUser">Photo</label>
-                        <input type="file" name="photo">
+                        <input class="kms-update kms-file" type="file" name="photo">
                         <p class="help-block">toutes les extensions sont autorisées</p>
                         <br />
                     </div>
                     <?php endif ?>
                     <div class="form-group">
-                        <input type="hidden" name="usr_role" value = <?= $role ?>>                    </div>
-                        <input type="hidden" name="method" value="update"/>
-                        <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                        <button type="submit" class="btn btn-primary" >Modifier</button>
+                        <input class="kms-update" type="hidden" name="usr_role" value = <?= $role ?>>                    </div>
+                        <button type="submit" class="btn btn-primary kms-crud-save-btn" >Modifier</button>
                     </div>
                 </form>
             </div>
@@ -205,19 +202,18 @@
             <div class="box-header">
                 <br>
 
-                <div class="box-tools">
+                <?php /*<div class="box-tools">
                     <div class="input-group">
                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 250px; height: 36px;" placeholder="Rechercher...">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search fa-2x "></i></button>
                         </div>
                     </div>
-                </div>
+                </div> */ ?>
             </div>
-            <br>
-            <div class="box-body table-responsive">
+            <div class="box-body table-responsive kms-datatable">
                 <!-- Table -->
-                <table class="table table-hover">
+                <table class="table table-hover kms-datatable">
                     <tbody>
                         <?php if (!empty($data)): ?>
                             <tr>

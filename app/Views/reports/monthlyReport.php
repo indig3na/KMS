@@ -6,13 +6,13 @@
     <h1 style="text-align: center;">My Month</h1>
     <div>
         <h4>Nom du Enfant:</h4>
-        <select data-placeholder="Sélectionnez le enfant" class="form-control chosen-select">
+        <select data-placeholder="Sélectionnez le enfant" class="mrp form-control chosen-select">
             <?php foreach ($fkData['child_chd_id'] as $id => $value): ?>
                 <option value="<?= $id ?>"><?= $value ?></option>
             <?php endforeach ?>
         </select>
         <div>
-           <p>Month: <input type="text" id="datepicker" value="<?= date("F") ?>"></p>
+           <p>Month: <input class="mrp" type="text" id="datepicker" value="<?= date("F") ?>"></p>
         </div>
     </div>
     <div class="menu3">

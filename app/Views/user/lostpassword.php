@@ -19,19 +19,21 @@ $this->start('main_content'); ?>
         </div>
         <?php  if(sizeof($successList > 0)) : ?>
         <?php foreach ($successList as $currentSuccessList) : ?>
-            <button type="button" class="btn btn-success btn-block">
+            <button id="emailSent" type="button" class="btn btn-success btn-block">
                 <?php echo $currentSuccessList; ?>
             </button> <br><br>
         <?php endforeach; ?>
         <?php endif; ?>
-        <form action="" method="post" role = "form">
+        <?php if (!isset($_POST['login'])): ?>
+        <form id="lostPass" action="" method="post" role = "form" >
             <div class="form-group">
             <fieldset>
                 <input type="email" class="form-control" name="login" value="<?= $login ?>" placeholder="Email address" /><br />
-                <input type="submit" class="btn btn-success btn-block" value="Change password" />
+                <input id="lostPassBtn" type="submit" class="btn btn-success btn-block" value="Change password" />
             </fieldset>
             </div>
         </form>
+        <?php endif; ?>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-0"></div>
 </div>

@@ -2,6 +2,9 @@
  * Created by Hicham on 18/12/2016.
  * layoutsystem script
  */
+
+var baseUrl = 'http://localhost/KMS/public';
+
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -41,9 +44,11 @@ $(document).ready(function() {
             data: {[getKey]:$(this).data('id')},
             context: this
         }).done(function (response) {
-            $(this).after('<tr><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
+            $(this).after('<tr class="kms-subtable"><td colspan="'+this.cells.length+'"></td></tr>').next().hide().children().append($(response).find('table'));
             $(this).next().find('.kms-action').remove();
-            $(this).next().fadeIn();
+            $(this).next().css('cursor','pointer').fadeIn().click(function(){
+                fold.call(this.previousSibling.firstChild,callFrom,callTo,getKey);
+            });
             $(this).addClass('kms-unfolded').children().not('.kms-action').off('click').click(function(){
                 fold.call(this,callFrom,callTo,getKey);
             });
@@ -58,13 +63,13 @@ $(document).ready(function() {
 
     if (window.location.pathname.endsWith('/class/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/class/','/childClassList/'+$(this.parentNode).data('id')+'/','class');
         });
     }
     if (window.location.pathname.endsWith('/parent/')){
 
-        $('.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
+        $('tr.kms-dataset').not('#kms-add').children().not('.kms-action').css('cursor','pointer').click(function(){
             unfold.call(this.parentNode,'/parent/','/child/','parent');
         });
     }
@@ -74,6 +79,7 @@ $(document).ready(function() {
         $.ajax({
             url: '',
             type: 'post',
+            //contentType:'multipart/form-data',
             dataType: 'json',
             data: data
         }).done(function (response) {
@@ -82,7 +88,7 @@ $(document).ready(function() {
                 alert(response.message);
             } else if (response.code == 1) {
                 alert(response.message);
-                location.reload();
+                location.search='';
             }
         });
     }
@@ -196,10 +202,10 @@ $(document).ready(function() {
             crudUpdate.call(this);
         });
     }
-
+//console.log($('.kms-file'));
     //si bouton 'modifier' cliqué - fonction principale
     function crudUpdate() {
-
+        //debuf fileupload console.log($('.kms-file').get(0).files[0]);
         // récupérer les données des input de la ligne courante
         tr = $(this).closest('.kms-dataset');
         var data = tr.find('.kms-update').not('.kms-select[multiple]').serializeArray();
@@ -332,7 +338,16 @@ $(document).ready(function() {
         $( "#text, #home" ).hide( "drop", { direction: "down" }, "fast" );
         $( ".menu1" ).show( "fast" );
     });
-
+    $( "#reportChild.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
+    $( "#datepicker.drp" ).change(function(event) {
+        child = $( "#reportChild" ).val();
+        date = $( "#datepicker" ).val();
+        window.location.assign(baseUrl.concat('/app/manage/dailyReport/',date,'/',child,'/'));
+    });
     //-------------------------monthly report functioning---------------//
 
     $( "#devCog" ).click(function(event) {
@@ -363,6 +378,16 @@ $(document).ready(function() {
         $( "#text5, #home" ).show( "fast" );
     });
 
+
+    //----------------------lost password------------------//
+    /*
+    $( "#lostPassBtn" ).click(function(event) {
+        event.preventDefault();
+        console.log("click");
+        $( "#lostPass" ).hide( "drop", { direction: "down" }, "fast" );
+    });
+    */
+   
     //----------------Select child-------------------
    /* $('#child').hide();
     $('.kms-crud-select-btn').click(function (e) {
@@ -378,10 +403,31 @@ $(document).ready(function() {
     //--------------------------Date Picker---------------------//
 
 
-$( function() {
-    $( "#datepicker" ).datepicker();
-});
+    $( function() {
+        $( "#datepicker" ).datepicker({ "dateFormat" : "yy-mm-dd" });
+    });
 
+    //----------------------contact form parent----------------------//
+
+    var form = $('#main-contact-form');
+    var form_status = $('<div class="form_status"></div>');
+    form.submit(function(event){
+        event.preventDefault();
+
+        var data = $(this).serializeArray();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            beforeSend: function(){
+                form.prepend( form_status.html('<p><i class="fa fa-spinner fa-spin"></i> Message en cours d\'envoie...</p>').fadeIn());
+            }
+        }).done(function(data){
+            console.log(data);
+            form_status.html('<p class="text-success">Merci de nous avoir laissé un mots , on vous contactera dés que possible</p>').delay(3000).fadeOut();
+        });
+    });
 
 });
 

@@ -1,6 +1,3 @@
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_EDU' ?>
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_PAR' ?>
-<?php// $_SESSION['user']['usr_role'] = 'ROLE_ADMIN' ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -166,9 +163,14 @@
                     <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-clock-o  fa-stack-1x "></i></span>Events</a>
                 </li>
             <?php  endif ; ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_PAR'): ?>
+                <li>
+                    <a href="<?= $this->url('contact_contact_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+                </li>
+            <?php  endif ; ?>
             <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+                    <a href="<?= $this->url('crud_message_get') ?>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Message</a>
                 </li>
             <?php  endif ; ?>
         </ul>

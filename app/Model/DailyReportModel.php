@@ -9,7 +9,7 @@
 namespace Model;
 
 /**
- * Modèle pour la table Nursery
+ * Modèle pour la table DailyReport
  * one foreign key
  */
 class DailyReportModel extends ModelTemplate
@@ -72,7 +72,7 @@ class DailyReportModel extends ModelTemplate
         }
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE child_chd_id  = :childId AND drp_date  = :date  LIMIT 1';
         $sth = $this->dbh->prepare($sql);
-        $sth->bindValue(':childId', $childId);
+        $sth->bindValue(':childId', $childId, \PDO::PARAM_INT);
         $sth->bindValue(':date', $date);
         $sth->execute();
 
@@ -246,9 +246,9 @@ class DailyReportModel extends ModelTemplate
         SELECT 
             *
         FROM
-            daily_report
-                INNER JOIN
-            child ON child.chd_id = daily_report.child_chd_id
+            child
+                LEFT OUTER JOIN
+            daily_report ON child.chd_id = daily_report.child_chd_id
                 AND daily_report.child_chd_id = :childId
                 AND daily_report.drp_date = :date
                  ';
@@ -261,6 +261,29 @@ class DailyReportModel extends ModelTemplate
         }
         else {
             return $stmt->fetch();
+        }
+        
+        return false;
+    }
+    public function childDailyReports_get($childId)
+    {
+    $sql = '
+        SELECT 
+            *
+        FROM
+            child
+                LEFT OUTER JOIN
+            daily_report ON child.chd_id = daily_report.child_chd_id
+                WHERE child.chd_id = :childId
+                 ';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(':childId', $childId);
+        
+        if ($stmt->execute() === false) {
+            debug($stmt->errorInfo());
+        }
+        else {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
         
         return false;
