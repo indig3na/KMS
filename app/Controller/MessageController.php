@@ -45,8 +45,7 @@ class MessageController extends ControllerTemplate
             //données
             'data' => $tabledata,
             'fkData' => $fkData,
-            'noAdd' => true,
-            'noEdit' => true,
+            'noAction' => true,
         ];
         $this->allowTo('ROLE_ADMIN');
         $this->show('crud/crud',$vars);

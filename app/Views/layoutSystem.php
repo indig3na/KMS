@@ -117,7 +117,12 @@
                 </li>
             <?php  endif ; ?>
             
-            <?php if (($w_user['usr_role'] == 'ROLE_ADMIN') || ($w_user['usr_role'] == 'ROLE_PAR')): ?>
+            <?php if ($w_user['usr_role'] == 'ROLE_PAR'): ?>
+                <li>
+                    <a href="<?= $this->url('child_childparentlist_get', ['userId'=>$w_user['usr_id']]) ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
+                </li>
+            <?php  endif ; ?>    
+            <?php if ($w_user['usr_role'] == 'ROLE_ADMIN'): ?>
                 <li>
                     <a href="<?= $this->url('child_child_get') ?>"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-user  fa-stack-1x "></i></span>Enfants</a>
                 </li>

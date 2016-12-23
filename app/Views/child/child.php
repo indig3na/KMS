@@ -109,31 +109,31 @@
         </div>
         <div class="box-body table-responsive">
             <!-- Form -->
-            <form class="form-horizontal col-md-10 col-md-offset-1" method="post" enctype="multipart/form-data" action="" name="addchild" role="form">
+            <form class="form-horizontal col-md-10 col-md-offset-1 kms-dataset" data-id="<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data" action="" name="addchild" role="form">
                 <div class="form-group" >
                     <label for="inputEmail3">Prénom *</label>
-                    <input type="text" name="chd_firstname" class="form-control" required value="<?= $childData['chd_firstname'] ?>">
+                    <input type="text" name="chd_firstname" class="form-control kms-update" required value="<?= $childData['chd_firstname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3">Nom *</label>
-                    <input type="text" name="chd_lastname" class="form-control" required value="<?= $childData['chd_lastname'] ?>">
+                    <input type="text" name="chd_lastname" class="form-control kms-update" required value="<?= $childData['chd_lastname'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="inputform">Date de naissance</label>
-                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class="form-control">
+                    <input type="date"  name="chd_birthday" value="<?= $childData['chd_birthday'] ?>" class=" kms-update form-control">
 
                 </div>
                 <div class="form-group">
                     <label for="inputform">Sexe *</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
+                            <input class="kms-update" type="radio" name="chd_gender" value="M" <?= $childData['chd_gender']==='M' ? 'checked' : '' ?>>
                             Male
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
+                            <input class="kms-update" type="radio" name="chd_gender" value="F" <?= $childData['chd_gender']==='F' ? 'checked' : '' ?>>
                             Female
                         </label>
                     </div>
@@ -141,7 +141,7 @@
                 <div class="form-group">
                     <label for="inputform">Parent</label>
 
-                    <select data-placeholder="Sélectionnez un parent" class="form-control chosen-select">
+                    <select data-placeholder="Sélectionnez un parent" class="form-control chosen-select kms-update">
                         <option value="0"></option>
                         <?php foreach ($fkData['user_usr_id'] as $id => $value): ?>
                             <option <?= $childData['user_usr_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
@@ -154,7 +154,7 @@
                 <div class="form-group">
                     <label for="inputform">Classe</label>
 
-                    <select data-placeholder="Sélectionnez une classe" class="form-control chosen-select" >
+                    <select data-placeholder="Sélectionnez une classe" class="form-control chosen-select kms-update" >
                         <option value="0"></option>
                         <?php foreach ($fkData['class_cls_id'] as $id => $value): ?>
                             <option <?= $childData['class_cls_id'] == $id ? 'selected' : ''?> value="<?= $id ?>"><?= $value ?></option>
@@ -164,11 +164,11 @@
                 </div>
                 <div class="form-group">
                     <label for="inputform">Commentaires</label>
-                    <input type="text" name="chd_comments" class="form-control" value="<?= $childData['chd_comments'] ?>" >
+                    <input type="text" name="chd_comments" class="form-control kms-update" value="<?= $childData['chd_comments'] ?>" >
                 </div>
                 <div class="form-group">
                     <label for="inputform">Intérêts</label>
-                    <input type="text" name="chd_hobbies" class="form-control"  value="<?= $childData['chd_hobbies'] ?>">
+                    <input type="text" name="chd_hobbies" class="form-control kms-update"  value="<?= $childData['chd_hobbies'] ?>">
                 </div>
 
                 <div class="form-group">
@@ -178,9 +178,7 @@
                     <input type="file" name="chd_photo" id="photo">
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="method" value="update"/>
-                    <input type="hidden" name="id" value="<?= $_GET['id'] ?>"/>
-                    <button type="submit" class="btn btn-primary" >Modifier Enfant</button>
+                    <button type="submit" class="btn btn-primary kms-crud-save-btn" >Modifier Enfant</button>
                 </div>
             </form>
         </div>

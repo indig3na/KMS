@@ -353,10 +353,10 @@ public function getListByClass($classId){
                         INNER JOIN
                     child ON class.cls_id = child.class_cls_id
                         INNER JOIN
-                    user as parent ON parent.usr_id = child.user_usr_id
-                    	LEFT OUTER JOIN
-                    daily_report ON daily_report.child_chd_id = child.chd_id
-                WHERE class.cls_id = :classId
+                    user as parent ON parent.usr_id = child.user_usr_id'
+                    	/*LEFT OUTER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id*/
+                .' WHERE class.cls_id = :classId
                 ';
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindValue(':classId', $classId);
@@ -408,9 +408,9 @@ public function getListClass($userId){
                     user ON class.cls_id = user.class_cls_id
                         INNER JOIN
                     user as parent ON parent.usr_id = child.user_usr_id
-                    	LEFT OUTER JOIN
-                    daily_report ON daily_report.child_chd_id = child.chd_id
-                AND user.usr_id =:userId
+                    	'/*LEFT OUTER JOIN
+                    daily_report ON daily_report.child_chd_id = child.chd_id*/
+                .'AND user.usr_id =:userId
                 ';
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindValue(':userId', $userId);
